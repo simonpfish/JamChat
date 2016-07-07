@@ -11,6 +11,7 @@
 		212DFCA21D2DA6F100489EEA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212DFC9C1D2DA6F100489EEA /* FBSDKLoginKit.framework */; };
 		212DFCA41D2DA6F100489EEA /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212DFC9E1D2DA6F100489EEA /* FBSDKShareKit.framework */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
+		E717EC161D2ED34500AC812B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717EC151D2ED34500AC812B /* User.swift */; };
 		E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756A8731D2D7E74007C0590 /* AppDelegate.swift */; };
 		E756A8761D2D7E74007C0590 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756A8751D2D7E74007C0590 /* ViewController.swift */; };
 		E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E756A8771D2D7E74007C0590 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		212DFC9C1D2DA6F100489EEA /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		212DFC9E1D2DA6F100489EEA /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		7F275E1B8FE709C2BCDCFD4D /* Pods-JamChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.debug.xcconfig"; sourceTree = "<group>"; };
+		E717EC151D2ED34500AC812B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E756A8701D2D7E74007C0590 /* JamChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JamChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E756A8731D2D7E74007C0590 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E756A8751D2D7E74007C0590 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E717EC141D2ED32F00AC812B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E717EC151D2ED34500AC812B /* User.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		E756A8671D2D7E74007C0590 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +100,7 @@
 		E756A8721D2D7E74007C0590 /* JamChat */ = {
 			isa = PBXGroup;
 			children = (
+				E717EC141D2ED32F00AC812B /* Models */,
 				E756A8731D2D7E74007C0590 /* AppDelegate.swift */,
 				E756A8751D2D7E74007C0590 /* ViewController.swift */,
 				E756A8771D2D7E74007C0590 /* Main.storyboard */,
@@ -225,6 +236,7 @@
 			files = (
 				E756A8761D2D7E74007C0590 /* ViewController.swift in Sources */,
 				E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */,
+				E717EC161D2ED34500AC812B /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
