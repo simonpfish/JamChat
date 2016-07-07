@@ -7,11 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		212DFC9F1D2DA6F100489EEA /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212DFC991D2DA6F100489EEA /* FBAudienceNetwork.framework */; };
-		212DFCA01D2DA6F100489EEA /* FBNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212DFC9A1D2DA6F100489EEA /* FBNotifications.framework */; };
 		212DFCA11D2DA6F100489EEA /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212DFC9B1D2DA6F100489EEA /* FBSDKCoreKit.framework */; };
 		212DFCA21D2DA6F100489EEA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212DFC9C1D2DA6F100489EEA /* FBSDKLoginKit.framework */; };
-		212DFCA31D2DA6F100489EEA /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212DFC9D1D2DA6F100489EEA /* FBSDKMessengerShareKit.framework */; };
 		212DFCA41D2DA6F100489EEA /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212DFC9E1D2DA6F100489EEA /* FBSDKShareKit.framework */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
 		E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756A8731D2D7E74007C0590 /* AppDelegate.swift */; };
@@ -23,13 +20,9 @@
 
 /* Begin PBXFileReference section */
 		06DC7EFB1EBB19B0747B99B1 /* Pods-JamChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.release.xcconfig"; sourceTree = "<group>"; };
-		212DFC991D2DA6F100489EEA /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
-		212DFC9A1D2DA6F100489EEA /* FBNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBNotifications.framework; sourceTree = "<group>"; };
 		212DFC9B1D2DA6F100489EEA /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		212DFC9C1D2DA6F100489EEA /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		212DFC9D1D2DA6F100489EEA /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
 		212DFC9E1D2DA6F100489EEA /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		212DFCA51D2DA90000489EEA /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		7F275E1B8FE709C2BCDCFD4D /* Pods-JamChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.debug.xcconfig"; sourceTree = "<group>"; };
 		E756A8701D2D7E74007C0590 /* JamChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JamChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E756A8731D2D7E74007C0590 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,9 +43,6 @@
 				212DFCA11D2DA6F100489EEA /* FBSDKCoreKit.framework in Frameworks */,
 				212DFCA21D2DA6F100489EEA /* FBSDKLoginKit.framework in Frameworks */,
 				212DFCA41D2DA6F100489EEA /* FBSDKShareKit.framework in Frameworks */,
-				212DFCA01D2DA6F100489EEA /* FBNotifications.framework in Frameworks */,
-				212DFCA31D2DA6F100489EEA /* FBSDKMessengerShareKit.framework in Frameworks */,
-				212DFC9F1D2DA6F100489EEA /* FBAudienceNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,11 +53,8 @@
 			isa = PBXGroup;
 			children = (
 				EB46293530A6261983676B0D /* Pods_JamChat.framework */,
-				212DFC991D2DA6F100489EEA /* FBAudienceNetwork.framework */,
-				212DFC9A1D2DA6F100489EEA /* FBNotifications.framework */,
 				212DFC9B1D2DA6F100489EEA /* FBSDKCoreKit.framework */,
 				212DFC9C1D2DA6F100489EEA /* FBSDKLoginKit.framework */,
-				212DFC9D1D2DA6F100489EEA /* FBSDKMessengerShareKit.framework */,
 				212DFC9E1D2DA6F100489EEA /* FBSDKShareKit.framework */,
 			);
 			name = Frameworks;
@@ -109,7 +96,6 @@
 				E756A87A1D2D7E74007C0590 /* Assets.xcassets */,
 				E756A87C1D2D7E74007C0590 /* LaunchScreen.storyboard */,
 				E756A87F1D2D7E74007C0590 /* Info.plist */,
-				212DFCA51D2DA90000489EEA /* Bridging-Header.h */,
 			);
 			path = JamChat;
 			sourceTree = "<group>";
