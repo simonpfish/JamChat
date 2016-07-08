@@ -7,14 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		115A2930A48A1D8596F13E02 /* Pods_AudioRecording.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 526C333AC5C7D20D85DAEBBF /* Pods_AudioRecording.framework */; };
 		E7CC22AF1D3030A6009B07A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CC22AE1D3030A6009B07A2 /* AppDelegate.swift */; };
 		E7CC22B11D3030A6009B07A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CC22B01D3030A6009B07A2 /* ViewController.swift */; };
 		E7CC22B41D3030A6009B07A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7CC22B21D3030A6009B07A2 /* Main.storyboard */; };
 		E7CC22B61D3030A6009B07A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7CC22B51D3030A6009B07A2 /* Assets.xcassets */; };
 		E7CC22B91D3030A6009B07A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7CC22B71D3030A6009B07A2 /* LaunchScreen.storyboard */; };
+		E7CC22C81D303245009B07A2 /* bassloop.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7CC22C21D303245009B07A2 /* bassloop.wav */; };
+		E7CC22C91D303245009B07A2 /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7CC22C31D303245009B07A2 /* click.wav */; };
+		E7CC22CA1D303245009B07A2 /* drumloop.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7CC22C41D303245009B07A2 /* drumloop.wav */; };
+		E7CC22CB1D303245009B07A2 /* guitarloop.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7CC22C51D303245009B07A2 /* guitarloop.wav */; };
+		E7CC22CC1D303245009B07A2 /* leadloop.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7CC22C61D303245009B07A2 /* leadloop.wav */; };
+		E7CC22CD1D303245009B07A2 /* mixloop.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7CC22C71D303245009B07A2 /* mixloop.wav */; };
+		E7CC22CF1D3034EF009B07A2 /* recording.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7CC22CE1D3034EF009B07A2 /* recording.wav */; };
+		E7CC22D11D303C84009B07A2 /* AKNodeRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CC22D01D303C84009B07A2 /* AKNodeRecorder.swift */; };
+		E7DE48F31D304EE100098D0A /* AKAudioFile+ConvenienceInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE48EF1D304EE100098D0A /* AKAudioFile+ConvenienceInitializers.swift */; };
+		E7DE48F41D304EE100098D0A /* AKAudioFile+Exporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE48F01D304EE100098D0A /* AKAudioFile+Exporting.swift */; };
+		E7DE48F51D304EE100098D0A /* AKAudioFile+Processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE48F11D304EE100098D0A /* AKAudioFile+Processing.swift */; };
+		E7DE48F61D304EE100098D0A /* AKAudioFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE48F21D304EE100098D0A /* AKAudioFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		526C333AC5C7D20D85DAEBBF /* Pods_AudioRecording.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioRecording.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		621EEDC1E7C555A6161E8550 /* Pods-AudioRecording.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioRecording.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioRecording/Pods-AudioRecording.release.xcconfig"; sourceTree = "<group>"; };
+		CF255B6A032ACFC0F8E2672F /* Pods-AudioRecording.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioRecording.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioRecording/Pods-AudioRecording.debug.xcconfig"; sourceTree = "<group>"; };
 		E7CC22AB1D3030A6009B07A2 /* AudioRecording.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioRecording.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CC22AE1D3030A6009B07A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7CC22B01D3030A6009B07A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +38,18 @@
 		E7CC22B51D3030A6009B07A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7CC22B81D3030A6009B07A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7CC22BA1D3030A6009B07A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7CC22C21D303245009B07A2 /* bassloop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bassloop.wav; path = "../../../../../Desktop/AudioKit-3.1.3/AudioKit/iOS/AudioKit/AudioKit.playground/Resources/bassloop.wav"; sourceTree = "<group>"; };
+		E7CC22C31D303245009B07A2 /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click.wav; path = "../../../../../Desktop/AudioKit-3.1.3/AudioKit/iOS/AudioKit/AudioKit.playground/Resources/click.wav"; sourceTree = "<group>"; };
+		E7CC22C41D303245009B07A2 /* drumloop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = drumloop.wav; path = "../../../../../Desktop/AudioKit-3.1.3/AudioKit/iOS/AudioKit/AudioKit.playground/Resources/drumloop.wav"; sourceTree = "<group>"; };
+		E7CC22C51D303245009B07A2 /* guitarloop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = guitarloop.wav; path = "../../../../../Desktop/AudioKit-3.1.3/AudioKit/iOS/AudioKit/AudioKit.playground/Resources/guitarloop.wav"; sourceTree = "<group>"; };
+		E7CC22C61D303245009B07A2 /* leadloop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = leadloop.wav; path = "../../../../../Desktop/AudioKit-3.1.3/AudioKit/iOS/AudioKit/AudioKit.playground/Resources/leadloop.wav"; sourceTree = "<group>"; };
+		E7CC22C71D303245009B07A2 /* mixloop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = mixloop.wav; path = "../../../../../Desktop/AudioKit-3.1.3/AudioKit/iOS/AudioKit/AudioKit.playground/Resources/mixloop.wav"; sourceTree = "<group>"; };
+		E7CC22CE1D3034EF009B07A2 /* recording.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = recording.wav; sourceTree = "<group>"; };
+		E7CC22D01D303C84009B07A2 /* AKNodeRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKNodeRecorder.swift; sourceTree = "<group>"; };
+		E7DE48EF1D304EE100098D0A /* AKAudioFile+ConvenienceInitializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AKAudioFile+ConvenienceInitializers.swift"; sourceTree = "<group>"; };
+		E7DE48F01D304EE100098D0A /* AKAudioFile+Exporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AKAudioFile+Exporting.swift"; sourceTree = "<group>"; };
+		E7DE48F11D304EE100098D0A /* AKAudioFile+Processing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AKAudioFile+Processing.swift"; sourceTree = "<group>"; };
+		E7DE48F21D304EE100098D0A /* AKAudioFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAudioFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +57,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				115A2930A48A1D8596F13E02 /* Pods_AudioRecording.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C799C76D7C07309264A022F3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CF255B6A032ACFC0F8E2672F /* Pods-AudioRecording.debug.xcconfig */,
+				621EEDC1E7C555A6161E8550 /* Pods-AudioRecording.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C93FFDB00D9C9C89443506E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				526C333AC5C7D20D85DAEBBF /* Pods_AudioRecording.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E7CC22A21D3030A6009B07A2 = {
 			isa = PBXGroup;
 			children = (
 				E7CC22AD1D3030A6009B07A2 /* AudioRecording */,
 				E7CC22AC1D3030A6009B07A2 /* Products */,
+				C799C76D7C07309264A022F3 /* Pods */,
+				C93FFDB00D9C9C89443506E4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +108,28 @@
 				E7CC22B51D3030A6009B07A2 /* Assets.xcassets */,
 				E7CC22B71D3030A6009B07A2 /* LaunchScreen.storyboard */,
 				E7CC22BA1D3030A6009B07A2 /* Info.plist */,
+				E7CC22C21D303245009B07A2 /* bassloop.wav */,
+				E7CC22C31D303245009B07A2 /* click.wav */,
+				E7CC22C41D303245009B07A2 /* drumloop.wav */,
+				E7CC22C51D303245009B07A2 /* guitarloop.wav */,
+				E7CC22C61D303245009B07A2 /* leadloop.wav */,
+				E7CC22C71D303245009B07A2 /* mixloop.wav */,
+				E7CC22CE1D3034EF009B07A2 /* recording.wav */,
+				E7DE48EE1D304EE100098D0A /* Audio File */,
+				E7CC22D01D303C84009B07A2 /* AKNodeRecorder.swift */,
 			);
 			path = AudioRecording;
+			sourceTree = "<group>";
+		};
+		E7DE48EE1D304EE100098D0A /* Audio File */ = {
+			isa = PBXGroup;
+			children = (
+				E7DE48EF1D304EE100098D0A /* AKAudioFile+ConvenienceInitializers.swift */,
+				E7DE48F01D304EE100098D0A /* AKAudioFile+Exporting.swift */,
+				E7DE48F11D304EE100098D0A /* AKAudioFile+Processing.swift */,
+				E7DE48F21D304EE100098D0A /* AKAudioFile.swift */,
+			);
+			path = "Audio File";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +139,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7CC22BD1D3030A6009B07A2 /* Build configuration list for PBXNativeTarget "AudioRecording" */;
 			buildPhases = (
+				31CE61C47AC4DC2CF60F04A5 /* [CP] Check Pods Manifest.lock */,
 				E7CC22A71D3030A6009B07A2 /* Sources */,
 				E7CC22A81D3030A6009B07A2 /* Frameworks */,
 				E7CC22A91D3030A6009B07A2 /* Resources */,
+				48CB2F23586B2C508757BAF3 /* [CP] Embed Pods Frameworks */,
+				BFFEA7F3AD1ACF7427B852E9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -122,19 +193,79 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7CC22CF1D3034EF009B07A2 /* recording.wav in Resources */,
+				E7CC22CC1D303245009B07A2 /* leadloop.wav in Resources */,
+				E7CC22CA1D303245009B07A2 /* drumloop.wav in Resources */,
+				E7CC22CD1D303245009B07A2 /* mixloop.wav in Resources */,
 				E7CC22B91D3030A6009B07A2 /* LaunchScreen.storyboard in Resources */,
 				E7CC22B61D3030A6009B07A2 /* Assets.xcassets in Resources */,
+				E7CC22C91D303245009B07A2 /* click.wav in Resources */,
 				E7CC22B41D3030A6009B07A2 /* Main.storyboard in Resources */,
+				E7CC22C81D303245009B07A2 /* bassloop.wav in Resources */,
+				E7CC22CB1D303245009B07A2 /* guitarloop.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		31CE61C47AC4DC2CF60F04A5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		48CB2F23586B2C508757BAF3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioRecording/Pods-AudioRecording-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BFFEA7F3AD1ACF7427B852E9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioRecording/Pods-AudioRecording-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E7CC22A71D3030A6009B07A2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7DE48F41D304EE100098D0A /* AKAudioFile+Exporting.swift in Sources */,
+				E7CC22D11D303C84009B07A2 /* AKNodeRecorder.swift in Sources */,
+				E7DE48F61D304EE100098D0A /* AKAudioFile.swift in Sources */,
+				E7DE48F31D304EE100098D0A /* AKAudioFile+ConvenienceInitializers.swift in Sources */,
+				E7DE48F51D304EE100098D0A /* AKAudioFile+Processing.swift in Sources */,
 				E7CC22B11D3030A6009B07A2 /* ViewController.swift in Sources */,
 				E7CC22AF1D3030A6009B07A2 /* AppDelegate.swift in Sources */,
 			);
@@ -247,6 +378,7 @@
 		};
 		E7CC22BE1D3030A6009B07A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF255B6A032ACFC0F8E2672F /* Pods-AudioRecording.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AudioRecording/Info.plist;
@@ -258,6 +390,7 @@
 		};
 		E7CC22BF1D3030A6009B07A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 621EEDC1E7C555A6161E8550 /* Pods-AudioRecording.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AudioRecording/Info.plist;
@@ -286,6 +419,7 @@
 				E7CC22BF1D3030A6009B07A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

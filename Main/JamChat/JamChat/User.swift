@@ -17,6 +17,8 @@ class User: NSObject {
     
     static let loginDelegate = LoginDelegate()
     
+    private var parseUser: PFUser!
+    
     var facebookID: String!
     var name: String!
     var pictureURL: NSURL!
@@ -109,6 +111,7 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
     // Called when user is logged in succesfully, dismissing the login view
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
         User.currentUser = User(userId: "me")
+        User.currentUser!.parseUser["facebookID"] = User.currentUser!.facebookID
         controller!.dismissViewControllerAnimated(true, completion: nil)
         if let success = loginSuccess {
             success()

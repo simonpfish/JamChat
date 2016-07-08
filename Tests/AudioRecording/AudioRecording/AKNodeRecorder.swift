@@ -187,7 +187,7 @@ public class AKNodeRecorder {
         recording = false
         if  node != nil {
             node!.avAudioNode.removeTapOnBus(0)
-            print("Recording Stopped.")
+            print("Recording Stopped. ( file duration:  \(self.internalAudioFile.duration) seconds) ")
         } else {
             print ("AKNodeRecorder Error: input node is not available")
         }
@@ -217,6 +217,14 @@ public class AKNodeRecorder {
             print ("AKNodeRecorder Error: cannot record to file: \(internalAudioFile.fileNamePlusExtension)")
             throw error
         }
+    }
+    
+    public func export() {
+        
+        
+        let export = try? self.internalAudioFile.export("output", ext: AKAudioFile.ExportFormat.wav, baseDir: AKAudioFile.BaseDirectory.Documents, callBack: { () in
+        })
+        
     }
     
 }

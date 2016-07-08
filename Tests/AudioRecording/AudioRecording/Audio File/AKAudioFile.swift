@@ -10,6 +10,7 @@
 
 import Foundation
 import AVFoundation
+import AudioKit
 
 /// Audio file, inherits from AVAudioFile and adds functionality
 public class AKAudioFile: AVAudioFile {
