@@ -138,9 +138,9 @@ extension AKAudioFile {
         var filePath: String
         switch baseDir {
         case .Temp:
-            filePath =  (NSTemporaryDirectory() as String) + "/" + fileNameWithExtension
+            filePath =  NSTemporaryDirectory() + fileNameWithExtension
         case .Documents:
-            filePath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) + "/" + fileNameWithExtension
+            filePath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) + fileNameWithExtension
         case .Resources:
             print( "ERROR AKAudioFile: cannot create a file in applications resources!...")
             throw NSError(domain: NSURLErrorDomain, code: NSURLErrorCannotCreateFile, userInfo: nil)

@@ -174,10 +174,11 @@ extension AKAudioFile {
             
             self.callBack = callBack
             
-            let assetUrl = file.url
-            let asset  = AVURLAsset(URL: assetUrl)
+//            let assetUrl = file.url
+//            let asset  = AVURLAsset(URL: assetUrl)
             
-            // let asset = file.avAsset
+            let asset = file.avAsset
+            
             print(asset)
             print(presetName)
             
@@ -194,7 +195,7 @@ extension AKAudioFile {
                 throw NSError(domain: NSURLErrorDomain, code: NSURLErrorUnknown, userInfo: nil)
             }
             
-            
+            exporter.shouldOptimizeForNetworkUse = true
             
             var filePath: String
             switch baseDir {

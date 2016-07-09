@@ -22,7 +22,7 @@ public class AKNodeRecorder {
     private var node: AKNode?
 
     // The file to record to
-    private var internalAudioFile: AKAudioFile
+    private(set) var internalAudioFile: AKAudioFile
 
     // the size of the recording buffer
     // Not tested, default is 1024
