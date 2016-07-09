@@ -37,7 +37,7 @@ class PlayDrumsViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //instantiate the AudioPlayer object with the correct sound and prepare it to play
+        //instantiate the AnlvgfgribhlgeejbvhbgchhuriruhtijudioPlayer object with the correct sound and prepare it to play
         
         crashPlayer = try! AVAudioPlayer(contentsOfURL: crashSound)
         crashPlayer.prepareToPlay()
@@ -110,17 +110,18 @@ class PlayDrumsViewController: UIViewController {
         rideSoundPlayer.play()
     }
     
-    @IBAction func onVoice(sender: AnyObject) {
-        performSegueWithIdentifier("fromPlayDrumstoPlayVoice", sender: self)
+    @IBAction func toSelection(sender: AnyObject) {
+        performSegueWithIdentifier("fromPlayDrumtoSelection", sender: self)
     }
     
-    @IBAction func onGuitar(sender: AnyObject) {
-        performSegueWithIdentifier("fromPlayDrumstoPlayGuitar", sender: self)
+    @IBAction func toGuitar(sender: AnyObject) {
+        performSegueWithIdentifier("fromPlayDrumtoPlayGuitar", sender: self)
     }
     
-    @IBAction func onPiano(sender: AnyObject) {
-        performSegueWithIdentifier("fromPlayDrumstoPlayPiano", sender: self)
+    @IBAction func toPiano(sender: AnyObject) {
+        performSegueWithIdentifier("fromPlayDrumtoPlayPiano", sender: self)
     }
+    
     
 }
 

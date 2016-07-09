@@ -21,16 +21,13 @@ class PlayPianoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onVoice(sender: AnyObject) {
-        performSegueWithIdentifier("fromPlayPianotoPlayVoice", sender: self)
-    }
-    
-    @IBAction func onGuitar(sender: AnyObject) {
-        performSegueWithIdentifier("fromPlayPianotoPlayGuitar", sender: self)
-    }
-    
-    @IBAction func onDrums(sender: AnyObject) {
+    @IBAction func toDrums(sender: AnyObject) {
         performSegueWithIdentifier("fromPlayPianotoPlayDrums", sender: self)
+    }
+    
+    
+    @IBAction func toSelection(sender: AnyObject) {
+        performSegueWithIdentifier("fromPlayPianotoSelection", sender: self)
     }
     
 

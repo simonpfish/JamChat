@@ -1,112 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="L31-mP-SMd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jh5-tW-QuO">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Guitar-->
-        <scene sceneID="s86-pj-xpU">
-            <objects>
-                <viewController storyboardIdentifier="GuitarViewController" id="7AF-WM-C1D" customClass="GuitarViewController" customModule="drums" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="IdT-2N-i8a"/>
-                        <viewControllerLayoutGuide type="bottom" id="ovA-eh-1np"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="23z-dO-paQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UMf-iS-tFs" userLabel="ChatView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="331"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j10-De-gmh" userLabel="InstrumentView">
-                                <rect key="frame" x="0.0" y="322" width="320" height="246"/>
-                                <subviews>
-                                    <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bDE-cu-6yl">
-                                        <rect key="frame" x="0.0" y="197" width="320" height="49"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <items>
-                                            <tabBarItem title="Voice" image="mic" id="KGK-QY-Gs7"/>
-                                            <tabBarItem title="Guitar" image="guitar" id="OTo-Jy-A1L"/>
-                                            <tabBarItem title="Drums" image="drums" id="Ncf-oQ-L4f"/>
-                                            <tabBarItem title="Piano" image="piano" id="E6w-8G-17Y"/>
-                                        </items>
-                                    </tabBar>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap on an instrument to select it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cy-K9-x19">
-                                        <rect key="frame" x="46" y="8" width="231" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="____________________________________________" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuX-Xc-PgV">
-                                        <rect key="frame" x="0.0" y="-22" width="320" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="guitar_large" translatesAutoresizingMaskIntoConstraints="NO" id="L02-Os-hr9">
-                                        <rect key="frame" x="98" y="66" width="125" height="76"/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="KGr-fu-gh1" appends="YES" id="hzo-3U-VKd"/>
-                                        </connections>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vql-Rk-KqL">
-                                        <rect key="frame" x="17" y="207" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onVoice:" destination="7AF-WM-C1D" eventType="touchUpInside" id="zFI-tn-vK5"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0g-3c-052">
-                                        <rect key="frame" x="177" y="208" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onDrums:" destination="7AF-WM-C1D" eventType="touchUpInside" id="xF6-8M-HaP"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25K-hc-xPG">
-                                        <rect key="frame" x="256" y="207" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onPiano:" destination="7AF-WM-C1D" eventType="touchUpInside" id="pip-Qi-LGB"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="TER-A3-8Lx" appends="YES" id="LAy-yo-Enc"/>
-                                    <outletCollection property="gestureRecognizers" destination="5HA-JF-ikx" appends="YES" id="NnO-3u-nir"/>
-                                </connections>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Guitar" image="guitar" selectedImage="guitar" id="49h-aJ-Hf5"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <segue destination="5Jf-nI-G7S" kind="show" identifier="toPianoFromGuitar" animates="NO" id="AIk-Cg-XBn"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="heI-Qy-v3y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="TER-A3-8Lx">
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="toDrumsFromGuitar" animates="NO" id="gu7-FA-A47"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="5HA-JF-ikx">
-                    <connections>
-                        <segue destination="L31-mP-SMd" kind="show" identifier="toVoiceFromGuitar" animates="NO" id="27l-Rj-t6M"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <tapGestureRecognizer numberOfTapsRequired="2" id="KGr-fu-gh1">
-                    <connections>
-                        <segue destination="qDQ-RA-qm2" kind="show" id="J8V-XQ-jW9"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="361" y="-1542"/>
-        </scene>
         <!--Play Guitar View Controller-->
         <scene sceneID="6gf-k6-0cO">
             <objects>
@@ -122,44 +20,36 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gCe-qH-W5A" userLabel="InstrumentView">
                                 <rect key="frame" x="0.0" y="320" width="320" height="246"/>
                                 <subviews>
-                                    <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PPZ-NP-Whe">
-                                        <rect key="frame" x="0.0" y="197" width="320" height="49"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <items>
-                                            <tabBarItem title="Voice" image="mic" id="gyX-av-yN1"/>
-                                            <tabBarItem title="Guitar" image="guitar" id="47S-kC-Vh4"/>
-                                            <tabBarItem title="Drums" image="drums" id="53R-RK-oME"/>
-                                            <tabBarItem title="Piano" image="piano" id="NXB-Wv-YXD"/>
-                                        </items>
-                                    </tabBar>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="guitar_large" translatesAutoresizingMaskIntoConstraints="NO" id="45Q-cb-L4e">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="192"/>
+                                        <rect key="frame" x="8" y="13" width="298" height="192"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="te3-ET-de0">
-                                        <rect key="frame" x="19" y="205" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqb-jg-POZ">
+                                        <rect key="frame" x="275" y="217" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="right"/>
                                         <connections>
-                                            <action selector="onVoice:" destination="qDQ-RA-qm2" eventType="touchUpInside" id="eIv-6y-rfI"/>
+                                            <action selector="toDrums:" destination="qDQ-RA-qm2" eventType="touchUpInside" id="GFs-HJ-WNR"/>
+                                            <segue destination="em3-4g-vwY" kind="show" identifier="fromPlayGuitartoPlayDrums" animates="NO" id="FYh-sl-rpU"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ne1-gk-e2a">
-                                        <rect key="frame" x="178" y="208" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="us0-ur-7KO">
+                                        <rect key="frame" x="20" y="217" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="left"/>
                                         <connections>
-                                            <action selector="onDrums:" destination="qDQ-RA-qm2" eventType="touchUpInside" id="qIC-qF-hWZ"/>
+                                            <action selector="toVoice:" destination="qDQ-RA-qm2" eventType="touchUpInside" id="yxy-bg-z0m"/>
+                                            <segue destination="yfv-ji-4xI" kind="show" identifier="fromPlayGuitartoPlayVoice" animates="NO" id="Qo1-mU-FEc"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHN-Xd-Q9c">
-                                        <rect key="frame" x="258" y="205" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8f-Xb-Quc">
+                                        <rect key="frame" x="146" y="217" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="grid"/>
                                         <connections>
-                                            <action selector="onPiano:" destination="qDQ-RA-qm2" eventType="touchUpInside" id="lgm-fS-13b"/>
+                                            <action selector="toSelection:" destination="qDQ-RA-qm2" eventType="touchUpInside" id="LSo-G0-Bfa"/>
+                                            <segue destination="jh5-tW-QuO" kind="show" identifier="fromPlayGuitartoSelection" animates="NO" id="VaP-n0-uiD"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="HlD-xM-1FO" appends="YES" id="55g-uv-bVp"/>
-                                    <outletCollection property="gestureRecognizers" destination="JHr-6b-fTF" appends="YES" id="rOV-ZC-MTm"/>
-                                </connections>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rst-lB-kjf" userLabel="ChatView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="331"/>
@@ -169,120 +59,102 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <segue destination="7bq-7M-ALH" kind="show" identifier="fromPlayGuitartoPlayPiano" animates="NO" id="99A-ae-jo6"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QsT-TB-Hhk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="HlD-xM-1FO">
-                    <connections>
-                        <segue destination="yfv-ji-4xI" kind="show" identifier="fromPlayGuitartoPlayVoice" animates="NO" id="gIK-da-h2Q"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="left" id="JHr-6b-fTF">
-                    <connections>
-                        <segue destination="em3-4g-vwY" kind="show" identifier="fromPlayGuitartoPlayDrums" animates="NO" id="B9i-RD-Cz0"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="803" y="-1542"/>
         </scene>
-        <!--Voice-->
-        <scene sceneID="ySo-eI-FFQ">
+        <!--Selection View Controller-->
+        <scene sceneID="B5U-pX-cN4">
             <objects>
-                <viewController id="L31-mP-SMd" customClass="VoiceViewController" customModule="drums" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jh5-tW-QuO" customClass="SelectionViewController" customModule="drums" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="N2r-4v-i3U"/>
-                        <viewControllerLayoutGuide type="bottom" id="k38-26-mZX"/>
+                        <viewControllerLayoutGuide type="top" id="cg3-9g-091"/>
+                        <viewControllerLayoutGuide type="bottom" id="veg-pm-4S2"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QlX-Ya-shR">
+                    <view key="view" contentMode="scaleToFill" id="u3H-e6-AL7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w56-QR-G9M" userLabel="ChatView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w5y-Vc-Sgq" userLabel="ChatView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="331"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hAx-c6-ijr" userLabel="InstrumentView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCE-aS-XA0" userLabel="InstrumentView">
                                 <rect key="frame" x="0.0" y="322" width="320" height="246"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap on an instrument to select it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTh-l7-wS1">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap on an instrument to select it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMh-Dy-1Ib">
                                         <rect key="frame" x="46" y="8" width="231" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="____________________________________________" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qj-y1-CyX">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="____________________________________________" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAg-sF-myn">
                                         <rect key="frame" x="0.0" y="-22" width="320" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mic_large" translatesAutoresizingMaskIntoConstraints="NO" id="8qQ-D6-Eeu">
-                                        <rect key="frame" x="97" y="64" width="126" height="72"/>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="screen640x640" translatesAutoresizingMaskIntoConstraints="NO" id="OwH-6R-Xry">
+                                        <rect key="frame" x="168" y="37" width="51" height="51"/>
                                         <gestureRecognizers/>
                                         <connections>
-                                            <outletCollection property="gestureRecognizers" destination="cCw-5b-ihz" appends="YES" id="Wvl-xl-XnY"/>
+                                            <outletCollection property="gestureRecognizers" destination="f7W-MI-jbD" appends="YES" id="ybJ-Dx-47N"/>
                                         </connections>
                                     </imageView>
-                                    <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tpx-5Z-4t6">
-                                        <rect key="frame" x="0.0" y="197" width="320" height="49"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <items>
-                                            <tabBarItem title="Voice" image="mic" id="mrE-op-7ov"/>
-                                            <tabBarItem tag="1" title="Guitar" image="guitar" id="psh-ml-ypy"/>
-                                            <tabBarItem title="Drums" image="drums" id="pA0-Kz-rgs"/>
-                                            <tabBarItem title="Piano" image="piano" id="zvI-AJ-gvc"/>
-                                        </items>
-                                    </tabBar>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueB-sF-zPc">
-                                        <rect key="frame" x="90" y="208" width="52" height="30"/>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="large_piano" translatesAutoresizingMaskIntoConstraints="NO" id="yNy-IT-3cA">
+                                        <rect key="frame" x="241" y="37" width="51" height="51"/>
+                                        <gestureRecognizers/>
                                         <connections>
-                                            <action selector="onGuitar:" destination="L31-mP-SMd" eventType="touchUpInside" id="mT5-hI-nF5"/>
+                                            <outletCollection property="gestureRecognizers" destination="pWr-ri-1Dy" appends="YES" id="hdq-9D-Hpp"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajV-1b-aHa">
-                                        <rect key="frame" x="177" y="208" width="46" height="30"/>
+                                    </imageView>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="guitar_large" translatesAutoresizingMaskIntoConstraints="NO" id="gwd-qu-lZi">
+                                        <rect key="frame" x="97" y="37" width="51" height="51"/>
+                                        <gestureRecognizers/>
                                         <connections>
-                                            <action selector="onDrums:" destination="L31-mP-SMd" eventType="touchUpInside" id="5Mk-KJ-Owv"/>
+                                            <outletCollection property="gestureRecognizers" destination="Pff-IR-jAo" appends="YES" id="eZC-hP-Wfe"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8JE-j2-9lZ">
-                                        <rect key="frame" x="257" y="207" width="46" height="30"/>
+                                    </imageView>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mic_large" translatesAutoresizingMaskIntoConstraints="NO" id="Zge-gw-5ET">
+                                        <rect key="frame" x="26" y="37" width="51" height="51"/>
+                                        <gestureRecognizers/>
                                         <connections>
-                                            <action selector="onPiano:" destination="L31-mP-SMd" eventType="touchUpInside" id="OId-Xm-8uK"/>
+                                            <outletCollection property="gestureRecognizers" destination="PmL-KO-mjm" appends="YES" id="Bs2-Wj-x1R"/>
                                         </connections>
-                                    </button>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="uKA-DP-9sS" appends="YES" id="qTk-tD-cD5"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Voice" image="mic" selectedImage="mic" id="Xkk-8o-boy"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="toDrumsFromVoice" animates="NO" id="dcZ-p9-47c"/>
-                        <segue destination="5Jf-nI-G7S" kind="show" identifier="toPianoFromVoice" animates="NO" id="Qq3-UU-vyf"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fAF-HA-AM0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="uKA-DP-9sS">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S83-To-shs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="PmL-KO-mjm">
                     <connections>
-                        <segue destination="7AF-WM-C1D" kind="show" identifier="toGuitarFromVoice" animates="NO" id="y8K-Tj-OIM"/>
+                        <segue destination="yfv-ji-4xI" kind="show" identifier="toPlayVoice" id="6md-ge-3fE"/>
                     </connections>
-                </swipeGestureRecognizer>
-                <tapGestureRecognizer numberOfTapsRequired="2" id="cCw-5b-ihz">
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Pff-IR-jAo">
                     <connections>
-                        <segue destination="yfv-ji-4xI" kind="show" id="Jb2-Ij-ZGh"/>
+                        <segue destination="qDQ-RA-qm2" kind="show" identifier="toPlayGuitar" id="B8E-Fx-tHT"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="f7W-MI-jbD">
+                    <connections>
+                        <segue destination="em3-4g-vwY" kind="show" identifier="toPlayDrums" id="GlN-P9-CoW"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="pWr-ri-1Dy">
+                    <connections>
+                        <segue destination="7bq-7M-ALH" kind="show" identifier="toPlayPiano" id="zEa-Yp-yAG"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="361" y="-2262"/>
+            <point key="canvasLocation" x="30" y="-667"/>
         </scene>
         <!--Play Voice View Controller-->
         <scene sceneID="byi-9H-Gmx">
@@ -303,164 +175,41 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dBP-IZ-Hei" userLabel="InstrumentView">
                                 <rect key="frame" x="0.0" y="320" width="320" height="246"/>
                                 <subviews>
-                                    <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xa3-qX-IW7">
-                                        <rect key="frame" x="0.0" y="197" width="320" height="49"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <items>
-                                            <tabBarItem title="Voice" image="mic" id="1iU-0r-QMU"/>
-                                            <tabBarItem title="Guitar" image="guitar" id="yow-zT-Dal"/>
-                                            <tabBarItem title="Drums" image="drums" id="AtG-dy-Tit"/>
-                                            <tabBarItem title="Piano" image="piano" id="aEO-W0-OZF"/>
-                                        </items>
-                                    </tabBar>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mic_large" translatesAutoresizingMaskIntoConstraints="NO" id="RIl-rG-JeX">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="191"/>
+                                        <rect key="frame" x="0.0" y="27" width="320" height="191"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAJ-8Y-Jot">
-                                        <rect key="frame" x="94" y="208" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oey-i2-Mni">
+                                        <rect key="frame" x="275" y="217" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="right"/>
                                         <connections>
-                                            <action selector="onGuitar:" destination="yfv-ji-4xI" eventType="touchUpInside" id="fi1-IJ-FHw"/>
+                                            <action selector="toGuitar:" destination="yfv-ji-4xI" eventType="touchUpInside" id="d0c-x0-UkO"/>
+                                            <segue destination="qDQ-RA-qm2" kind="show" identifier="fromPlayVoicetoPlayGuitar" animates="NO" id="OeR-u4-4zc"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCr-dt-0RO">
-                                        <rect key="frame" x="177" y="208" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onDrums:" destination="yfv-ji-4xI" eventType="touchUpInside" id="mRe-Wg-gps"/>
-                                        </connections>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fz-rt-HoI">
+                                        <rect key="frame" x="20" y="217" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="left"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Teh-m2-8PL">
-                                        <rect key="frame" x="259" y="208" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRb-Fl-7Fn">
+                                        <rect key="frame" x="146" y="217" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="grid"/>
                                         <connections>
-                                            <action selector="onPiano:" destination="yfv-ji-4xI" eventType="touchUpInside" id="6wb-WY-bFu"/>
+                                            <action selector="toSelection:" destination="yfv-ji-4xI" eventType="touchUpInside" id="YdR-WB-O0u"/>
+                                            <segue destination="jh5-tW-QuO" kind="show" identifier="fromPlayVoicetoSelection" id="TsL-K2-PZ1"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="9fp-Bw-85n" appends="YES" id="xLI-Zt-9sX"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <segue destination="em3-4g-vwY" kind="show" identifier="fromPlayVoicetoPlayDrums" animates="NO" id="4b2-mL-2gG"/>
-                        <segue destination="7bq-7M-ALH" kind="show" identifier="fromPlayVoicetoPlayPiano" animates="NO" id="NvW-NG-wIL"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bU6-Bb-ddi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="9fp-Bw-85n">
-                    <connections>
-                        <segue destination="qDQ-RA-qm2" kind="show" identifier="fromPlayVoicetoPlayGuitar" animates="NO" id="bs5-qC-xht"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="803" y="-2262"/>
-        </scene>
-        <!--Drums-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="DrumsViewController" customModule="drums" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DOk-2h-e4v" userLabel="ChatView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="331"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qXx-Lo-Ajz" userLabel="InstrumentView">
-                                <rect key="frame" x="0.0" y="322" width="320" height="246"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap on an instrument to select it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HY-lM-nFx">
-                                        <rect key="frame" x="46" y="8" width="231" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="____________________________________________" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNX-qI-x5q">
-                                        <rect key="frame" x="0.0" y="-22" width="320" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="screen640x640" translatesAutoresizingMaskIntoConstraints="NO" id="JIr-g3-jEe">
-                                        <rect key="frame" x="72" y="64" width="177" height="94"/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="t9B-r7-xdW" appends="YES" id="9rS-aA-IMe"/>
-                                        </connections>
-                                    </imageView>
-                                    <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7U-fb-dPE">
-                                        <rect key="frame" x="0.0" y="197" width="320" height="49"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <items>
-                                            <tabBarItem title="Voice" image="mic" id="92I-qO-Dkp"/>
-                                            <tabBarItem title="Guitar" image="guitar" id="ZYn-qS-O8e"/>
-                                            <tabBarItem title="Drums" image="drums" id="8mA-or-rYc"/>
-                                            <tabBarItem title="Piano" image="piano" id="YwW-Zk-dqj"/>
-                                        </items>
-                                    </tabBar>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9M-Bj-goH">
-                                        <rect key="frame" x="21" y="207" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onVoice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="klR-eR-7PX"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWp-VA-MpS">
-                                        <rect key="frame" x="95" y="208" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onGuitar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ReW-CZ-nTL"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Cq-fy-v5c">
-                                        <rect key="frame" x="257" y="208" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onPiano:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gk9-d8-cDg"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Kdg-4W-qrm" appends="YES" id="0gE-sp-8hB"/>
-                                    <outletCollection property="gestureRecognizers" destination="tX8-eM-rZa" appends="YES" id="CIk-2d-vJB"/>
-                                </connections>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Drums" image="drums" selectedImage="drums" id="114-xg-1nO"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <segue destination="L31-mP-SMd" kind="show" identifier="toVoiceFromDrums" animates="NO" id="9IH-p9-tY3"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer numberOfTapsRequired="2" id="t9B-r7-xdW">
-                    <connections>
-                        <segue destination="em3-4g-vwY" kind="show" identifier="toPlayDrums" id="ajV-iN-0Gm"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="Kdg-4W-qrm">
-                    <connections>
-                        <segue destination="7AF-WM-C1D" kind="show" identifier="toGuitarFromDrums" animates="NO" id="snH-9X-TEf"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="left" id="tX8-eM-rZa">
-                    <connections>
-                        <segue destination="5Jf-nI-G7S" kind="show" identifier="toPianoFromDrums" animates="NO" id="JEG-jz-j1m"/>
-                    </connections>
-                </swipeGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="371" y="-881"/>
         </scene>
         <!--Play Drums View Controller-->
         <scene sceneID="3KI-fI-CbJ">
@@ -475,64 +224,64 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3kf-wY-8pY" userLabel="InstrumentView">
-                                <rect key="frame" x="0.0" y="322" width="320" height="189"/>
+                                <rect key="frame" x="0.0" y="322" width="320" height="246"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mFH-Zc-EBg" userLabel="DrumView">
-                                        <rect key="frame" x="-4" y="-14" width="329" height="217"/>
+                                        <rect key="frame" x="0.0" y="-8" width="320" height="209"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="screen640x640" translatesAutoresizingMaskIntoConstraints="NO" id="6ji-hb-vdF">
-                                                <rect key="frame" x="20" y="20" width="289" height="177"/>
+                                                <rect key="frame" x="16" y="20" width="289" height="177"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-0B-pM3">
-                                                <rect key="frame" x="164" y="37" width="46" height="30"/>
+                                                <rect key="frame" x="160" y="37" width="46" height="30"/>
                                                 <connections>
                                                     <action selector="onSmallTom:" destination="em3-4g-vwY" eventType="touchUpInside" id="hi5-lz-77n"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ttR-oN-Jmg">
-                                                <rect key="frame" x="218" y="46" width="46" height="30"/>
+                                                <rect key="frame" x="214" y="46" width="46" height="30"/>
                                                 <connections>
                                                     <action selector="onRide:" destination="em3-4g-vwY" eventType="touchUpInside" id="SzG-kr-Tws"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCA-ST-Sat">
-                                                <rect key="frame" x="62" y="46" width="46" height="30"/>
+                                                <rect key="frame" x="58" y="46" width="46" height="30"/>
                                                 <connections>
                                                     <action selector="onCrash:" destination="em3-4g-vwY" eventType="touchUpInside" id="yIB-QR-xBw"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oie-Is-bJL">
-                                                <rect key="frame" x="67" y="113" width="46" height="30"/>
+                                                <rect key="frame" x="63" y="113" width="46" height="30"/>
                                                 <connections>
                                                     <action selector="onCrash:" destination="em3-4g-vwY" eventType="touchUpInside" id="mJZ-Jw-Oa3"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldp-ev-ekw">
-                                                <rect key="frame" x="116" y="150" width="46" height="30"/>
+                                                <rect key="frame" x="112" y="150" width="46" height="30"/>
                                                 <connections>
                                                     <action selector="onFloorTom:" destination="em3-4g-vwY" eventType="touchUpInside" id="GQG-Re-hfK"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3h-gJ-wKY">
-                                                <rect key="frame" x="190" y="159" width="46" height="30"/>
+                                                <rect key="frame" x="186" y="159" width="46" height="30"/>
                                                 <connections>
                                                     <action selector="onMediumTom:" destination="em3-4g-vwY" eventType="touchUpInside" id="TJT-lA-c3R"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxI-n1-Kp9">
-                                                <rect key="frame" x="207" y="100" width="46" height="30"/>
+                                                <rect key="frame" x="203" y="100" width="46" height="30"/>
                                                 <connections>
                                                     <action selector="onSnare:" destination="em3-4g-vwY" eventType="touchUpInside" id="XtN-ON-Kqi"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oiG-ny-oHr">
-                                                <rect key="frame" x="225" y="138" width="46" height="30"/>
+                                                <rect key="frame" x="221" y="138" width="46" height="30"/>
                                                 <connections>
                                                     <action selector="onHighHat:" destination="em3-4g-vwY" eventType="touchUpInside" id="uBs-Yl-6zi"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5H0-WP-UQX">
-                                                <rect key="frame" x="116" y="37" width="46" height="30"/>
+                                                <rect key="frame" x="112" y="37" width="46" height="30"/>
                                                 <connections>
                                                     <action selector="onDuplicateTom:" destination="em3-4g-vwY" eventType="touchUpInside" id="i8a-h5-Zv5"/>
                                                 </connections>
@@ -540,50 +289,36 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWZ-Tf-9Sc">
+                                        <rect key="frame" x="275" y="215" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="right"/>
+                                        <connections>
+                                            <action selector="toPiano:" destination="em3-4g-vwY" eventType="touchUpInside" id="KlB-Y6-ry3"/>
+                                            <segue destination="7bq-7M-ALH" kind="show" identifier="fromPlayDrumtoPlayPiano" animates="NO" id="9Pz-1E-YDm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Slx-hw-EWh">
+                                        <rect key="frame" x="20" y="215" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="left"/>
+                                        <connections>
+                                            <action selector="toGuitar:" destination="em3-4g-vwY" eventType="touchUpInside" id="Che-Ce-tlF"/>
+                                            <segue destination="qDQ-RA-qm2" kind="show" identifier="fromPlayDrumtoPlayGuitar" animates="NO" id="xtZ-sz-ivn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gf1-sl-rK0">
+                                        <rect key="frame" x="146" y="215" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="grid"/>
+                                        <connections>
+                                            <action selector="toSelection:" destination="em3-4g-vwY" eventType="touchUpInside" id="Avw-bq-SBr"/>
+                                            <segue destination="jh5-tW-QuO" kind="show" identifier="fromPlayDrumtoSelection" id="0Xz-lM-Hzm"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="564-kH-2AA" appends="YES" id="19d-ue-G1m"/>
-                                    <outletCollection property="gestureRecognizers" destination="28e-o9-kPx" appends="YES" id="7Fh-d8-ZzV"/>
-                                </connections>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zBn-pL-PhQ" userLabel="ChatView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="331"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kDA-TY-9Ky" userLabel="TabBarView">
-                                <rect key="frame" x="0.0" y="516" width="320" height="50"/>
-                                <subviews>
-                                    <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvM-Wj-6Xf">
-                                        <rect key="frame" x="0.0" y="1" width="320" height="49"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <items>
-                                            <tabBarItem title="Voice" image="mic" id="fTm-P0-Rbg"/>
-                                            <tabBarItem title="Guitar" image="guitar" id="b3t-Hg-0Bi"/>
-                                            <tabBarItem title="Drums" image="drums" id="Uk0-nq-7so"/>
-                                            <tabBarItem title="Piano" image="piano" id="IeY-Vg-SV6"/>
-                                        </items>
-                                    </tabBar>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRm-c4-ks9">
-                                        <rect key="frame" x="15" y="11" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onVoice:" destination="em3-4g-vwY" eventType="touchUpInside" id="74A-QL-9Yj"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc5-01-VyQ">
-                                        <rect key="frame" x="97" y="11" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onGuitar:" destination="em3-4g-vwY" eventType="touchUpInside" id="brm-AR-TnY"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v06-rh-xdl">
-                                        <rect key="frame" x="259" y="11" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onPiano:" destination="em3-4g-vwY" eventType="touchUpInside" id="LYJ-gk-dn3"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -592,120 +327,10 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <segue destination="yfv-ji-4xI" kind="show" identifier="fromPlayDrumstoPlayVoice" animates="NO" action="showDetailViewController:sender:" id="9r8-Vf-B7x"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wn6-JW-9UU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="564-kH-2AA">
-                    <connections>
-                        <segue destination="7bq-7M-ALH" kind="show" identifier="fromPlayDrumstoPlayPiano" animates="NO" id="Oav-J8-n31"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="28e-o9-kPx">
-                    <connections>
-                        <segue destination="qDQ-RA-qm2" kind="show" identifier="fromPlayDrumstoPlayGuitar" animates="NO" id="bqr-2u-4Jc"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="803" y="-881"/>
-        </scene>
-        <!--Piano-->
-        <scene sceneID="w3D-om-mA5">
-            <objects>
-                <viewController storyboardIdentifier="Piano" id="5Jf-nI-G7S" customClass="PianoViewController" customModule="drums" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Mga-Nh-OWt"/>
-                        <viewControllerLayoutGuide type="bottom" id="9pl-DW-Zrg"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iIo-FO-38m">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GUT-Om-dUh" userLabel="ChatView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="331"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLQ-7X-VcZ" userLabel="InstrumentView">
-                                <rect key="frame" x="0.0" y="322" width="320" height="246"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap on an instrument to select it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9tG-3U-kaE">
-                                        <rect key="frame" x="46" y="8" width="231" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="____________________________________________" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kn2-0K-6DO">
-                                        <rect key="frame" x="0.0" y="-22" width="320" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="13618250_1022661111182155_670870386_n" translatesAutoresizingMaskIntoConstraints="NO" id="Bzq-Yq-DyP">
-                                        <rect key="frame" x="83" y="57" width="155" height="74"/>
-                                    </imageView>
-                                    <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YD5-i6-Iut">
-                                        <rect key="frame" x="0.0" y="197" width="320" height="49"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <items>
-                                            <tabBarItem title="Voice" image="mic" id="y2K-k1-9hA"/>
-                                            <tabBarItem title="Guitar" image="guitar" id="20J-ao-dvl"/>
-                                            <tabBarItem title="Drums" image="drums" id="iJ7-TH-oF0"/>
-                                            <tabBarItem title="Piano" image="piano" id="fpF-jV-2Ee"/>
-                                        </items>
-                                    </tabBar>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfV-C7-1l0">
-                                        <rect key="frame" x="17" y="207" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onVoice:" destination="5Jf-nI-G7S" eventType="touchUpInside" id="mmU-ZG-ZiU"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YvD-ym-x6u">
-                                        <rect key="frame" x="96" y="208" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onGuitar:" destination="5Jf-nI-G7S" eventType="touchUpInside" id="W8I-fK-qg6"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oxp-zc-5hc">
-                                        <rect key="frame" x="180" y="208" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onDrums:" destination="5Jf-nI-G7S" eventType="touchUpInside" id="D3P-2e-Ma3"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="OY2-Sw-dCV" appends="YES" id="mX6-UB-lSZ"/>
-                                </connections>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="Yq5-gI-hsh" appends="YES" id="t8J-Hf-Vl4"/>
-                        </connections>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Piano" image="piano" selectedImage="piano" id="biJ-iD-OQ7"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <segue destination="7AF-WM-C1D" kind="show" identifier="toGuitarFromPiano" animates="NO" id="Yyy-b9-txQ"/>
-                        <segue destination="L31-mP-SMd" kind="show" identifier="toVoiceFromPiano" animates="NO" id="Veo-jX-QUA"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IAs-WP-wED" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer numberOfTapsRequired="2" id="Yq5-gI-hsh">
-                    <connections>
-                        <segue destination="7bq-7M-ALH" kind="show" id="fsF-SZ-ty8"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="OY2-Sw-dCV">
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="toDrumsFromPiano" animates="NO" id="bdL-hN-IhW"/>
-                    </connections>
-                </swipeGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="371" y="-240"/>
         </scene>
         <!--Play Piano View Controller-->
         <scene sceneID="8uW-EX-yiH">
@@ -726,81 +351,60 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vik-Ou-yxY" userLabel="InstrumentView">
                                 <rect key="frame" x="0.0" y="322" width="320" height="246"/>
                                 <subviews>
-                                    <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ua-ce-ozh">
-                                        <rect key="frame" x="0.0" y="195" width="320" height="49"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <items>
-                                            <tabBarItem title="Voice" image="mic" id="XCN-vE-BBW"/>
-                                            <tabBarItem title="Guitar" image="guitar" id="rdr-mt-tvW"/>
-                                            <tabBarItem title="Drums" image="drums" id="Sdj-a2-Zoe"/>
-                                            <tabBarItem title="Piano" image="piano" id="4o9-aC-uZL"/>
-                                        </items>
-                                    </tabBar>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tj2-6P-wtE">
-                                        <rect key="frame" x="15" y="205" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onVoice:" destination="7bq-7M-ALH" eventType="touchUpInside" id="K59-uI-2D9"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWA-u3-2Wc">
-                                        <rect key="frame" x="96" y="205" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onGuitar:" destination="7bq-7M-ALH" eventType="touchUpInside" id="JxJ-Zh-MtL"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2H1-So-hWj">
-                                        <rect key="frame" x="177" y="205" width="46" height="30"/>
-                                        <connections>
-                                            <action selector="onDrums:" destination="7bq-7M-ALH" eventType="touchUpInside" id="C6W-Ku-IeM"/>
-                                        </connections>
-                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="13618250_1022661111182155_670870386_n" translatesAutoresizingMaskIntoConstraints="NO" id="ob2-M1-Bbe">
-                                        <rect key="frame" x="2" y="0.0" width="318" height="189"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="194"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHq-0t-jgn">
+                                        <rect key="frame" x="275" y="215" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="right"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ala-Og-S2n">
+                                        <rect key="frame" x="20" y="215" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="left"/>
+                                        <connections>
+                                            <action selector="toDrums:" destination="7bq-7M-ALH" eventType="touchUpInside" id="8wf-va-lva"/>
+                                            <segue destination="em3-4g-vwY" kind="show" identifier="fromPlayPianotoPlayDrums" animates="NO" id="daF-lc-Jgr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9w-jo-VM0">
+                                        <rect key="frame" x="146" y="215" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="grid"/>
+                                        <connections>
+                                            <action selector="toSelection:" destination="7bq-7M-ALH" eventType="touchUpInside" id="9Z5-aN-DCb"/>
+                                            <segue destination="jh5-tW-QuO" kind="show" identifier="fromPlayPianotoSelection" id="bV6-kh-ovn"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="FRV-Lr-2z2" appends="YES" id="Cbh-sl-JEG"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <segue destination="qDQ-RA-qm2" kind="show" identifier="fromPlayPianotoPlayGuitar" animates="NO" id="BF9-U8-nBw"/>
-                        <segue destination="yfv-ji-4xI" kind="show" identifier="fromPlayPianotoPlayVoice" animates="NO" id="66L-X5-9E2"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AbD-Vs-ynk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="FRV-Lr-2z2">
-                    <connections>
-                        <segue destination="em3-4g-vwY" kind="show" identifier="fromPlayPianotoPlayDrums" animates="NO" id="daM-ES-Nwf"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="803" y="-231"/>
         </scene>
     </scenes>
     <resources>
         <image name="13618250_1022661111182155_670870386_n" width="800" height="605"/>
-        <image name="drums" width="20" height="20"/>
-        <image name="guitar" width="21" height="21"/>
+        <image name="grid" width="21" height="21"/>
         <image name="guitar_large" width="259" height="194"/>
-        <image name="mic" width="21" height="21"/>
+        <image name="large_piano" width="800" height="605"/>
+        <image name="left" width="21" height="21"/>
         <image name="mic_large" width="259" height="194"/>
-        <image name="piano" width="18" height="18"/>
+        <image name="right" width="21" height="21"/>
         <image name="screen640x640" width="640" height="360"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="y8K-Tj-OIM"/>
-        <segue reference="27l-Rj-t6M"/>
-        <segue reference="dcZ-p9-47c"/>
-        <segue reference="Qq3-UU-vyf"/>
-        <segue reference="gIK-da-h2Q"/>
-        <segue reference="bs5-qC-xht"/>
-        <segue reference="99A-ae-jo6"/>
-        <segue reference="B9i-RD-Cz0"/>
+        <segue reference="Qo1-mU-FEc"/>
+        <segue reference="xtZ-sz-ivn"/>
+        <segue reference="daF-lc-Jgr"/>
+        <segue reference="9Pz-1E-YDm"/>
+        <segue reference="bV6-kh-ovn"/>
     </inferredMetricsTieBreakers>
 </document>
