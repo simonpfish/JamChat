@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		212DFCA11D2DA6F100489EEA /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212DFC9B1D2DA6F100489EEA /* FBSDKCoreKit.framework */; };
-		212DFCA21D2DA6F100489EEA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212DFC9C1D2DA6F100489EEA /* FBSDKLoginKit.framework */; };
-		212DFCA41D2DA6F100489EEA /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212DFC9E1D2DA6F100489EEA /* FBSDKShareKit.framework */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
 		E717EC161D2ED34500AC812B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717EC151D2ED34500AC812B /* User.swift */; };
 		E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756A8731D2D7E74007C0590 /* AppDelegate.swift */; };
@@ -17,13 +14,15 @@
 		E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E756A8771D2D7E74007C0590 /* Main.storyboard */; };
 		E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E756A87A1D2D7E74007C0590 /* Assets.xcassets */; };
 		E756A87E1D2D7E74007C0590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E756A87C1D2D7E74007C0590 /* LaunchScreen.storyboard */; };
+		E79956741D316E9D00EE445B /* AKAudioFile+ConvenienceInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79956701D316E9D00EE445B /* AKAudioFile+ConvenienceInitializers.swift */; };
+		E79956751D316E9D00EE445B /* AKAudioFile+Exporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79956711D316E9D00EE445B /* AKAudioFile+Exporting.swift */; };
+		E79956761D316E9D00EE445B /* AKAudioFile+Processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79956721D316E9D00EE445B /* AKAudioFile+Processing.swift */; };
+		E79956771D316E9D00EE445B /* AKAudioFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79956731D316E9D00EE445B /* AKAudioFile.swift */; };
+		E79956791D316EA500EE445B /* AKNodeRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79956781D316EA500EE445B /* AKNodeRecorder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		06DC7EFB1EBB19B0747B99B1 /* Pods-JamChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.release.xcconfig"; sourceTree = "<group>"; };
-		212DFC9B1D2DA6F100489EEA /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		212DFC9C1D2DA6F100489EEA /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		212DFC9E1D2DA6F100489EEA /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		7F275E1B8FE709C2BCDCFD4D /* Pods-JamChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.debug.xcconfig"; sourceTree = "<group>"; };
 		E717EC151D2ED34500AC812B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E756A8701D2D7E74007C0590 /* JamChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JamChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,6 +32,11 @@
 		E756A87A1D2D7E74007C0590 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E756A87D1D2D7E74007C0590 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E756A87F1D2D7E74007C0590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E79956701D316E9D00EE445B /* AKAudioFile+ConvenienceInitializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AKAudioFile+ConvenienceInitializers.swift"; sourceTree = "<group>"; };
+		E79956711D316E9D00EE445B /* AKAudioFile+Exporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AKAudioFile+Exporting.swift"; sourceTree = "<group>"; };
+		E79956721D316E9D00EE445B /* AKAudioFile+Processing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AKAudioFile+Processing.swift"; sourceTree = "<group>"; };
+		E79956731D316E9D00EE445B /* AKAudioFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAudioFile.swift; sourceTree = "<group>"; };
+		E79956781D316EA500EE445B /* AKNodeRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AKNodeRecorder.swift; path = "Audio File/AKNodeRecorder.swift"; sourceTree = "<group>"; };
 		EB46293530A6261983676B0D /* Pods_JamChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JamChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -42,9 +46,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */,
-				212DFCA11D2DA6F100489EEA /* FBSDKCoreKit.framework in Frameworks */,
-				212DFCA21D2DA6F100489EEA /* FBSDKLoginKit.framework in Frameworks */,
-				212DFCA41D2DA6F100489EEA /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,9 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				EB46293530A6261983676B0D /* Pods_JamChat.framework */,
-				212DFC9B1D2DA6F100489EEA /* FBSDKCoreKit.framework */,
-				212DFC9C1D2DA6F100489EEA /* FBSDKLoginKit.framework */,
-				212DFC9E1D2DA6F100489EEA /* FBSDKShareKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -107,8 +105,29 @@
 				E756A87A1D2D7E74007C0590 /* Assets.xcassets */,
 				E756A87C1D2D7E74007C0590 /* LaunchScreen.storyboard */,
 				E756A87F1D2D7E74007C0590 /* Info.plist */,
+				E799566E1D316E5700EE445B /* AudioKit-fixed */,
 			);
 			path = JamChat;
+			sourceTree = "<group>";
+		};
+		E799566E1D316E5700EE445B /* AudioKit-fixed */ = {
+			isa = PBXGroup;
+			children = (
+				E79956781D316EA500EE445B /* AKNodeRecorder.swift */,
+				E799566F1D316E9D00EE445B /* Audio File */,
+			);
+			name = "AudioKit-fixed";
+			sourceTree = "<group>";
+		};
+		E799566F1D316E9D00EE445B /* Audio File */ = {
+			isa = PBXGroup;
+			children = (
+				E79956701D316E9D00EE445B /* AKAudioFile+ConvenienceInitializers.swift */,
+				E79956711D316E9D00EE445B /* AKAudioFile+Exporting.swift */,
+				E79956721D316E9D00EE445B /* AKAudioFile+Processing.swift */,
+				E79956731D316E9D00EE445B /* AKAudioFile.swift */,
+			);
+			path = "Audio File";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,9 +253,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E79956751D316E9D00EE445B /* AKAudioFile+Exporting.swift in Sources */,
 				E756A8761D2D7E74007C0590 /* ViewController.swift in Sources */,
+				E79956771D316E9D00EE445B /* AKAudioFile.swift in Sources */,
+				E79956741D316E9D00EE445B /* AKAudioFile+ConvenienceInitializers.swift in Sources */,
+				E79956761D316E9D00EE445B /* AKAudioFile+Processing.swift in Sources */,
 				E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */,
 				E717EC161D2ED34500AC812B /* User.swift in Sources */,
+				E79956791D316EA500EE445B /* AKNodeRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
