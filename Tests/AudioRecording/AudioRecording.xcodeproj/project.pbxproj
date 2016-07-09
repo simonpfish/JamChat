@@ -25,6 +25,7 @@
 		E7DE48F41D304EE100098D0A /* AKAudioFile+Exporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE48F01D304EE100098D0A /* AKAudioFile+Exporting.swift */; };
 		E7DE48F51D304EE100098D0A /* AKAudioFile+Processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE48F11D304EE100098D0A /* AKAudioFile+Processing.swift */; };
 		E7DE48F61D304EE100098D0A /* AKAudioFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE48F21D304EE100098D0A /* AKAudioFile.swift */; };
+		E7DE48F81D307ABF00098D0A /* output.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E7DE48F71D307ABF00098D0A /* output.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		E7DE48F01D304EE100098D0A /* AKAudioFile+Exporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AKAudioFile+Exporting.swift"; sourceTree = "<group>"; };
 		E7DE48F11D304EE100098D0A /* AKAudioFile+Processing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AKAudioFile+Processing.swift"; sourceTree = "<group>"; };
 		E7DE48F21D304EE100098D0A /* AKAudioFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAudioFile.swift; sourceTree = "<group>"; };
+		E7DE48F71D307ABF00098D0A /* output.m4a */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				E7CC22C21D303245009B07A2 /* bassloop.wav */,
 				E7CC22C31D303245009B07A2 /* click.wav */,
 				E7CC22C41D303245009B07A2 /* drumloop.wav */,
+				E7DE48F71D307ABF00098D0A /* output.m4a */,
 				E7CC22C51D303245009B07A2 /* guitarloop.wav */,
 				E7CC22C61D303245009B07A2 /* leadloop.wav */,
 				E7CC22C71D303245009B07A2 /* mixloop.wav */,
@@ -199,6 +202,7 @@
 				E7CC22CD1D303245009B07A2 /* mixloop.wav in Resources */,
 				E7CC22B91D3030A6009B07A2 /* LaunchScreen.storyboard in Resources */,
 				E7CC22B61D3030A6009B07A2 /* Assets.xcassets in Resources */,
+				E7DE48F81D307ABF00098D0A /* output.m4a in Resources */,
 				E7CC22C91D303245009B07A2 /* click.wav in Resources */,
 				E7CC22B41D3030A6009B07A2 /* Main.storyboard in Resources */,
 				E7CC22C81D303245009B07A2 /* bassloop.wav in Resources */,

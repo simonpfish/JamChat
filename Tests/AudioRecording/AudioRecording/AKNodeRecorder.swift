@@ -17,13 +17,15 @@ import AudioKit
 /// Simple audio recorder class
 public class AKNodeRecorder {
     
+    static var exportSession: AKAudioFile.ExportSession?
+    
     // MARK: - Properties
     
     // The node we record from
     private var node: AKNode?
     
     // The file to record to
-    private var internalAudioFile: AKAudioFile
+    var internalAudioFile: AKAudioFile
     
     // the size of the recording buffer
     // Not tested, default is 1024
@@ -219,12 +221,14 @@ public class AKNodeRecorder {
         }
     }
     
+    
     public func export() {
         
         
-        let export = try? self.internalAudioFile.export("output", ext: AKAudioFile.ExportFormat.wav, baseDir: AKAudioFile.BaseDirectory.Documents, callBack: { () in
-        })
-        
+//        AKNodeRecorder.exportSession = try? internalAudioFile.export("export", ext: .m4a, baseDir: .Documents, callBack: { () in
+//            print("done!")
+//        })
+
     }
     
 }

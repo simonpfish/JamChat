@@ -10,7 +10,12 @@ import UIKit
 import AudioKit
 
 class ViewController: UIViewController {
-
+    
+    var recorder: AKNodeRecorder?
+    var exportSession: AVAssetExportSession?
+    
+    var export: AKAudioFile.ExportSession?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,7 +32,6 @@ class ViewController: UIViewController {
         let guitar = AKAudioPlayer(guitarFile!)
         let lead   = AKAudioPlayer(leadFile!)
         
-        let recordFile = bundle.bundlePath + "/recording.wav"
 
 //        print(bundle.bundlePath)
 //        print(recordFile.absoluteString)
@@ -56,30 +60,56 @@ class ViewController: UIViewController {
         
 //        player.play()
         
+        
+        
         let tape = try? AKAudioFile()
-        let recorder = try? AKNodeRecorder(node: AudioKit.output!)
         
         print(tape?.directoryPath.absoluteString)
         
+        recorder = try? AKNodeRecorder(node: AudioKit.output!)
         recorder!.record()
         
         sleep(4)
         recorder!.stop()
         
-        print(tape?.duration)
+//        let export = recorder?.internalAudioFile
         
-        recorder?.export()
+//        let exporter = AVExport
+        
+//        let asset = AVAsset(URL: (recorder?.internalAudioFile.url)!)
+//        print(asset.exportable)
+//        print(asset.availableMetadataFormats)
+//        exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A)
+//        
+//        let outURL = bundle.bundleURL.URLByAppendingPathComponent("wowowow.m4a")
+//        exportSession?.outputURL = outURL
+//        exportSession?.outputFileType = AVFileTypeAppleM4A
+//        exportSession?.shouldOptimizeForNetworkUse = true
+//        exportSession?.exportAsynchronouslyWithCompletionHandler({
+//            print("done!")
+//            if let error = self.exportSession?.error {
+//                print("error")
+//                print(error.debugDescription)
+//            }
+//        })
+        
+        
+//        let file = try? AKAudioFile(forReading: NSURL(string: guitarFile!)!)
+        export =  try! recorder?.internalAudioFile.export("out", ext: .m4a, baseDir: .Documents, callBack: { () in
+            
+            })
+        
         
         //: Adjust the individual track volumes here
-        drums.volume  = 0.9
-        bass.volume   = 0.9
-        guitar.volume = 0.6
-        lead.volume   = 0.7
-        
-        drums.pan  = 0.0
-        bass.pan   = 0.0
-        guitar.pan = 0.2
-        lead.pan   = -0.2
+//        drums.volume  = 0.9
+//        bass.volume   = 0.9
+//        guitar.volume = 0.6
+//        lead.volume   = 0.7
+//        
+//        drums.pan  = 0.0
+//        bass.pan   = 0.0
+//        guitar.pan = 0.2
+//        lead.pan   = -0.2
         // Do any additional setup after loading the view, typically from a nib.
     }
 

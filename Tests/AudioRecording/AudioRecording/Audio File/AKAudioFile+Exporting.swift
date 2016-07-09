@@ -147,7 +147,7 @@ extension AKAudioFile {
     public class ExportSession {
         
         private var outputAudioFile: AKAudioFile?
-        private var exporter: AVAssetExportSession
+        var exporter: AVAssetExportSession
         private var callBack: AKCallback
         
         /// Initalization
@@ -175,9 +175,13 @@ extension AKAudioFile {
             self.callBack = callBack
             
             let assetUrl = file.url
-            let asset  = AVURLAsset(URL: assetUrl)
+            var asset  = AVURLAsset(URL: assetUrl)
+            asset = file.avAsset
+
             
-            // let asset = file.avAsset
+            print(asset.exportable)
+            print(asset.availableMetadataFormats)
+            
             
             let process = AVAssetExportSession(asset: asset, presetName:presetName)
             
@@ -192,7 +196,7 @@ extension AKAudioFile {
                 throw NSError(domain: NSURLErrorDomain, code: NSURLErrorUnknown, userInfo: nil)
             }
             
-            
+            exporter.shouldOptimizeForNetworkUse = true
             
             var filePath: String
             switch baseDir {
@@ -233,6 +237,7 @@ extension AKAudioFile {
             }
             
             exporter.outputURL = NSURL.fileURLWithPath(filePath)
+            
             // Sets the output file encoding (avoid .wav encoded as m4a...)
             exporter.outputFileType = outputFileExtension.UTI as String
             
@@ -261,7 +266,7 @@ extension AKAudioFile {
             exporter.exportAsynchronouslyWithCompletionHandler(internalCompletionHandler)
         }
         
-        private func internalCompletionHandler () {
+        func internalCompletionHandler () {
             switch exporter.status {
             case  AVAssetExportSessionStatus.Failed:
                 print("ERROR AKAudioFile: Export Failed!...")
