@@ -32,6 +32,10 @@ class PlayPianoViewController: UIViewController {
         performSegueWithIdentifier("fromPlayPianotoSelection", sender: self)
     }
     
+    @IBAction func onRight(sender: AnyObject) {
+        performSegueWithIdentifier("fromPlayPianotoPlaySax", sender: self)
+        
+    }
 
     /*
     // MARK: - Navigation
