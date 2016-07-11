@@ -19,6 +19,7 @@ class Track: NSObject {
     private var player: AKAudioPlayer?
     private var filepath: String!
     private var object: PFObject!
+    private let identifier = NSUUID().UUIDString
     
     private var recorder: AKNodeRecorder?
     private var exportSession: AKAudioFile.ExportSession?
@@ -33,6 +34,8 @@ class Track: NSObject {
         let file = object["media"] as! PFFile
         let parseUser = object["author"] as! PFUser
         author = User(user: parseUser)
+        
+        // TODO: Check if file is already downloaded.
         
         file.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) in
             if let error = error {
@@ -55,8 +58,9 @@ class Track: NSObject {
      */
     override init() {
         object = PFObject(className: "Track")
+        
         author = User.currentUser
-        self.filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + String(self.object.objectId!) + ".m4a"
+        self.filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + identifier + ".m4a"
     }
     
     func play() {
@@ -78,11 +82,11 @@ class Track: NSObject {
         delay(duration) { 
             self.recorder!.stop()
             
-            self.exportSession =  try! self.recorder?.internalAudioFile.export(String(self.object.objectId!), ext: .m4a, baseDir: .Documents, callBack: { () in
+            self.exportSession =  try! self.recorder?.internalAudioFile.export(self.identifier, ext: .m4a, baseDir: .Documents, callBack: { () in
                 
                 if self.exportSession!.succeeded {
                     
-                    self.filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + String(self.object.objectId!) + ".m4a"
+                    self.filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + self.identifier + ".m4a"
                     
                     self.player = AKAudioPlayer(self.filepath)
                     Track.mainMixer.connect(self.player!)
@@ -117,6 +121,7 @@ class Track: NSObject {
         // Add relevant fields to the object
         object["media"] = PFFile(name: "audio.m4a", data: NSData(contentsOfFile: filepath)!)
         object["author"] = author.parseUser // Pointer column type that points to PFUser
+        object["identifier"] = identifier
         
         object.saveInBackgroundWithBlock(completion)
     }
