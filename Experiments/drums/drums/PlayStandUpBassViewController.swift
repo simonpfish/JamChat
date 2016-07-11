@@ -1,14 +1,14 @@
 //
-//  PlayVoiceViewController.swift
+//  PlayStandUpBassViewController.swift
 //  drums
 //
-//  Created by Meena Sengottuvelu on 7/8/16.
+//  Created by Meena Sengottuvelu on 7/11/16.
 //  Copyright © 2016 Meena Sengottuvelu. All rights reserved.
 //
 
 import UIKit
 
-class PlayVoiceViewController: UIViewController {
+class PlayStandUpBassViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +23,16 @@ class PlayVoiceViewController: UIViewController {
     
     //performs the appropriate segue depending on which button on the navigation bar is pressed
     
-    @IBAction func toSelection(sender: AnyObject) {
-        performSegueWithIdentifier("fromPlayVoicetoSelection", sender: self)
+    @IBAction func onSelection(sender: AnyObject) {
+        performSegueWithIdentifier("fromPlayStandUpBasstoSelection", sender: self)
     }
     
-    @IBAction func toGuitar(sender: AnyObject) {
-        performSegueWithIdentifier("fromPlayVoicetoPlayGuitar", sender: self)
+    @IBAction func onRight(sender: AnyObject) {
+        performSegueWithIdentifier("fromPlayStandUpBasstoPlayElectricBass", sender: self)
+    }
+    
+    @IBAction func onLeft(sender: AnyObject) {
+        performSegueWithIdentifier("fromPlayStandUpBasstoPlaySax", sender: self)
     }
     
     

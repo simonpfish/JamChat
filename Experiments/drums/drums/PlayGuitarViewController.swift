@@ -21,6 +21,8 @@ class PlayGuitarViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //performs the appropriate segue depending on which button on the navigation bar is pressed
+    
     @IBAction func toVoice(sender: AnyObject) {
         performSegueWithIdentifier("fromPlayGuitartoPlayVoice", sender: self)
     }

@@ -21,6 +21,8 @@ class PlayPianoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //performs the appropriate segue depending on which button on the navigation bar is pressed
+    
     @IBAction func toDrums(sender: AnyObject) {
         performSegueWithIdentifier("fromPlayPianotoPlayDrums", sender: self)
     }

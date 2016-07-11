@@ -37,7 +37,7 @@ class PlayDrumsViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //instantiate the AnlvgfgribhlgeejbvhbgchhuriruhtijudioPlayer object with the correct sound and prepare it to play
+        //instantiate the AudioPlayer object with the correct sound and prepare it to play
         
         crashPlayer = try! AVAudioPlayer(contentsOfURL: crashSound)
         crashPlayer.prepareToPlay()
@@ -69,6 +69,8 @@ class PlayDrumsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //calls the play method on the appropriate AVAudioPlayer depending on which button is clicked
     
     @IBAction func onCrash(sender: AnyObject) {
         crashPlayer.stop()
@@ -109,6 +111,8 @@ class PlayDrumsViewController: UIViewController {
         rideSoundPlayer.stop()
         rideSoundPlayer.play()
     }
+    
+    //performs the appropriate segue depending on which button on the navigation bar is pressed
     
     @IBAction func toSelection(sender: AnyObject) {
         performSegueWithIdentifier("fromPlayDrumtoSelection", sender: self)

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		213580011D3419AF001BF312 /* PlaySaxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213580001D3419AF001BF312 /* PlaySaxViewController.swift */; };
+		213580031D3419CD001BF312 /* PlayStandUpBassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213580021D3419CD001BF312 /* PlayStandUpBassViewController.swift */; };
+		213580051D3419DE001BF312 /* PlayElectricBassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213580041D3419DE001BF312 /* PlayElectricBassViewController.swift */; };
+		213580071D3419ED001BF312 /* PlayMiscPercussionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213580061D3419ED001BF312 /* PlayMiscPercussionViewController.swift */; };
 		21A4A4341D2ED40F00551766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A4A4331D2ED40F00551766 /* AppDelegate.swift */; };
 		21A4A4391D2ED40F00551766 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A4371D2ED40F00551766 /* Main.storyboard */; };
 		21A4A43B1D2ED40F00551766 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A43A1D2ED40F00551766 /* Assets.xcassets */; };
@@ -34,6 +38,10 @@
 
 /* Begin PBXFileReference section */
 		098B7BA37B16FE4402AA07FD /* Pods_drums.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_drums.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		213580001D3419AF001BF312 /* PlaySaxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySaxViewController.swift; sourceTree = "<group>"; };
+		213580021D3419CD001BF312 /* PlayStandUpBassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayStandUpBassViewController.swift; sourceTree = "<group>"; };
+		213580041D3419DE001BF312 /* PlayElectricBassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayElectricBassViewController.swift; sourceTree = "<group>"; };
+		213580061D3419ED001BF312 /* PlayMiscPercussionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayMiscPercussionViewController.swift; sourceTree = "<group>"; };
 		21A4A4301D2ED40F00551766 /* drums.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = drums.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A4A4331D2ED40F00551766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21A4A4381D2ED40F00551766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -134,6 +142,10 @@
 				21A52AC31D3036B400F1A90C /* PlayVoiceViewController.swift */,
 				21A52AC51D3036C100F1A90C /* PlayGuitarViewController.swift */,
 				21A52AC71D3036CE00F1A90C /* PlayPianoViewController.swift */,
+				213580001D3419AF001BF312 /* PlaySaxViewController.swift */,
+				213580021D3419CD001BF312 /* PlayStandUpBassViewController.swift */,
+				213580041D3419DE001BF312 /* PlayElectricBassViewController.swift */,
+				213580061D3419ED001BF312 /* PlayMiscPercussionViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -293,6 +305,10 @@
 				21A52AC61D3036C100F1A90C /* PlayGuitarViewController.swift in Sources */,
 				21A4A4651D2F021A00551766 /* SelectionViewController.swift in Sources */,
 				21A52AC81D3036CE00F1A90C /* PlayPianoViewController.swift in Sources */,
+				213580031D3419CD001BF312 /* PlayStandUpBassViewController.swift in Sources */,
+				213580011D3419AF001BF312 /* PlaySaxViewController.swift in Sources */,
+				213580071D3419ED001BF312 /* PlayMiscPercussionViewController.swift in Sources */,
+				213580051D3419DE001BF312 /* PlayElectricBassViewController.swift in Sources */,
 				21A52AC41D3036B400F1A90C /* PlayVoiceViewController.swift in Sources */,
 				21A52AC11D300BDF00F1A90C /* PlayDrumsViewController.swift in Sources */,
 				21A4A4341D2ED40F00551766 /* AppDelegate.swift in Sources */,
