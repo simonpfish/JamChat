@@ -1,0 +1,3 @@
+[submodule "Servers/jamchat-dashboard"]
+	path = Servers/jamchat-dashboard
+	url = https://git.heroku.com/jamchat-dashboard.git

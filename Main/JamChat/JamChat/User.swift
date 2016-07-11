@@ -17,17 +17,16 @@ class User: NSObject {
     
     static let loginDelegate = LoginDelegate()
     
-    private var parseUser: PFUser!
+    private(set) var parseUser: PFUser!
     
     var facebookID: String!
     var name: String!
     var pictureURL: NSURL!
     var email: String!
     
-    /**
-     Initializes user based on a facebookID, pulling all the user data from the Facebook API.
-     */
-    init(userId: String) {
+    
+    // Initializes user based on a facebookID, pulling all the user data from the Facebook API. Used only internally.
+    private init(userId: String) {
         super.init()
         // Create request for user's Facebook data
         let request = FBSDKGraphRequest(graphPath: userId, parameters:["fields" : "email,name,friends"])
@@ -41,8 +40,6 @@ class User: NSObject {
                 // Some error checking here
             }
             else if let userData = result as? [String:AnyObject] {
-                
-                print(userData)
                 self.facebookID = userData["id"] as! String
                 self.name = userData["name"] as! String
                 self.email = userData["email"] as? String
@@ -50,6 +47,15 @@ class User: NSObject {
             }
         }
     }
+    
+    /**
+     Initializes user object based on a Parse User.
+     */
+    convenience init(user: PFUser) {
+        let ID = user["facebookID"] as! String
+        self.init(userId: ID)
+    }
+    
     
     /**
      Checks if an user is already logged in
@@ -111,11 +117,18 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
     // Called when user is logged in succesfully, dismissing the login view
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
         User.currentUser = User(userId: "me")
-        User.currentUser!.parseUser["facebookID"] = User.currentUser!.facebookID
+        User.currentUser?.parseUser = PFUser.currentUser()
+        
+        FBSDKProfile.loadCurrentProfileWithCompletion({ (profile: FBSDKProfile!, error: NSError!) in
+            User.currentUser?.parseUser["facebookID"] = profile.userID
+            User.currentUser?.parseUser.saveInBackground()
+        })
+        
         controller!.dismissViewControllerAnimated(true, completion: nil)
         if let success = loginSuccess {
             success()
         }
+        
     }
     
     // Called when the login fails
