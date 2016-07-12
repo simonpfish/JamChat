@@ -12,6 +12,7 @@ import AudioKit
 class PlayPianoViewController: UIViewController, KeyboardDelegate {
 
     let sampler = AKSampler()
+    var alreadyLoaded = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,17 +45,21 @@ class PlayPianoViewController: UIViewController, KeyboardDelegate {
     }
     
     //performs the appropriate segue depending on which button on the navigation bar is pressed
+    //you must stop the AudioKit before switching to a new ViewController
     
     @IBAction func toDrums(sender: AnyObject) {
+        AudioKit.stop()
         performSegueWithIdentifier("fromPlayPianotoPlayDrums", sender: self)
     }
     
     
     @IBAction func toSelection(sender: AnyObject) {
+        AudioKit.stop()
         performSegueWithIdentifier("fromPlayPianotoSelection", sender: self)
     }
     
     @IBAction func onRight(sender: AnyObject) {
+        AudioKit.stop()
         performSegueWithIdentifier("fromPlayPianotoPlaySax", sender: self)
         
     }
