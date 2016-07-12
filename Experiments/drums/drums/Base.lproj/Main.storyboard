@@ -84,7 +84,7 @@
                                 <rect key="frame" x="0.0" y="322" width="320" height="246"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap on an instrument to select it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMh-Dy-1Ib">
-                                        <rect key="frame" x="46" y="8" width="231" height="21"/>
+                                        <rect key="frame" x="46" y="7" width="231" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -96,7 +96,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="screen640x640" translatesAutoresizingMaskIntoConstraints="NO" id="OwH-6R-Xry">
-                                        <rect key="frame" x="168" y="37" width="51" height="51"/>
+                                        <rect key="frame" x="168" y="34" width="51" height="51"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="f7W-MI-jbD" appends="YES" id="ybJ-Dx-47N"/>
@@ -104,7 +104,7 @@
                                         </connections>
                                     </imageView>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="large_piano" translatesAutoresizingMaskIntoConstraints="NO" id="yNy-IT-3cA">
-                                        <rect key="frame" x="241" y="37" width="51" height="51"/>
+                                        <rect key="frame" x="241" y="34" width="51" height="51"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="pWr-ri-1Dy" appends="YES" id="hdq-9D-Hpp"/>
@@ -112,7 +112,7 @@
                                         </connections>
                                     </imageView>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="guitar_large" translatesAutoresizingMaskIntoConstraints="NO" id="gwd-qu-lZi">
-                                        <rect key="frame" x="97" y="37" width="51" height="51"/>
+                                        <rect key="frame" x="97" y="34" width="51" height="51"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="Pff-IR-jAo" appends="YES" id="eZC-hP-Wfe"/>
@@ -120,7 +120,7 @@
                                         </connections>
                                     </imageView>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mic_large" translatesAutoresizingMaskIntoConstraints="NO" id="Zge-gw-5ET">
-                                        <rect key="frame" x="26" y="37" width="51" height="51"/>
+                                        <rect key="frame" x="26" y="34" width="51" height="51"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="PmL-KO-mjm" appends="YES" id="Bs2-Wj-x1R"/>
@@ -128,13 +128,13 @@
                                         </connections>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-YA-286">
-                                        <rect key="frame" x="77" y="217" width="164" height="21"/>
+                                        <rect key="frame" x="77" y="211" width="164" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sax2" translatesAutoresizingMaskIntoConstraints="NO" id="x90-VC-dzL">
-                                        <rect key="frame" x="26" y="97" width="51" height="51"/>
+                                        <rect key="frame" x="26" y="90" width="51" height="51"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="y6b-lX-0QY" appends="YES" id="CHr-Bs-t1I"/>
@@ -142,7 +142,7 @@
                                         </connections>
                                     </imageView>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stand up bass 2" translatesAutoresizingMaskIntoConstraints="NO" id="LVm-WR-PC8">
-                                        <rect key="frame" x="97" y="97" width="51" height="51"/>
+                                        <rect key="frame" x="97" y="90" width="51" height="51"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="P7J-8I-oPP" appends="YES" id="2XS-sA-aq9"/>
@@ -150,7 +150,7 @@
                                         </connections>
                                     </imageView>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="electric bass" translatesAutoresizingMaskIntoConstraints="NO" id="yMq-cd-HJc">
-                                        <rect key="frame" x="168" y="96" width="51" height="51"/>
+                                        <rect key="frame" x="168" y="90" width="51" height="51"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="HpS-oR-1Bu" appends="YES" id="rmp-ct-p4m"/>
@@ -158,7 +158,7 @@
                                         </connections>
                                     </imageView>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="misc percussion" translatesAutoresizingMaskIntoConstraints="NO" id="4GA-FP-N5m">
-                                        <rect key="frame" x="241" y="97" width="51" height="51"/>
+                                        <rect key="frame" x="241" y="90" width="51" height="51"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="Ht5-G4-kOL" appends="YES" id="MZ2-KY-kvq"/>
@@ -456,12 +456,12 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vik-Ou-yxY" userLabel="InstrumentView">
                                 <rect key="frame" x="0.0" y="322" width="320" height="246"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="13618250_1022661111182155_670870386_n" translatesAutoresizingMaskIntoConstraints="NO" id="ob2-M1-Bbe">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="194"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHq-0t-jgn" userLabel="Right">
                                         <rect key="frame" x="275" y="215" width="22" height="22"/>
                                         <state key="normal" title="Button" image="right"/>
+                                        <connections>
+                                            <action selector="onRight:" destination="7bq-7M-ALH" eventType="touchUpInside" id="kBK-zx-8GG"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ala-Og-S2n" userLabel="Left">
                                         <rect key="frame" x="20" y="215" width="22" height="22"/>
@@ -489,6 +489,9 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="uaz-Z7-j71" kind="show" identifier="fromPlayPianotoPlaySax" animates="NO" id="tIl-yE-KpI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AbD-Vs-ynk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -746,7 +749,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="13618250_1022661111182155_670870386_n" width="800" height="605"/>
         <image name="electric bass" width="800" height="264"/>
         <image name="grid" width="21" height="21"/>
         <image name="guitar_large" width="259" height="194"/>
@@ -760,14 +762,14 @@
         <image name="stand up bass 2" width="498" height="597"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TtO-OU-wPl"/>
-        <segue reference="2RJ-cV-Rh2"/>
-        <segue reference="Vu4-dO-T3Y"/>
-        <segue reference="CQn-5e-tUG"/>
-        <segue reference="kN3-3L-ucW"/>
-        <segue reference="g1y-u1-6Pc"/>
-        <segue reference="B8E-Fx-tHT"/>
+        <segue reference="UIl-kv-Qpu"/>
+        <segue reference="bV6-kh-ovn"/>
+        <segue reference="zEa-Yp-yAG"/>
+        <segue reference="tIl-yE-KpI"/>
+        <segue reference="daF-lc-Jgr"/>
         <segue reference="6md-ge-3fE"/>
-        <segue reference="GlN-P9-CoW"/>
+        <segue reference="B8E-Fx-tHT"/>
+        <segue reference="Sfc-mD-drs"/>
+        <segue reference="1k5-uM-N5D"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -11,6 +11,8 @@
 		213580031D3419CD001BF312 /* PlayStandUpBassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213580021D3419CD001BF312 /* PlayStandUpBassViewController.swift */; };
 		213580051D3419DE001BF312 /* PlayElectricBassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213580041D3419DE001BF312 /* PlayElectricBassViewController.swift */; };
 		213580071D3419ED001BF312 /* PlayMiscPercussionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213580061D3419ED001BF312 /* PlayMiscPercussionViewController.swift */; };
+		216691CE1D3474A60079D919 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216691CD1D3474A60079D919 /* PianoView.swift */; };
+		216691D01D3474BA0079D919 /* PianoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216691CF1D3474BA0079D919 /* PianoKey.swift */; };
 		21A4A4341D2ED40F00551766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A4A4331D2ED40F00551766 /* AppDelegate.swift */; };
 		21A4A4391D2ED40F00551766 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A4371D2ED40F00551766 /* Main.storyboard */; };
 		21A4A43B1D2ED40F00551766 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A43A1D2ED40F00551766 /* Assets.xcassets */; };
@@ -33,8 +35,25 @@
 		21A52AC41D3036B400F1A90C /* PlayVoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A52AC31D3036B400F1A90C /* PlayVoiceViewController.swift */; };
 		21A52AC61D3036C100F1A90C /* PlayGuitarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A52AC51D3036C100F1A90C /* PlayGuitarViewController.swift */; };
 		21A52AC81D3036CE00F1A90C /* PlayPianoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A52AC71D3036CE00F1A90C /* PlayPianoViewController.swift */; };
+		21EDA78D1D346BBB00916C53 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21EDA78C1D346BBB00916C53 /* AudioKit.framework */; };
+		21EDA78E1D346BBB00916C53 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 21EDA78C1D346BBB00916C53 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		21EDA7911D346C0300916C53 /* PianoC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 21EDA7901D346C0300916C53 /* PianoC.wav */; };
 		29D655B55B0545DBB3C85FF6 /* Pods_drums.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 098B7BA37B16FE4402AA07FD /* Pods_drums.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		21EDA78F1D346BBB00916C53 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				21EDA78E1D346BBB00916C53 /* AudioKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		098B7BA37B16FE4402AA07FD /* Pods_drums.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_drums.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +61,8 @@
 		213580021D3419CD001BF312 /* PlayStandUpBassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayStandUpBassViewController.swift; sourceTree = "<group>"; };
 		213580041D3419DE001BF312 /* PlayElectricBassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayElectricBassViewController.swift; sourceTree = "<group>"; };
 		213580061D3419ED001BF312 /* PlayMiscPercussionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayMiscPercussionViewController.swift; sourceTree = "<group>"; };
+		216691CD1D3474A60079D919 /* PianoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
+		216691CF1D3474BA0079D919 /* PianoKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoKey.swift; sourceTree = "<group>"; };
 		21A4A4301D2ED40F00551766 /* drums.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = drums.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A4A4331D2ED40F00551766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21A4A4381D2ED40F00551766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -66,6 +87,8 @@
 		21A52AC31D3036B400F1A90C /* PlayVoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVoiceViewController.swift; sourceTree = "<group>"; };
 		21A52AC51D3036C100F1A90C /* PlayGuitarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayGuitarViewController.swift; sourceTree = "<group>"; };
 		21A52AC71D3036CE00F1A90C /* PlayPianoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPianoViewController.swift; sourceTree = "<group>"; };
+		21EDA78C1D346BBB00916C53 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
+		21EDA7901D346C0300916C53 /* PianoC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PianoC.wav; sourceTree = "<group>"; };
 		42DBD29DAF94F74667367BD2 /* Pods-drums.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-drums.debug.xcconfig"; path = "Pods/Target Support Files/Pods-drums/Pods-drums.debug.xcconfig"; sourceTree = "<group>"; };
 		8219C1E9E91ACAFF198F4223 /* Pods-drums.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-drums.release.xcconfig"; path = "Pods/Target Support Files/Pods-drums/Pods-drums.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21EDA78D1D346BBB00916C53 /* AudioKit.framework in Frameworks */,
 				29D655B55B0545DBB3C85FF6 /* Pods_drums.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,9 +106,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		216691CC1D3472AE0079D919 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				216691CD1D3474A60079D919 /* PianoView.swift */,
+				216691CF1D3474BA0079D919 /* PianoKey.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		21A4A4271D2ED40F00551766 = {
 			isa = PBXGroup;
 			children = (
+				21EDA78C1D346BBB00916C53 /* AudioKit.framework */,
 				21A4A4321D2ED40F00551766 /* drums */,
 				21A4A4311D2ED40F00551766 /* Products */,
 				3A2D86A71C3EA1207C246664 /* Pods */,
@@ -103,8 +137,8 @@
 		21A4A4321D2ED40F00551766 /* drums */ = {
 			isa = PBXGroup;
 			children = (
+				216691CC1D3472AE0079D919 /* Models */,
 				21A52AC21D3035B000F1A90C /* ViewControllers */,
-				21A4A4551D2EE38E00551766 /* Sounds */,
 				21A4A4331D2ED40F00551766 /* AppDelegate.swift */,
 				21A4A4371D2ED40F00551766 /* Main.storyboard */,
 				21A4A43A1D2ED40F00551766 /* Assets.xcassets */,
@@ -118,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				21A4A45E1D2EFBF600551766 /* G_TOM_1.wav */,
+				21EDA7901D346C0300916C53 /* PianoC.wav */,
 				21A4A4581D2EFB4600551766 /* small.WAV */,
 				21A4A4591D2EFB4600551766 /* duplicate.WAV */,
 				21A4A45A1D2EFB4600551766 /* medium.wav */,
@@ -137,6 +172,7 @@
 		21A52AC21D3035B000F1A90C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				21A4A4551D2EE38E00551766 /* Sounds */,
 				21A4A4641D2F021A00551766 /* SelectionViewController.swift */,
 				21A52AC01D300BDF00F1A90C /* PlayDrumsViewController.swift */,
 				21A52AC31D3036B400F1A90C /* PlayVoiceViewController.swift */,
@@ -180,6 +216,7 @@
 				21A4A42E1D2ED40F00551766 /* Resources */,
 				C825EE1B51973DB20B485F19 /* [CP] Embed Pods Frameworks */,
 				93FB52184DDAE22627C73536 /* [CP] Copy Pods Resources */,
+				21EDA78F1D346BBB00916C53 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -238,6 +275,7 @@
 				21A4A45C1D2EFB4600551766 /* duplicate.WAV in Resources */,
 				21A4A44D1D2EE38A00551766 /* highHat.mp3 in Resources */,
 				21A4A4391D2ED40F00551766 /* Main.storyboard in Resources */,
+				21EDA7911D346C0300916C53 /* PianoC.wav in Resources */,
 				21A4A4571D2EE4E000551766 /* G_TOM_1.mp3 in Resources */,
 				21A4A44E1D2EE38A00551766 /* duplicateTom.mp3 in Resources */,
 				21A4A4521D2EE38A00551766 /* longCrash.mp3 in Resources */,
@@ -304,8 +342,10 @@
 			files = (
 				21A52AC61D3036C100F1A90C /* PlayGuitarViewController.swift in Sources */,
 				21A4A4651D2F021A00551766 /* SelectionViewController.swift in Sources */,
+				216691CE1D3474A60079D919 /* PianoView.swift in Sources */,
 				21A52AC81D3036CE00F1A90C /* PlayPianoViewController.swift in Sources */,
 				213580031D3419CD001BF312 /* PlayStandUpBassViewController.swift in Sources */,
+				216691D01D3474BA0079D919 /* PianoKey.swift in Sources */,
 				213580011D3419AF001BF312 /* PlaySaxViewController.swift in Sources */,
 				213580071D3419ED001BF312 /* PlayMiscPercussionViewController.swift in Sources */,
 				213580051D3419DE001BF312 /* PlayElectricBassViewController.swift in Sources */,
@@ -425,6 +465,10 @@
 			baseConfigurationReference = 42DBD29DAF94F74667367BD2 /* Pods-drums.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = drums/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JamChat.drums;
@@ -437,6 +481,10 @@
 			baseConfigurationReference = 8219C1E9E91ACAFF198F4223 /* Pods-drums.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = drums/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JamChat.drums;
