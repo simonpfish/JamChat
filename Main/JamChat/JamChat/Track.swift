@@ -52,7 +52,9 @@ class Track: NSObject {
                     failure(error)
                 } else {
                     
-                    data?.writeToURL(NSURL(string: self.filepath)!, atomically: true)
+                    let manager = NSFileManager()
+                    manager.createFileAtPath(self.filepath, contents: data, attributes: nil)
+//                    data?.writeToURL(NSURL(string: self.filepath)!, atomically: true)
                     self.player = AKAudioPlayer(self.filepath)
                     Track.mainMixer.connect(self.player!)
                     
