@@ -40,6 +40,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func loadFeed() {
         Chat.downloadActiveUserChats({ (chats: [Chat]) in
             self.chats = chats
+            print("reloading")
             self.tableView.reloadData()
         }) { (error: NSError) in
             print(error.localizedDescription)

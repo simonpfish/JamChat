@@ -44,11 +44,13 @@ class User: NSObject {
                 self.name = userData["name"] as! String
                 self.email = userData["email"] as? String
                 self.pictureURL = NSURL(string: "https://graph.facebook.com/\(self.facebookID)/picture?type=large&return_ssl_resources=1")!
+                print(self.name)
+                if let completion = completion {
+                    completion()
+                }
             }
             
-            if let completion = completion {
-                completion()
-            }
+            
         }
     }
     

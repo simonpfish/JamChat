@@ -39,27 +39,43 @@ class Chat: NSObject {
                 completion()
             })
         }
+    }
+    
+    /**
+     Creates a new chat with a given message duration
+     */
+    init(messageDuration: Double, users: [User]) {
+        object = PFObject(className: "Chat")
+        self.messageDuration = messageDuration
         
+        super.init()
+        
+        for user in users {
+            add(user)
+        }
+        add(User.currentUser!)
     }
     
     private func loadUsers(completion: () -> ()) {
-        for userID in userIDs {
             let query = PFQuery(className: "_User")
-            query.whereKey("objectId", equalTo: userID)
+            query.whereKey("objectId", containedIn: userIDs)
             query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
+                    var loadedCount = 0
                     for object in objects! {
                         self.users.append(User(user: object as! PFUser, completion: {
-                            if self.users.count == objects?.count {
+                            loadedCount += 1
+                            print("done loading user \(loadedCount) \(objects!.count)")
+                            if loadedCount == objects?.count {
+                                print("done loading users")
                                 completion()
                             }
                         }))
                     }
                 }
             })
-        }
     }
     
     private func loadMessages(completion: () -> ()) {
@@ -74,9 +90,11 @@ class Chat: NSObject {
                 if objects?.count == 0 {
                     completion()
                 } else {
+                    var loadedCount = 0
                     for object in objects! {
                         self.messages.append(Message(object: object, completion: {
-                            if self.messages.count == objects?.count {
+                            loadedCount += 1
+                            if loadedCount == objects?.count {
                                 completion()
                             }
                         }))
@@ -84,21 +102,6 @@ class Chat: NSObject {
                 }
             }
         }
-    }
-    
-    /**
-     Creates a new chat with a given message duration
-     */
-    init(messageDuration: Double, users: [User]) {
-        object = PFObject(className: "Chat")
-        self.messageDuration = messageDuration
-        
-        super.init()
-
-        for user in users {
-            add(user)
-        }
-        add(User.currentUser!)
     }
     
     init(messageDuration: Double, userIDs: [String], completion: () -> ()) {
@@ -212,9 +215,11 @@ class Chat: NSObject {
                 failure(error)
             } else {
                 var chats: [Chat] = []
+                var loadedCount = 0
                 for object in objects ?? [] {
                     chats.append(Chat(object: object, completion: {
-                        if chats.count == objects?.count {
+                        loadedCount += 1
+                        if loadedCount == objects?.count {
                             success(chats)
                         }
                     }))
