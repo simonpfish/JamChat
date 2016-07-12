@@ -456,9 +456,6 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vik-Ou-yxY" userLabel="InstrumentView">
                                 <rect key="frame" x="0.0" y="322" width="320" height="246"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="13618250_1022661111182155_670870386_n" translatesAutoresizingMaskIntoConstraints="NO" id="ob2-M1-Bbe">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="194"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHq-0t-jgn" userLabel="Right">
                                         <rect key="frame" x="275" y="215" width="22" height="22"/>
                                         <state key="normal" title="Button" image="right"/>
@@ -752,7 +749,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="13618250_1022661111182155_670870386_n" width="800" height="605"/>
         <image name="electric bass" width="800" height="264"/>
         <image name="grid" width="21" height="21"/>
         <image name="guitar_large" width="259" height="194"/>
