@@ -78,6 +78,7 @@ class Chat: NSObject {
         for user in users {
             add(user)
         }
+        add(User.currentUser!)
     }
     
     init(messageDuration: Double, userIDs: [String]) {
@@ -100,6 +101,7 @@ class Chat: NSObject {
                 }
             })
         }
+        add(User.currentUser!)
     }
     
     /**
