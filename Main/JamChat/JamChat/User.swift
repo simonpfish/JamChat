@@ -54,6 +54,7 @@ class User: NSObject {
     convenience init(user: PFUser) {
         let ID = user["facebookID"] as! String
         self.init(userId: ID)
+        parseUser = user
     }
     
     
