@@ -31,7 +31,6 @@ class PlaySaxViewController: UIViewController {
         performSegueWithIdentifier("fromPlaySaxtoPlayStandUpBass", sender: self)
     }
     
-    //doesnt work
     @IBAction func onLeft(sender: AnyObject) {
         performSegueWithIdentifier("fromPlaySaxtoPlayPiano", sender: self)
     }
