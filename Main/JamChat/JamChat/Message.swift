@@ -13,6 +13,7 @@ class Message: NSObject {
     
     private var tracks: [Track] = []
     private var newTracks: [Track] = []
+    private(set) var id: String?
     
     /**
      Initializes a new message based on a parse object
@@ -78,7 +79,10 @@ class Message: NSObject {
                 } else {
                     uploadedCount += 1
                     if uploadedCount == self.newTracks.count {
-                        object.saveInBackgroundWithBlock(completion)
+                        object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                            self.id = object.objectId
+                            completion!(success, error)
+                        })
                     }
                 }
             })
