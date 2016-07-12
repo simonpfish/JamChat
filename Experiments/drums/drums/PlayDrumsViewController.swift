@@ -122,7 +122,6 @@ class PlayDrumsViewController: UIViewController {
         performSegueWithIdentifier("fromPlayDrumtoPlayGuitar", sender: self)
     }
     
-    //doesnt work
     @IBAction func toPiano(sender: AnyObject) {
         performSegueWithIdentifier("fromPlayDrumtoPlayPiano", sender: self)
     }
