@@ -21,6 +21,8 @@ class Message: NSObject {
     init(object: PFObject, completion: () -> ()) {
         super.init()
         
+        id = object.objectId
+        
         let trackIDs = object["tracks"] as! [String]
         
         let query = PFQuery(className: "Track")
