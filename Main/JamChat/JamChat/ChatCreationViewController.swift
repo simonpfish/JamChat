@@ -24,7 +24,8 @@ class ChatCreationViewController: UIViewController {
     }
     
     @IBAction func onCreate(sender: AnyObject) {
-        let feed = parentViewController as! FeedViewController
+        let navController = presentingViewController as! UINavigationController
+        let feed = navController.topViewController as! FeedViewController
         self.dismissViewControllerAnimated(true) {
             feed.createNewChat([self.userField.text!])
         }

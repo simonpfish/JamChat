@@ -29,7 +29,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidAppear(animated)
         
         if (!User.isLoggedIn()) {
-            User.login(self, success: nil, failure: nil)
+            User.login(self, success: { 
+                self.loadFeed()
+                }, failure: { (error: NSError?) in
+                print(error?.localizedDescription)
+            })
         }
     }
     

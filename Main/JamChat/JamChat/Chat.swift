@@ -34,8 +34,8 @@ class Chat: NSObject {
         super.init()
         
         for userID in userIDs {
-            let query = PFQuery(className: "User")
-            query.whereKey("objectID", equalTo: userID)
+            let query = PFQuery(className: "_User")
+            query.whereKey("objectId", equalTo: userID)
             query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
                 if let error = error {
                     print(error.localizedDescription)
@@ -49,18 +49,22 @@ class Chat: NSObject {
         
         let query = PFQuery(className: "Message")
         query.orderByDescending("createdAt")
-        query.whereKey("objectID", containedIn: messageIDs)
+        query.whereKey("objectId", containedIn: messageIDs)
         
         query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                for object in objects! {
-                    self.messages.append(Message(object: object, completion: { 
-                        if self.messages.count == objects?.count {
-                            completion()
-                        }
-                    }))
+                if objects?.count == 0 {
+                    completion()
+                } else {
+                    for object in objects! {
+                        self.messages.append(Message(object: object, completion: {
+                            if self.messages.count == objects?.count {
+                                completion()
+                            }
+                        }))
+                    }
                 }
             }
         }
@@ -157,7 +161,7 @@ class Chat: NSObject {
                 let newMessageIDs = serverMessageIDs.subtract(self.messageIDs)
                 
                 let query = PFQuery(className: "Message")
-                query.whereKey("objectID", containedIn: Array(newMessageIDs))
+                query.whereKey("objectId", containedIn: Array(newMessageIDs))
                 
                 query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
                     if let error = error {
@@ -185,6 +189,7 @@ class Chat: NSObject {
      */
     func push(completion: PFBooleanResultBlock?) {
         
+        object["messageDuration"] = messageDuration
         object["users"] = userIDs
         object["messages"] = messageIDs
 
@@ -194,9 +199,8 @@ class Chat: NSObject {
     class func downloadActiveUserChats(success: ([Chat]) -> (), failure: (NSError) -> ()) {
         let query = PFQuery(className: "Chat")
         
-        query.whereKey("users", containsString: User.currentUser?.parseUser.objectId)
+        query.whereKey("users", containsString: User.currentUser!.parseUser.objectId!)
         query.orderByDescending("modifiedAt")
-        
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
             if let error = error {
                 failure(error)

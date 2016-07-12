@@ -14,7 +14,11 @@ class ChatCell: UITableViewCell {
     
     var chat: Chat? {
         didSet {
-            usersLabel.text = String(chat!.users)
+            var usersString = ""
+            for user in chat!.users {
+                usersString += user.name + ", "
+            }
+            usersLabel.text = usersString
         }
     }
     
