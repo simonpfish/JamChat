@@ -130,7 +130,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-YA-286">
                                         <rect key="frame" x="77" y="211" width="164" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sax2" translatesAutoresizingMaskIntoConstraints="NO" id="x90-VC-dzL">
@@ -482,34 +482,6 @@
                                             <segue destination="jh5-tW-QuO" kind="show" identifier="fromPlayPianotoSelection" id="bV6-kh-ovn"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wI3-zc-hrl">
-                                        <rect key="frame" x="0.0" y="125" width="46" height="69"/>
-                                        <state key="normal" title="C"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YeF-NP-3bF">
-                                        <rect key="frame" x="47" y="125" width="46" height="69"/>
-                                        <state key="normal" title="D"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epS-LC-KRP">
-                                        <rect key="frame" x="137" y="125" width="46" height="69"/>
-                                        <state key="normal" title="F"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBS-7z-Ylv">
-                                        <rect key="frame" x="91" y="125" width="46" height="69"/>
-                                        <state key="normal" title="E"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ViG-tI-XW0">
-                                        <rect key="frame" x="182" y="125" width="46" height="69"/>
-                                        <state key="normal" title="G"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sh3-FW-fyg">
-                                        <rect key="frame" x="228" y="125" width="46" height="69"/>
-                                        <state key="normal" title="A"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evH-fa-zc6">
-                                        <rect key="frame" x="274" y="125" width="46" height="69"/>
-                                        <state key="normal" title="B"/>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -794,14 +766,14 @@
         <image name="stand up bass 2" width="498" height="597"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4hb-uP-y3O"/>
+        <segue reference="UIl-kv-Qpu"/>
         <segue reference="bV6-kh-ovn"/>
         <segue reference="zEa-Yp-yAG"/>
-        <segue reference="Sfc-mD-drs"/>
-        <segue reference="B8E-Fx-tHT"/>
+        <segue reference="tIl-yE-KpI"/>
+        <segue reference="daF-lc-Jgr"/>
         <segue reference="6md-ge-3fE"/>
-        <segue reference="GlN-P9-CoW"/>
-        <segue reference="UIl-kv-Qpu"/>
+        <segue reference="B8E-Fx-tHT"/>
+        <segue reference="Sfc-mD-drs"/>
         <segue reference="1k5-uM-N5D"/>
     </inferredMetricsTieBreakers>
 </document>
