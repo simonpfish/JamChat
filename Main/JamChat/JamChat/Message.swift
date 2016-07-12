@@ -12,14 +12,15 @@ import Parse
 class Message: NSObject {
     
     private var tracks: [Track] = []
+    private var newTracks: [Track] = []
     
     /**
-     Initializes a new message that builds on top of an existing one
+     Initializes a new message based on a parse object
      */
-    init(oldMessage: PFObject, completion: () -> ()) {
+    init(object: PFObject, completion: () -> ()) {
         super.init()
         
-        let trackIDs = oldMessage["tracks"] as! [String]
+        let trackIDs = object["tracks"] as! [String]
         
         let query = PFQuery(className: "Track")
         query.orderByDescending("createdAt")
@@ -52,10 +53,11 @@ class Message: NSObject {
      */
     func add(track: Track) {
         tracks.append(track)
+        newTracks.append(track)
     }
     
     /**
-     Uploads message to parse
+     Uploads message to parse, creating a new one in the server. Will not upload anything if no new tracks were added.
      */
     func send(completion: PFBooleanResultBlock?) {
         let object = PFObject(className: "Message")
@@ -68,7 +70,19 @@ class Message: NSObject {
         
         object["tracks"] = trackIDs
 
-        object.saveInBackgroundWithBlock(completion)
+        var uploadedCount = 0
+        for track in newTracks {
+            track.upload({ (success: Bool, error: NSError?) in
+                if let error = error {
+                    completion!(false, error)
+                } else {
+                    uploadedCount += 1
+                    if uploadedCount == self.newTracks.count {
+                        object.saveInBackgroundWithBlock(completion)
+                    }
+                }
+            })
+        }
     }
     
 }
