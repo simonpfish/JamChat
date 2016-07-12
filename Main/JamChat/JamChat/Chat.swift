@@ -33,36 +33,11 @@ class Chat: NSObject {
         
         super.init()
         
-        for userID in userIDs {
-            let query = PFQuery(className: "User")
-            query.whereKey("objectID", equalTo: userID)
-            query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    for object in objects! {
-                        self.users.append(User(user: object as! PFUser))
-                    }
-                }
+        
+        loadUsers { 
+            self.loadMessages({ 
+                completion()
             })
-        }
-        
-        let query = PFQuery(className: "Message")
-        query.orderByDescending("createdAt")
-        query.whereKey("objectID", containedIn: messageIDs)
-        
-        query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                for object in objects! {
-                    self.messages.append(Message(object: object, completion: { 
-                        if self.messages.count == objects?.count {
-                            completion()
-                        }
-                    }))
-                }
-            }
         }
     }
     
@@ -74,9 +49,71 @@ class Chat: NSObject {
         self.messageDuration = messageDuration
         
         super.init()
-
+        
         for user in users {
             add(user)
+        }
+        add(User.currentUser!)
+    }
+    
+    private func loadUsers(completion: () -> ()) {
+            let query = PFQuery(className: "_User")
+            query.whereKey("objectId", containedIn: userIDs)
+            query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    var loadedCount = 0
+                    for object in objects! {
+                        self.users.append(User(user: object as! PFUser, completion: {
+                            loadedCount += 1
+                            print("done loading user \(loadedCount) \(objects!.count)")
+                            if loadedCount == objects?.count {
+                                print("done loading users")
+                                completion()
+                            }
+                        }))
+                    }
+                }
+            })
+    }
+    
+    private func loadMessages(completion: () -> ()) {
+        let query = PFQuery(className: "Message")
+        query.orderByDescending("createdAt")
+        query.whereKey("objectId", containedIn: messageIDs)
+        
+        query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if objects?.count == 0 {
+                    completion()
+                } else {
+                    var loadedCount = 0
+                    for object in objects! {
+                        self.messages.append(Message(object: object, completion: {
+                            loadedCount += 1
+                            if loadedCount == objects?.count {
+                                completion()
+                            }
+                        }))
+                    }
+                }
+            }
+        }
+    }
+    
+    init(messageDuration: Double, userIDs: [String], completion: () -> ()) {
+        object = PFObject(className: "Chat")
+        self.messageDuration = messageDuration
+        self.userIDs = userIDs
+
+        super.init()
+        
+        loadUsers {
+            self.add(User.currentUser!)
+            completion()
         }
     }
     
@@ -84,7 +121,13 @@ class Chat: NSObject {
      Records a track from a certain audio node for the set track duration, adds it to a message and sends it immediately.
      */
     func recordSend(instrument: AKNode, success: () -> (), failure: (NSError) -> ()) {
-        let message = Message(previousMessage: messages[messages.count-1])
+        let message: Message
+        if messages.count > 0 {
+            message = Message(previousMessage: messages[messages.count-1])
+        } else {
+            message = Message(previousMessage: nil)
+        }
+        
         let track = Track()
         track.record(instrument, duration: messageDuration) {
             message.add(track)
@@ -133,7 +176,7 @@ class Chat: NSObject {
                 let newMessageIDs = serverMessageIDs.subtract(self.messageIDs)
                 
                 let query = PFQuery(className: "Message")
-                query.whereKey("objectID", containedIn: Array(newMessageIDs))
+                query.whereKey("objectId", containedIn: Array(newMessageIDs))
                 
                 query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
                     if let error = error {
@@ -161,9 +204,33 @@ class Chat: NSObject {
      */
     func push(completion: PFBooleanResultBlock?) {
         
+        object["messageDuration"] = messageDuration
         object["users"] = userIDs
         object["messages"] = messageIDs
 
         object.saveInBackgroundWithBlock(completion)
+    }
+    
+    class func downloadActiveUserChats(success: ([Chat]) -> (), failure: (NSError) -> ()) {
+        let query = PFQuery(className: "Chat")
+        
+        query.whereKey("users", containsString: User.currentUser!.parseUser.objectId!)
+        query.orderByDescending("modifiedAt")
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+            if let error = error {
+                failure(error)
+            } else {
+                var chats: [Chat] = []
+                var loadedCount = 0
+                for object in objects ?? [] {
+                    chats.append(Chat(object: object, completion: {
+                        loadedCount += 1
+                        if loadedCount == objects?.count {
+                            success(chats)
+                        }
+                    }))
+                }
+            }
+        }
     }
 }

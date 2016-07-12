@@ -33,7 +33,7 @@ class Track: NSObject {
         let file = object["media"] as! PFFile
         let parseUser = object["author"] as! PFUser
         
-        author = User(user: parseUser)
+        author = User(user: parseUser, completion: nil)
         identifier = object["identifier"] as! String
         
         filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + self.identifier + ".m4a"
