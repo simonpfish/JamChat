@@ -80,6 +80,28 @@ class Chat: NSObject {
         }
     }
     
+    init(messageDuration: Double, userIDs: [String]) {
+        object = PFObject(className: "Chat")
+        self.messageDuration = messageDuration
+        self.userIDs = userIDs
+
+        super.init()
+        
+        for userID in userIDs {
+            let query = PFQuery(className: "User")
+            query.whereKey("objectID", equalTo: userID)
+            query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    for object in objects! {
+                        self.users.append(User(user: object as! PFUser))
+                    }
+                }
+            })
+        }
+    }
+    
     /**
      Records a track from a certain audio node for the set track duration, adds it to a message and sends it immediately.
      */
