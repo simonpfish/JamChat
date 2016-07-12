@@ -26,6 +26,11 @@
 		E7FE0FE81D35706A00452361 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE71D35706A00452361 /* FeedViewController.swift */; };
 		E7FE0FEF1D357C6C00452361 /* ChatCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FED1D357C6C00452361 /* ChatCreationViewController.swift */; };
 		E7FE0FF01D357C6C00452361 /* ChatCreationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7FE0FEE1D357C6C00452361 /* ChatCreationViewController.xib */; };
+		E7FE0FF21D359B6600452361 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FF11D359B6600452361 /* ChatViewController.swift */; };
+		E7FE0FF71D359CE300452361 /* RockGuitarC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7FE0FF61D359CE300452361 /* RockGuitarC.wav */; };
+		E7FE0FF91D359D0000452361 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FF81D359D0000452361 /* PianoView.swift */; };
+		E7FE0FFB1D359D0C00452361 /* PianoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FFA1D359D0C00452361 /* PianoKey.swift */; };
+		E7FE0FFD1D359F4100452361 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FFC1D359F4100452361 /* MessageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +56,11 @@
 		E7FE0FE71D35706A00452361 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		E7FE0FED1D357C6C00452361 /* ChatCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCreationViewController.swift; sourceTree = "<group>"; };
 		E7FE0FEE1D357C6C00452361 /* ChatCreationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCreationViewController.xib; sourceTree = "<group>"; };
+		E7FE0FF11D359B6600452361 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		E7FE0FF61D359CE300452361 /* RockGuitarC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = RockGuitarC.wav; sourceTree = "<group>"; };
+		E7FE0FF81D359D0000452361 /* PianoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
+		E7FE0FFA1D359D0C00452361 /* PianoKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoKey.swift; sourceTree = "<group>"; };
+		E7FE0FFC1D359F4100452361 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		EB46293530A6261983676B0D /* Pods_JamChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JamChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -115,17 +125,16 @@
 		E756A8721D2D7E74007C0590 /* JamChat */ = {
 			isa = PBXGroup;
 			children = (
+				E7FE0FF41D359CA400452361 /* Controllers */,
 				E717EC141D2ED32F00AC812B /* Models */,
 				E7FE0FE21D356D9B00452361 /* Views */,
 				E756A8731D2D7E74007C0590 /* AppDelegate.swift */,
-				E756A8751D2D7E74007C0590 /* ViewController.swift */,
-				E7FE0FE71D35706A00452361 /* FeedViewController.swift */,
-				E7FE0FED1D357C6C00452361 /* ChatCreationViewController.swift */,
 				E7FE0FEE1D357C6C00452361 /* ChatCreationViewController.xib */,
 				E756A8771D2D7E74007C0590 /* Main.storyboard */,
 				E756A87A1D2D7E74007C0590 /* Assets.xcassets */,
 				E756A87C1D2D7E74007C0590 /* LaunchScreen.storyboard */,
 				E756A87F1D2D7E74007C0590 /* Info.plist */,
+				E7FE0FF51D359CB000452361 /* Resources */,
 				E799566E1D316E5700EE445B /* AudioKit-fixed */,
 			);
 			path = JamChat;
@@ -154,9 +163,31 @@
 		E7FE0FE21D356D9B00452361 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7FE0FF81D359D0000452361 /* PianoView.swift */,
+				E7FE0FFA1D359D0C00452361 /* PianoKey.swift */,
 				E7FE0FE51D356E2100452361 /* ChatCell.swift */,
+				E7FE0FFC1D359F4100452361 /* MessageCell.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		E7FE0FF41D359CA400452361 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E756A8751D2D7E74007C0590 /* ViewController.swift */,
+				E7FE0FE71D35706A00452361 /* FeedViewController.swift */,
+				E7FE0FED1D357C6C00452361 /* ChatCreationViewController.swift */,
+				E7FE0FF11D359B6600452361 /* ChatViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E7FE0FF51D359CB000452361 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E7FE0FF61D359CE300452361 /* RockGuitarC.wav */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +254,7 @@
 			files = (
 				E756A87E1D2D7E74007C0590 /* LaunchScreen.storyboard in Resources */,
 				E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */,
+				E7FE0FF71D359CE300452361 /* RockGuitarC.wav in Resources */,
 				E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */,
 				E7FE0FF01D357C6C00452361 /* ChatCreationViewController.xib in Resources */,
 			);
@@ -294,9 +326,13 @@
 				E79956761D316E9D00EE445B /* AKAudioFile+Processing.swift in Sources */,
 				E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */,
 				E717EC161D2ED34500AC812B /* User.swift in Sources */,
+				E7FE0FFB1D359D0C00452361 /* PianoKey.swift in Sources */,
 				E7FE0FE81D35706A00452361 /* FeedViewController.swift in Sources */,
+				E7FE0FF91D359D0000452361 /* PianoView.swift in Sources */,
 				E7FE0FEF1D357C6C00452361 /* ChatCreationViewController.swift in Sources */,
+				E7FE0FF21D359B6600452361 /* ChatViewController.swift in Sources */,
 				E79956791D316EA500EE445B /* AKNodeRecorder.swift in Sources */,
+				E7FE0FFD1D359F4100452361 /* MessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

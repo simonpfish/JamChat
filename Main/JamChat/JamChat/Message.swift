@@ -45,10 +45,10 @@ class Message: NSObject {
     /**
      Initializes a new message that builds on top of an older one
      */
-    init(previousMessage: Message) {
+    init(previousMessage: Message?) {
         super.init()
         
-        tracks = previousMessage.tracks
+        tracks = previousMessage?.tracks ?? []
     }
     
     /**

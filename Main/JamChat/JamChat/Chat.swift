@@ -121,7 +121,13 @@ class Chat: NSObject {
      Records a track from a certain audio node for the set track duration, adds it to a message and sends it immediately.
      */
     func recordSend(instrument: AKNode, success: () -> (), failure: (NSError) -> ()) {
-        let message = Message(previousMessage: messages[messages.count-1])
+        let message: Message
+        if messages.count > 0 {
+            message = Message(previousMessage: messages[messages.count-1])
+        } else {
+            message = Message(previousMessage: nil)
+        }
+        
         let track = Track()
         track.record(instrument, duration: messageDuration) {
             message.add(track)
