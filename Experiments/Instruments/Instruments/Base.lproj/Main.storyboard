@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5L-z3-xdz">
-                                <rect key="frame" x="158" y="112" width="30" height="222.5"/>
+                                <rect key="frame" x="158" y="112" width="30" height="223"/>
                                 <state key="normal" title="F#"/>
                                 <connections>
                                     <action selector="downFsharp:" destination="BYZ-38-t0r" eventType="touchDown" id="PC6-uZ-Tub"/>
@@ -78,7 +78,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rq2-2h-woe">
-                                <rect key="frame" x="184" y="342" width="41" height="108.5"/>
+                                <rect key="frame" x="184" y="342" width="41" height="109"/>
                                 <state key="normal" title="G"/>
                                 <connections>
                                     <action selector="downG:" destination="BYZ-38-t0r" eventType="touchDown" id="K0n-50-shb"/>
@@ -94,7 +94,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azk-BZ-p8V">
-                                <rect key="frame" x="233" y="343" width="37" height="107.5"/>
+                                <rect key="frame" x="233" y="343" width="37" height="108"/>
                                 <state key="normal" title="A"/>
                                 <connections>
                                     <action selector="downA:" destination="BYZ-38-t0r" eventType="touchDown" id="xeP-ni-8TJ"/>
@@ -102,7 +102,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIL-wM-FGL">
-                                <rect key="frame" x="263" y="112" width="30" height="221.5"/>
+                                <rect key="frame" x="263" y="112" width="30" height="222"/>
                                 <state key="normal" title="Bb"/>
                                 <connections>
                                     <action selector="downBflat:" destination="BYZ-38-t0r" eventType="touchDown" id="Y89-2n-OyS"/>
