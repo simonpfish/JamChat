@@ -32,7 +32,7 @@ class Track: NSObject {
         self.object = object
         let file = object["media"] as! PFFile
         let parseUser = object["author"] as! PFUser
-        
+        try! parseUser.fetch()
         author = User(user: parseUser, completion: nil)
         identifier = object["identifier"] as! String
         
