@@ -30,14 +30,17 @@ class Message: NSObject {
         query.whereKey("identifier", containedIn: trackIDs)
         
         query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
+            var loadedCount = 0
             for object in objects! {
-                self.tracks.append(Track(object: object, success: { 
-                    if self.tracks.count == objects?.count {
+                let track = Track(object: object, success: {
+                    loadedCount += 1
+                    if loadedCount == objects?.count {
                         completion()
                     }
-                }, failure: { (error: NSError) in
+                    }, failure: { (error: NSError) in
                         print("failed to load message")
-                }))
+                })
+                self.tracks.append(track)
             }
         }
     }

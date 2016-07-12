@@ -28,6 +28,7 @@ class User: NSObject {
     // Initializes user based on a facebookID, pulling all the user data from the Facebook API. Used only internally.
     private init(userId: String, completion: (() -> ())?) {
         super.init()
+        
         // Create request for user's Facebook data
         let request = FBSDKGraphRequest(graphPath: userId, parameters:["fields" : "email,name,friends"])
         

@@ -80,8 +80,9 @@ class Chat: NSObject {
     
     private func loadMessages(completion: () -> ()) {
         let query = PFQuery(className: "Message")
-        query.orderByDescending("createdAt")
+        query.orderByAscending("createdAt")
         query.whereKey("objectId", containedIn: messageIDs)
+        query.includeKey("author")
         
         query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
             if let error = error {
