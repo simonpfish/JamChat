@@ -38,6 +38,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="usersLabel" destination="ID7-cx-oNE" id="rS8-Uj-9j9"/>
+                                            <segue destination="cfm-6g-MvX" kind="show" id="t2c-Y2-kSv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -60,6 +61,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="775.5" y="313.5"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="dW1-1B-URr">
+            <objects>
+                <viewController id="cfm-6g-MvX" customClass="ChatViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="B6F-Sl-fKu"/>
+                        <viewControllerLayoutGuide type="bottom" id="VGu-7w-JdV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jFR-hv-l4v">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="97" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LDL-Vh-qmE">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="437"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageCell" rowHeight="97" id="Ret-99-1AO" customClass="MessageCell" customModule="JamChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="97"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ret-99-1AO" id="AEP-NG-LYZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="96.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wgN-HT-JQh">
+                                                    <rect key="frame" x="172" y="34" width="30" height="30"/>
+                                                    <state key="normal" title="Play"/>
+                                                    <connections>
+                                                        <action selector="onPlay:" destination="Ret-99-1AO" eventType="touchUpInside" id="v9N-lp-C9P"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="LDL-Vh-qmE" id="rYZ-sJ-onP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VsT-5S-Ncc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1297.5" y="313.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yqE-Es-MDu">
