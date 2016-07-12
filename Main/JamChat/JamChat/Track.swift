@@ -67,7 +67,6 @@ class Track: NSObject {
      Initializes a new empty track
      */
     override init() {
-        super.init()
         object = PFObject(className: "Track")
         identifier = NSUUID().UUIDString
         author = User.currentUser
