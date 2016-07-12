@@ -33,6 +33,16 @@ class Chat: NSObject {
         
         super.init()
         
+        
+        loadUsers { 
+            self.loadMessages({ 
+                completion()
+            })
+        }
+        
+    }
+    
+    private func loadUsers(completion: () -> ()) {
         for userID in userIDs {
             let query = PFQuery(className: "_User")
             query.whereKey("objectId", equalTo: userID)
@@ -41,12 +51,18 @@ class Chat: NSObject {
                     print(error.localizedDescription)
                 } else {
                     for object in objects! {
-                        self.users.append(User(user: object as! PFUser))
+                        self.users.append(User(user: object as! PFUser, completion: {
+                            if self.users.count == objects?.count {
+                                completion()
+                            }
+                        }))
                     }
                 }
             })
         }
-        
+    }
+    
+    private func loadMessages(completion: () -> ()) {
         let query = PFQuery(className: "Message")
         query.orderByDescending("createdAt")
         query.whereKey("objectId", containedIn: messageIDs)
@@ -85,27 +101,17 @@ class Chat: NSObject {
         add(User.currentUser!)
     }
     
-    init(messageDuration: Double, userIDs: [String]) {
+    init(messageDuration: Double, userIDs: [String], completion: () -> ()) {
         object = PFObject(className: "Chat")
         self.messageDuration = messageDuration
         self.userIDs = userIDs
 
         super.init()
         
-        for userID in userIDs {
-            let query = PFQuery(className: "User")
-            query.whereKey("objectID", equalTo: userID)
-            query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    for object in objects! {
-                        self.users.append(User(user: object as! PFUser))
-                    }
-                }
-            })
+        loadUsers {
+            self.add(User.currentUser!)
+            completion()
         }
-        add(User.currentUser!)
     }
     
     /**

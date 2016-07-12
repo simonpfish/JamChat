@@ -62,15 +62,17 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func createNewChat(userIDs: [String]) {
-        let chat = Chat(messageDuration: 10, userIDs: userIDs)
-        chat.push { (success: Bool, error: NSError?) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                self.tableView.reloadData()
+        var chat: Chat!
+        chat = Chat(messageDuration: 10, userIDs: userIDs, completion: {
+            chat.push { (success: Bool, error: NSError?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    self.chats.append(chat)
+                    self.tableView.reloadData()
+                }
             }
-        }
-        chats.append(chat)
+        })
     }
     
     override func didReceiveMemoryWarning() {

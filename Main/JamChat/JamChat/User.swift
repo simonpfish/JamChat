@@ -26,7 +26,7 @@ class User: NSObject {
     
     
     // Initializes user based on a facebookID, pulling all the user data from the Facebook API. Used only internally.
-    private init(userId: String) {
+    private init(userId: String, completion: (() -> ())?) {
         super.init()
         // Create request for user's Facebook data
         let request = FBSDKGraphRequest(graphPath: userId, parameters:["fields" : "email,name,friends"])
@@ -45,15 +45,19 @@ class User: NSObject {
                 self.email = userData["email"] as? String
                 self.pictureURL = NSURL(string: "https://graph.facebook.com/\(self.facebookID)/picture?type=large&return_ssl_resources=1")!
             }
+            
+            if let completion = completion {
+                completion()
+            }
         }
     }
     
     /**
      Initializes user object based on a Parse User.
      */
-    convenience init(user: PFUser) {
+    convenience init(user: PFUser, completion: (() -> ())?) {
         let ID = user["facebookID"] as! String
-        self.init(userId: ID)
+        self.init(userId: ID, completion: completion)
         parseUser = user
     }
     
@@ -117,7 +121,7 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
     
     // Called when user is logged in succesfully, dismissing the login view
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
-        User.currentUser = User(userId: "me")
+        User.currentUser = User(userId: "me", completion: nil)
         User.currentUser?.parseUser = PFUser.currentUser()
         
         FBSDKProfile.loadCurrentProfileWithCompletion({ (profile: FBSDKProfile!, error: NSError!) in
