@@ -166,4 +166,26 @@ class Chat: NSObject {
 
         object.saveInBackgroundWithBlock(completion)
     }
+    
+    class func downloadActiveUserChats(success: ([Chat]) -> (), failure: (NSError) -> ()) {
+        let query = PFQuery(className: "Chat")
+        
+        query.whereKey("users", containsString: User.currentUser?.parseUser.objectId)
+        query.orderByDescending("modifiedAt")
+        
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+            if let error = error {
+                failure(error)
+            } else {
+                var chats: [Chat] = []
+                for object in objects ?? [] {
+                    chats.append(Chat(object: object, completion: {
+                        if chats.count == objects?.count {
+                            success(chats)
+                        }
+                    }))
+                }
+            }
+        }
+    }
 }
