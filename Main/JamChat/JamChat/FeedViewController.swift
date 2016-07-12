@@ -53,11 +53,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func onNewChat(sender: AnyObject) {
-        performSegueWithIdentifier("NewChatSegue", sender: self)
+        let newChatController = ChatCreationViewController()
+        presentViewController(newChatController, animated: true, completion: nil)
     }
     
     func createNewChat(userIDs: [String]) {
-        
         let chat = Chat(messageDuration: 10, userIDs: userIDs)
         chat.push { (success: Bool, error: NSError?) in
             if let error = error {

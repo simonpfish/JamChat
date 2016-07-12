@@ -24,7 +24,8 @@
 		E799567F1D31749F00EE445B /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799567E1D31749F00EE445B /* Track.swift */; };
 		E7FE0FE61D356E2100452361 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE51D356E2100452361 /* ChatCell.swift */; };
 		E7FE0FE81D35706A00452361 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE71D35706A00452361 /* FeedViewController.swift */; };
-		E7FE0FEA1D3575C000452361 /* ChatCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE91D3575C000452361 /* ChatCreationViewController.swift */; };
+		E7FE0FEF1D357C6C00452361 /* ChatCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FED1D357C6C00452361 /* ChatCreationViewController.swift */; };
+		E7FE0FF01D357C6C00452361 /* ChatCreationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7FE0FEE1D357C6C00452361 /* ChatCreationViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +49,8 @@
 		E799567E1D31749F00EE445B /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		E7FE0FE51D356E2100452361 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		E7FE0FE71D35706A00452361 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		E7FE0FE91D3575C000452361 /* ChatCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCreationViewController.swift; sourceTree = "<group>"; };
+		E7FE0FED1D357C6C00452361 /* ChatCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCreationViewController.swift; sourceTree = "<group>"; };
+		E7FE0FEE1D357C6C00452361 /* ChatCreationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCreationViewController.xib; sourceTree = "<group>"; };
 		EB46293530A6261983676B0D /* Pods_JamChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JamChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -118,7 +120,8 @@
 				E756A8731D2D7E74007C0590 /* AppDelegate.swift */,
 				E756A8751D2D7E74007C0590 /* ViewController.swift */,
 				E7FE0FE71D35706A00452361 /* FeedViewController.swift */,
-				E7FE0FE91D3575C000452361 /* ChatCreationViewController.swift */,
+				E7FE0FED1D357C6C00452361 /* ChatCreationViewController.swift */,
+				E7FE0FEE1D357C6C00452361 /* ChatCreationViewController.xib */,
 				E756A8771D2D7E74007C0590 /* Main.storyboard */,
 				E756A87A1D2D7E74007C0590 /* Assets.xcassets */,
 				E756A87C1D2D7E74007C0590 /* LaunchScreen.storyboard */,
@@ -221,6 +224,7 @@
 				E756A87E1D2D7E74007C0590 /* LaunchScreen.storyboard in Resources */,
 				E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */,
 				E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */,
+				E7FE0FF01D357C6C00452361 /* ChatCreationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +295,7 @@
 				E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */,
 				E717EC161D2ED34500AC812B /* User.swift in Sources */,
 				E7FE0FE81D35706A00452361 /* FeedViewController.swift in Sources */,
-				E7FE0FEA1D3575C000452361 /* ChatCreationViewController.swift in Sources */,
+				E7FE0FEF1D357C6C00452361 /* ChatCreationViewController.swift in Sources */,
 				E79956791D316EA500EE445B /* AKNodeRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

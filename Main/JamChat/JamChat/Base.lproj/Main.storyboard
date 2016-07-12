@@ -55,47 +55,11 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="ide-jJ-Qoh" id="eab-A1-jAk"/>
-                        <segue destination="c5q-Xo-G4f" kind="presentation" identifier="NewChatSegue" id="02O-OE-bJu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="775.5" y="313.5"/>
-        </scene>
-        <!--Chat Creation View Controller-->
-        <scene sceneID="edC-0N-sSv">
-            <objects>
-                <viewController id="c5q-Xo-G4f" customClass="ChatCreationViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Rjx-Lc-5Bl"/>
-                        <viewControllerLayoutGuide type="bottom" id="ULT-X3-S2n"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="eMq-nm-geK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="user" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EId-8M-0QE">
-                                <rect key="frame" x="88" y="201" width="199" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1f-bm-AnM">
-                                <rect key="frame" x="164" y="617" width="46" height="30"/>
-                                <state key="normal" title="Create"/>
-                                <connections>
-                                    <action selector="onCreate:" destination="c5q-Xo-G4f" eventType="touchUpInside" id="aD5-rq-gEa"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="userField" destination="EId-8M-0QE" id="CRF-RX-IFS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hsa-ye-z4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="775.5" y="-473.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yqE-Es-MDu">
