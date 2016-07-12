@@ -43,6 +43,15 @@ class Message: NSObject {
     }
     
     /**
+     Initializes a new message that builds on top of an older one
+     */
+    init(previousMessage: Message) {
+        super.init()
+        
+        tracks = previousMessage.tracks
+    }
+    
+    /**
      Plays the message to the main audio output
      */
     func play() {
