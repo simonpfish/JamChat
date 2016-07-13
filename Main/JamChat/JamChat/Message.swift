@@ -14,15 +14,19 @@ class Message: NSObject {
     private var tracks: [Track] = []
     private var newTracks: [Track] = []
     private(set) var id: String?
+    private var object: PFObject!
     
     /**
      Initializes a new message based on a parse object
      */
-    init(object: PFObject, completion: () -> ()) {
+    init(object: PFObject) {
         super.init()
         
+        self.object = object
         id = object.objectId
-        
+    }
+    
+    func loadTracks(completion: () -> ()) {
         let trackIDs = object["tracks"] as! [String]
         
         let query = PFQuery(className: "Track")
@@ -30,18 +34,22 @@ class Message: NSObject {
         query.whereKey("identifier", containedIn: trackIDs)
         
         query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
-            var loadedCount = 0
             for object in objects! {
-                let track = Track(object: object, success: {
-                    loadedCount += 1
-                    if loadedCount == objects?.count {
-                        completion()
-                    }
-                    }, failure: { (error: NSError) in
-                        print("failed to load message")
-                })
+                let track = Track(object: object)
                 self.tracks.append(track)
             }
+        }
+        
+        var loadedCount = 0
+        for track in tracks {
+            track.loadMedia({ 
+                loadedCount += 1
+                if loadedCount == self.tracks.count {
+                    completion()
+                }
+            }, failure: { (error: NSError) in
+                    print(error.localizedDescription)
+            })
         }
     }
     
@@ -89,7 +97,7 @@ class Message: NSObject {
         for track in newTracks {
             track.upload({ (success: Bool, error: NSError?) in
                 if let error = error {
-                    completion!(false, error)
+                    completion?(false, error)
                 } else {
                     uploadedCount += 1
                     if uploadedCount == self.newTracks.count {

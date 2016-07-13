@@ -31,14 +31,22 @@ class User: NSObject {
      Initializes user object based on a Parse User.
      */
     init(user: PFUser) {
-        facebookID = user["facebookID"] as! String
-        name = user["name"] as! String
-        firstName = user["firstName"] as! String
-        lastName = user["lastName"] as! String
-        middleName = user["middleName"] as! String
-        profileImageURL = NSURL(string: user["profileImageURL"] as! String)!
-        
         parseUser = user
+    }
+    
+    func loadData(success: (() -> ())?) {
+        parseUser.fetchInBackgroundWithBlock { (_: PFObject?, error: NSError?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                self.facebookID = self.parseUser["facebookID"] as! String
+                self.name = self.parseUser["name"] as! String
+                self.firstName = self.parseUser["firstName"] as! String
+                self.lastName = self.parseUser["lastName"] as! String
+                self.middleName = self.parseUser["middleName"] as! String
+                self.profileImageURL = NSURL(string: self.parseUser["profileImageURL"] as! String)!
+            }
+        }
     }
     
     func loadFacebookData(completion: (() -> ())?) {
@@ -110,7 +118,22 @@ class User: NSObject {
         controller.presentViewController(loginViewController, animated: false, completion: nil)
     }
     
-    
+    func updateDataFromProfile (profile: FBSDKProfile!) {
+        facebookID = profile.userID
+        name = profile.name
+        firstName = profile.firstName
+        lastName = profile.lastName
+        middleName = profile.middleName
+        profileImageURL = profile.imageURLForPictureMode(.Square, size: CGSize(width: 500, height: 500))
+        
+        parseUser["facebookID"] = facebookID
+        parseUser["name"] = name
+        parseUser["firstName"] = firstName
+        parseUser["lastName"] = lastName
+        parseUser["middleName"] = middleName ?? ""
+        parseUser["profileImageURL"] = profileImageURL.absoluteString
+        parseUser.saveInBackground()
+    }
 }
 
 // Delegate used for the login view success and failure cases
@@ -124,23 +147,17 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
        
         FBSDKProfile.loadCurrentProfileWithCompletion({ (profile: FBSDKProfile!, error: NSError!) in
-            User.currentUser?.parseUser["facebookID"] = profile.userID
-            User.currentUser?.parseUser["name"] = profile.name
-            User.currentUser?.parseUser["firstName"] = profile.firstName
-            User.currentUser?.parseUser["lastName"] = profile.lastName
-            User.currentUser?.parseUser["middleName"] = profile.middleName
-            User.currentUser?.parseUser["profileImageURL"] = profile.imageURLForPictureMode(.Square, size: CGSize(width: 500, height: 500))
-            User.currentUser?.parseUser.saveInBackgroundWithBlock({ (success: Bool, failure: NSError?) in
-                if let error = error {
-                    self.loginFailure?(error)
-                }
+            
+            if let error = error {
+                self.loginFailure?(error)
+            } else {
                 User.currentUser = User(user: PFUser.currentUser()!)
-                
+                User.currentUser?.updateDataFromProfile(profile)
                 self.controller!.dismissViewControllerAnimated(true, completion: nil)
-                if let success = self.loginSuccess {
-                    success()
-                }
-            })
+                self.loginSuccess?()
+            }
+            
+            
         })
     }
     

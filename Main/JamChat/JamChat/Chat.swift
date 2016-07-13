@@ -23,7 +23,7 @@ class Chat: NSObject {
     /**
      Loads chat from an exisiting PFObject.
      */
-    init(object: PFObject, completion: () -> ()) {
+    init(object: PFObject) {
         
         self.object = object
         
@@ -32,10 +32,11 @@ class Chat: NSObject {
         userIDs = object["users"] as! [String]
         
         super.init()
-        
-        
-        loadUsers { 
-            self.loadMessages({ 
+    }
+    
+    func loadData(completion: () -> ()) {
+        loadUsers {
+            self.loadMessages({
                 completion()
             })
         }
@@ -63,16 +64,18 @@ class Chat: NSObject {
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    var loadedCount = 0
                     for object in objects! {
-                        self.users.append(User(user: object as! PFUser, completion: {
+                        self.users.append(User(user: object as! PFUser))
+                    }
+                    
+                    var loadedCount = 0
+                    for user in self.users {
+                        user.loadData({ 
                             loadedCount += 1
-                            print("done loading user \(loadedCount) \(objects!.count)")
-                            if loadedCount == objects?.count {
-                                print("done loading users")
+                            if loadedCount == self.users.count {
                                 completion()
                             }
-                        }))
+                        })
                     }
                 }
             })
@@ -91,15 +94,10 @@ class Chat: NSObject {
                 if objects?.count == 0 {
                     completion()
                 } else {
-                    var loadedCount = 0
                     for object in objects! {
-                        self.messages.append(Message(object: object, completion: {
-                            loadedCount += 1
-                            if loadedCount == objects?.count {
-                                completion()
-                            }
-                        }))
+                        self.messages.append(Message(object: object))
                     }
+                    completion()
                 }
             }
         }
@@ -112,7 +110,7 @@ class Chat: NSObject {
 
         super.init()
         
-        loadUsers {
+        loadUsers() {
             self.add(User.currentUser!)
             completion()
         }
@@ -184,12 +182,9 @@ class Chat: NSObject {
                         failure(error)
                     } else {
                         for object in objects! {
-                            self.messages.append(Message(object: object, completion: {
-                                if self.messages.count == objects?.count {
-                                    success()
-                                }
-                            }))
+                            self.messages.append(Message(object: object))
                         }
+                        success()
                     }
                 }
                 
@@ -224,12 +219,13 @@ class Chat: NSObject {
                 var chats: [Chat] = []
                 var loadedCount = 0
                 for object in objects ?? [] {
-                    chats.append(Chat(object: object, completion: {
+                    chats.append(Chat(object: object))
+                    chats.last?.loadData({
                         loadedCount += 1
-                        if loadedCount == objects?.count {
+                        if loadedCount == objects!.count {
                             success(chats)
                         }
-                    }))
+                    })
                 }
             }
         }

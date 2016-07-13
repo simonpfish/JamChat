@@ -125,9 +125,9 @@
 		E756A8721D2D7E74007C0590 /* JamChat */ = {
 			isa = PBXGroup;
 			children = (
-				E7FE0FF41D359CA400452361 /* Controllers */,
 				E717EC141D2ED32F00AC812B /* Models */,
 				E7FE0FE21D356D9B00452361 /* Views */,
+				E7FE0FF41D359CA400452361 /* Controllers */,
 				E756A8731D2D7E74007C0590 /* AppDelegate.swift */,
 				E7FE0FEE1D357C6C00452361 /* ChatCreationViewController.xib */,
 				E756A8771D2D7E74007C0590 /* Main.storyboard */,
