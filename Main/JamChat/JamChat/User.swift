@@ -21,16 +21,29 @@ class User: NSObject {
     
     var facebookID: String!
     var name: String!
-    var pictureURL: NSURL!
-    var email: String!
+    var firstName: String!
+    var lastName: String!
+    var middleName: String!
+    var profileImageURL: NSURL!
+    var email: String?
     
-    
-    // Initializes user based on a facebookID, pulling all the user data from the Facebook API. Used only internally.
-    private init(userId: String, completion: (() -> ())?) {
-        super.init()
+    /**
+     Initializes user object based on a Parse User.
+     */
+    init(user: PFUser) {
+        facebookID = user["facebookID"] as! String
+        name = user["name"] as! String
+        firstName = user["firstName"] as! String
+        lastName = user["lastName"] as! String
+        middleName = user["middleName"] as! String
+        profileImageURL = NSURL(string: user["profileImageURL"] as! String)!
         
+        parseUser = user
+    }
+    
+    func loadFacebookData(completion: (() -> ())?) {
         // Create request for user's Facebook data
-        let request = FBSDKGraphRequest(graphPath: userId, parameters:["fields" : "email,name,friends"])
+        let request = FBSDKGraphRequest(graphPath: facebookID, parameters:["fields" : "email,name,friends"])
         
         // Send request to Facebook
         request.startWithCompletionHandler {
@@ -41,29 +54,14 @@ class User: NSObject {
                 // Some error checking here
             }
             else if let userData = result as? [String:AnyObject] {
-                self.facebookID = userData["id"] as! String
-                self.name = userData["name"] as! String
                 self.email = userData["email"] as? String
-                self.pictureURL = NSURL(string: "https://graph.facebook.com/\(self.facebookID)/picture?type=large&return_ssl_resources=1")!
                 print(self.name)
                 if let completion = completion {
                     completion()
                 }
             }
-            
-            
         }
     }
-    
-    /**
-     Initializes user object based on a Parse User.
-     */
-    convenience init(user: PFUser, completion: (() -> ())?) {
-        let ID = user["facebookID"] as! String
-        self.init(userId: ID, completion: completion)
-        parseUser = user
-    }
-    
     
     /**
      Checks if an user is already logged in
@@ -124,25 +122,30 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
     
     // Called when user is logged in succesfully, dismissing the login view
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
-        User.currentUser = User(userId: "me", completion: nil)
-        User.currentUser?.parseUser = PFUser.currentUser()
-        
+       
         FBSDKProfile.loadCurrentProfileWithCompletion({ (profile: FBSDKProfile!, error: NSError!) in
             User.currentUser?.parseUser["facebookID"] = profile.userID
-            User.currentUser?.parseUser.saveInBackground()
+            User.currentUser?.parseUser["name"] = profile.name
+            User.currentUser?.parseUser["firstName"] = profile.firstName
+            User.currentUser?.parseUser["lastName"] = profile.lastName
+            User.currentUser?.parseUser["middleName"] = profile.middleName
+            User.currentUser?.parseUser["profileImageURL"] = profile.imageURLForPictureMode(.Square, size: CGSize(width: 500, height: 500))
+            User.currentUser?.parseUser.saveInBackgroundWithBlock({ (success: Bool, failure: NSError?) in
+                if let error = error {
+                    self.loginFailure?(error)
+                }
+                User.currentUser = User(user: PFUser.currentUser()!)
+                
+                self.controller!.dismissViewControllerAnimated(true, completion: nil)
+                if let success = self.loginSuccess {
+                    success()
+                }
+            })
         })
-        
-        controller!.dismissViewControllerAnimated(true, completion: nil)
-        if let success = loginSuccess {
-            success()
-        }
-        
     }
     
     // Called when the login fails
     func logInViewController(logInController: PFLogInViewController, didFailToLogInWithError error: NSError?) {
-        if let failure = loginFailure {
-            failure(error)
-        }
+        loginFailure?(error)
     }
 }
