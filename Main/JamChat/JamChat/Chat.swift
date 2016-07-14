@@ -58,29 +58,29 @@ class Chat: NSObject {
     }
     
     private func loadUsers(completion: () -> ()) {
-            print("Loading chat \(self.object.objectId!) users")
-            let query = PFQuery(className: "_User")
-            query.whereKey("objectId", containedIn: userIDs)
-            query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    for object in objects! {
-                        self.users.append(User(user: object as! PFUser))
-                    }
-                    
-                    var loadedCount = 0
-                    for user in self.users {
-                        user.loadData({ 
-                            loadedCount += 1
-                            if loadedCount == self.users.count {
-                                print("Successfully loaded chat \(self.object.objectId!) users")
-                                completion()
-                            }
-                        })
-                    }
+        print("Loading chat \(self.object.objectId ?? "NEW") users")
+        let query = PFQuery(className: "_User")
+        query.whereKey("objectId", containedIn: userIDs)
+        query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                for object in objects! {
+                    self.users.append(User(user: object as! PFUser))
                 }
-            })
+                
+                var loadedCount = 0
+                for user in self.users {
+                    user.loadData({
+                        loadedCount += 1
+                        if loadedCount == self.users.count {
+                            print("Successfully loaded chat \(self.object.objectId ?? "NEW") users")
+                            completion()
+                        }
+                    })
+                }
+            }
+        })
     }
     
     private func loadMessages(completion: () -> ()) {
@@ -100,7 +100,7 @@ class Chat: NSObject {
                     for object in objects! {
                         self.messages.append(Message(object: object))
                     }
-                    print("Successfully loaded chat \(self.object.objectId!) messages")
+                    print("Successfully loaded chat \(self.object.objectId ?? "NEW") messages")
                     completion()
                 }
             }
@@ -111,7 +111,7 @@ class Chat: NSObject {
         object = PFObject(className: "Chat")
         self.messageDuration = messageDuration
         self.userIDs = userIDs
-
+        
         super.init()
         
         loadUsers() {
@@ -171,8 +171,8 @@ class Chat: NSObject {
      Updates the chat from the server if it is necessary
      */
     func fetch(success: () -> (), failure: (NSError) -> ()) {
-        print("Fetching chat \(self.object.objectId!) users")
-
+        print("Fetching chat \(self.object.objectId ?? "NEW") users")
+        
         object.fetchIfNeededInBackgroundWithBlock() { (object: PFObject?, error: NSError?) in
             if let object = object {
                 
@@ -205,18 +205,18 @@ class Chat: NSObject {
      Push the updates to the chat back to the server
      */
     func push(completion: PFBooleanResultBlock?) {
-        print("Pushing chat \(self.object.objectId!) users")
-
+        print("Pushing chat \(self.object.objectId ?? "NEW") users")
+        
         object["messageDuration"] = messageDuration
         object["users"] = userIDs
         object["messages"] = messageIDs
-
+        
         object.saveInBackgroundWithBlock(completion)
     }
     
     class func downloadActiveUserChats(success: ([Chat]) -> (), failure: (NSError) -> ()) {
         print("Downloading chats for active user")
-
+        
         let query = PFQuery(className: "Chat")
         
         query.whereKey("users", containsString: User.currentUser!.parseUser.objectId!)
