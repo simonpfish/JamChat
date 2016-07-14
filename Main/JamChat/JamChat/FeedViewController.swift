@@ -34,6 +34,15 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }, failure: { (error: NSError?) in
                 print(error?.localizedDescription)
             })
+        } else {
+            FBSDKProfile.loadCurrentProfileWithCompletion({ (profile: FBSDKProfile!, error: NSError!) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    User.currentUser?.updateDataFromProfile(profile)
+                    self.loadFeed()
+                }
+            })
         }
     }
     

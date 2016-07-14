@@ -35,7 +35,7 @@ class User: NSObject {
     }
     
     func loadData(success: (() -> ())?) {
-        parseUser.fetchInBackgroundWithBlock { (_: PFObject?, error: NSError?) in
+        parseUser.fetchIfNeededInBackgroundWithBlock() { (_: PFObject?, error: NSError?) in
             if let error = error {
                 print(error.localizedDescription)
             } else {
@@ -45,6 +45,7 @@ class User: NSObject {
                 self.lastName = self.parseUser["lastName"] as! String
                 self.middleName = self.parseUser["middleName"] as! String
                 self.profileImageURL = NSURL(string: self.parseUser["profileImageURL"] as! String)!
+                print("Loaded \(self.name)'s data")
             }
         }
     }
@@ -75,8 +76,9 @@ class User: NSObject {
      Checks if an user is already logged in
      */
     class func isLoggedIn() -> Bool {
-        if PFUser.currentUser() != nil && currentUser != nil {
-            return PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()!)
+        if let user = PFUser.currentUser() {
+            User.currentUser = User(user: user)
+            return PFFacebookUtils.isLinkedWithUser(user)
         }
         
         return false
@@ -133,6 +135,8 @@ class User: NSObject {
         parseUser["middleName"] = middleName ?? ""
         parseUser["profileImageURL"] = profileImageURL.absoluteString
         parseUser.saveInBackground()
+        
+        print("Updated \(name)'s data")
     }
 }
 
@@ -151,10 +155,11 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
             if let error = error {
                 self.loginFailure?(error)
             } else {
-                User.currentUser = User(user: PFUser.currentUser()!)
+                User.currentUser = User(user: user)
                 User.currentUser?.updateDataFromProfile(profile)
                 self.controller!.dismissViewControllerAnimated(true, completion: nil)
                 self.loginSuccess?()
+                print("Logged in \(User.currentUser!.name)")
             }
             
             
