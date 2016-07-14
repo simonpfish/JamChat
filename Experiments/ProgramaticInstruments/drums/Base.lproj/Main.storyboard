@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jh5-tW-QuO">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Selection View Controller-->
+        <scene sceneID="B5U-pX-cN4">
+            <objects>
+                <viewController id="jh5-tW-QuO" customClass="SelectionViewController" customModule="drums" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cg3-9g-091"/>
+                        <viewControllerLayoutGuide type="bottom" id="veg-pm-4S2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="u3H-e6-AL7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w5y-Vc-Sgq" userLabel="ChatView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="397"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCE-aS-XA0" userLabel="InstrumentView">
+                                <rect key="frame" x="0.0" y="399" width="320" height="169"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap on an instrument to select it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMh-Dy-1Ib">
+                                        <rect key="frame" x="45" y="5" width="231" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="screen640x640" translatesAutoresizingMaskIntoConstraints="NO" id="OwH-6R-Xry">
+                                        <rect key="frame" x="168" y="34" width="51" height="51"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="f7W-MI-jbD" appends="YES" id="ybJ-Dx-47N"/>
+                                            <outletCollection property="gestureRecognizers" destination="zQ4-rA-V4f" appends="YES" id="reL-Hg-ExB"/>
+                                        </connections>
+                                    </imageView>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="large_piano" translatesAutoresizingMaskIntoConstraints="NO" id="yNy-IT-3cA">
+                                        <rect key="frame" x="241" y="34" width="51" height="51"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="pWr-ri-1Dy" appends="YES" id="hdq-9D-Hpp"/>
+                                            <outletCollection property="gestureRecognizers" destination="nrx-qa-ium" appends="YES" id="X6w-kB-Wtd"/>
+                                        </connections>
+                                    </imageView>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="guitar_large" translatesAutoresizingMaskIntoConstraints="NO" id="gwd-qu-lZi">
+                                        <rect key="frame" x="97" y="34" width="51" height="51"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Pff-IR-jAo" appends="YES" id="eZC-hP-Wfe"/>
+                                            <outletCollection property="gestureRecognizers" destination="ZFJ-Ch-Wet" appends="YES" id="oHd-Pw-vQB"/>
+                                        </connections>
+                                    </imageView>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mic_large" translatesAutoresizingMaskIntoConstraints="NO" id="Zge-gw-5ET">
+                                        <rect key="frame" x="26" y="34" width="51" height="51"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="PmL-KO-mjm" appends="YES" id="Bs2-Wj-x1R"/>
+                                            <outletCollection property="gestureRecognizers" destination="KWD-BQ-Cdq" appends="YES" id="k1C-kw-eY9"/>
+                                        </connections>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-YA-286">
+                                        <rect key="frame" x="78" y="148" width="164" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sax2" translatesAutoresizingMaskIntoConstraints="NO" id="x90-VC-dzL">
+                                        <rect key="frame" x="26" y="93" width="51" height="51"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="y6b-lX-0QY" appends="YES" id="CHr-Bs-t1I"/>
+                                            <outletCollection property="gestureRecognizers" destination="h0g-Aw-0bp" appends="YES" id="vfR-DI-0VR"/>
+                                        </connections>
+                                    </imageView>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stand up bass 2" translatesAutoresizingMaskIntoConstraints="NO" id="LVm-WR-PC8">
+                                        <rect key="frame" x="97" y="93" width="51" height="51"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="P7J-8I-oPP" appends="YES" id="2XS-sA-aq9"/>
+                                            <outletCollection property="gestureRecognizers" destination="K2E-xS-uik" appends="YES" id="gVN-Fl-0qI"/>
+                                        </connections>
+                                    </imageView>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="electric bass" translatesAutoresizingMaskIntoConstraints="NO" id="yMq-cd-HJc">
+                                        <rect key="frame" x="168" y="93" width="51" height="51"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="HpS-oR-1Bu" appends="YES" id="rmp-ct-p4m"/>
+                                            <outletCollection property="gestureRecognizers" destination="SwJ-bm-S4e" appends="YES" id="GYm-2T-xct"/>
+                                        </connections>
+                                    </imageView>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="misc percussion" translatesAutoresizingMaskIntoConstraints="NO" id="4GA-FP-N5m">
+                                        <rect key="frame" x="241" y="93" width="51" height="51"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Ht5-G4-kOL" appends="YES" id="MZ2-KY-kvq"/>
+                                            <outletCollection property="gestureRecognizers" destination="kjc-D6-Eb0" appends="YES" id="qa0-eW-BS6"/>
+                                        </connections>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="____________________________________________" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAg-sF-myn">
+                                        <rect key="frame" x="0.0" y="-22" width="320" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="instrumentLabel" destination="fdH-YA-286" id="vIn-Rw-Cjj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S83-To-shs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="PmL-KO-mjm">
+                    <connections>
+                        <segue destination="yfv-ji-4xI" kind="show" identifier="toPlayVoice" id="6md-ge-3fE"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Pff-IR-jAo">
+                    <connections>
+                        <segue destination="yfv-ji-4xI" kind="show" identifier="toPlayElectricGuitar" id="YdD-L6-CSW"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="f7W-MI-jbD">
+                    <connections>
+                        <segue destination="em3-4g-vwY" kind="show" identifier="toPlayDrums" id="GlN-P9-CoW"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="pWr-ri-1Dy">
+                    <connections>
+                        <segue destination="yfv-ji-4xI" kind="show" identifier="toPlayPiano" id="PS4-fx-YxG"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="y6b-lX-0QY">
+                    <connections>
+                        <segue destination="yfv-ji-4xI" kind="show" identifier="toPlaySax" id="km3-4p-mJN"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="P7J-8I-oPP">
+                    <connections>
+                        <segue destination="yfv-ji-4xI" kind="show" identifier="toPlayStandUp" id="Kjm-vO-pxZ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="HpS-oR-1Bu">
+                    <connections>
+                        <segue destination="yfv-ji-4xI" kind="show" identifier="toPlayElectricBass" id="Oij-tf-ajq"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Ht5-G4-kOL"/>
+                <tapGestureRecognizer id="KWD-BQ-Cdq">
+                    <connections>
+                        <action selector="onMic:" destination="jh5-tW-QuO" id="BcG-Od-BQn"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="ZFJ-Ch-Wet">
+                    <connections>
+                        <action selector="onGuitar:" destination="jh5-tW-QuO" id="TBr-az-2QV"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="zQ4-rA-V4f">
+                    <connections>
+                        <action selector="onDrums:" destination="jh5-tW-QuO" id="uVx-8b-vuU"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="nrx-qa-ium">
+                    <connections>
+                        <action selector="onPiano:" destination="jh5-tW-QuO" id="7Wn-oV-OfJ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="h0g-Aw-0bp">
+                    <connections>
+                        <action selector="onSax:" destination="jh5-tW-QuO" id="oLz-Pf-06m"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="K2E-xS-uik">
+                    <connections>
+                        <action selector="onStandUpBass:" destination="jh5-tW-QuO" id="gKW-LW-3LE"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="SwJ-bm-S4e">
+                    <connections>
+                        <action selector="onElectricBass:" destination="jh5-tW-QuO" id="b99-cx-04c"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="kjc-D6-Eb0">
+                    <connections>
+                        <action selector="onMiscPercussion:" destination="jh5-tW-QuO" id="jC6-Wc-ojK"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-79" y="1701"/>
+        </scene>
+        <!--Scale Instrument View Controller-->
+        <scene sceneID="byi-9H-Gmx">
+            <objects>
+                <viewController id="yfv-ji-4xI" customClass="ScaleInstrumentViewController" customModule="drums" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6ru-Cy-KwX"/>
+                        <viewControllerLayoutGuide type="bottom" id="dwn-Ui-d5E"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LMJ-LD-EFe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="epu-rj-cft" userLabel="ChatView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRb-Fl-7Fn" userLabel="Selection">
+                                <rect key="frame" x="149" y="538" width="22" height="22"/>
+                                <state key="normal" title="Button" image="iconmonstr-view-5-240"/>
+                                <connections>
+                                    <action selector="onGrid:" destination="yfv-ji-4xI" eventType="touchUpInside" id="9N8-9Z-zaE"/>
+                                    <segue destination="jh5-tW-QuO" kind="show" identifier="ScaleToSelection" id="8nb-Wh-swr"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="b9W-VB-j5l">
+                                <rect key="frame" x="-2" y="447" width="324" height="31"/>
+                                <connections>
+                                    <action selector="wahSlider:" destination="yfv-ji-4xI" eventType="valueChanged" id="Nc8-DG-Jyc"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="wahSlider" destination="b9W-VB-j5l" id="4RI-Qz-slP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bU6-Bb-ddi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="967" y="1782"/>
+        </scene>
+        <!--Play Drums View Controller-->
+        <scene sceneID="3KI-fI-CbJ">
+            <objects>
+                <viewController id="em3-4g-vwY" customClass="PlayDrumsViewController" customModule="drums" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VbR-Nw-yA9"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZwI-Zl-n5T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fsA-A8-Rc8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3kf-wY-8pY" userLabel="InstrumentView">
+                                <rect key="frame" x="0.0" y="322" width="320" height="246"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mFH-Zc-EBg" userLabel="DrumView">
+                                        <rect key="frame" x="0.0" y="-8" width="320" height="209"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="screen640x640" translatesAutoresizingMaskIntoConstraints="NO" id="6ji-hb-vdF">
+                                                <rect key="frame" x="16" y="20" width="289" height="177"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-0B-pM3">
+                                                <rect key="frame" x="160" y="37" width="46" height="30"/>
+                                                <connections>
+                                                    <action selector="onSmallTom:" destination="em3-4g-vwY" eventType="touchUpInside" id="hi5-lz-77n"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ttR-oN-Jmg">
+                                                <rect key="frame" x="214" y="46" width="46" height="30"/>
+                                                <connections>
+                                                    <action selector="onRide:" destination="em3-4g-vwY" eventType="touchUpInside" id="SzG-kr-Tws"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCA-ST-Sat">
+                                                <rect key="frame" x="58" y="46" width="46" height="30"/>
+                                                <connections>
+                                                    <action selector="onCrash:" destination="em3-4g-vwY" eventType="touchUpInside" id="yIB-QR-xBw"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oie-Is-bJL">
+                                                <rect key="frame" x="63" y="113" width="46" height="30"/>
+                                                <connections>
+                                                    <action selector="onCrash:" destination="em3-4g-vwY" eventType="touchUpInside" id="mJZ-Jw-Oa3"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldp-ev-ekw">
+                                                <rect key="frame" x="112" y="150" width="46" height="30"/>
+                                                <connections>
+                                                    <action selector="onFloorTom:" destination="em3-4g-vwY" eventType="touchUpInside" id="GQG-Re-hfK"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3h-gJ-wKY">
+                                                <rect key="frame" x="186" y="159" width="46" height="30"/>
+                                                <connections>
+                                                    <action selector="onMediumTom:" destination="em3-4g-vwY" eventType="touchUpInside" id="TJT-lA-c3R"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxI-n1-Kp9">
+                                                <rect key="frame" x="203" y="100" width="46" height="30"/>
+                                                <connections>
+                                                    <action selector="onSnare:" destination="em3-4g-vwY" eventType="touchUpInside" id="XtN-ON-Kqi"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oiG-ny-oHr">
+                                                <rect key="frame" x="221" y="138" width="46" height="30"/>
+                                                <connections>
+                                                    <action selector="onHighHat:" destination="em3-4g-vwY" eventType="touchUpInside" id="uBs-Yl-6zi"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5H0-WP-UQX">
+                                                <rect key="frame" x="112" y="37" width="46" height="30"/>
+                                                <connections>
+                                                    <action selector="onDuplicateTom:" destination="em3-4g-vwY" eventType="touchUpInside" id="i8a-h5-Zv5"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gf1-sl-rK0" userLabel="Selection">
+                                        <rect key="frame" x="146" y="215" width="22" height="22"/>
+                                        <state key="normal" title="Button" image="iconmonstr-view-5-240"/>
+                                        <connections>
+                                            <action selector="toSelection:" destination="em3-4g-vwY" eventType="touchUpInside" id="Avw-bq-SBr"/>
+                                            <segue destination="jh5-tW-QuO" kind="show" identifier="fromPlayDrumtoSelection" id="0Xz-lM-Hzm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zBn-pL-PhQ" userLabel="ChatView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="331"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wn6-JW-9UU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1347" y="455"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="electric bass" width="800" height="264"/>
+        <image name="guitar_large" width="259" height="194"/>
+        <image name="iconmonstr-view-5-240" width="240" height="240"/>
+        <image name="large_piano" width="800" height="605"/>
+        <image name="mic_large" width="259" height="194"/>
+        <image name="misc percussion" width="266" height="207"/>
+        <image name="sax2" width="380" height="400"/>
+        <image name="screen640x640" width="640" height="360"/>
+        <image name="stand up bass 2" width="498" height="597"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Oij-tf-ajq"/>
+        <segue reference="0Xz-lM-Hzm"/>
+    </inferredMetricsTieBreakers>
+</document>

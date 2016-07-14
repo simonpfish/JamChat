@@ -1,0 +1,529 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		213580071D3419ED001BF312 /* PlayMiscPercussionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213580061D3419ED001BF312 /* PlayMiscPercussionViewController.swift */; };
+		21A4A4341D2ED40F00551766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A4A4331D2ED40F00551766 /* AppDelegate.swift */; };
+		21A4A4391D2ED40F00551766 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A4371D2ED40F00551766 /* Main.storyboard */; };
+		21A4A43B1D2ED40F00551766 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A43A1D2ED40F00551766 /* Assets.xcassets */; };
+		21A4A43E1D2ED40F00551766 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A43C1D2ED40F00551766 /* LaunchScreen.storyboard */; };
+		21A4A44D1D2EE38A00551766 /* highHat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A4451D2EE38A00551766 /* highHat.mp3 */; };
+		21A4A44E1D2EE38A00551766 /* duplicateTom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A4461D2EE38A00551766 /* duplicateTom.mp3 */; };
+		21A4A44F1D2EE38A00551766 /* crashShort.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A4471D2EE38A00551766 /* crashShort.mp3 */; };
+		21A4A4501D2EE38A00551766 /* mediumTom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A4481D2EE38A00551766 /* mediumTom.mp3 */; };
+		21A4A4511D2EE38A00551766 /* snare.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A4491D2EE38A00551766 /* snare.mp3 */; };
+		21A4A4521D2EE38A00551766 /* longCrash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A44A1D2EE38A00551766 /* longCrash.mp3 */; };
+		21A4A4531D2EE38A00551766 /* smallTom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A44B1D2EE38A00551766 /* smallTom.mp3 */; };
+		21A4A4541D2EE38A00551766 /* largeTom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A44C1D2EE38A00551766 /* largeTom.mp3 */; };
+		21A4A4571D2EE4E000551766 /* G_TOM_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A4561D2EE4E000551766 /* G_TOM_1.mp3 */; };
+		21A4A45B1D2EFB4600551766 /* small.WAV in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A4581D2EFB4600551766 /* small.WAV */; };
+		21A4A45C1D2EFB4600551766 /* duplicate.WAV in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A4591D2EFB4600551766 /* duplicate.WAV */; };
+		21A4A45D1D2EFB4600551766 /* medium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A45A1D2EFB4600551766 /* medium.wav */; };
+		21A4A45F1D2EFBF600551766 /* G_TOM_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 21A4A45E1D2EFBF600551766 /* G_TOM_1.wav */; };
+		21A4A4651D2F021A00551766 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A4A4641D2F021A00551766 /* SelectionViewController.swift */; };
+		21A52AC11D300BDF00F1A90C /* PlayDrumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A52AC01D300BDF00F1A90C /* PlayDrumsViewController.swift */; };
+		29D655B55B0545DBB3C85FF6 /* Pods_drums.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 098B7BA37B16FE4402AA07FD /* Pods_drums.framework */; };
+		8C5958E31D36B02800A7BB7F /* ScaleInstrumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5958E21D36B02800A7BB7F /* ScaleInstrumentViewController.swift */; };
+		8C5958E71D36B57100A7BB7F /* AcousticBassC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C5958E61D36B57100A7BB7F /* AcousticBassC.wav */; };
+		8C5958E91D36B57700A7BB7F /* ElectricBassC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C5958E81D36B57700A7BB7F /* ElectricBassC.wav */; };
+		8C5958EB1D36B57D00A7BB7F /* PianoC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C5958EA1D36B57D00A7BB7F /* PianoC.wav */; };
+		8C5958F31D36B7B900A7BB7F /* ScaleInstrumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5958F21D36B7B900A7BB7F /* ScaleInstrumentView.swift */; };
+		8C5958F51D36B7D500A7BB7F /* ScaleInstrumentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5958F41D36B7D500A7BB7F /* ScaleInstrumentObject.swift */; };
+		8C5958F71D36E99200A7BB7F /* RockGuitarC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C5958F61D36E99200A7BB7F /* RockGuitarC.wav */; };
+		8C5958FD1D36EC9200A7BB7F /* SaxC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C5958FC1D36EC9200A7BB7F /* SaxC.wav */; };
+		8C5958FF1D36ED3800A7BB7F /* ChoirC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C5958FE1D36ED3800A7BB7F /* ChoirC.wav */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		21EDA78F1D346BBB00916C53 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		098B7BA37B16FE4402AA07FD /* Pods_drums.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_drums.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		213580061D3419ED001BF312 /* PlayMiscPercussionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayMiscPercussionViewController.swift; sourceTree = "<group>"; };
+		21A4A4301D2ED40F00551766 /* drums.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = drums.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		21A4A4331D2ED40F00551766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		21A4A4381D2ED40F00551766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		21A4A43A1D2ED40F00551766 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		21A4A43D1D2ED40F00551766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		21A4A43F1D2ED40F00551766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21A4A4451D2EE38A00551766 /* highHat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = highHat.mp3; sourceTree = "<group>"; };
+		21A4A4461D2EE38A00551766 /* duplicateTom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = duplicateTom.mp3; sourceTree = "<group>"; };
+		21A4A4471D2EE38A00551766 /* crashShort.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crashShort.mp3; sourceTree = "<group>"; };
+		21A4A4481D2EE38A00551766 /* mediumTom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mediumTom.mp3; sourceTree = "<group>"; };
+		21A4A4491D2EE38A00551766 /* snare.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = snare.mp3; sourceTree = "<group>"; };
+		21A4A44A1D2EE38A00551766 /* longCrash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = longCrash.mp3; sourceTree = "<group>"; };
+		21A4A44B1D2EE38A00551766 /* smallTom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = smallTom.mp3; sourceTree = "<group>"; };
+		21A4A44C1D2EE38A00551766 /* largeTom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = largeTom.mp3; sourceTree = "<group>"; };
+		21A4A4561D2EE4E000551766 /* G_TOM_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = G_TOM_1.mp3; sourceTree = "<group>"; };
+		21A4A4581D2EFB4600551766 /* small.WAV */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = small.WAV; sourceTree = "<group>"; };
+		21A4A4591D2EFB4600551766 /* duplicate.WAV */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = duplicate.WAV; sourceTree = "<group>"; };
+		21A4A45A1D2EFB4600551766 /* medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = medium.wav; sourceTree = "<group>"; };
+		21A4A45E1D2EFBF600551766 /* G_TOM_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = G_TOM_1.wav; sourceTree = "<group>"; };
+		21A4A4641D2F021A00551766 /* SelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
+		21A52AC01D300BDF00F1A90C /* PlayDrumsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayDrumsViewController.swift; sourceTree = "<group>"; };
+		42DBD29DAF94F74667367BD2 /* Pods-drums.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-drums.debug.xcconfig"; path = "Pods/Target Support Files/Pods-drums/Pods-drums.debug.xcconfig"; sourceTree = "<group>"; };
+		8219C1E9E91ACAFF198F4223 /* Pods-drums.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-drums.release.xcconfig"; path = "Pods/Target Support Files/Pods-drums/Pods-drums.release.xcconfig"; sourceTree = "<group>"; };
+		8C5958E21D36B02800A7BB7F /* ScaleInstrumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleInstrumentViewController.swift; sourceTree = "<group>"; };
+		8C5958E61D36B57100A7BB7F /* AcousticBassC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AcousticBassC.wav; sourceTree = "<group>"; };
+		8C5958E81D36B57700A7BB7F /* ElectricBassC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ElectricBassC.wav; sourceTree = "<group>"; };
+		8C5958EA1D36B57D00A7BB7F /* PianoC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PianoC.wav; sourceTree = "<group>"; };
+		8C5958F21D36B7B900A7BB7F /* ScaleInstrumentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleInstrumentView.swift; sourceTree = "<group>"; };
+		8C5958F41D36B7D500A7BB7F /* ScaleInstrumentObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleInstrumentObject.swift; sourceTree = "<group>"; };
+		8C5958F61D36E99200A7BB7F /* RockGuitarC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = RockGuitarC.wav; sourceTree = "<group>"; };
+		8C5958FC1D36EC9200A7BB7F /* SaxC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SaxC.wav; sourceTree = "<group>"; };
+		8C5958FE1D36ED3800A7BB7F /* ChoirC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ChoirC.wav; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		21A4A42D1D2ED40F00551766 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29D655B55B0545DBB3C85FF6 /* Pods_drums.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		216691CC1D3472AE0079D919 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C5958F21D36B7B900A7BB7F /* ScaleInstrumentView.swift */,
+				8C5958F41D36B7D500A7BB7F /* ScaleInstrumentObject.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		21A4A4271D2ED40F00551766 = {
+			isa = PBXGroup;
+			children = (
+				21A4A4321D2ED40F00551766 /* drums */,
+				21A4A4311D2ED40F00551766 /* Products */,
+				3A2D86A71C3EA1207C246664 /* Pods */,
+				DA56CFB87853796D39F1E4BF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		21A4A4311D2ED40F00551766 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21A4A4301D2ED40F00551766 /* drums.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		21A4A4321D2ED40F00551766 /* drums */ = {
+			isa = PBXGroup;
+			children = (
+				216691CC1D3472AE0079D919 /* Models */,
+				21A52AC21D3035B000F1A90C /* ViewControllers */,
+				21A4A4331D2ED40F00551766 /* AppDelegate.swift */,
+				21A4A4371D2ED40F00551766 /* Main.storyboard */,
+				21A4A43A1D2ED40F00551766 /* Assets.xcassets */,
+				21A4A43C1D2ED40F00551766 /* LaunchScreen.storyboard */,
+				21A4A43F1D2ED40F00551766 /* Info.plist */,
+			);
+			path = drums;
+			sourceTree = "<group>";
+		};
+		21A4A4551D2EE38E00551766 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8C5958E51D36B37A00A7BB7F /* ScaleInstruments */,
+				8C5958E41D36B34C00A7BB7F /* DrumKit */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		21A52AC21D3035B000F1A90C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8C5958E21D36B02800A7BB7F /* ScaleInstrumentViewController.swift */,
+				21A4A4641D2F021A00551766 /* SelectionViewController.swift */,
+				21A52AC01D300BDF00F1A90C /* PlayDrumsViewController.swift */,
+				213580061D3419ED001BF312 /* PlayMiscPercussionViewController.swift */,
+				21A4A4551D2EE38E00551766 /* Sounds */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3A2D86A71C3EA1207C246664 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				42DBD29DAF94F74667367BD2 /* Pods-drums.debug.xcconfig */,
+				8219C1E9E91ACAFF198F4223 /* Pods-drums.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8C5958E41D36B34C00A7BB7F /* DrumKit */ = {
+			isa = PBXGroup;
+			children = (
+				21A4A45E1D2EFBF600551766 /* G_TOM_1.wav */,
+				21A4A4581D2EFB4600551766 /* small.WAV */,
+				21A4A4591D2EFB4600551766 /* duplicate.WAV */,
+				21A4A45A1D2EFB4600551766 /* medium.wav */,
+				21A4A4561D2EE4E000551766 /* G_TOM_1.mp3 */,
+				21A4A4451D2EE38A00551766 /* highHat.mp3 */,
+				21A4A4461D2EE38A00551766 /* duplicateTom.mp3 */,
+				21A4A4471D2EE38A00551766 /* crashShort.mp3 */,
+				21A4A4481D2EE38A00551766 /* mediumTom.mp3 */,
+				21A4A4491D2EE38A00551766 /* snare.mp3 */,
+				21A4A44A1D2EE38A00551766 /* longCrash.mp3 */,
+				21A4A44B1D2EE38A00551766 /* smallTom.mp3 */,
+				21A4A44C1D2EE38A00551766 /* largeTom.mp3 */,
+			);
+			name = DrumKit;
+			sourceTree = "<group>";
+		};
+		8C5958E51D36B37A00A7BB7F /* ScaleInstruments */ = {
+			isa = PBXGroup;
+			children = (
+				8C5958E61D36B57100A7BB7F /* AcousticBassC.wav */,
+				8C5958FE1D36ED3800A7BB7F /* ChoirC.wav */,
+				8C5958E81D36B57700A7BB7F /* ElectricBassC.wav */,
+				8C5958EA1D36B57D00A7BB7F /* PianoC.wav */,
+				8C5958F61D36E99200A7BB7F /* RockGuitarC.wav */,
+				8C5958FC1D36EC9200A7BB7F /* SaxC.wav */,
+			);
+			name = ScaleInstruments;
+			sourceTree = "<group>";
+		};
+		DA56CFB87853796D39F1E4BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				098B7BA37B16FE4402AA07FD /* Pods_drums.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		21A4A42F1D2ED40F00551766 /* drums */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21A4A4421D2ED40F00551766 /* Build configuration list for PBXNativeTarget "drums" */;
+			buildPhases = (
+				75C1CDD326EB60327C7725D4 /* [CP] Check Pods Manifest.lock */,
+				21A4A42C1D2ED40F00551766 /* Sources */,
+				21A4A42D1D2ED40F00551766 /* Frameworks */,
+				21A4A42E1D2ED40F00551766 /* Resources */,
+				C825EE1B51973DB20B485F19 /* [CP] Embed Pods Frameworks */,
+				93FB52184DDAE22627C73536 /* [CP] Copy Pods Resources */,
+				21EDA78F1D346BBB00916C53 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = drums;
+			productName = drums;
+			productReference = 21A4A4301D2ED40F00551766 /* drums.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		21A4A4281D2ED40F00551766 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Meena Sengottuvelu";
+				TargetAttributes = {
+					21A4A42F1D2ED40F00551766 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 21A4A42B1D2ED40F00551766 /* Build configuration list for PBXProject "drums" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 21A4A4271D2ED40F00551766;
+			productRefGroup = 21A4A4311D2ED40F00551766 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				21A4A42F1D2ED40F00551766 /* drums */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		21A4A42E1D2ED40F00551766 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C5958E91D36B57700A7BB7F /* ElectricBassC.wav in Resources */,
+				21A4A4511D2EE38A00551766 /* snare.mp3 in Resources */,
+				21A4A45D1D2EFB4600551766 /* medium.wav in Resources */,
+				21A4A4531D2EE38A00551766 /* smallTom.mp3 in Resources */,
+				8C5958FF1D36ED3800A7BB7F /* ChoirC.wav in Resources */,
+				8C5958FD1D36EC9200A7BB7F /* SaxC.wav in Resources */,
+				8C5958F71D36E99200A7BB7F /* RockGuitarC.wav in Resources */,
+				21A4A4541D2EE38A00551766 /* largeTom.mp3 in Resources */,
+				8C5958EB1D36B57D00A7BB7F /* PianoC.wav in Resources */,
+				21A4A45B1D2EFB4600551766 /* small.WAV in Resources */,
+				8C5958E71D36B57100A7BB7F /* AcousticBassC.wav in Resources */,
+				21A4A43E1D2ED40F00551766 /* LaunchScreen.storyboard in Resources */,
+				21A4A43B1D2ED40F00551766 /* Assets.xcassets in Resources */,
+				21A4A45C1D2EFB4600551766 /* duplicate.WAV in Resources */,
+				21A4A44D1D2EE38A00551766 /* highHat.mp3 in Resources */,
+				21A4A4391D2ED40F00551766 /* Main.storyboard in Resources */,
+				21A4A4571D2EE4E000551766 /* G_TOM_1.mp3 in Resources */,
+				21A4A44E1D2EE38A00551766 /* duplicateTom.mp3 in Resources */,
+				21A4A4521D2EE38A00551766 /* longCrash.mp3 in Resources */,
+				21A4A45F1D2EFBF600551766 /* G_TOM_1.wav in Resources */,
+				21A4A4501D2EE38A00551766 /* mediumTom.mp3 in Resources */,
+				21A4A44F1D2EE38A00551766 /* crashShort.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		75C1CDD326EB60327C7725D4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		93FB52184DDAE22627C73536 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-drums/Pods-drums-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C825EE1B51973DB20B485F19 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-drums/Pods-drums-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		21A4A42C1D2ED40F00551766 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C5958F51D36B7D500A7BB7F /* ScaleInstrumentObject.swift in Sources */,
+				8C5958F31D36B7B900A7BB7F /* ScaleInstrumentView.swift in Sources */,
+				21A4A4651D2F021A00551766 /* SelectionViewController.swift in Sources */,
+				8C5958E31D36B02800A7BB7F /* ScaleInstrumentViewController.swift in Sources */,
+				213580071D3419ED001BF312 /* PlayMiscPercussionViewController.swift in Sources */,
+				21A52AC11D300BDF00F1A90C /* PlayDrumsViewController.swift in Sources */,
+				21A4A4341D2ED40F00551766 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		21A4A4371D2ED40F00551766 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21A4A4381D2ED40F00551766 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		21A4A43C1D2ED40F00551766 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21A4A43D1D2ED40F00551766 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		21A4A4401D2ED40F00551766 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		21A4A4411D2ED40F00551766 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		21A4A4431D2ED40F00551766 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42DBD29DAF94F74667367BD2 /* Pods-drums.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = drums/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.JamChat.drums;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		21A4A4441D2ED40F00551766 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8219C1E9E91ACAFF198F4223 /* Pods-drums.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = drums/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.JamChat.drums;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		21A4A42B1D2ED40F00551766 /* Build configuration list for PBXProject "drums" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21A4A4401D2ED40F00551766 /* Debug */,
+				21A4A4411D2ED40F00551766 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21A4A4421D2ED40F00551766 /* Build configuration list for PBXNativeTarget "drums" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21A4A4431D2ED40F00551766 /* Debug */,
+				21A4A4441D2ED40F00551766 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 21A4A4281D2ED40F00551766 /* Project object */;
+}
