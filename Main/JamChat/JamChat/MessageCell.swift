@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MessageCell: UITableViewCell {
     
     var message: Message?
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,8 +25,11 @@ class MessageCell: UITableViewCell {
     }
 
     @IBAction func onPlay(sender: AnyObject) {
+        
         message?.loadTracks({ 
             self.message?.play()
         })
+        
     }
 }
+
