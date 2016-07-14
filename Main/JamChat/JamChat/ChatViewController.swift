@@ -48,6 +48,7 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
             print("recording")
             chat?.recordSend(instrument!, success: { 
                 print("done!")
+                self.tableView.reloadData()
                 self.recording = false
                 self.chat?.fetch({ 
                     self.tableView.reloadData()
