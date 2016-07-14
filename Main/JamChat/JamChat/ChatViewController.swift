@@ -24,9 +24,6 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
     
     var recording = false
     
-    let r = CAReplicatorLayer()
-    let dot = CALayer()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,50 +45,6 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
         
         // Do any additional setup after loading the view.
         
-        
-        r.frame = waveformView.bounds
-        waveformView.layer.addSublayer(r)
-        
-        dot.bounds = CGRect(x: 0.0, y: 0.0, width: 5.0, height: 5.0)
-        dot.position = CGPoint(x: 18.0, y: waveformView.center.y)
-        dot.backgroundColor = UIColor.magentaColor().CGColor
-        dot.borderColor = UIColor(white: 1.0, alpha: 1.0).CGColor
-        dot.borderWidth = 1.0
-        dot.cornerRadius = 2.0
-        r.addSublayer(dot)
-        
-        r.instanceCount = 35
-        r.instanceTransform = CATransform3DMakeTranslation(20.0, 0.0, 0.0)
-        r.instanceDelay = 0.1
-        
-    }
-    
-    func sineWaveOn() {
-        
-        UIView.animateWithDuration(0.5, delay: 0.0, options: [.CurveEaseOut, .Repeat, .Autoreverse, .FillModeForwards], animations: {
-            self.dot.transform = CATransform3DMakeScale(1.4, 10, 1.0)
-            self.dot.backgroundColor = UIColor.purpleColor().CGColor
-            
-            }, completion: nil)
-        dot.transform = CATransform3DIdentity
-        
-        UIView.animateWithDuration(1.25, delay: 0.0, options: [.Repeat, .Autoreverse], animations: {
-            self.r.instanceTransform = CATransform3DMakeTranslation(10.0, 0.0, 0.0)
-            }, completion: nil)
-
-    }
-    
-    func sineWaveOff() {
-        UIView.animateWithDuration(0.5, delay: 0.0, options: [.CurveEaseOut, .Repeat, .Autoreverse, .FillModeForwards], animations: {
-            self.dot.transform = CATransform3DMakeScale(0.0, 0.0, 0.0)
-            self.dot.backgroundColor = UIColor.purpleColor().CGColor
-            
-            }, completion: nil)
-        dot.transform = CATransform3DIdentity
-        
-        UIView.animateWithDuration(1.25, delay: 0.0, options: [.Repeat, .Autoreverse], animations: {
-            self.r.instanceTransform = CATransform3DMakeTranslation(0.0, 0.0, 0.0)
-            }, completion: nil)
     }
     
     func noteOn(note: Int) {
@@ -99,11 +52,9 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
         if (!recording) {
             recording = true
             print("recording")
-            sineWaveOn()
             chat?.recordSend(instrument!, success: {
                 print("done!")
                 self.tableView.reloadData()
-                self.sineWaveOff()
                 self.recording = false
                 self.chat?.fetch({ 
                     self.tableView.reloadData()
@@ -132,17 +83,6 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
         cell.message = chat!.messages[indexPath.row]
         return cell
     }
-    
-    
-    //does this work?
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        var previousOffset: CGFloat
-        var rect: CGRect = self.view.frame
-        previousOffset = scrollView.contentOffset.y
-        rect.origin.y += previousOffset - scrollView.contentOffset.y
-        self.view.frame = rect
-    }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
