@@ -23,7 +23,7 @@ class Chat: NSObject {
     /**
      Loads chat from an exisiting PFObject.
      */
-    init(object: PFObject, completion: () -> ()) {
+    init(object: PFObject) {
         
         self.object = object
         
@@ -32,10 +32,11 @@ class Chat: NSObject {
         userIDs = object["users"] as! [String]
         
         super.init()
-        
-        
-        loadUsers { 
-            self.loadMessages({ 
+    }
+    
+    func loadData(completion: () -> ()) {
+        loadUsers {
+            self.loadMessages({
                 completion()
             })
         }
@@ -57,28 +58,33 @@ class Chat: NSObject {
     }
     
     private func loadUsers(completion: () -> ()) {
+            print("Loading chat \(self.object.objectId!) users")
             let query = PFQuery(className: "_User")
             query.whereKey("objectId", containedIn: userIDs)
             query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    var loadedCount = 0
                     for object in objects! {
-                        self.users.append(User(user: object as! PFUser, completion: {
+                        self.users.append(User(user: object as! PFUser))
+                    }
+                    
+                    var loadedCount = 0
+                    for user in self.users {
+                        user.loadData({ 
                             loadedCount += 1
-                            print("done loading user \(loadedCount) \(objects!.count)")
-                            if loadedCount == objects?.count {
-                                print("done loading users")
+                            if loadedCount == self.users.count {
+                                print("Successfully loaded chat \(self.object.objectId!) users")
                                 completion()
                             }
-                        }))
+                        })
                     }
                 }
             })
     }
     
     private func loadMessages(completion: () -> ()) {
+        print("Loading chat \(self.object.objectId!) messages")
         let query = PFQuery(className: "Message")
         query.orderByAscending("createdAt")
         query.whereKey("objectId", containedIn: messageIDs)
@@ -91,15 +97,11 @@ class Chat: NSObject {
                 if objects?.count == 0 {
                     completion()
                 } else {
-                    var loadedCount = 0
                     for object in objects! {
-                        self.messages.append(Message(object: object, completion: {
-                            loadedCount += 1
-                            if loadedCount == objects?.count {
-                                completion()
-                            }
-                        }))
+                        self.messages.append(Message(object: object))
                     }
+                    print("Successfully loaded chat \(self.object.objectId!) messages")
+                    completion()
                 }
             }
         }
@@ -112,7 +114,7 @@ class Chat: NSObject {
 
         super.init()
         
-        loadUsers {
+        loadUsers() {
             self.add(User.currentUser!)
             completion()
         }
@@ -169,6 +171,8 @@ class Chat: NSObject {
      Updates the chat from the server if it is necessary
      */
     func fetch(success: () -> (), failure: (NSError) -> ()) {
+        print("Fetching chat \(self.object.objectId!) users")
+
         object.fetchIfNeededInBackgroundWithBlock() { (object: PFObject?, error: NSError?) in
             if let object = object {
                 
@@ -184,12 +188,9 @@ class Chat: NSObject {
                         failure(error)
                     } else {
                         for object in objects! {
-                            self.messages.append(Message(object: object, completion: {
-                                if self.messages.count == objects?.count {
-                                    success()
-                                }
-                            }))
+                            self.messages.append(Message(object: object))
                         }
+                        success()
                     }
                 }
                 
@@ -204,7 +205,8 @@ class Chat: NSObject {
      Push the updates to the chat back to the server
      */
     func push(completion: PFBooleanResultBlock?) {
-        
+        print("Pushing chat \(self.object.objectId!) users")
+
         object["messageDuration"] = messageDuration
         object["users"] = userIDs
         object["messages"] = messageIDs
@@ -213,6 +215,8 @@ class Chat: NSObject {
     }
     
     class func downloadActiveUserChats(success: ([Chat]) -> (), failure: (NSError) -> ()) {
+        print("Downloading chats for active user")
+
         let query = PFQuery(className: "Chat")
         
         query.whereKey("users", containsString: User.currentUser!.parseUser.objectId!)
@@ -224,12 +228,14 @@ class Chat: NSObject {
                 var chats: [Chat] = []
                 var loadedCount = 0
                 for object in objects ?? [] {
-                    chats.append(Chat(object: object, completion: {
+                    chats.append(Chat(object: object))
+                    chats.last?.loadData({
                         loadedCount += 1
-                        if loadedCount == objects?.count {
+                        if loadedCount == objects!.count {
+                            print("Succesfully downloaded chats for active user")
                             success(chats)
                         }
-                    }))
+                    })
                 }
             }
         }

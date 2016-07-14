@@ -27,20 +27,21 @@ class Track: NSObject {
     /**
      Initializes a track based on a PFObject, useful for downloading them from Parse.
      */
-    init(object: PFObject, success: () -> (), failure: (NSError) -> ()) {
+    init(object: PFObject) {
         
         self.object = object
-        let file = object["media"] as! PFFile
         let parseUser = object["author"] as! PFUser
-        try! parseUser.fetch()
-        author = User(user: parseUser, completion: nil)
+        author = User(user: parseUser)
         identifier = object["identifier"] as! String
         
         filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + self.identifier + ".m4a"
         
         super.init()
-        
+    }
+    
+    func loadMedia(success: () -> (), failure: (NSError) -> ()) {
         let fileManager = NSFileManager()
+        let file = object["media"] as! PFFile
         
         if fileManager.fileExistsAtPath(filepath) {
             self.player = AKAudioPlayer(self.filepath)
@@ -52,9 +53,8 @@ class Track: NSObject {
                     failure(error)
                 } else {
                     
-                    let manager = NSFileManager()
-                    manager.createFileAtPath(self.filepath, contents: data, attributes: nil)
-//                    data?.writeToURL(NSURL(string: self.filepath)!, atomically: true)
+                    fileManager.createFileAtPath(self.filepath, contents: data, attributes: nil)
+                    //                    data?.writeToURL(NSURL(string: self.filepath)!, atomically: true)
                     self.player = AKAudioPlayer(self.filepath)
                     Track.mainMixer.connect(self.player!)
                     
@@ -62,7 +62,6 @@ class Track: NSObject {
                 }
             }
         }
-        
     }
     
     /**

@@ -11,6 +11,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Parse
 import ParseUI
+import AudioKit
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -22,6 +23,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         tableView.delegate = self
         tableView.dataSource = self
+        
+        AudioKit.output = Track.mainMixer
+        AudioKit.start()
         // Do any additional setup after loading the view.
     }
     
@@ -34,13 +38,22 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }, failure: { (error: NSError?) in
                 print(error?.localizedDescription)
             })
+        } else {
+            FBSDKProfile.loadCurrentProfileWithCompletion({ (profile: FBSDKProfile!, error: NSError!) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    User.currentUser?.updateDataFromProfile(profile)
+                    self.loadFeed()
+                }
+            })
         }
     }
     
     func loadFeed() {
         Chat.downloadActiveUserChats({ (chats: [Chat]) in
             self.chats = chats
-            print("reloading")
+            print("Reloading table view")
             self.tableView.reloadData()
         }) { (error: NSError) in
             print(error.localizedDescription)
@@ -61,6 +74,18 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let newChatController = ChatCreationViewController()
         presentViewController(newChatController, animated: true, completion: nil)
     }
+
+    
+    @IBAction func onLogout(sender: AnyObject) {
+        User.logout()
+        User.login(self, success: { 
+            self.loadFeed()
+        }) { (error: NSError?) in
+            print(error?.localizedDescription)
+        }
+        
+    }
+    
     
     func createNewChat(userIDs: [String]) {
         var chat: Chat!

@@ -24,6 +24,8 @@ class MessageCell: UITableViewCell {
     }
 
     @IBAction func onPlay(sender: AnyObject) {
-        message?.play()
+        message?.loadTracks({ 
+            self.message?.play()
+        })
     }
 }
