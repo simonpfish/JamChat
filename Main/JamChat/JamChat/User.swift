@@ -27,6 +27,7 @@ class User: NSObject {
     var profileImageURL: NSURL!
     var email: String?
     
+    var friends: [[String : String]]?
     /**
      Initializes user object based on a Parse User.
      */
@@ -51,9 +52,11 @@ class User: NSObject {
         }
     }
     
-    func loadFacebookData(completion: (() -> ())?) {
+    func loadFriends(completion: (() -> ())?) {
+        print("Loading \(name)'s frieds")
+        
         // Create request for user's Facebook data
-        let request = FBSDKGraphRequest(graphPath: facebookID, parameters:["fields" : "email,name,friends"])
+        let request = FBSDKGraphRequest(graphPath: facebookID, parameters:["fields" : "friends"])
         
         // Send request to Facebook
         request.startWithCompletionHandler {
@@ -61,14 +64,17 @@ class User: NSObject {
             (connection, result, error) in
             
             if error != nil {
-                // Some error checking here
+                print(error!.localizedDescription)
             }
             else if let userData = result as? [String:AnyObject] {
-                self.email = userData["email"] as? String
-                print(self.name)
-                if let completion = completion {
-                    completion()
-                }
+                let friendDict = userData["friends"] as! NSDictionary
+                let friendData = friendDict["data"] as! [[String : String]]
+                
+                self.friends = []
+                self.friends?.appendContentsOf(friendData)
+                
+                print("Succesfully loaded \(self.name)'s frieds: \(self.friends!)")
+                completion?()
             }
         }
     }
@@ -122,6 +128,7 @@ class User: NSObject {
     }
     
     func updateDataFromProfile (profile: FBSDKProfile!) {
+        
         facebookID = profile.userID
         name = profile.name
         firstName = profile.firstName
