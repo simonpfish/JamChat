@@ -37,8 +37,7 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
         instrument = reverb
         Track.mainMixer.connect(instrument!)
         
-        AudioKit.output = Track.mainMixer
-        AudioKit.start()
+        
         // Do any additional setup after loading the view.
     }
     
