@@ -7,15 +7,59 @@
 //
 
 import UIKit
+import RAMReel
 
 class ChatCreationViewController: UIViewController {
-
-    @IBOutlet weak var userField: UITextField!
+    
+    var dataSource: SimplePrefixQueryDataSource!
+    var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
+    var selectedFriendIDs: [String] = []
+    
+    @IBOutlet weak var selectedUsersLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        initializeFriendPicker()
+    }
+    
+    func initializeFriendPicker() {
+        
+        var friendNames: [String] = []
+        
+        User.currentUser?.loadFriends({ 
+            for friend in User.currentUser!.friends! {
+                friendNames.append(friend["name"]!)
+            }
+            
+            self.dataSource = SimplePrefixQueryDataSource(friendNames)
+            self.ramReel = RAMReel(frame: self.view.bounds, dataSource: self.dataSource, placeholder: "Start by typing…") {
+                if let index = friendNames.indexOf(self.ramReel.selectedItem!) {
+                    let selectedID = User.currentUser!.friends![index]["id"]!
+                    if !self.selectedFriendIDs.contains(selectedID) {
+                        self.selectedFriendIDs.append(selectedID)
+                        self.selectedUsersLabel.text?.appendContentsOf($0 + "\n")
+                        print("Added friend to chat: ", $0)
+                        self.ramReel.prepareForReuse()
+                    }
+                } else {
+                    print("Friend does not exist: ", $0)
+                }
+            }
+            
+            self.ramReel.theme = FriendSearchTheme()
+            self.view.addSubview(self.ramReel.view)
+            self.view.sendSubviewToBack(self.ramReel.view)
+            self.ramReel.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        })
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,7 +71,7 @@ class ChatCreationViewController: UIViewController {
         let navController = presentingViewController as! UINavigationController
         let feed = navController.topViewController as! FeedViewController
         self.dismissViewControllerAnimated(true) {
-            feed.createNewChat([self.userField.text!])
+            feed.addNewChat(self.selectedFriendIDs)
         }
     }
 
@@ -41,4 +85,10 @@ class ChatCreationViewController: UIViewController {
     }
     */
 
+}
+
+struct FriendSearchTheme: Theme {
+    let font: UIFont = UIFont(name: "Roboto", size: 30)!
+    let listBackgroundColor: UIColor = UIColor.clearColor()
+    let textColor: UIColor = UIColor.blackColor()
 }

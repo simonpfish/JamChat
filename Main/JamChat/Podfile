@@ -3,21 +3,24 @@
 
 target 'JamChat' do
 
-    # Facebook
-	pod 'FBSDKCoreKit'
-	pod 'FBSDKLoginKit'
-    
-    # Parse
-    pod 'ParseFacebookUtilsV4'
-	pod 'Parse'
-    pod 'ParseUI'
-    
-    # Audio
-    pod 'AudioKit'
-
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for JamChat
+  # Pods for JamChat:
+  
+    # Facebook
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKLoginKit'
+  
+    # Parse
+    pod 'ParseFacebookUtilsV4'
+    pod 'Parse'
+    pod 'ParseUI'
+  
+    # Audio
+    pod 'AudioKit'
+  
+    # UI
+    pod 'RAMReel'
 
 end

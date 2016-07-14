@@ -60,11 +60,12 @@ class Chat: NSObject {
     private func loadUsers(completion: () -> ()) {
         print("Loading chat \(self.object.objectId ?? "NEW") users")
         let query = PFQuery(className: "_User")
-        query.whereKey("objectId", containedIn: userIDs)
+        query.whereKey("facebookID", containedIn: userIDs)
         query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
             if let error = error {
                 print(error.localizedDescription)
             } else {
+                self.users = []
                 for object in objects! {
                     self.users.append(User(user: object as! PFUser))
                 }
@@ -107,17 +108,11 @@ class Chat: NSObject {
         }
     }
     
-    init(messageDuration: Double, userIDs: [String], completion: () -> ()) {
+    init(messageDuration: Double, userIDs: [String]) {
         object = PFObject(className: "Chat")
         self.messageDuration = messageDuration
         self.userIDs = userIDs
-        
-        super.init()
-        
-        loadUsers() {
-            self.add(User.currentUser!)
-            completion()
-        }
+        self.userIDs.append(User.currentUser!.facebookID)
     }
     
     /**
@@ -205,21 +200,24 @@ class Chat: NSObject {
      Push the updates to the chat back to the server
      */
     func push(completion: PFBooleanResultBlock?) {
-        print("Pushing chat \(self.object.objectId ?? "NEW") users")
+        print("Pushing chat \(self.object.objectId ?? "NEW")")
         
         object["messageDuration"] = messageDuration
         object["users"] = userIDs
         object["messages"] = messageIDs
         
-        object.saveInBackgroundWithBlock(completion)
+        object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+            print("Finished pushing chat \(self.object.objectId ?? "NEW")")
+            completion?(success, error)
+        })
     }
     
-    class func downloadActiveUserChats(success: ([Chat]) -> (), failure: (NSError) -> ()) {
+    class func downloadCurrentUserChats(success: ([Chat]) -> (), failure: (NSError) -> ()) {
         print("Downloading chats for active user")
         
         let query = PFQuery(className: "Chat")
         
-        query.whereKey("users", containsString: User.currentUser!.parseUser.objectId!)
+        query.whereKey("users", containsString: User.currentUser!.facebookID)
         query.orderByDescending("modifiedAt")
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
             if let error = error {
