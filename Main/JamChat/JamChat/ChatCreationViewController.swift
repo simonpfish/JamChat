@@ -45,7 +45,7 @@ class ChatCreationViewController: UIViewController {
                     if !self.selectedFriendIDs.contains(selectedID) {
                         self.selectedFriendIDs.append(selectedID)
                         self.selectedUsersLabel.text?.appendContentsOf($0 + "\n")
-                        print("Added friend to chat: ", $0)
+                        print("Added friend to chat in creation: ", $0)
                         self.ramReel.prepareForReuse()
                     }
                 } else {

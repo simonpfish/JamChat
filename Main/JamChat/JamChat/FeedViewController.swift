@@ -27,16 +27,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         AudioKit.output = Track.mainMixer
         AudioKit.start()
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         
         if (!User.isLoggedIn()) {
-            User.login(self, success: { 
+            User.login(self, success: {
                 self.loadFeed()
                 }, failure: { (error: NSError?) in
-                print(error?.localizedDescription)
+                    print(error?.localizedDescription)
             })
         } else {
             FBSDKProfile.loadCurrentProfileWithCompletion({ (profile: FBSDKProfile!, error: NSError!) in
@@ -48,6 +44,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             })
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     func loadFeed() {
@@ -97,9 +97,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    print("Succesfully created chat, reloading data")
                     self.chats.append(chat)
-                    self.tableView.reloadData()
+                    print("Succesfully created chat, reloading data")
+                    chat.loadData({
+                        self.tableView.reloadData()
+                    })
                 }
             }
         }
