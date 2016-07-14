@@ -27,29 +27,35 @@ class Message: NSObject {
     }
     
     func loadTracks(completion: () -> ()) {
-        let trackIDs = object["tracks"] as! [String]
-        
-        let query = PFQuery(className: "Track")
-        query.orderByDescending("createdAt")
-        query.whereKey("identifier", containedIn: trackIDs)
-        
-        query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
-            for object in objects! {
-                let track = Track(object: object)
-                self.tracks.append(track)
-            }
-        }
-        
-        var loadedCount = 0
-        for track in tracks {
-            track.loadMedia({ 
-                loadedCount += 1
-                if loadedCount == self.tracks.count {
-                    completion()
+        print("Loading tracks for message \(self.id!)")
+        object.fetchIfNeededInBackgroundWithBlock { (_: PFObject?, error: NSError?) in
+            let trackIDs = self.object["tracks"] as! [String]
+            
+            let query = PFQuery(className: "Track")
+            query.orderByDescending("createdAt")
+            query.whereKey("identifier", containedIn: trackIDs)
+            
+            query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
+                for object in objects! {
+                    let track = Track(object: object)
+                    self.tracks.append(track)
                 }
-            }, failure: { (error: NSError) in
-                    print(error.localizedDescription)
-            })
+            }
+            
+            var loadedCount = 0
+            for track in self.tracks {
+                track.loadMedia({
+                    loadedCount += 1
+                    if loadedCount == self.tracks.count {
+                        print("Succesfully loaded tracks for message \(self.id!)")
+
+                        completion()
+                    }
+                    }, failure: { (error: NSError) in
+                        print(error.localizedDescription)
+                })
+            }
+
         }
     }
     
@@ -66,6 +72,7 @@ class Message: NSObject {
      Plays the message to the main audio output
      */
     func play() {
+        print("Playing message \(self.id)")
         for track in tracks {
             track.play()
         }
@@ -75,6 +82,8 @@ class Message: NSObject {
      Adds a new track to the message
      */
     func add(track: Track) {
+        print("Added track \(track.identifier) to message \(self.id!)")
+
         tracks.append(track)
         newTracks.append(track)
     }
@@ -103,6 +112,7 @@ class Message: NSObject {
                     if uploadedCount == self.newTracks.count {
                         object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
                             self.id = object.objectId
+                            print("Sent message \(self.id!)")
                             completion!(success, error)
                         })
                     }

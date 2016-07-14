@@ -46,6 +46,7 @@ class User: NSObject {
                 self.middleName = self.parseUser["middleName"] as! String
                 self.profileImageURL = NSURL(string: self.parseUser["profileImageURL"] as! String)!
                 print("Loaded \(self.name)'s data")
+                success?()
             }
         }
     }
