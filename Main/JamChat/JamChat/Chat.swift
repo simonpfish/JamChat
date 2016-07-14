@@ -200,13 +200,16 @@ class Chat: NSObject {
      Push the updates to the chat back to the server
      */
     func push(completion: PFBooleanResultBlock?) {
-        print("Pushing chat \(self.object.objectId ?? "NEW") users")
+        print("Pushing chat \(self.object.objectId ?? "NEW")")
         
         object["messageDuration"] = messageDuration
         object["users"] = userIDs
         object["messages"] = messageIDs
         
-        object.saveInBackgroundWithBlock(completion)
+        object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+            print("Finished pushing chat \(self.object.objectId ?? "NEW")")
+            completion?(success, error)
+        })
     }
     
     class func downloadCurrentUserChats(success: ([Chat]) -> (), failure: (NSError) -> ()) {
@@ -214,7 +217,7 @@ class Chat: NSObject {
         
         let query = PFQuery(className: "Chat")
         
-        query.whereKey("users", containsString: User.currentUser!.parseUser.objectId!)
+        query.whereKey("users", containsString: User.currentUser!.facebookID)
         query.orderByDescending("modifiedAt")
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
             if let error = error {

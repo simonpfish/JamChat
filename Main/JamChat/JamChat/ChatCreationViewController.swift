@@ -70,7 +70,7 @@ class ChatCreationViewController: UIViewController {
         let navController = presentingViewController as! UINavigationController
         let feed = navController.topViewController as! FeedViewController
         self.dismissViewControllerAnimated(true) {
-//            feed.createNewChat([self.userField.text!])
+            feed.addNewChat(self.selectedFriendIDs)
         }
     }
 

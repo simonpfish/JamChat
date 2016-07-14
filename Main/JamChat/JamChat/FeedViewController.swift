@@ -51,7 +51,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func loadFeed() {
-        Chat.downloadActiveUserChats({ (chats: [Chat]) in
+        Chat.downloadCurrentUserChats({ (chats: [Chat]) in
             self.chats = chats
             print("Reloading table view")
             self.tableView.reloadData()
@@ -87,18 +87,22 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    func createNewChat(userIDs: [String]) {
+    func addNewChat(userIDs: [String]) {
         var chat: Chat!
-        chat = Chat(messageDuration: 10, userIDs: userIDs, completion: {
+        if userIDs.count == 0 {
+            print("Can't create chat without users")
+        } else {
+            chat = Chat(messageDuration: 5, userIDs: userIDs)
             chat.push { (success: Bool, error: NSError?) in
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
+                    print("Succesfully created chat, reloading data")
                     self.chats.append(chat)
                     self.tableView.reloadData()
                 }
             }
-        })
+        }
     }
     
     override func didReceiveMemoryWarning() {
