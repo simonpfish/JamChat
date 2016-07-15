@@ -47,7 +47,7 @@ class Message: NSObject {
                 track.loadMedia({
                     loadedCount += 1
                     if loadedCount == self.tracks.count {
-                        print("Succesfully loaded tracks for message \(self.id!)")
+                        print("Succesfully loaded tracks for message \(self.id ?? "NEW")")
 
                         completion()
                     }
