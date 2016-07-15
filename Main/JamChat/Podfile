@@ -21,6 +21,6 @@ target 'JamChat' do
     pod 'AudioKit'
   
     # UI
-    pod 'RAMReel'
+    pod 'RAMReel' 
 
 end
