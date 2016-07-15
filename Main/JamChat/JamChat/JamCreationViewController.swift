@@ -69,9 +69,9 @@ class JamCreationViewController: UIViewController {
     
     @IBAction func onCreate(sender: AnyObject) {
         let navController = presentingViewController as! UINavigationController
-        let feed = navController.topViewController as! FeedViewController
+        let home = navController.topViewController as! HomeViewController
         self.dismissViewControllerAnimated(true) {
-            feed.addNewJam(self.selectedFriendIDs)
+            home.addNewJam(self.selectedFriendIDs)
         }
     }
 

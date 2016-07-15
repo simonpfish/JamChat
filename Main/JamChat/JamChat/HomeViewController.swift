@@ -13,7 +13,7 @@ import Parse
 import ParseUI
 import AudioKit
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     var jams: [Jam] = []
