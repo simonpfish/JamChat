@@ -8,10 +8,15 @@
 
 import UIKit
 import AudioKit
+import RBBAnimation
+import EasyAnimation
 
 class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+        
+    @IBOutlet weak var waveformView: UIView!
+    
     var sampler = AKSampler()
     var wah: AKAutoWah?
     var chat: Chat?
@@ -39,6 +44,7 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
         
         
         // Do any additional setup after loading the view.
+        
     }
     
     func noteOn(note: Int) {
@@ -46,7 +52,7 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
         if (!recording) {
             recording = true
             print("recording")
-            chat?.recordSend(instrument!, success: { 
+            chat?.recordSend(instrument!, success: {
                 print("done!")
                 self.tableView.reloadData()
                 self.recording = false
@@ -61,6 +67,7 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
         }
         
         sampler.playNote(note)
+
     }
     
     func noteOff(note: Int) {
