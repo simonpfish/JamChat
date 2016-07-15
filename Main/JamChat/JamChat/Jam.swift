@@ -1,5 +1,5 @@
 //
-//  Chat.swift
+//  Jam.swift
 //  JamChat
 //
 //  Created by Simon Posada Fishman on 7/9/16.
@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import AudioKit
 
-class Chat: NSObject {
+class Jam: NSObject {
     
     var messages: [Message] = []
     var users: [User] = []
@@ -21,7 +21,7 @@ class Chat: NSObject {
     private var object: PFObject!
     
     /**
-     Loads chat from an exisiting PFObject.
+     Loads jam from an exisiting PFObject.
      */
     init(object: PFObject) {
         
@@ -43,10 +43,10 @@ class Chat: NSObject {
     }
     
     /**
-     Creates a new chat with a given message duration
+     Creates a new jam with a given message duration
      */
     init(messageDuration: Double, users: [User]) {
-        object = PFObject(className: "Chat")
+        object = PFObject(className: "Jam")
         self.messageDuration = messageDuration
         
         super.init()
@@ -58,7 +58,7 @@ class Chat: NSObject {
     }
     
     private func loadUsers(completion: () -> ()) {
-        print("Loading chat \(self.object.objectId ?? "NEW") users")
+        print("Loading jam \(self.object.objectId ?? "NEW") users")
         let query = PFQuery(className: "_User")
         query.whereKey("facebookID", containedIn: userIDs)
         query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
@@ -75,7 +75,7 @@ class Chat: NSObject {
                     user.loadData({
                         loadedCount += 1
                         if loadedCount == self.users.count {
-                            print("Successfully loaded chat \(self.object.objectId ?? "NEW") users")
+                            print("Successfully loaded jam \(self.object.objectId ?? "NEW") users")
                             completion()
                         }
                     })
@@ -85,7 +85,7 @@ class Chat: NSObject {
     }
     
     private func loadMessages(completion: () -> ()) {
-        print("Loading chat \(self.object.objectId!) messages")
+        print("Loading jam \(self.object.objectId!) messages")
         let query = PFQuery(className: "Message")
         query.orderByAscending("createdAt")
         query.whereKey("objectId", containedIn: messageIDs)
@@ -101,7 +101,7 @@ class Chat: NSObject {
                     for object in objects! {
                         self.messages.append(Message(object: object))
                     }
-                    print("Successfully loaded chat \(self.object.objectId ?? "NEW") messages")
+                    print("Successfully loaded jam \(self.object.objectId ?? "NEW") messages")
                     completion()
                 }
             }
@@ -109,7 +109,7 @@ class Chat: NSObject {
     }
     
     init(messageDuration: Double, userIDs: [String]) {
-        object = PFObject(className: "Chat")
+        object = PFObject(className: "Jam")
         self.messageDuration = messageDuration
         self.userIDs = userIDs
         self.userIDs.append(User.currentUser!.facebookID)
@@ -163,10 +163,10 @@ class Chat: NSObject {
     }
     
     /**
-     Updates the chat from the server if it is necessary
+     Updates the jam from the server if it is necessary
      */
     func fetch(success: () -> (), failure: (NSError) -> ()) {
-        print("Fetching chat \(self.object.objectId ?? "NEW") users")
+        print("Fetching jam \(self.object.objectId ?? "NEW") users")
         
         object.fetchIfNeededInBackgroundWithBlock() { (object: PFObject?, error: NSError?) in
             if let object = object {
@@ -197,25 +197,25 @@ class Chat: NSObject {
     }
     
     /**
-     Push the updates to the chat back to the server
+     Push the updates to the jam back to the server
      */
     func push(completion: PFBooleanResultBlock?) {
-        print("Pushing chat \(self.object.objectId ?? "NEW")")
+        print("Pushing jam \(self.object.objectId ?? "NEW")")
         
         object["messageDuration"] = messageDuration
         object["users"] = userIDs
         object["messages"] = messageIDs
         
         object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
-            print("Finished pushing chat \(self.object.objectId ?? "NEW")")
+            print("Finished pushing jam \(self.object.objectId ?? "NEW")")
             completion?(success, error)
         })
     }
     
-    class func downloadCurrentUserChats(success: ([Chat]) -> (), failure: (NSError) -> ()) {
-        print("Downloading chats for active user")
+    class func downloadCurrentUserJams(success: ([Jam]) -> (), failure: (NSError) -> ()) {
+        print("Downloading jams for active user")
         
-        let query = PFQuery(className: "Chat")
+        let query = PFQuery(className: "Jam")
         
         query.whereKey("users", containsString: User.currentUser!.facebookID)
         query.orderByDescending("modifiedAt")
@@ -223,15 +223,15 @@ class Chat: NSObject {
             if let error = error {
                 failure(error)
             } else {
-                var chats: [Chat] = []
+                var jams: [Jam] = []
                 var loadedCount = 0
                 for object in objects ?? [] {
-                    chats.append(Chat(object: object))
-                    chats.last?.loadData({
+                    jams.append(Jam(object: object))
+                    jams.last?.loadData({
                         loadedCount += 1
                         if loadedCount == objects!.count {
-                            print("Succesfully downloaded chats for active user")
-                            success(chats)
+                            print("Succesfully downloaded jams for active user")
+                            success(jams)
                         }
                     })
                 }

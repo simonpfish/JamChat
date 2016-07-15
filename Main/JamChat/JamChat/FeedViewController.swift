@@ -16,7 +16,7 @@ import AudioKit
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    var chats: [Chat] = []
+    var jams: [Jam] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +51,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func loadFeed() {
-        Chat.downloadCurrentUserChats({ (chats: [Chat]) in
-            self.chats = chats
+        Jam.downloadCurrentUserJams({ (jams: [Jam]) in
+            self.jams = jams
             print("Reloading table view")
             self.tableView.reloadData()
         }) { (error: NSError) in
@@ -61,18 +61,18 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chats.count
+        return jams.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ChatCell") as! ChatCell
-        cell.chat = chats[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("JamCell") as! JamCell
+        cell.jam = jams[indexPath.row]
         return cell
     }
 
-    @IBAction func onNewChat(sender: AnyObject) {
-        let newChatController = ChatCreationViewController()
-        presentViewController(newChatController, animated: true, completion: nil)
+    @IBAction func onNewJam(sender: AnyObject) {
+        let newJamController = JamCreationViewController()
+        presentViewController(newJamController, animated: true, completion: nil)
     }
 
     
@@ -87,19 +87,19 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    func addNewChat(userIDs: [String]) {
-        var chat: Chat!
+    func addNewJam(userIDs: [String]) {
+        var jam: Jam!
         if userIDs.count == 0 {
-            print("Can't create chat without users")
+            print("Can't create jam without users")
         } else {
-            chat = Chat(messageDuration: 5, userIDs: userIDs)
-            chat.push { (success: Bool, error: NSError?) in
+            jam = Jam(messageDuration: 5, userIDs: userIDs)
+            jam.push { (success: Bool, error: NSError?) in
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    self.chats.append(chat)
-                    print("Succesfully created chat, reloading data")
-                    chat.loadData({
+                    self.jams.append(jam)
+                    print("Succesfully created jam, reloading data")
+                    jam.loadData({
                         self.tableView.reloadData()
                     })
                 }
@@ -120,9 +120,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if let chatView = segue.destinationViewController as? ChatViewController {
-            let cell = sender as! ChatCell
-            chatView.chat = cell.chat
+        if let jamView = segue.destinationViewController as? ChatViewController {
+            let cell = sender as! JamCell
+            jamView.jam = cell.jam
         }
         
     }

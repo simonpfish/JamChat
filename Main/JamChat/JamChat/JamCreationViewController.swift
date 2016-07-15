@@ -9,7 +9,7 @@
 import UIKit
 import RAMReel
 
-class ChatCreationViewController: UIViewController {
+class JamCreationViewController: UIViewController {
     
     var dataSource: SimplePrefixQueryDataSource!
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
@@ -71,7 +71,7 @@ class ChatCreationViewController: UIViewController {
         let navController = presentingViewController as! UINavigationController
         let feed = navController.topViewController as! FeedViewController
         self.dismissViewControllerAnimated(true) {
-            feed.addNewChat(self.selectedFriendIDs)
+            feed.addNewJam(self.selectedFriendIDs)
         }
     }
 

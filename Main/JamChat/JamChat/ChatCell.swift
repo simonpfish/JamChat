@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ChatCell: UITableViewCell {
+class JamCell: UITableViewCell {
 
     @IBOutlet weak var usersLabel: UILabel!
     
-    var chat: Chat? {
+    var jam: Jam? {
         didSet {
             var usersString = ""
-            for user in chat!.users {
+            for user in jam!.users {
                 usersString += user.name + ", "
             }
             usersLabel.text = usersString

@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChatCell" rowHeight="100" id="AFU-eb-MrX" customClass="ChatCell" customModule="JamChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="JamCell" rowHeight="100" id="AFU-eb-MrX" customClass="JamCell" customModule="JamChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AFU-eb-MrX" id="l8b-cR-tVz">
@@ -59,7 +59,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="new" id="RfN-Vr-bra">
                             <connections>
-                                <action selector="onNewChat:" destination="BYZ-38-t0r" id="v9R-La-kyn"/>
+                                <action selector="onNewJam:" destination="BYZ-38-t0r" id="vAh-jG-qMM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

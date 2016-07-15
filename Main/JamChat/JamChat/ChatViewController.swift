@@ -19,7 +19,7 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
     
     var sampler = AKSampler()
     var wah: AKAutoWah?
-    var chat: Chat?
+    var jam: Jam?
     var instrument: AKNode?
     
     var recording = false
@@ -52,11 +52,11 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
         if (!recording) {
             recording = true
             print("recording")
-            chat?.recordSend(instrument!, success: {
+            jam?.recordSend(instrument!, success: {
                 print("done!")
                 self.tableView.reloadData()
                 self.recording = false
-                self.chat?.fetch({ 
+                self.jam?.fetch({ 
                     self.tableView.reloadData()
                     }, failure: { (error: NSError) in
                         print(error.localizedDescription)
@@ -75,12 +75,12 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chat?.messages.count ?? 0
+        return jam?.messages.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as! MessageCell
-        cell.message = chat!.messages[indexPath.row]
+        cell.message = jam!.messages[indexPath.row]
         return cell
     }
 
