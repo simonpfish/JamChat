@@ -40,22 +40,21 @@ class Message: NSObject {
                     let track = Track(object: object)
                     self.tracks.append(track)
                 }
+                
+                var loadedCount = 0
+                for track in self.tracks {
+                    track.loadMedia({
+                        loadedCount += 1
+                        if loadedCount == self.tracks.count {
+                            print("Succesfully loaded tracks for message \(self.id ?? "NEW")")
+                            
+                            completion()
+                        }
+                        }, failure: { (error: NSError) in
+                            print(error.localizedDescription)
+                    })
+                }
             }
-            
-            var loadedCount = 0
-            for track in self.tracks {
-                track.loadMedia({
-                    loadedCount += 1
-                    if loadedCount == self.tracks.count {
-                        print("Succesfully loaded tracks for message \(self.id ?? "NEW")")
-
-                        completion()
-                    }
-                    }, failure: { (error: NSError) in
-                        print(error.localizedDescription)
-                })
-            }
-
         }
     }
     
