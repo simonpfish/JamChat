@@ -27,7 +27,7 @@ class Message: NSObject {
     }
     
     func loadTracks(completion: () -> ()) {
-        print("Loading tracks for message \(self.id!)")
+        print("Loading tracks for message \(self.id ?? "NEW")")
         object.fetchIfNeededInBackgroundWithBlock { (_: PFObject?, error: NSError?) in
             let trackIDs = self.object["tracks"] as! [String]
             
@@ -72,7 +72,7 @@ class Message: NSObject {
      Plays the message to the main audio output
      */
     func play() {
-        print("Playing message \(self.id)")
+        print("Playing message \(self.id ?? "NEW")")
         for track in tracks {
             track.play()
         }
@@ -92,7 +92,7 @@ class Message: NSObject {
      Uploads message to parse, creating a new one in the server. Will not upload anything if no new tracks were added.
      */
     func send(completion: PFBooleanResultBlock?) {
-        let object = PFObject(className: "Message")
+        object = PFObject(className: "Message")
         
         var trackIDs: [String] = []
         
@@ -110,8 +110,8 @@ class Message: NSObject {
                 } else {
                     uploadedCount += 1
                     if uploadedCount == self.newTracks.count {
-                        object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
-                            self.id = object.objectId
+                        self.object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                            self.id = self.object.objectId
                             print("Sent message \(self.id!)")
                             completion!(success, error)
                         })

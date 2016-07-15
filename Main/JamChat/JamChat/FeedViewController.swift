@@ -27,16 +27,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         AudioKit.output = Track.mainMixer
         AudioKit.start()
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         
         if (!User.isLoggedIn()) {
-            User.login(self, success: { 
+            User.login(self, success: {
                 self.loadFeed()
                 }, failure: { (error: NSError?) in
-                print(error?.localizedDescription)
+                    print(error?.localizedDescription)
             })
         } else {
             FBSDKProfile.loadCurrentProfileWithCompletion({ (profile: FBSDKProfile!, error: NSError!) in
@@ -50,8 +46,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     func loadFeed() {
-        Chat.downloadActiveUserChats({ (chats: [Chat]) in
+        Chat.downloadCurrentUserChats({ (chats: [Chat]) in
             self.chats = chats
             print("Reloading table view")
             self.tableView.reloadData()
@@ -87,18 +87,24 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    func createNewChat(userIDs: [String]) {
+    func addNewChat(userIDs: [String]) {
         var chat: Chat!
-        chat = Chat(messageDuration: 10, userIDs: userIDs, completion: {
+        if userIDs.count == 0 {
+            print("Can't create chat without users")
+        } else {
+            chat = Chat(messageDuration: 5, userIDs: userIDs)
             chat.push { (success: Bool, error: NSError?) in
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
                     self.chats.append(chat)
-                    self.tableView.reloadData()
+                    print("Succesfully created chat, reloading data")
+                    chat.loadData({
+                        self.tableView.reloadData()
+                    })
                 }
             }
-        })
+        }
     }
     
     override func didReceiveMemoryWarning() {

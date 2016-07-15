@@ -1,0 +1,21 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'AudioKitPiano' do
+  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+pod 'AudioKit'
+
+  # Pods for AudioKitPiano
+
+  target 'AudioKitPianoTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'AudioKitPianoUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
