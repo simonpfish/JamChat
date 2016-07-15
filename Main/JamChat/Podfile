@@ -7,25 +7,22 @@ target 'JamChat' do
   use_frameworks!
 
   # Pods for JamChat:
-  
+
     # Facebook
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
-  
+
     # Parse
     pod 'ParseFacebookUtilsV4'
     pod 'Parse'
     pod 'ParseUI'
-  
+
     # Audio
     pod 'AudioKit'
-    
+
+    # UI
+    pod 'RAMReel'
     pod 'RBBAnimation'
     pod 'EasyAnimation'
-
-  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for JamChat
 
 end
