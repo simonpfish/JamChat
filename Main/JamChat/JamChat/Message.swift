@@ -82,7 +82,7 @@ class Message: NSObject {
      Adds a new track to the message
      */
     func add(track: Track) {
-        //print("Added track \(track.identifier) to message \(self.id!)")
+        print("Added track \(track.identifier) to message")
 
         tracks.append(track)
         newTracks.append(track)
