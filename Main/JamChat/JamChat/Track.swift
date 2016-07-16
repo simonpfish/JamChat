@@ -17,8 +17,8 @@ class Track: NSObject {
     private(set) var author: User!
     let identifier: String!
     
-    private var player: AKAudioPlayer?
-    private var filepath: String!
+    var player: AKAudioPlayer?
+    var filepath: String!
     private var object: PFObject!
     
     private var recorder: AKNodeRecorder?

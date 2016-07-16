@@ -24,5 +24,6 @@ target 'JamChat' do
     pod 'RAMReel'
     pod 'RBBAnimation'
     pod 'EasyAnimation'
+    pod 'SCWaveformView'
 
 end

@@ -19,7 +19,15 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
     
     var sampler = AKSampler()
     var wah: AKAutoWah?
-    var jam: Jam?
+    var jam: Jam? {
+        didSet {
+            for message in jam!.messages {
+                message.loadTracks() {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
     var instrument: AKNode?
     
     var recording = false

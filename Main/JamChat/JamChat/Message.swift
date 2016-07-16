@@ -11,7 +11,7 @@ import Parse
 
 class Message: NSObject {
     
-    private var tracks: [Track] = []
+    var tracks: [Track] = []
     private var newTracks: [Track] = []
     private(set) var id: String?
     private var object: PFObject!
