@@ -17,43 +17,80 @@ public protocol KeyboardDelegate {
 public class PianoView: UIView {
     public var delegate: KeyboardDelegate?
     var keys: [PianoKey] = []
-    var count = 0
+    var sharpCount = 0
+    var naturalCount = 0
+    var sharp: Bool = false
+    var natural: Bool = false
+    var instrumentColor: UIColor?
     
     let notesWithFlats  = ["C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭", "A", "B♭", "B"]
     let notesWithSharps = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
     
-    public init(width: Int, height: Int, lowestKey: Int = 48, totalKeys: Int = 37) {
+    public init(width: Int, height: Int, lowestKey: Int, totalKeys: Int, color: UIColor) {
+        instrumentColor = color
         super.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
         let allowedNotes = notesWithSharps //["A", "B", "C#", "D", "E", "F#", "G"]
         
-        let keyWidth = width / totalKeys - 1
-        let height = Int(frame.height)
+        let keyWidth = width / totalKeys
         
-        let blackFrame = UIView(frame: CGRect(x: 0, y: 0, width: (keyWidth + 1) * totalKeys + 1, height: height))
-        blackFrame.backgroundColor = UIColor.blackColor()
+        let blackFrame = UIView(frame: CGRect(x: 0, y: 0, width: (keyWidth ) * totalKeys , height: height))
+        
+        blackFrame.clipsToBounds = true
+        blackFrame.backgroundColor = UIColor.whiteColor()
         self.addSubview(blackFrame)
         
-        var keyCount = 0
         var increment = 0
-        while keyCount < totalKeys {
+        while (sharpCount + naturalCount) < totalKeys {
             if  allowedNotes.indexOf(notesWithFlats[(lowestKey + increment) % 12]) != nil || allowedNotes.indexOf(notesWithSharps[(lowestKey + increment) % 12]) != nil {
-                let newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: height - 2))
+                
+                var color: UIColor?
+                var size: Double?
+                
                 if notesWithSharps[(lowestKey + increment) % 12].rangeOfString("#") != nil {
-                    newButton.backgroundColor = UIColor.blackColor()
+                    color = UIColor.blackColor()
+                    size = keyWidth*0.9
+                    sharp = true
+                    
                 } else {
-                    newButton.backgroundColor = UIColor.whiteColor()
+                    color = instrumentColor
+                    size = keyWidth*4/3
+                    natural = true
                 }
+                
+                let newButton = UIView(frame:CGRect(x: 0, y: 0, width: size!, height: size!))
+                newButton.backgroundColor = color
+                newButton.layer.borderColor = UIColor.blackColor().CGColor
+                newButton.layer.borderWidth = 2.0
+                newButton.layer.cornerRadius = 15
+                newButton.clipsToBounds = true
+                
                 
                 newButton.setNeedsDisplay()
                 
-                newButton.frame.origin.x = CGFloat(keyCount * (keyWidth + 1)) + 1
+                var sharpWidth: Double = sharpCount*keyWidth*2/3
+                let naturalWidth: Double = naturalCount*keyWidth*4/3
+                
+                if (sharp == true){
+                    sharpWidth = sharpWidth-4
+                }
+                
+                newButton.frame.origin.x = CGFloat(naturalWidth + sharpWidth)
+                
                 newButton.frame.origin.y = CGFloat(1)
                 newButton.tag = lowestKey + increment
                 let newKey = PianoKey()
                 newKey.key = newButton
                 keys.append(newKey)
                 self.addSubview(newButton)
-                keyCount += 1
+                
+                if(sharp == true){
+                    sharpCount += 1
+                    sharp = false
+                }
+                if(natural == true ){
+                    naturalCount += 1
+                    natural = false
+                }
                 
             }
             increment += 1
@@ -77,9 +114,9 @@ public class PianoView: UIView {
                     
                     delegate?.noteOn(key.key!.tag)
                     key.count = 1
-                  
+                    
                 }
-               
+                
             }
             
         }
@@ -91,8 +128,8 @@ public class PianoView: UIView {
             for key in keys {
                 if CGRectContainsPoint(key.key!.frame, touch.locationInView(self)) {
                     if(key.count == 0){
-                    delegate?.noteOn(key.key!.tag)
-                    key.count = 1
+                        delegate?.noteOn(key.key!.tag)
+                        key.count = 1
                     }
                 }
                 else{
@@ -100,8 +137,6 @@ public class PianoView: UIView {
                 }
             }
             
-            // determine vertical value
-            //setPercentagesWithTouchPoint(touchPoint)
         }
     }
     
@@ -109,11 +144,9 @@ public class PianoView: UIView {
         for touch in touches {
             for key in keys {
                 if CGRectContainsPoint(key.key!.frame, touch.locationInView(self)) {
-                delegate?.noteOff(key.key!.tag)
+                    delegate?.noteOff(key.key!.tag)
                 }
             }
         }
     }
-
-
 }

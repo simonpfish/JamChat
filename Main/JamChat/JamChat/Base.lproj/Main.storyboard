@@ -118,6 +118,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="chatView" destination="jFR-hv-l4v" id="ohY-r1-sAU"/>
                         <outlet property="tableView" destination="LDL-Vh-qmE" id="rYZ-sJ-onP"/>
                     </connections>
                 </viewController>
