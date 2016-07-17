@@ -14,8 +14,6 @@ import EasyAnimation
 class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-        
-    @IBOutlet weak var waveformView: UIView!
     
     var sampler = AKSampler()
     var wah: AKAutoWah?

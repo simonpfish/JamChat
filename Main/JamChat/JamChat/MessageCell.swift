@@ -11,45 +11,22 @@ import AVFoundation
 import RBBAnimation
 import EasyAnimation
 import AudioKit
-import SCWaveformView
+import FDWaveformView
 
 class MessageCell: UITableViewCell {
     
-    var plot: SCWaveformView?
+    @IBOutlet weak var plot: FDWaveformView!
     
     var message: Message? {
         didSet {
             if let filepath = message?.tracks.first?.filepath {
-//                plot = EZAudioPlot(frame: self.bounds)
                 
-                print ("plotting filepath: \(filepath)")
-                if let file = try? AKAudioFile(forReading: NSURL(fileURLWithPath: filepath)) {
-                    print("sample rate: \(file.sampleRate)")
-//                    let buf = file.pcmBuffer
-                    
-                    plot = SCWaveformView(frame: self.bounds)
-                    
-                    print ("plotting filepath: \(filepath)")
-//                    let asset = AVURLAsset(URL: NSURL(fileURLWithPath: filepath), options: nil)
-                    //                    print("sample rate: \(file.sampleRate)")
-                    //                    let buf = file.pcmBuffer
-                    plot = SCWaveformView(frame: self.bounds)
-                    plot!.precision = 1
-                    plot!.lineWidthRatio = 1
-                    plot!.normalColor = UIColor.redColor();
-                    plot!.channelsPadding = 10;
-                    plot!.progressColor = UIColor.blueColor();
-                    
-                    plot!.alpha = 0.8;
-                    
-                    plot!.asset = file.avAsset;
-                    
-//                    print(plot!.asset.duration)
-                    
-                    plot!.timeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(0, 10000), CMTimeMakeWithSeconds(10, 10))
-                    self.addSubview(plot!)
-
-                }
+                let fileURL = NSURL(fileURLWithPath: filepath)
+                
+                self.plot.audioURL = fileURL
+                self.plot.doesAllowScrubbing = false
+                self.plot.doesAllowScroll = false
+                self.plot.doesAllowStretch = false
             }
         }
     }
@@ -61,12 +38,13 @@ class MessageCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
     }
     
     override func prepareForReuse() {
-        plot?.removeFromSuperview()
-        plot = nil
+//        plot?.removeFromSuperview()
+//        plot = nil
     }
     
     // sets up the sine wave layout
