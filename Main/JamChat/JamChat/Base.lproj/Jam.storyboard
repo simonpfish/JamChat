@@ -129,7 +129,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMT-nD-Qbk" customClass="FDWaveformView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMT-nD-Qbk">
                                 <rect key="frame" x="0.0" y="269" width="375" height="130"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -150,7 +150,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="userCollection" destination="p7U-1d-pb3" id="RpP-UM-wzn"/>
-                        <outlet property="waveformView" destination="FMT-nD-Qbk" id="3AS-JN-JHd"/>
+                        <outlet property="waveformContainer" destination="FMT-nD-Qbk" id="uIf-vL-0Bk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="peg-K1-tck" userLabel="First Responder" sceneMemberID="firstResponder"/>

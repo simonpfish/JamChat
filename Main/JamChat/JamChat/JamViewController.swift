@@ -15,7 +15,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var jam: Jam!
     
     @IBOutlet weak var userCollection: UICollectionView!
-    @IBOutlet weak var waveformView: FDWaveformView!
+    @IBOutlet weak var waveformContainer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,22 +30,29 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         userCollection.collectionViewLayout = layout
         
         // Set up waveform view:
-        self.waveformView.doesAllowScrubbing = false
-        self.waveformView.doesAllowScroll = false
-        self.waveformView.doesAllowStretch = false
     }
     
     override func viewWillAppear(animated: Bool) {
         
         let lastMessage = jam.messages.last
-        lastMessage?.loadTracks({ 
-            if let filepath = lastMessage!.tracks.first?.filepath {
-                
-                let fileURL = NSURL(fileURLWithPath: filepath)
-                
-                self.waveformView.audioURL = fileURL
-                
+        lastMessage?.loadTracks({
+            
+            for track in (lastMessage?.tracks)! {
+                if let filepath = track.filepath {
+                    
+                    let fileURL = NSURL(fileURLWithPath: filepath)
+                    
+                    let waveformView = FDWaveformView(frame: self.waveformContainer.frame)
+                    waveformView.frame.origin.y = 0
+                    waveformView.audioURL = fileURL
+                    waveformView.doesAllowScrubbing = false
+                    waveformView.doesAllowScroll = false
+                    waveformView.doesAllowStretch = false
+                    
+                    self.waveformContainer.addSubview(waveformView)
+                }
             }
+            
         })
         
     }
