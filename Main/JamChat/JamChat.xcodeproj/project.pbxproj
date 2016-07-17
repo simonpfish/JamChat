@@ -19,6 +19,7 @@
 		E74F1DF71D3869DB00A34409 /* JamView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E74F1DF51D3869DB00A34409 /* JamView.xib */; };
 		E74F1DFA1D386A2E00A34409 /* JamHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */; };
 		E74F1DFB1D386A2E00A34409 /* JamHistoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E74F1DF91D386A2E00A34409 /* JamHistoryView.xib */; };
+		E74F1E031D3C06B800A34409 /* Jam.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74F1E011D3C06B800A34409 /* Jam.storyboard */; };
 		E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756A8731D2D7E74007C0590 /* AppDelegate.swift */; };
 		E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E756A8771D2D7E74007C0590 /* Main.storyboard */; };
 		E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E756A87A1D2D7E74007C0590 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		E74F1DF51D3869DB00A34409 /* JamView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JamView.xib; sourceTree = "<group>"; };
 		E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamHistoryViewController.swift; sourceTree = "<group>"; };
 		E74F1DF91D386A2E00A34409 /* JamHistoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JamHistoryView.xib; sourceTree = "<group>"; };
+		E74F1E021D3C06B800A34409 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Jam.storyboard; sourceTree = "<group>"; };
 		E756A8701D2D7E74007C0590 /* JamChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JamChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E756A8731D2D7E74007C0590 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E756A8781D2D7E74007C0590 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			children = (
 				E756A87C1D2D7E74007C0590 /* LaunchScreen.storyboard */,
 				E756A8771D2D7E74007C0590 /* Main.storyboard */,
+				E74F1E011D3C06B800A34409 /* Jam.storyboard */,
 				E7FE0FEE1D357C6C00452361 /* JamCreationView.xib */,
 				E74F1DF51D3869DB00A34409 /* JamView.xib */,
 				E74F1DF91D386A2E00A34409 /* JamHistoryView.xib */,
@@ -300,6 +303,7 @@
 				8C20F5F81D38F5B500622892 /* ElectricBassC.wav in Resources */,
 				E7FE0FF71D359CE300452361 /* RockGuitarC.wav in Resources */,
 				E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */,
+				E74F1E031D3C06B800A34409 /* Jam.storyboard in Resources */,
 				8C20F5F61D38F5AC00622892 /* ChoirC.wav in Resources */,
 				8C20F5F41D38F5A600622892 /* AcousticBassC.wav in Resources */,
 				8C20F5FC1D38F5CD00622892 /* SaxC.wav in Resources */,
@@ -391,6 +395,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		E74F1E011D3C06B800A34409 /* Jam.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E74F1E021D3C06B800A34409 /* Base */,
+			);
+			name = Jam.storyboard;
+			sourceTree = "<group>";
+		};
 		E756A8771D2D7E74007C0590 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

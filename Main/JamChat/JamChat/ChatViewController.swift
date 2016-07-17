@@ -15,8 +15,11 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet var chatView: UIView!
+        
+    @IBOutlet weak var waveformView: UIView!
+    
     var sampler = AKSampler()
-    var wah: AKAutoWah?
     var jam: Jam? {
         didSet {
             for message in jam!.messages {
