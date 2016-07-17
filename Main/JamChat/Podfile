@@ -19,11 +19,16 @@ target 'JamChat' do
 
     # Audio
     pod 'AudioKit'
+    
+    #Networking
+    pod 'AFNetworking'
 
     # UI
     pod 'RAMReel'
     pod 'RBBAnimation'
     pod 'EasyAnimation'
     pod 'FDWaveformView'
+    pod 'KTCenterFlowLayout'
+
 
 end

@@ -42,11 +42,6 @@ class MessageCell: UITableViewCell {
         // Initialization code
     }
     
-    override func prepareForReuse() {
-//        plot?.removeFromSuperview()
-//        plot = nil
-    }
-    
     // sets up the sine wave layout
     func setUpSineWave() {
         
