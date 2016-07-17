@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20F5F11D38F37800622892 /* SelectionView.swift */; };
+		8C20F5F41D38F5A600622892 /* AcousticBassC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C20F5F31D38F5A600622892 /* AcousticBassC.wav */; };
+		8C20F5F61D38F5AC00622892 /* ChoirC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C20F5F51D38F5AC00622892 /* ChoirC.wav */; };
+		8C20F5F81D38F5B500622892 /* ElectricBassC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C20F5F71D38F5B500622892 /* ElectricBassC.wav */; };
+		8C20F5FA1D38F5C300622892 /* PianoC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C20F5F91D38F5C300622892 /* PianoC.wav */; };
+		8C20F5FC1D38F5CD00622892 /* SaxC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C20F5FB1D38F5CD00622892 /* SaxC.wav */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
 		E717EC161D2ED34500AC812B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717EC151D2ED34500AC812B /* User.swift */; };
 		E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F1DF41D3869DB00A34409 /* JamViewController.swift */; };
@@ -39,6 +45,12 @@
 /* Begin PBXFileReference section */
 		06DC7EFB1EBB19B0747B99B1 /* Pods-JamChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.release.xcconfig"; sourceTree = "<group>"; };
 		7F275E1B8FE709C2BCDCFD4D /* Pods-JamChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.debug.xcconfig"; sourceTree = "<group>"; };
+		8C20F5F11D38F37800622892 /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		8C20F5F31D38F5A600622892 /* AcousticBassC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AcousticBassC.wav; sourceTree = "<group>"; };
+		8C20F5F51D38F5AC00622892 /* ChoirC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ChoirC.wav; sourceTree = "<group>"; };
+		8C20F5F71D38F5B500622892 /* ElectricBassC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ElectricBassC.wav; sourceTree = "<group>"; };
+		8C20F5F91D38F5C300622892 /* PianoC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PianoC.wav; sourceTree = "<group>"; };
+		8C20F5FB1D38F5CD00622892 /* SaxC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SaxC.wav; sourceTree = "<group>"; };
 		E717EC151D2ED34500AC812B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E74F1DF41D3869DB00A34409 /* JamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamViewController.swift; sourceTree = "<group>"; };
 		E74F1DF51D3869DB00A34409 /* JamView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JamView.xib; sourceTree = "<group>"; };
@@ -113,6 +125,7 @@
 		E74F1DF01D38162500A34409 /* Instruments */ = {
 			isa = PBXGroup;
 			children = (
+				8C20F5F11D38F37800622892 /* SelectionView.swift */,
 				E7FE0FF81D359D0000452361 /* PianoView.swift */,
 				E7FE0FFA1D359D0C00452361 /* PianoKey.swift */,
 			);
@@ -210,7 +223,12 @@
 		E7FE0FF51D359CB000452361 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C20F5F31D38F5A600622892 /* AcousticBassC.wav */,
+				8C20F5F51D38F5AC00622892 /* ChoirC.wav */,
+				8C20F5F71D38F5B500622892 /* ElectricBassC.wav */,
+				8C20F5F91D38F5C300622892 /* PianoC.wav */,
 				E7FE0FF61D359CE300452361 /* RockGuitarC.wav */,
+				8C20F5FB1D38F5CD00622892 /* SaxC.wav */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -279,11 +297,16 @@
 			files = (
 				E756A87E1D2D7E74007C0590 /* LaunchScreen.storyboard in Resources */,
 				E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */,
+				8C20F5F81D38F5B500622892 /* ElectricBassC.wav in Resources */,
 				E7FE0FF71D359CE300452361 /* RockGuitarC.wav in Resources */,
 				E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */,
+				8C20F5F61D38F5AC00622892 /* ChoirC.wav in Resources */,
+				8C20F5F41D38F5A600622892 /* AcousticBassC.wav in Resources */,
+				8C20F5FC1D38F5CD00622892 /* SaxC.wav in Resources */,
 				E7FE0FF01D357C6C00452361 /* JamCreationView.xib in Resources */,
 				E74F1DF71D3869DB00A34409 /* JamView.xib in Resources */,
 				E74F1DFB1D386A2E00A34409 /* JamHistoryView.xib in Resources */,
+				8C20F5FA1D38F5C300622892 /* PianoC.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +384,7 @@
 				E79956791D316EA500EE445B /* AKNodeRecorder.swift in Sources */,
 				E74F1DFA1D386A2E00A34409 /* JamHistoryViewController.swift in Sources */,
 				E7FE0FFD1D359F4100452361 /* MessageCell.swift in Sources */,
+				8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +505,7 @@
 				);
 				INFOPLIST_FILE = JamChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Jammers.JamChat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Jammers.JamChatRocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -498,7 +522,7 @@
 				);
 				INFOPLIST_FILE = JamChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Jammers.JamChat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Jammers.JamChatRocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
