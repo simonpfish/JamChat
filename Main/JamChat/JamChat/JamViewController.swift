@@ -29,14 +29,10 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         layout.minimumLineSpacing = 0.0
         userCollection.collectionViewLayout = layout
         
-        // Set up waveform view:
-    }
-    
-    override func viewWillAppear(animated: Bool) {
         
+        // Set up waveform view:
         let lastMessage = jam.messages.last
         lastMessage?.loadTracks({
-            
             for track in (lastMessage?.tracks)! {
                 if let filepath = track.filepath {
                     
