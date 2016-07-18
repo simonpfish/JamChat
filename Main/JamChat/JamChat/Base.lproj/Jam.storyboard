@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="97"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ret-99-1AO" id="AEP-NG-LYZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="96.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fzc-sE-OFA" customClass="FDWaveformView">
@@ -69,7 +69,7 @@
         <!--Jam View Controller-->
         <scene sceneID="fa6-cm-aS6">
             <objects>
-                <viewController id="uE3-Np-Dxa" customClass="JamViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JamView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uE3-Np-Dxa" customClass="JamViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NZY-hJ-wKw"/>
                         <viewControllerLayoutGuide type="bottom" id="o63-bA-2ee"/>
@@ -106,7 +106,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3v-Qd-JH1">
-                                                    <rect key="frame" x="14" y="52" width="31" height="14.5"/>
+                                                    <rect key="frame" x="14" y="52" width="31" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
