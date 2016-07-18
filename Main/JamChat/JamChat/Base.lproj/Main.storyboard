@@ -48,6 +48,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="OGw-g0-NdJ">
+                        <barButtonItem key="backBarButtonItem" title=" " id="9xd-mB-OhM"/>
                         <barButtonItem key="leftBarButtonItem" style="plain" id="hhF-Qb-BLw">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VKB-ao-20d">
                                 <rect key="frame" x="16" y="7" width="83" height="30"/>
