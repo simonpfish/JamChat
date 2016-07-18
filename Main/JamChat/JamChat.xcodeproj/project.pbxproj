@@ -35,6 +35,8 @@
 		E7F0BB3E1D3D61550059160B /* PagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB3D1D3D61550059160B /* PagerViewController.swift */; };
 		E7F0BB471D3D67110059160B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F0BB451D3D67110059160B /* Home.storyboard */; };
 		E7F0BB491D3D67B80059160B /* JamCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F0BB481D3D67B80059160B /* JamCreation.storyboard */; };
+		E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */; };
+		E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */; };
 		E7FE0FE61D356E2100452361 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE51D356E2100452361 /* ChatCell.swift */; };
 		E7FE0FE81D35706A00452361 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE71D35706A00452361 /* HomeViewController.swift */; };
 		E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */; };
@@ -77,6 +79,8 @@
 		E7F0BB3D1D3D61550059160B /* PagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerViewController.swift; sourceTree = "<group>"; };
 		E7F0BB461D3D67110059160B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		E7F0BB481D3D67B80059160B /* JamCreation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JamCreation.storyboard; sourceTree = "<group>"; };
+		E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		E7FE0FE51D356E2100452361 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		E7FE0FE71D35706A00452361 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamCreationViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 				E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */,
 				E7FE0FF11D359B6600452361 /* ChatViewController.swift */,
 				E7F0BB3D1D3D61550059160B /* PagerViewController.swift */,
+				E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */,
+				E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -390,12 +396,14 @@
 				E7FE0FE81D35706A00452361 /* HomeViewController.swift in Sources */,
 				E7FE0FF91D359D0000452361 /* PianoView.swift in Sources */,
 				E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */,
+				E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */,
 				E7FE0FF21D359B6600452361 /* ChatViewController.swift in Sources */,
 				E79956791D316EA500EE445B /* AKNodeRecorder.swift in Sources */,
 				E74F1DFA1D386A2E00A34409 /* JamHistoryViewController.swift in Sources */,
 				E7FE0FFD1D359F4100452361 /* MessageCell.swift in Sources */,
 				8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */,
 				E7F0BB3E1D3D61550059160B /* PagerViewController.swift in Sources */,
+				E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */,
 				E7E0D6981D3C0DCB005A840A /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,7 +8,7 @@
         <!--Jam Creation View Controller-->
         <scene sceneID="mGP-eE-BR9">
             <objects>
-                <viewController id="p0i-bN-VsL" customClass="JamCreationViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JamCreationView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="p0i-bN-VsL" customClass="JamCreationViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r6g-f0-bWc"/>
                         <viewControllerLayoutGuide type="bottom" id="EJ1-zV-UzS"/>
