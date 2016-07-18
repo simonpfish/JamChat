@@ -186,7 +186,6 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
     
     func onRecord(sender: UIButton!) {
         recording = true
-        print("Button tapped")
     }
     
     func onToSelection(sender: UIButton!) {
