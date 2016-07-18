@@ -8,8 +8,9 @@
 
 import UIKit
 import RAMReel
+import XLPagerTabStrip
 
-class JamCreationViewController: UIViewController {
+class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     
     var dataSource: SimplePrefixQueryDataSource!
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
@@ -27,6 +28,10 @@ class JamCreationViewController: UIViewController {
         super.viewWillAppear(animated)
         
         initializeFriendPicker()
+    }
+    
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "New")
     }
     
     func initializeFriendPicker() {

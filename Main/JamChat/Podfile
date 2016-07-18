@@ -29,6 +29,7 @@ target 'JamChat' do
     pod 'EasyAnimation'
     pod 'FDWaveformView'
     pod 'KTCenterFlowLayout'
+    pod 'XLPagerTabStrip'
 
 
 end

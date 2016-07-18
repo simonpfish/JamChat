@@ -8,7 +8,7 @@
         <!--Profile View Controller-->
         <scene sceneID="vVH-gr-Ilf">
             <objects>
-                <viewController id="76U-2A-vol" customClass="ProfileViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="76U-2A-vol" customClass="ProfileViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NbP-4e-Jym"/>
                         <viewControllerLayoutGuide type="bottom" id="Z6M-jt-h6j"/>
