@@ -38,18 +38,19 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
         tableView.dataSource = self
         
         goToSelection()
-        //instrument = sampler
-        Track.mainMixer.connect(sampler)//instrument!)
+        Track.mainMixer.connect(sampler)
         
     }
     
     func noteOn(note: Int) {
-        
-        if (!recording) {
-            recording = true
+
+        if (recording) {
+            recording = false
             print("recording")
             jam?.recordSend(instrument!, success: {
+                Track.mainMixer.stop()
                 print("done!")
+ 
                 self.tableView.reloadData()
                 self.recording = false
                 self.jam?.fetch({ 
@@ -61,13 +62,12 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
                 print(error.localizedDescription)
             })
         }
-        
         sampler.playNote(note)
-
     }
     
     func noteOff(note: Int) {
         sampler.stopNote(note)
+      
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -155,6 +155,7 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
     
     func goToInstrument (){
         selection!.removeFromSuperview()
+        Track.mainMixer.start()
         
         keyboard = PianoView(width: 351, height: 30, lowestKey: 60, totalKeys: 13, color: self.instrumentColor!)
         keyboard!.frame.origin.y = CGFloat(550)
@@ -171,9 +172,21 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
         gridButton!.setImage(image, forState: .Normal)
         gridButton!.addTarget(self, action: #selector(onToSelection), forControlEvents: .TouchUpInside)
         
+        let recordButton = UIButton(frame: CGRect(x: 50, y: 500, width: 60, height: 20))
+        recordButton.backgroundColor = .redColor()
+        recordButton.setTitle("Record", forState: .Normal)
+        recordButton.addTarget(self, action: #selector(onRecord), forControlEvents: .TouchUpInside)
+        
+        self.view.addSubview(recordButton)
+        
         self.view.addSubview(gridButton!)
         
         
+    }
+    
+    func onRecord(sender: UIButton!) {
+        recording = true
+        print("Button tapped")
     }
     
     func onToSelection(sender: UIButton!) {
