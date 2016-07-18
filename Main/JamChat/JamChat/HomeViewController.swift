@@ -13,7 +13,7 @@ import Parse
 import ParseUI
 import AudioKit
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     var jams: [Jam] = []
@@ -83,7 +83,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }) { (error: NSError?) in
             print(error?.localizedDescription)
         }
-        
     }
     
     
@@ -120,7 +119,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if let jamView = segue.destinationViewController as? ChatViewController {
+        if let jamView = segue.destinationViewController as? JamViewController {
             let cell = sender as! JamCell
             jamView.jam = cell.jam
         }
