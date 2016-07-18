@@ -73,7 +73,7 @@ class User: NSObject {
                 self.friends = []
                 self.friends?.appendContentsOf(friendData)
                 
-                print("Succesfully loaded \(self.name)'s frieds: \(self.friends!)")
+                print("Succesfully loaded \(self.name)'s friends: \(self.friends!)")
                 completion?()
             }
         }
@@ -158,6 +158,20 @@ class User: NSObject {
             }
         }
     }
+    
+    func getNumberOfTracks(completion: (Int) -> ()) {
+        
+        let query = PFQuery(className: "Track")
+        query.whereKey("author", containsString: parseUser.objectId)
+        query.countObjectsInBackgroundWithBlock { (count: Int32, error: NSError?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                completion(Int(count))
+            }
+        }
+    }
+    
 }
 
 // Delegate used for the login view success and failure cases

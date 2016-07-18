@@ -39,6 +39,9 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         })
         
         // Sets the number of tracks the user has sent
+        User.currentUser?.getNumberOfTracks({ (count: Int) in
+            self.numTracksLabel.text = String(count)
+        })
         
     }
     
