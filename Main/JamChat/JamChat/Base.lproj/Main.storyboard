@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -57,11 +58,18 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="new" id="RfN-Vr-bra">
-                            <connections>
-                                <action selector="onNewJam:" destination="BYZ-38-t0r" id="vAh-jG-qMM"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="new" id="RfN-Vr-bra">
+                                <connections>
+                                    <action selector="onNewJam:" destination="BYZ-38-t0r" id="vAh-jG-qMM"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="profile" id="Zg1-N1-dEL">
+                                <connections>
+                                    <segue destination="Ic1-dH-4q3" kind="show" id="wey-is-6bu"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -97,7 +105,15 @@
                 <viewControllerPlaceholder storyboardName="Jam" id="x4v-zO-RyJ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8Y-ov-5aD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1369.5" y="289.5"/>
+            <point key="canvasLocation" x="1301" y="401"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="lxn-Qe-bY6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="Ic1-dH-4q3" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cxw-ef-5Ug" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1301" y="235"/>
         </scene>
     </scenes>
 </document>
