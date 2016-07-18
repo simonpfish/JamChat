@@ -146,6 +146,18 @@ class User: NSObject {
         
         print("Updated \(name)'s data")
     }
+    
+    func getNumberOfJams(completion: (Int) -> ()) {
+        let query = PFQuery(className: "Jam")
+        query.whereKey("users", containsString: facebookID)
+        query.countObjectsInBackgroundWithBlock { (count: Int32, error: NSError?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                completion(Int(count))
+            }
+        }
+    }
 }
 
 // Delegate used for the login view success and failure cases

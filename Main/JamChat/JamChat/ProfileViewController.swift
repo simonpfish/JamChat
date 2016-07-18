@@ -17,27 +17,50 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var numJamsLabel: UILabel!
+    @IBOutlet weak var numTracksLabel: UILabel!
+    
+    var jams: [Jam] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        // Make profile picture circular
+        // Makes the profile picture circular
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2;
         profilePicture.clipsToBounds = true;
         
-        // Set user's profile picture
+        // Sets the user's profile picture
         profilePicture.setImageWithURL(User.currentUser!.profileImageURL)
         
-        // Set user's name
+        // Sets the user's name
         userNameLabel.text = User.currentUser!.firstName + " " + User.currentUser!.lastName
+        
+        // Sets the number of jams user is a member of
+        User.currentUser?.getNumberOfJams({ (count: Int) in
+            self.numJamsLabel.text = String(count)
+        })
+        
+        // Sets the number of tracks the user has sent
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func onLogout(sender: AnyObject) {
+        User.logout()
+        User.login(self, success: {
+            
+            //self.loadFeed()
+        }) { (error: NSError?) in
+            print(error?.localizedDescription)
+        }
+    }
+    
     
 
     /*
