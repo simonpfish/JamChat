@@ -16,6 +16,8 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var numJamsLabel: UILabel!
     @IBOutlet weak var numTracksLabel: UILabel!
     
+    
+    
     var jams: [Jam] = []
     
     override func viewDidLoad() {
@@ -51,10 +53,12 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     }
     
     @IBAction func onLogout(sender: AnyObject) {
+        PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: false)
+        let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
+        let home = homeNavigation.viewControllers[0] as! HomeViewController
         User.logout()
-        User.login(self, success: {
-            
-            //self.loadFeed()
+        User.login(home, success: {
+            home.loadFeed()
         }) { (error: NSError?) in
             print(error?.localizedDescription)
         }
