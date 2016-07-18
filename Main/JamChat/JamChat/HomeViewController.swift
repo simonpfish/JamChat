@@ -54,6 +54,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+        }
     }
     
     func loadFeed() {
