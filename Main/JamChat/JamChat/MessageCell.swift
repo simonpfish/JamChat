@@ -10,10 +10,26 @@ import UIKit
 import AVFoundation
 import RBBAnimation
 import EasyAnimation
+import AudioKit
+import FDWaveformView
 
 class MessageCell: UITableViewCell {
     
-    var message: Message?
+    @IBOutlet weak var plot: FDWaveformView!
+    
+    var message: Message? {
+        didSet {
+            if let filepath = message?.tracks.first?.filepath {
+                
+                let fileURL = NSURL(fileURLWithPath: filepath)
+                
+                self.plot.audioURL = fileURL
+                self.plot.doesAllowScrubbing = false
+                self.plot.doesAllowScroll = false
+                self.plot.doesAllowStretch = false
+            }
+        }
+    }
     
     @IBOutlet weak var waveformView: UIView!
     
@@ -22,6 +38,7 @@ class MessageCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
     }
     

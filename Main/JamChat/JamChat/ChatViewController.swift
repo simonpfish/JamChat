@@ -20,7 +20,15 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
     @IBOutlet weak var waveformView: UIView!
     
     var sampler = AKSampler()
-    var jam: Jam?
+    var jam: Jam? {
+        didSet {
+            for message in jam!.messages {
+                message.loadTracks() {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
     var instrument: AKNode?
     var keyboard: PianoView?
     var selection: SelectionView?

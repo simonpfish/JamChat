@@ -11,10 +11,11 @@ import Parse
 
 class Message: NSObject {
     
-    private var tracks: [Track] = []
+    var tracks: [Track] = []
     private var newTracks: [Track] = []
     private(set) var id: String?
     private var object: PFObject!
+    private var tracksAreLoaded = false
     
     /**
      Initializes a new message based on a parse object
@@ -28,6 +29,11 @@ class Message: NSObject {
     
     func loadTracks(completion: () -> ()) {
         print("Loading tracks for message \(self.id ?? "NEW")")
+        if tracksAreLoaded {
+            print("Tracks are already loaded for message \(self.id ?? "NEW")")
+            completion()
+            return
+        }
         object.fetchIfNeededInBackgroundWithBlock { (_: PFObject?, error: NSError?) in
             let trackIDs = self.object["tracks"] as! [String]
             
@@ -40,22 +46,21 @@ class Message: NSObject {
                     let track = Track(object: object)
                     self.tracks.append(track)
                 }
+                
+                var loadedCount = 0
+                for track in self.tracks {
+                    track.loadMedia({
+                        loadedCount += 1
+                        if loadedCount == self.tracks.count {
+                            print("Succesfully loaded tracks for message \(self.id ?? "NEW")")
+                            self.tracksAreLoaded = true
+                            completion()
+                        }
+                        }, failure: { (error: NSError) in
+                            print(error.localizedDescription)
+                    })
+                }
             }
-            
-            var loadedCount = 0
-            for track in self.tracks {
-                track.loadMedia({
-                    loadedCount += 1
-                    if loadedCount == self.tracks.count {
-                        print("Succesfully loaded tracks for message \(self.id ?? "NEW")")
-
-                        completion()
-                    }
-                    }, failure: { (error: NSError) in
-                        print(error.localizedDescription)
-                })
-            }
-
         }
     }
     

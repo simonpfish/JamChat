@@ -7,13 +7,50 @@
 //
 
 import UIKit
+import KTCenterFlowLayout
+import FDWaveformView
 
-class JamViewController: UIViewController {
+class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    var jam: Jam!
+    
+    @IBOutlet weak var userCollection: UICollectionView!
+    @IBOutlet weak var waveformContainer: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Set up user collection view:
+        userCollection.dataSource = self
+        userCollection.delegate = self
+        let layout = KTCenterFlowLayout()
+        layout.minimumInteritemSpacing = 20.0
+        layout.itemSize = CGSizeMake(60, 70)
+        layout.minimumLineSpacing = 0.0
+        userCollection.collectionViewLayout = layout
+        
+        
+        // Set up waveform view:
+        let lastMessage = jam.messages.last
+        lastMessage?.loadTracks({
+            for track in (lastMessage?.tracks)! {
+                if let filepath = track.filepath {
+                    
+                    let fileURL = NSURL(fileURLWithPath: filepath)
+                    
+                    let waveformView = FDWaveformView(frame: self.waveformContainer.frame)
+                    waveformView.frame.origin.y = 0
+                    waveformView.audioURL = fileURL
+                    waveformView.doesAllowScrubbing = false
+                    waveformView.doesAllowScroll = false
+                    waveformView.doesAllowStretch = false
+                    
+                    self.waveformContainer.addSubview(waveformView)
+                }
+            }
+            
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +58,15 @@ class JamViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return jam.users.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = userCollection.dequeueReusableCellWithReuseIdentifier("UserCell", forIndexPath: indexPath) as! UserCell
+        cell.user = jam.users[indexPath.row]
+        return cell
+    }
 
     /*
     // MARK: - Navigation
