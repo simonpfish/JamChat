@@ -8,29 +8,36 @@
 
 import UIKit
 
-class JamCell: UITableViewCell {
-
-    @IBOutlet weak var usersLabel: UILabel!
+class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    @IBOutlet weak var userCollection: UICollectionView!
     
     var jam: Jam? {
         didSet {
-            var usersString = ""
-            for user in jam!.users {
-                usersString += user.name + ", "
-            }
-            usersLabel.text = usersString
+            userCollection.reloadData()
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        userCollection.dataSource = self
+        userCollection.delegate = self
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return jam?.users.count ?? 0
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = userCollection.dequeueReusableCellWithReuseIdentifier("UserCell", forIndexPath: indexPath) as! UserCell
+        cell.user = jam!.users[indexPath.row]
+        return cell
     }
 
 }
