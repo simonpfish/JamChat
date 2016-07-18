@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21D7D83C1D3D5B1200A6C86D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D7D83B1D3D5B1200A6C86D /* ProfileViewController.swift */; };
 		8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20F5F11D38F37800622892 /* SelectionView.swift */; };
 		8C20F5F41D38F5A600622892 /* AcousticBassC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C20F5F31D38F5A600622892 /* AcousticBassC.wav */; };
 		8C20F5F61D38F5AC00622892 /* ChoirC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C20F5F51D38F5AC00622892 /* ChoirC.wav */; };
@@ -47,7 +46,6 @@
 
 /* Begin PBXFileReference section */
 		06DC7EFB1EBB19B0747B99B1 /* Pods-JamChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.release.xcconfig"; sourceTree = "<group>"; };
-		21D7D83B1D3D5B1200A6C86D /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7F275E1B8FE709C2BCDCFD4D /* Pods-JamChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.debug.xcconfig"; sourceTree = "<group>"; };
 		8C20F5F11D38F37800622892 /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		8C20F5F31D38F5A600622892 /* AcousticBassC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AcousticBassC.wav; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				E7FE0FE71D35706A00452361 /* HomeViewController.swift */,
 				E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */,
 				E7FE0FF11D359B6600452361 /* ChatViewController.swift */,
-				21D7D83B1D3D5B1200A6C86D /* ProfileViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -385,7 +382,6 @@
 				E799567D1D31746300EE445B /* Jam.swift in Sources */,
 				E7FE0FE61D356E2100452361 /* ChatCell.swift in Sources */,
 				E799567B1D31744500EE445B /* Message.swift in Sources */,
-				21D7D83C1D3D5B1200A6C86D /* ProfileViewController.swift in Sources */,
 				E79956741D316E9D00EE445B /* AKAudioFile+ConvenienceInitializers.swift in Sources */,
 				E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */,
 				E79956761D316E9D00EE445B /* AKAudioFile+Processing.swift in Sources */,
