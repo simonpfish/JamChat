@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Jam-->
@@ -25,11 +26,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zEE-YY-lg8">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEE-YY-lg8">
                                 <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                             </scrollView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wvl-A8-1jW" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="0.0" y="28" width="375" height="43"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wvl-A8-1jW" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                <rect key="frame" x="-4" y="20" width="383" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="GQC-UN-whv"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="262-G1-aqQ">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -40,6 +44,15 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zEE-YY-lg8" firstAttribute="leading" secondItem="giK-6F-cfV" secondAttribute="leading" id="ITb-pA-cqu"/>
+                            <constraint firstItem="g6P-IN-mwJ" firstAttribute="top" secondItem="zEE-YY-lg8" secondAttribute="bottom" id="YTs-ez-5ud"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Wvl-A8-1jW" secondAttribute="trailing" constant="-20" id="feo-L6-bu6"/>
+                            <constraint firstItem="Wvl-A8-1jW" firstAttribute="top" secondItem="DTK-sw-krE" secondAttribute="bottom" id="iwe-w2-dB5"/>
+                            <constraint firstAttribute="trailing" secondItem="zEE-YY-lg8" secondAttribute="trailing" id="kl6-eK-EBC"/>
+                            <constraint firstItem="zEE-YY-lg8" firstAttribute="top" secondItem="Wvl-A8-1jW" secondAttribute="bottom" id="mLf-jb-Wch"/>
+                            <constraint firstItem="Wvl-A8-1jW" firstAttribute="leading" secondItem="giK-6F-cfV" secondAttribute="leadingMargin" constant="-20" id="w4W-ko-n50"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
