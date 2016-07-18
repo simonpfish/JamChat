@@ -32,8 +32,10 @@ class PagerViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = .blackColor()
         }
         
+        moveToViewControllerAtIndex(1, animated: false)
+        
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -48,7 +50,7 @@ class PagerViewController: ButtonBarPagerTabStripViewController {
         let profileStoryboard = UIStoryboard(name: "Profile", bundle: NSBundle.mainBundle())
         let jamCreationStoryboard = UIStoryboard(name: "JamCreation", bundle: NSBundle.mainBundle())
         
-        return [homeStoryboard.instantiateViewControllerWithIdentifier("HomeView"), profileStoryboard.instantiateViewControllerWithIdentifier("ProfileView"), jamCreationStoryboard.instantiateViewControllerWithIdentifier("JamCreationView")]
+        return [jamCreationStoryboard.instantiateViewControllerWithIdentifier("JamCreationView"), homeStoryboard.instantiateViewControllerWithIdentifier("HomeView"), profileStoryboard.instantiateViewControllerWithIdentifier("ProfileView")]
     }
 
     /*
