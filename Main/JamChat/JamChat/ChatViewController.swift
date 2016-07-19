@@ -16,8 +16,9 @@ class ChatViewController: UIViewController,  UITableViewDelegate, KeyboardDelega
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet var chatView: UIView!
     
+    @IBOutlet var chatView: UIView!
+  
         
     @IBOutlet weak var waveformView: UIView!
     
@@ -51,8 +52,6 @@ class ChatViewController: UIViewController,  UITableViewDelegate, KeyboardDelega
         
         goToSelection()
         Track.mainMixer.connect(sampler)
-       
-        //Instrument.init(name: "")
         
     }
     
@@ -163,13 +162,12 @@ class ChatViewController: UIViewController,  UITableViewDelegate, KeyboardDelega
     
     func goToInstrument (){
         selection!.removeFromSuperview()
-        Track.mainMixer.start()
         
-        keyboard = PianoView(width: 351, height: 30, lowestKey: 60, totalKeys: 13, color: _instrument._color!)
-        keyboard!.frame.origin.y = CGFloat(550)
+        keyboard = PianoView(width: 351, height: 100, lowestKey: 60, totalKeys: 13, color: _instrument._color!)
+        keyboard!.frame.origin.y = CGFloat(450)
         keyboard!.setNeedsDisplay()
         keyboard!.delegate = self
-        sampler.loadWav(_instrument._sound!)//self.soundString)
+        sampler.loadWav(_instrument._sound!)
         instrument = sampler
         
         chatView.addSubview(keyboard!)
@@ -180,7 +178,7 @@ class ChatViewController: UIViewController,  UITableViewDelegate, KeyboardDelega
         gridButton!.setImage(image, forState: .Normal)
         gridButton!.addTarget(self, action: #selector(onToSelection), forControlEvents: .TouchUpInside)
         
-        recordButton = UIButton(frame: CGRect(x: 50, y: 500, width: 60, height: 20))
+        recordButton = UIButton(frame: CGRect(x: 50, y: 400, width: 60, height: 20))
         recordButton!.backgroundColor = .redColor()
         recordButton!.setTitle("Record", forState: .Normal)
         recordButton!.addTarget(self, action: #selector(onRecord), forControlEvents: .TouchUpInside)

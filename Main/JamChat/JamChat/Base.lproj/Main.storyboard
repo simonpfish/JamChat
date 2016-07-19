@@ -30,7 +30,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="JamCell" rowHeight="100" id="AFU-eb-MrX" customClass="JamCell" customModule="JamChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AFU-eb-MrX" id="l8b-cR-tVz">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
@@ -55,8 +55,6 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="buttonBarView" destination="Wvl-A8-1jW" id="mwx-6g-LGE"/>
-                        <outlet property="containerView" destination="zEE-YY-lg8" id="CrG-Kn-6uY"/>
                         <segue destination="J1a-cw-lUE" kind="presentation" id="MIk-Yw-aVr"/>
                         <segue destination="Ic1-dH-4q3" kind="presentation" id="qqi-bA-M4h"/>
                         <segue destination="spH-v8-h0F" kind="presentation" id="Hbv-Hk-b8L"/>
