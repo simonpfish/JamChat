@@ -64,6 +64,15 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         
         var topFriends = User.currentUser?.getTopFriends()
         
+//        topFriend1View.setImageWithURL(User.profileImageURL)
+//        topFriend1Label.text = User.firstName + " " User.lastName
+//        
+//        topFriend2View.setImageWithURL(User.profileImageURL)
+//        topFriend2Label.text = User.firstName + " " User.lastName
+//        
+//        topFriend3View.setImageWithURL(User.profileImageURL)
+//        topFriend3Label.text = User.firstName + " " User.lastName
+        
 //        topFriend1View.setImageWithURL(topFriends![0].profileImageURL)
 //        topFriend2View.setImageWithURL(topFriends![1].profileImageURL)
         
