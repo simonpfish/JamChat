@@ -57,7 +57,7 @@ class SelectionView: UIView {
     }
     
     
-    required public init?(coder aDecoder: NSCoder) {
+    required internal init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 

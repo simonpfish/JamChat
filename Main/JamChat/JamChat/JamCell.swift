@@ -18,7 +18,7 @@ class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSo
     var jam: Jam? {
         didSet {
             userCollection.reloadData()
-            jamNameLabel.text = jam?.jamName
+            jamNameLabel.text = jam?.title
         }
     }
     
