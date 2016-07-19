@@ -18,7 +18,6 @@
 		E717EC161D2ED34500AC812B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717EC151D2ED34500AC812B /* User.swift */; };
 		E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F1DF41D3869DB00A34409 /* JamViewController.swift */; };
 		E74F1DFA1D386A2E00A34409 /* JamHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */; };
-		E74F1DFB1D386A2E00A34409 /* JamHistoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E74F1DF91D386A2E00A34409 /* JamHistoryView.xib */; };
 		E74F1E031D3C06B800A34409 /* Jam.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74F1E011D3C06B800A34409 /* Jam.storyboard */; };
 		E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756A8731D2D7E74007C0590 /* AppDelegate.swift */; };
 		E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E756A8771D2D7E74007C0590 /* Main.storyboard */; };
@@ -34,10 +33,14 @@
 		E799567F1D31749F00EE445B /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799567E1D31749F00EE445B /* Track.swift */; };
 		E79AE2051D3D50F400899823 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E79AE2031D3D50F400899823 /* Profile.storyboard */; };
 		E7E0D6981D3C0DCB005A840A /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E0D6971D3C0DCB005A840A /* UserCell.swift */; };
+		E7F0BB3E1D3D61550059160B /* PagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB3D1D3D61550059160B /* PagerViewController.swift */; };
+		E7F0BB471D3D67110059160B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F0BB451D3D67110059160B /* Home.storyboard */; };
+		E7F0BB491D3D67B80059160B /* JamCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F0BB481D3D67B80059160B /* JamCreation.storyboard */; };
+		E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */; };
+		E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */; };
 		E7FE0FE61D356E2100452361 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE51D356E2100452361 /* ChatCell.swift */; };
 		E7FE0FE81D35706A00452361 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE71D35706A00452361 /* HomeViewController.swift */; };
 		E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */; };
-		E7FE0FF01D357C6C00452361 /* JamCreationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7FE0FEE1D357C6C00452361 /* JamCreationView.xib */; };
 		E7FE0FF21D359B6600452361 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FF11D359B6600452361 /* ChatViewController.swift */; };
 		E7FE0FF71D359CE300452361 /* RockGuitarC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7FE0FF61D359CE300452361 /* RockGuitarC.wav */; };
 		E7FE0FF91D359D0000452361 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FF81D359D0000452361 /* PianoView.swift */; };
@@ -58,7 +61,6 @@
 		E717EC151D2ED34500AC812B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E74F1DF41D3869DB00A34409 /* JamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamViewController.swift; sourceTree = "<group>"; };
 		E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamHistoryViewController.swift; sourceTree = "<group>"; };
-		E74F1DF91D386A2E00A34409 /* JamHistoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JamHistoryView.xib; sourceTree = "<group>"; };
 		E74F1E021D3C06B800A34409 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Jam.storyboard; sourceTree = "<group>"; };
 		E756A8701D2D7E74007C0590 /* JamChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JamChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E756A8731D2D7E74007C0590 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,10 +78,14 @@
 		E799567E1D31749F00EE445B /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		E79AE2041D3D50F400899823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		E7E0D6971D3C0DCB005A840A /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		E7F0BB3D1D3D61550059160B /* PagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerViewController.swift; sourceTree = "<group>"; };
+		E7F0BB461D3D67110059160B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
+		E7F0BB481D3D67B80059160B /* JamCreation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JamCreation.storyboard; sourceTree = "<group>"; };
+		E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		E7FE0FE51D356E2100452361 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		E7FE0FE71D35706A00452361 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamCreationViewController.swift; sourceTree = "<group>"; };
-		E7FE0FEE1D357C6C00452361 /* JamCreationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JamCreationView.xib; sourceTree = "<group>"; };
 		E7FE0FF11D359B6600452361 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		E7FE0FF61D359CE300452361 /* RockGuitarC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = RockGuitarC.wav; sourceTree = "<group>"; };
 		E7FE0FF81D359D0000452361 /* PianoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
@@ -207,10 +213,10 @@
 			children = (
 				E756A87C1D2D7E74007C0590 /* LaunchScreen.storyboard */,
 				E756A8771D2D7E74007C0590 /* Main.storyboard */,
+				E7F0BB481D3D67B80059160B /* JamCreation.storyboard */,
+				E7F0BB451D3D67110059160B /* Home.storyboard */,
 				E79AE2031D3D50F400899823 /* Profile.storyboard */,
 				E74F1E011D3C06B800A34409 /* Jam.storyboard */,
-				E7FE0FEE1D357C6C00452361 /* JamCreationView.xib */,
-				E74F1DF91D386A2E00A34409 /* JamHistoryView.xib */,
 				E74F1DF11D38163900A34409 /* Cells */,
 				E74F1DF01D38162500A34409 /* Instruments */,
 			);
@@ -225,6 +231,9 @@
 				E7FE0FE71D35706A00452361 /* HomeViewController.swift */,
 				E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */,
 				E7FE0FF11D359B6600452361 /* ChatViewController.swift */,
+				E7F0BB3D1D3D61550059160B /* PagerViewController.swift */,
+				E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */,
+				E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -277,7 +286,11 @@
 				TargetAttributes = {
 					E756A86F1D2D7E74007C0590 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = Z443VBQUV3;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -305,17 +318,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E756A87E1D2D7E74007C0590 /* LaunchScreen.storyboard in Resources */,
+				E7F0BB491D3D67B80059160B /* JamCreation.storyboard in Resources */,
 				E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */,
 				8C20F5F81D38F5B500622892 /* ElectricBassC.wav in Resources */,
 				E7FE0FF71D359CE300452361 /* RockGuitarC.wav in Resources */,
 				E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */,
 				E79AE2051D3D50F400899823 /* Profile.storyboard in Resources */,
+				E7F0BB471D3D67110059160B /* Home.storyboard in Resources */,
 				E74F1E031D3C06B800A34409 /* Jam.storyboard in Resources */,
 				8C20F5F61D38F5AC00622892 /* ChoirC.wav in Resources */,
 				8C20F5F41D38F5A600622892 /* AcousticBassC.wav in Resources */,
 				8C20F5FC1D38F5CD00622892 /* SaxC.wav in Resources */,
-				E7FE0FF01D357C6C00452361 /* JamCreationView.xib in Resources */,
-				E74F1DFB1D386A2E00A34409 /* JamHistoryView.xib in Resources */,
 				8C20F5FA1D38F5C300622892 /* PianoC.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,11 +404,14 @@
 				E7FE0FE81D35706A00452361 /* HomeViewController.swift in Sources */,
 				E7FE0FF91D359D0000452361 /* PianoView.swift in Sources */,
 				E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */,
+				E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */,
 				E7FE0FF21D359B6600452361 /* ChatViewController.swift in Sources */,
 				E79956791D316EA500EE445B /* AKNodeRecorder.swift in Sources */,
 				E74F1DFA1D386A2E00A34409 /* JamHistoryViewController.swift in Sources */,
 				E7FE0FFD1D359F4100452361 /* MessageCell.swift in Sources */,
 				8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */,
+				E7F0BB3E1D3D61550059160B /* PagerViewController.swift in Sources */,
+				E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */,
 				E7E0D6981D3C0DCB005A840A /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +449,14 @@
 				E79AE2041D3D50F400899823 /* Base */,
 			);
 			name = Profile.storyboard;
+			sourceTree = "<group>";
+		};
+		E7F0BB451D3D67110059160B /* Home.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7F0BB461D3D67110059160B /* Base */,
+			);
+			name = Home.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
