@@ -1,5 +1,5 @@
 //
-//  ChatCreationViewController.swift
+//  JamCreationViewController.swift
 //  JamChat
 //
 //  Created by Simon Posada Fishman on 7/12/16.
@@ -20,6 +20,7 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     
     @IBOutlet weak var jamDurationSlider: UISlider!
     
+    @IBOutlet weak var setJamName: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +78,8 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
         let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
         let home = homeNavigation.viewControllers[0] as! HomeViewController
-        home.addNewJam(Int(self.jamDurationSlider.value), userIDs: self.selectedFriendIDs)
+       // let jamName = setJamName.text as! String
+        home.addNewJam(Int(self.jamDurationSlider.value), userIDs: self.selectedFriendIDs, name: setJamName.text!)
         self.selectedFriendIDs = []
         self.selectedUsersLabel.text = ""
     }

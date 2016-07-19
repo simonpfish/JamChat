@@ -28,32 +28,38 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jam Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljl-KK-ak9">
+                                                    <rect key="frame" x="8" y="0.0" width="193" height="49"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YEx-qK-Ety">
-                                                    <rect key="frame" x="8" y="8" width="359" height="84"/>
+                                                    <rect key="frame" x="8" y="29" width="359" height="63"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1LC-OI-xZR">
-                                                        <size key="itemSize" width="60" height="70"/>
+                                                        <size key="itemSize" width="53" height="67"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCell" id="Boz-gf-2yX" customClass="UserCell" customModule="JamChat" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="7" width="60" height="70"/>
+                                                            <rect key="frame" x="0.0" y="-2" width="53" height="67"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="70"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="53" height="67"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jkp-Pg-Kfp">
-                                                                        <rect key="frame" x="5" y="5" width="50" height="50"/>
-                                                                    </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6h-G8-oYK">
-                                                                        <rect key="frame" x="15" y="55" width="31" height="15"/>
+                                                                        <rect key="frame" x="8" y="52" width="38" height="15"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jkp-Pg-Kfp">
+                                                                        <rect key="frame" x="6" y="13" width="41" height="39"/>
+                                                                    </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </view>
@@ -67,6 +73,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="jamNameLabel" destination="Ljl-KK-ak9" id="PmL-L3-SV1"/>
                                             <outlet property="userCollection" destination="YEx-qK-Ety" id="vqg-pd-Eii"/>
                                             <segue destination="x4v-zO-RyJ" kind="show" id="ZOx-pJ-uvm"/>
                                         </connections>
@@ -92,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1099.5" y="-122.5"/>
+            <point key="canvasLocation" x="1099.5" y="-124.5"/>
         </scene>
         <!--Home Navigation Controller-->
         <scene sceneID="yqE-Es-MDu">
