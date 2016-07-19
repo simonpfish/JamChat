@@ -119,9 +119,8 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
         let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
         let home = homeNavigation.viewControllers[0] as! HomeViewController
-        home.addNewJam(Double(intervalSlider1.getValue()), userIDs: self.selectedFriendIDs)
-        
-        //reset home feed view
+       // let jamName = setJamName.text as! String
+        home.addNewJam(Int(self.jamDurationSlider.value), userIDs: self.selectedFriendIDs, name: setJamName.text!)
         self.selectedFriendIDs = []
         self.selectedUsersLabel.text = ""
     }
