@@ -95,7 +95,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    func addNewJam(duration: Int, userIDs: [String], name: String) {
+    func addNewJam(duration: Double, userIDs: [String], name: String) {
         var jam: Jam!
         var jamLength = duration
         var jamName = name
