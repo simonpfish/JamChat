@@ -33,9 +33,18 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         
         // Do any additional setup after loading the view.
         
-        // Makes the profile picture circular
+        // Makes the profile picture views circular
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2;
         profilePicture.clipsToBounds = true;
+        
+        topFriend1View.layer.cornerRadius = profilePicture.frame.size.width / 2;
+        topFriend1View.clipsToBounds = true;
+        
+        topFriend2View.layer.cornerRadius = profilePicture.frame.size.width / 2;
+        topFriend2View.clipsToBounds = true;
+        
+        topFriend3View.layer.cornerRadius = profilePicture.frame.size.width / 2;
+        topFriend3View.clipsToBounds = true;
         
         // Sets the user's profile picture
         profilePicture.setImageWithURL(User.currentUser!.profileImageURL)
@@ -52,6 +61,11 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         User.currentUser?.getNumberOfTracks({ (count: Int) in
             self.numTracksLabel.text = String(count)
         })
+        
+        var topFriends = User.currentUser?.getTopFriends()
+        
+//        topFriend1View.setImageWithURL(topFriends![0].profileImageURL)
+//        topFriend2View.setImageWithURL(topFriends![1].profileImageURL)
         
     }
     
