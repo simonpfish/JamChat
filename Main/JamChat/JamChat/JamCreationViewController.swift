@@ -18,6 +18,9 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     
     @IBOutlet weak var selectedUsersLabel: UILabel!
     
+    @IBOutlet weak var jamDurationSlider: UISlider!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -74,9 +77,16 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         let navController = presentingViewController as! UINavigationController
         let home = navController.topViewController as! HomeViewController
         self.dismissViewControllerAnimated(true) {
-            home.addNewJam(self.selectedFriendIDs)
+            home.addNewJam(Int(self.jamDurationSlider.value), userIDs: self.selectedFriendIDs)
         }
     }
+    
+    let step: Float = 5
+    @IBAction func sliderValueChanged(sender: UISlider) {
+        let roundedValue = round(sender.value / step) * step
+        sender.value = roundedValue
+    }
+    
 
     /*
     // MARK: - Navigation
