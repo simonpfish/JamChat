@@ -18,11 +18,8 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     var selectedFriendIDs: [String] = []
     
     @IBOutlet weak var selectedUsersLabel: UILabel!
-    
     @IBOutlet weak var sliderView1: UIView!
-    //@IBOutlet weak var valueLabel1: UILabel!
-    
-    @IBOutlet weak var setJamName: UITextField!
+    @IBOutlet weak var titleLabel: UITextField!
     
     // creates an interval slider
     private var intervalSlider1: IntervalSlider! {
@@ -119,8 +116,7 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
         let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
         let home = homeNavigation.viewControllers[0] as! HomeViewController
-       // let jamName = setJamName.text as! String
-        home.addNewJam(Double(intervalSlider1.getValue()), userIDs: self.selectedFriendIDs, name: setJamName.text!)
+        home.addNewJam(Double(intervalSlider1.getValue()), userIDs: self.selectedFriendIDs, name: titleLabel.text!)
         self.selectedFriendIDs = []
         self.selectedUsersLabel.text = ""
         self.setJamName.text = ""
