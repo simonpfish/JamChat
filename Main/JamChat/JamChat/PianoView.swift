@@ -9,11 +9,6 @@
 import UIKit
 import AudioKit
 
-public protocol KeyboardDelegate {
-    func noteOn(note: Int)
-    func noteOff(note: Int)
-}
-
 public class PianoView: UIView {
     public var delegate: KeyboardDelegate?
     var keys: [PianoKey] = []

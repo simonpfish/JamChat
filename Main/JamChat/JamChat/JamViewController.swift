@@ -9,14 +9,17 @@
 import UIKit
 import KTCenterFlowLayout
 import FDWaveformView
+import AudioKit
 
-class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, KeyboardDelegate {
 
     var jam: Jam!
     
     @IBOutlet weak var jamNameLabel: UILabel!
     @IBOutlet weak var userCollection: UICollectionView!
     @IBOutlet weak var waveformContainer: UIView!
+    
+    @IBOutlet weak var keyboardViewContainer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +34,13 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         userCollection.collectionViewLayout = layout
         jamNameLabel.text = jam.title
         
+        // Set up keyboard
+        let keyboardView = KeyboardView(frame: keyboardViewContainer.frame, lowestKey: 60, totalKeys: 13)
+        keyboardView.delegate = self
+        keyboardView.frame.origin.y = 0
+        keyboardViewContainer.addSubview(keyboardView)
+        AudioKit.start()
+
         
         // Set up waveform view:
         let lastMessage = jam.messages.last
@@ -68,6 +78,14 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let cell = userCollection.dequeueReusableCellWithReuseIdentifier("UserCell", forIndexPath: indexPath) as! UserCell
         cell.user = jam.users[indexPath.row]
         return cell
+    }
+    
+    func noteOn(note: Int) {
+        Instrument.electricGuitar.play(note)
+    }
+    
+    func noteOff(note: Int) {
+        Instrument.electricGuitar.stop()
     }
 
     /*

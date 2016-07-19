@@ -30,8 +30,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         
-        AudioKit.output = Track.mainMixer
-        AudioKit.start()
         // Do any additional setup after loading the view.
         
         if (!User.isLoggedIn()) {
