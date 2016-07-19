@@ -74,19 +74,18 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     }
     
     @IBAction func onCreate(sender: AnyObject) {
-        let navController = presentingViewController as! UINavigationController
-        let home = navController.topViewController as! HomeViewController
-        self.dismissViewControllerAnimated(true) {
-            home.addNewJam(Int(self.jamDurationSlider.value), userIDs: self.selectedFriendIDs)
-            print(Int(self.jamDurationSlider.value))
-        }
+        PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
+        let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
+        let home = homeNavigation.viewControllers[0] as! HomeViewController
+        home.addNewJam(Int(self.jamDurationSlider.value), userIDs: self.selectedFriendIDs)
+        self.selectedFriendIDs = []
+        self.selectedUsersLabel.text = ""
     }
     
     let step: Float = 5
     @IBAction func sliderValueChanged(sender: UISlider) {
         let roundedValue = round(sender.value / step) * step
         sender.value = roundedValue
-        print(sender.value)
     }
     
 
