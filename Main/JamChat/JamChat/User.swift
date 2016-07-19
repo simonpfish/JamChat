@@ -172,22 +172,14 @@ class User: NSObject {
         }
     }
     
-    func getTopFriends(completion: ([Users] -> ()) {
-        
-        var numUserOccurrences: [String, Integer]
-        
-        let query = PFQuery(className: "Jam")
-        query.whereKey("users", containsString: facebookID)
-        
-        Jam.downloadCurrentUserJams({ (jams: [Jam]) in
-        self.jams = jams
-        print("Reloading table view")
-        self.tableView.reloadData()
-        }) { (error: NSError) in
-        print(error.localizedDescription)
-        }
-        
-    }
+//    func getTopFriends(completion: ([Users] -> ()) {
+//        
+//        var numUserOccurrences: [String, Integer]
+//        
+//        let query = PFQuery(className: "Jam")
+//        query.whereKey("users", containsString: facebookID)
+//        
+//    }
     
 }
 
