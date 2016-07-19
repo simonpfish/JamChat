@@ -78,6 +78,7 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         let home = navController.topViewController as! HomeViewController
         self.dismissViewControllerAnimated(true) {
             home.addNewJam(Int(self.jamDurationSlider.value), userIDs: self.selectedFriendIDs)
+            print(Int(self.jamDurationSlider.value))
         }
     }
     
@@ -85,6 +86,7 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     @IBAction func sliderValueChanged(sender: UISlider) {
         let roundedValue = round(sender.value / step) * step
         sender.value = roundedValue
+        print(sender.value)
     }
     
 
