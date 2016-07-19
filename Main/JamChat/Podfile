@@ -30,6 +30,7 @@ target 'JamChat' do
     pod 'FDWaveformView'
     pod 'KTCenterFlowLayout'
     pod 'XLPagerTabStrip'
+    pod 'CircleMenu'
 
 
 end
