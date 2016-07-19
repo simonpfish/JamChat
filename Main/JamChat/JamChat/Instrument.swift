@@ -11,7 +11,7 @@ import AudioKit
 
 class Instrument: NSObject {
     
-    static let mainMixer = AKMixer()
+    static let mixer = AKMixer()
     
     private(set) var name: String!
     private(set) var color: UIColor!
@@ -23,9 +23,14 @@ class Instrument: NSObject {
         self.name = name
         self.color = color
         self.image = image
+        
+        let bundle = NSBundle.mainBundle()
+        let filepath = bundle.URLForResource(fileName, withExtension: "wav")
+        
         sampler.loadWav(fileName)
         
-        Instrument.mainMixer.connect(self.sampler)
+        print("Loaded instrument: " + filepath!.absoluteString)
+        Instrument.mixer.connect(self.sampler)
     }
     
     func play(note: Int) {

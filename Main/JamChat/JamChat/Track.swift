@@ -12,7 +12,7 @@ import AudioKit
 
 class Track: NSObject {
     
-    static let mainMixer = AKMixer()
+    static let mixer = AKMixer()
     
     private(set) var author: User!
     let identifier: String!
@@ -45,7 +45,7 @@ class Track: NSObject {
         
         if fileManager.fileExistsAtPath(filepath) {
             self.player = AKAudioPlayer(self.filepath)
-            Track.mainMixer.connect(self.player!)
+            Track.mixer.connect(self.player!)
             success()
         } else {
             file.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) in
@@ -56,7 +56,7 @@ class Track: NSObject {
                     fileManager.createFileAtPath(self.filepath, contents: data, attributes: nil)
                     //                    data?.writeToURL(NSURL(string: self.filepath)!, atomically: true)
                     self.player = AKAudioPlayer(self.filepath)
-                    Track.mainMixer.connect(self.player!)
+                    Track.mixer.connect(self.player!)
                     
                     success()
                 }
@@ -100,7 +100,7 @@ class Track: NSObject {
                     self.filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + self.identifier + ".m4a"
                     
                     self.player = AKAudioPlayer(self.filepath)
-                    Track.mainMixer.connect(self.player!)
+                    Track.mixer.connect(self.player!)
                     
                     completion()
                     
