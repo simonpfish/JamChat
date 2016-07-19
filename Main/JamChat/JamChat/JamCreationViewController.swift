@@ -123,6 +123,7 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         home.addNewJam(Double(intervalSlider1.getValue()), userIDs: self.selectedFriendIDs, name: setJamName.text!)
         self.selectedFriendIDs = []
         self.selectedUsersLabel.text = ""
+        self.setJamName.text = ""
     }
     
 
