@@ -38,14 +38,12 @@
 		E7F0BB491D3D67B80059160B /* JamCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F0BB481D3D67B80059160B /* JamCreation.storyboard */; };
 		E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */; };
 		E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */; };
-		E7F0BB551D3EA5070059160B /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB531D3EA5070059160B /* KeyboardView.swift */; };
 		E7F0BB561D3EA5070059160B /* PolyphonicKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB541D3EA5070059160B /* PolyphonicKeyboardView.swift */; };
+		E7F0BB591D3ECA470059160B /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */; };
 		E7FE0FE61D356E2100452361 /* JamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE51D356E2100452361 /* JamCell.swift */; };
 		E7FE0FE81D35706A00452361 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE71D35706A00452361 /* HomeViewController.swift */; };
 		E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */; };
 		E7FE0FF71D359CE300452361 /* RockGuitarC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7FE0FF61D359CE300452361 /* RockGuitarC.wav */; };
-		E7FE0FF91D359D0000452361 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FF81D359D0000452361 /* PianoView.swift */; };
-		E7FE0FFB1D359D0C00452361 /* PianoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FFA1D359D0C00452361 /* PianoKey.swift */; };
 		E7FE0FFD1D359F4100452361 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FFC1D359F4100452361 /* MessageCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,14 +82,12 @@
 		E7F0BB481D3D67B80059160B /* JamCreation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JamCreation.storyboard; sourceTree = "<group>"; };
 		E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
-		E7F0BB531D3EA5070059160B /* KeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		E7F0BB541D3EA5070059160B /* PolyphonicKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolyphonicKeyboardView.swift; sourceTree = "<group>"; };
+		E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		E7FE0FE51D356E2100452361 /* JamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamCell.swift; sourceTree = "<group>"; };
 		E7FE0FE71D35706A00452361 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamCreationViewController.swift; sourceTree = "<group>"; };
 		E7FE0FF61D359CE300452361 /* RockGuitarC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = RockGuitarC.wav; sourceTree = "<group>"; };
-		E7FE0FF81D359D0000452361 /* PianoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
-		E7FE0FFA1D359D0C00452361 /* PianoKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoKey.swift; sourceTree = "<group>"; };
 		E7FE0FFC1D359F4100452361 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		EB46293530A6261983676B0D /* Pods_JamChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JamChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -140,11 +136,9 @@
 		E74F1DF01D38162500A34409 /* Instruments */ = {
 			isa = PBXGroup;
 			children = (
-				E7F0BB531D3EA5070059160B /* KeyboardView.swift */,
+				E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */,
 				E7F0BB541D3EA5070059160B /* PolyphonicKeyboardView.swift */,
 				8C20F5F11D38F37800622892 /* SelectionView.swift */,
-				E7FE0FF81D359D0000452361 /* PianoView.swift */,
-				E7FE0FFA1D359D0C00452361 /* PianoKey.swift */,
 			);
 			name = Instruments;
 			sourceTree = "<group>";
@@ -400,7 +394,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E79956751D316E9D00EE445B /* AKAudioFile+Exporting.swift in Sources */,
-				E7F0BB551D3EA5070059160B /* KeyboardView.swift in Sources */,
 				E799567F1D31749F00EE445B /* Track.swift in Sources */,
 				E79956771D316E9D00EE445B /* AKAudioFile.swift in Sources */,
 				E799567D1D31746300EE445B /* Jam.swift in Sources */,
@@ -412,9 +405,8 @@
 				E79956761D316E9D00EE445B /* AKAudioFile+Processing.swift in Sources */,
 				E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */,
 				E717EC161D2ED34500AC812B /* User.swift in Sources */,
-				E7FE0FFB1D359D0C00452361 /* PianoKey.swift in Sources */,
+				E7F0BB591D3ECA470059160B /* KeyboardViewController.swift in Sources */,
 				E7FE0FE81D35706A00452361 /* HomeViewController.swift in Sources */,
-				E7FE0FF91D359D0000452361 /* PianoView.swift in Sources */,
 				E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */,
 				E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */,
 				E79956791D316EA500EE445B /* AKNodeRecorder.swift in Sources */,

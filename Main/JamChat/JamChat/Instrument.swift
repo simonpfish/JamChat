@@ -37,8 +37,8 @@ class Instrument: NSObject {
         sampler.playNote(note)
     }
     
-    func stop() {
-        sampler.stopNote()
+    func stop(note: Int) {
+        sampler.stopNote(note)
     }
     
     // Instruments:

@@ -1,21 +1,15 @@
 //
-//  KeyboardView.swift
-//  AudioKit
+//  KeyboardViewController.swift
+//  JamChat
 //
-//  Created by Aurelius Prochazka, revision history on Github.
-//  Copyright (c) 2016 Aurelius Prochazka. All rights reserved.
+//  Created by Simon Posada Fishman on 7/19/16.
+//  Copyright © 2016 Jammers. All rights reserved.
 //
 
 import UIKit
 
-public protocol KeyboardDelegate {
-    func noteOn(note: Int)
-    func noteOff(note: Int)
-}
-
-public class KeyboardView: UIView {
+class KeyboardViewController: UIViewController {
     
-    public var delegate: KeyboardDelegate?
     var keys: [UIView] = []
     
     var onKeys: Set<UIView> = []
@@ -23,30 +17,33 @@ public class KeyboardView: UIView {
     let notesWithFlats  = ["C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭", "A", "B♭", "B"]
     let notesWithSharps = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
     
-    public convenience init(width: Int, height: Int, lowestKey: Int = 48, totalKeys: Int = 37) {
-        self.init(frame: CGRect(x: 0, y: 0, width: width, height: height), lowestKey: lowestKey, totalKeys: totalKeys)
-    }
+    let totalKeys = 12
+    let lowestKey = 60
     
-    public init(frame: CGRect, lowestKey: Int = 48, totalKeys: Int = 37) {
-        super.init(frame: frame)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let allowedNotes = notesWithSharps //["A", "B", "C#", "D", "E", "F#", "G"]
         
-        let keyWidth = Int(frame.width) / totalKeys - 1
-        let height = Int(frame.height)
+        let keyWidth = Int(view.frame.width) / totalKeys - 1
+        let height = Int(view.frame.height)
         
         let blackFrame = UIView(frame: CGRect(x: 0, y: 0, width: (keyWidth + 1) * totalKeys + 1, height: height))
-        blackFrame.backgroundColor = UIColor.blackColor()
-        self.addSubview(blackFrame)
+        blackFrame.backgroundColor = UIColor.clearColor()
+        view.addSubview(blackFrame)
         
         var keyCount = 0
         var increment = 0
         while keyCount < totalKeys {
             if  allowedNotes.indexOf(notesWithFlats[(lowestKey + increment) % 12]) != nil || allowedNotes.indexOf(notesWithSharps[(lowestKey + increment) % 12]) != nil {
-                let newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: height - 2))
+                var newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: height - 2))
                 if notesWithSharps[(lowestKey + increment) % 12].rangeOfString("#") != nil {
+                    newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: height - 50))
                     newButton.backgroundColor = UIColor.blackColor()
                 } else {
                     newButton.backgroundColor = UIColor.whiteColor()
+                    newButton.layer.borderColor = UIColor.blackColor().CGColor
+                    newButton.layer.borderWidth = 2
                 }
                 
                 newButton.setNeedsDisplay()
@@ -55,29 +52,31 @@ public class KeyboardView: UIView {
                 newButton.frame.origin.y = CGFloat(1)
                 newButton.tag = lowestKey + increment
                 keys.append(newButton)
-                self.addSubview(newButton)
+                view.addSubview(newButton)
                 keyCount += 1
                 
             }
             increment += 1
             
         }
+        // Do any additional setup after loading the view.
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     // *********************************************************
     // MARK: - Handle Touches
     // *********************************************************
     
-    override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
             
             for key in keys where !onKeys.contains(key) {
-                if CGRectContainsPoint(key.frame, touch.locationInView(self)) {
-                    delegate?.noteOn(key.tag)
+                if CGRectContainsPoint(key.frame, touch.locationInView(self.view)) {
+                    Instrument.electricGuitar.play(key.tag)
                     unhighlightKeys()
                     key.backgroundColor = UIColor.redColor()
                     onKeys.insert(key)
@@ -87,12 +86,12 @@ public class KeyboardView: UIView {
         }
     }
     
-    override public func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
-
+            
             for key in keys where !onKeys.contains(key) {
-                if CGRectContainsPoint(key.frame, touch.locationInView(self)) {
-                    delegate?.noteOn(key.tag)
+                if CGRectContainsPoint(key.frame, touch.locationInView(self.view)) {
+                    Instrument.electricGuitar.play(key.tag)
                     unhighlightKeys()
                     key.backgroundColor = UIColor.redColor()
                     onKeys.insert(key)
@@ -104,11 +103,11 @@ public class KeyboardView: UIView {
         }
     }
     
-    override public func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
             for key in keys where onKeys.contains(key) {
-                if CGRectContainsPoint(key.frame, touch.locationInView(self)) {
-                    delegate?.noteOff(key.tag)
+                if CGRectContainsPoint(key.frame, touch.locationInView(self.view)) {
+                    Instrument.electricGuitar.stop(key.tag)
                     unhighlightKeys()
                 }
             }
@@ -125,4 +124,15 @@ public class KeyboardView: UIView {
         }
         onKeys.removeAll()
     }
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }

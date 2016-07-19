@@ -10,7 +10,7 @@ import UIKit
 
 public class PolyphonicKeyboardView: UIView {
     
-    public var delegate: KeyboardDelegate?
+//    public var delegate: KeyboardDelegate?
     var keys: [UIView] = []
 
     var onKeys: Set<UIView> = []
@@ -69,7 +69,7 @@ public class PolyphonicKeyboardView: UIView {
             for key in keys {
                 if CGRectContainsPoint(key.frame, touch.locationInView(self)) {
                     if onKeys.contains(key) {
-                        delegate?.noteOff(key.tag)
+//                        delegate?.noteOff(key.tag)
                         if notesWithSharps[key.tag % 12].rangeOfString("#") != nil {
                             key.backgroundColor = UIColor.blackColor()
                         } else {
@@ -77,7 +77,7 @@ public class PolyphonicKeyboardView: UIView {
                         }
                         onKeys.remove(key)
                     } else {
-                        delegate?.noteOn(key.tag)
+//                        delegate?.noteOn(key.tag)
                         key.backgroundColor = UIColor.redColor()
                         onKeys.insert(key)
                     }

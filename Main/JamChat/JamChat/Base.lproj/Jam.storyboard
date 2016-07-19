@@ -37,8 +37,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EIM-Qf-ukp">
-                                                    <rect key="frame" x="5" y="0.0" width="50" height="50"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EIM-Qf-ukp">
+                                                    <rect key="frame" x="5" y="-3" width="50" height="53"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="d3e-X5-z2B"/>
                                                         <constraint firstAttribute="height" constant="50" id="g7O-hq-N8G"/>
@@ -75,39 +75,40 @@
                                     <constraint firstAttribute="height" constant="130" id="JzI-ws-X0S"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6BZ-Y2-avN">
-                                <rect key="frame" x="0.0" y="467" width="375" height="200"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="6qC-aq-N6W"/>
-                                </constraints>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-J2-ape">
                                 <rect key="frame" x="167" y="84" width="42" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBW-N3-riu">
+                                <rect key="frame" x="0.0" y="467" width="375" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="sA4-ZM-QeT"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="RLR-1N-ip0" kind="embed" id="gm9-Wy-dxr"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="6BZ-Y2-avN" secondAttribute="trailing" id="883-lA-p7D"/>
+                            <constraint firstItem="eBW-N3-riu" firstAttribute="leading" secondItem="3FR-Kb-TeC" secondAttribute="leading" id="7ed-gE-d87"/>
                             <constraint firstItem="FMT-nD-Qbk" firstAttribute="centerY" secondItem="3FR-Kb-TeC" secondAttribute="centerY" id="OgI-st-s7X"/>
                             <constraint firstItem="p7U-1d-pb3" firstAttribute="top" secondItem="nbw-J2-ape" secondAttribute="bottom" constant="8" id="Pgi-9b-vDR"/>
-                            <constraint firstItem="6BZ-Y2-avN" firstAttribute="leading" secondItem="3FR-Kb-TeC" secondAttribute="leading" id="ZM3-P7-hpY"/>
+                            <constraint firstItem="o63-bA-2ee" firstAttribute="top" secondItem="eBW-N3-riu" secondAttribute="bottom" id="S54-uB-TpQ"/>
                             <constraint firstItem="FMT-nD-Qbk" firstAttribute="leading" secondItem="3FR-Kb-TeC" secondAttribute="leading" id="Zkn-79-6cM"/>
-                            <constraint firstItem="o63-bA-2ee" firstAttribute="top" secondItem="6BZ-Y2-avN" secondAttribute="bottom" id="eh6-zj-YbX"/>
                             <constraint firstItem="FMT-nD-Qbk" firstAttribute="top" secondItem="p7U-1d-pb3" secondAttribute="bottom" constant="28" id="j48-I2-zVl"/>
                             <constraint firstAttribute="trailing" secondItem="FMT-nD-Qbk" secondAttribute="trailing" id="qRx-E3-1Mq"/>
                             <constraint firstItem="nbw-J2-ape" firstAttribute="centerX" secondItem="3FR-Kb-TeC" secondAttribute="centerX" id="qYw-7D-HFd"/>
                             <constraint firstAttribute="trailing" secondItem="p7U-1d-pb3" secondAttribute="trailing" id="uhT-0V-cuR"/>
+                            <constraint firstAttribute="trailing" secondItem="eBW-N3-riu" secondAttribute="trailing" id="uxw-R2-YXh"/>
                             <constraint firstItem="p7U-1d-pb3" firstAttribute="leading" secondItem="3FR-Kb-TeC" secondAttribute="leading" id="yZD-BU-MW7"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="jamNameLabel" destination="nbw-J2-ape" id="3Z1-JL-cFF"/>
-                        <outlet property="keyboardViewContainer" destination="6BZ-Y2-avN" id="abX-Qc-Eyi"/>
                         <outlet property="userCollection" destination="p7U-1d-pb3" id="RpP-UM-wzn"/>
                         <outlet property="waveformContainer" destination="FMT-nD-Qbk" id="uIf-vL-0Bk"/>
                     </connections>
@@ -115,6 +116,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="peg-K1-tck" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1335.5" y="324.5"/>
+        </scene>
+        <!--Keyboard View Controller-->
+        <scene sceneID="2Hc-FO-EKy">
+            <objects>
+                <viewController id="RLR-1N-ip0" customClass="KeyboardViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vIF-XK-yOn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mc3-yC-YA8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1826.5" y="558"/>
         </scene>
     </scenes>
 </document>
