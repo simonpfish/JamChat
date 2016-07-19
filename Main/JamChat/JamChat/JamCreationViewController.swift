@@ -1,5 +1,5 @@
 //
-//  ChatCreationViewController.swift
+//  JamCreationViewController.swift
 //  JamChat
 //
 //  Created by Simon Posada Fishman on 7/12/16.
@@ -22,6 +22,7 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var sliderView1: UIView!
     //@IBOutlet weak var valueLabel1: UILabel!
     
+    @IBOutlet weak var setJamName: UITextField!
     
     // creates an interval slider
     private var intervalSlider1: IntervalSlider! {

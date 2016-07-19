@@ -98,6 +98,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func addNewJam(duration: Double, userIDs: [String]) {
         var jam: Jam!
         var jamLength = duration
+        var jamName = name
         
         if userIDs.count == 0 {
             print("Can't create jam without users")

@@ -79,10 +79,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="p7U-1d-pb3">
-                                <rect key="frame" x="0.0" y="7" width="375" height="143"/>
+                                <rect key="frame" x="0.0" y="58" width="375" height="92"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="143" id="1Mt-jX-VDh"/>
+                                    <constraint firstAttribute="height" constant="92" id="1Mt-jX-VDh"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NxA-aC-Jix">
                                     <size key="itemSize" width="60" height="70"/>
@@ -92,7 +92,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCell" id="brE-dW-oau" customClass="UserCell" customModule="JamChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="36.5" width="60" height="70"/>
+                                        <rect key="frame" x="0.0" y="11" width="60" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="70"/>
@@ -136,10 +136,16 @@
                                     <constraint firstAttribute="height" constant="130" id="JzI-ws-X0S"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-J2-ape">
+                                <rect key="frame" x="0.0" y="34" width="375" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="p7U-1d-pb3" firstAttribute="top" secondItem="3FR-Kb-TeC" secondAttribute="top" constant="7" id="0ym-2f-cxO"/>
+                            <constraint firstItem="p7U-1d-pb3" firstAttribute="top" secondItem="3FR-Kb-TeC" secondAttribute="top" constant="58" id="0ym-2f-cxO"/>
                             <constraint firstItem="FMT-nD-Qbk" firstAttribute="centerY" secondItem="3FR-Kb-TeC" secondAttribute="centerY" id="OgI-st-s7X"/>
                             <constraint firstItem="FMT-nD-Qbk" firstAttribute="leading" secondItem="3FR-Kb-TeC" secondAttribute="leading" id="Zkn-79-6cM"/>
                             <constraint firstAttribute="trailing" secondItem="FMT-nD-Qbk" secondAttribute="trailing" id="qRx-E3-1Mq"/>
@@ -149,6 +155,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="jamNameLabel" destination="nbw-J2-ape" id="3Z1-JL-cFF"/>
                         <outlet property="userCollection" destination="p7U-1d-pb3" id="RpP-UM-wzn"/>
                         <outlet property="waveformContainer" destination="FMT-nD-Qbk" id="uIf-vL-0Bk"/>
                     </connections>
