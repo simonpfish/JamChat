@@ -1,3 +1,4 @@
+
 //
 //  ChatViewController.swift
 //  JamChat
@@ -11,11 +12,13 @@ import AudioKit
 import RBBAnimation
 import EasyAnimation
 
-class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegate, UITableViewDataSource {
+class ChatViewController: UIViewController,  UITableViewDelegate, KeyboardDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     
+    
     @IBOutlet var chatView: UIView!
+  
         
     @IBOutlet weak var waveformView: UIView!
     
@@ -36,32 +39,35 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
     var instrumentColor: UIColor?
     var gridButton: UIButton?
     var guitarSender: Bool = false
+    var recordButton: UIButton?
+    var _instrument = Instrument()
     
     var recording = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
+      //  tableView.delegate = self
+       // tableView.dataSource = self
         
         goToSelection()
-        //instrument = sampler
-        Track.mainMixer.connect(sampler)//instrument!)
+        Track.mainMixer.connect(sampler)
         
     }
     
     func noteOn(note: Int) {
-        
-        if (!recording) {
-            recording = true
+
+        if (recording) {
+            recording = false
             print("recording")
             jam?.recordSend(instrument!, success: {
+                Track.mainMixer.stop()
                 print("done!")
-                self.tableView.reloadData()
+ 
+                //self.tableView.reloadData()
                 self.recording = false
                 self.jam?.fetch({ 
-                    self.tableView.reloadData()
+                    //self.tableView.reloadData()
                     }, failure: { (error: NSError) in
                         print(error.localizedDescription)
                 })
@@ -69,13 +75,12 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
                 print(error.localizedDescription)
             })
         }
-        
         sampler.playNote(note)
-
     }
     
     func noteOff(note: Int) {
         sampler.stopNote(note)
+      
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -125,50 +130,44 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
     }
     
     func toSax(sender: UIButton!) {
-        soundString = "SaxC"
-        instrumentColor = UIColor(red: 0.9294, green: 0.8353, blue: 0, alpha: 1.0)
+        _instrument.setInstrument("Saxophone")
         goToInstrument()
+   
     }
-    
+ 
     func toVoice(sender: UIButton!) {
-        soundString = "ChoirC"
-        instrumentColor = UIColor(red: 0.6392, green: 0, blue: 0.6275, alpha: 1.0)
+    _instrument.setInstrument("Choir")
         goToInstrument()
     }
     
     func toGuitar(sender: UIButton!) {
-        soundString = "RockGuitarC"
-        instrumentColor = UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0)
-        guitarSender = true
+    _instrument.setInstrument("ElectricGuitar")
         goToInstrument()
     }
     
     func toPiano(sender: UIButton!) {
-        soundString = "PianoC"
-        instrumentColor = UIColor.whiteColor()
+    _instrument.setInstrument("Piano")
         goToInstrument()
     }
     
     func toStandUp(sender: UIButton!) {
-        soundString = "AcousticBassC"
-        instrumentColor = UIColor(red: 0.5294, green: 0.1294, blue: 0, alpha: 1.0)
+    _instrument.setInstrument("AcousticBass")
         goToInstrument()
     }
     
     func toBass(sender: UIButton!) {
-        soundString = "ElectricBassC"
-        instrumentColor = UIColor(red: 0.4118, green: 0.6863, blue: 0, alpha: 1.0)
+    _instrument.setInstrument("ElectricBass")
         goToInstrument()
     }
     
     func goToInstrument (){
         selection!.removeFromSuperview()
         
-        keyboard = PianoView(width: 351, height: 30, lowestKey: 60, totalKeys: 13, color: self.instrumentColor!)
-        keyboard!.frame.origin.y = CGFloat(550)
+        keyboard = PianoView(width: 351, height: 100, lowestKey: 60, totalKeys: 13, color: _instrument._color!)
+        keyboard!.frame.origin.y = CGFloat(450)
         keyboard!.setNeedsDisplay()
         keyboard!.delegate = self
-        sampler.loadWav(self.soundString)
+        sampler.loadWav(_instrument._sound!)
         instrument = sampler
         
         chatView.addSubview(keyboard!)
@@ -179,14 +178,26 @@ class ChatViewController: UIViewController, KeyboardDelegate, UITableViewDelegat
         gridButton!.setImage(image, forState: .Normal)
         gridButton!.addTarget(self, action: #selector(onToSelection), forControlEvents: .TouchUpInside)
         
+        recordButton = UIButton(frame: CGRect(x: 50, y: 400, width: 60, height: 20))
+        recordButton!.backgroundColor = .redColor()
+        recordButton!.setTitle("Record", forState: .Normal)
+        recordButton!.addTarget(self, action: #selector(onRecord), forControlEvents: .TouchUpInside)
+        
+        self.view.addSubview(recordButton!)
+        
         self.view.addSubview(gridButton!)
         
         
     }
     
+    func onRecord(sender: UIButton!) {
+        recording = true
+    }
+    
     func onToSelection(sender: UIButton!) {
         keyboard!.removeFromSuperview()
         gridButton!.removeFromSuperview()
+        recordButton!.removeFromSuperview()
         goToSelection()
     }
 

@@ -1,5 +1,5 @@
 //
-//  ChatCell.swift
+//  JamCell.swift
 //  JamChat
 //
 //  Created by Simon Posada Fishman on 7/12/16.
@@ -12,9 +12,13 @@ class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBOutlet weak var userCollection: UICollectionView!
     
+    @IBOutlet weak var jamNameLabel: UILabel!
+    
+    
     var jam: Jam? {
         didSet {
             userCollection.reloadData()
+            jamNameLabel.text = jam?.title
         }
     }
     

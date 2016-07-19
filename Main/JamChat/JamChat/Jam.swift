@@ -15,6 +15,7 @@ class Jam: NSObject {
     var messages: [Message] = []
     var users: [User] = []
     let messageDuration: Double!
+    var title: String = ""
     
     private var messageIDs: [String] = []
     private var userIDs: [String] = []
@@ -30,6 +31,7 @@ class Jam: NSObject {
         messageDuration = object["messageDuration"] as! Double
         messageIDs = object["messages"] as! [String]
         userIDs = object["users"] as! [String]
+        title = object["title"] as? String ?? ""
         
         super.init()
     }
@@ -43,11 +45,12 @@ class Jam: NSObject {
     }
     
     /**
-     Creates a new jam with a given message duration
+     Creates a new jam with a given message duration and name
      */
-    init(messageDuration: Double, users: [User]) {
+    init(messageDuration: Double, users: [User], title: String) {
         object = PFObject(className: "Jam")
         self.messageDuration = messageDuration
+        self.title = title
         
         super.init()
         
@@ -108,11 +111,12 @@ class Jam: NSObject {
         }
     }
     
-    init(messageDuration: Double, userIDs: [String]) {
+    init(messageDuration: Double, userIDs: [String], title: String) {
         object = PFObject(className: "Jam")
         self.messageDuration = messageDuration
         self.userIDs = userIDs
         self.userIDs.append(User.currentUser!.facebookID)
+        self.title = title
     }
     
     /**
@@ -205,6 +209,7 @@ class Jam: NSObject {
         object["messageDuration"] = messageDuration
         object["users"] = userIDs
         object["messages"] = messageIDs
+        object["title"] = title
         
         object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
             print("Finished pushing jam \(self.object.objectId ?? "NEW")")
