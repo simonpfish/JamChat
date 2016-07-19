@@ -16,6 +16,14 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var numJamsLabel: UILabel!
     @IBOutlet weak var numTracksLabel: UILabel!
     
+    @IBOutlet weak var topFriend1View: UIImageView!
+    @IBOutlet weak var topFriend2View: UIImageView!
+    @IBOutlet weak var topFriend3View: UIImageView!
+    
+    @IBOutlet weak var topFriend1Label: UILabel!
+    @IBOutlet weak var topFriend2Label: UILabel!
+    @IBOutlet weak var topFriend3Label: UILabel!
+    
     
     
     var jams: [Jam] = []
