@@ -29,7 +29,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         layout.itemSize = CGSizeMake(60, 70)
         layout.minimumLineSpacing = 0.0
         userCollection.collectionViewLayout = layout
-        jamNameLabel.text = jam.jamName
+        jamNameLabel.text = jam.title
         
         
         // Set up waveform view:

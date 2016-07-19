@@ -71,8 +71,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="selectedUsersLabel" destination="UtY-V3-lfq" id="tAT-Wf-ncv"/>
-                        <outlet property="setJamName" destination="Dla-u1-i4Y" id="gpM-bW-lgJ"/>
                         <outlet property="sliderView1" destination="XHu-qe-3er" id="Y6q-z6-MHq"/>
+                        <outlet property="titleLabel" destination="Dla-u1-i4Y" id="4Hj-jt-rcx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eyp-zi-gHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
