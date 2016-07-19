@@ -136,7 +136,6 @@
 		E74F1DF01D38162500A34409 /* Instruments */ = {
 			isa = PBXGroup;
 			children = (
-				E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */,
 				E7F0BB541D3EA5070059160B /* PolyphonicKeyboardView.swift */,
 				8C20F5F11D38F37800622892 /* SelectionView.swift */,
 			);
@@ -211,6 +210,7 @@
 			children = (
 				E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */,
 				E74F1DF41D3869DB00A34409 /* JamViewController.swift */,
+				E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */,
 			);
 			name = Jam;
 			sourceTree = "<group>";

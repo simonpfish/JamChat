@@ -36,19 +36,24 @@ class KeyboardViewController: UIViewController {
         var increment = 0
         while keyCount < totalKeys {
             if  allowedNotes.indexOf(notesWithFlats[(lowestKey + increment) % 12]) != nil || allowedNotes.indexOf(notesWithSharps[(lowestKey + increment) % 12]) != nil {
-                var newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: height - 2))
+                print(height)
+                var newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: 100))
                 if notesWithSharps[(lowestKey + increment) % 12].rangeOfString("#") != nil {
-                    newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: height - 50))
+                    newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: 200))
+                    newButton.frame.origin.x = CGFloat(keyCount * (keyWidth + 1)) + 1
                     newButton.backgroundColor = UIColor.blackColor()
                 } else {
+                    newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: 200))
+                    newButton.frame.origin.x = CGFloat(keyCount * (keyWidth + 1)) + 1
                     newButton.backgroundColor = UIColor.whiteColor()
-                    newButton.layer.borderColor = UIColor.blackColor().CGColor
-                    newButton.layer.borderWidth = 2
                 }
+                
+                newButton.layer.borderColor = UIColor.blackColor().CGColor
+                newButton.layer.cornerRadius = 10
+                newButton.layer.borderWidth = 2
                 
                 newButton.setNeedsDisplay()
                 
-                newButton.frame.origin.x = CGFloat(keyCount * (keyWidth + 1)) + 1
                 newButton.frame.origin.y = CGFloat(1)
                 newButton.tag = lowestKey + increment
                 keys.append(newButton)
@@ -103,6 +108,27 @@ class KeyboardViewController: UIViewController {
         }
     }
     
+    @IBAction func onPan(sender: UIPanGestureRecognizer) {
+        
+        for key in keys where !onKeys.contains(key) {
+            if CGRectContainsPoint(key.frame, sender.locationInView(self.view)) {
+                Instrument.electricGuitar.play(key.tag)
+                unhighlightKeys()
+                key.backgroundColor = UIColor.redColor()
+                onKeys.insert(key)
+            }
+        }
+        if(sender.state == .Ended){
+            for key in keys where onKeys.contains(key) {
+                if CGRectContainsPoint(key.frame, sender.locationInView(self.view)) {
+                    Instrument.electricGuitar.stop(key.tag)
+                    unhighlightKeys()
+                }
+            }
+        }
+    }
+    
+    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
             for key in keys where onKeys.contains(key) {
@@ -112,6 +138,8 @@ class KeyboardViewController: UIViewController {
                 }
             }
         }
+        
+        
     }
     
     func unhighlightKeys() {
