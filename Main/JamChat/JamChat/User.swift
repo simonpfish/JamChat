@@ -172,6 +172,15 @@ class User: NSObject {
         }
     }
     
+//    func getTopFriends(completion: ([Users] -> ()) {
+//        
+//        var numUserOccurrences: [String, Integer]
+//        
+//        let query = PFQuery(className: "Jam")
+//        query.whereKey("users", containsString: facebookID)
+//        
+//    }
+    
 }
 
 // Delegate used for the login view success and failure cases
@@ -195,7 +204,6 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
                 self.loginSuccess?()
                 print("Logged in \(User.currentUser!.name)")
             }
-            
             
         })
     }

@@ -39,13 +39,14 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         super.viewDidLoad()
         
         // set up interval slider
-        self.intervalSlider1 = IntervalSlider(frame: self.sliderView1.bounds, sources: self.createSources())
+        let result = self.createSources()
+        self.intervalSlider1 = IntervalSlider(frame: self.sliderView1.bounds, sources: result.sources, options: result.options)
         
         initializeFriendPicker()
     }
     
     // formats the slider and the jam duration text
-    private func createSources() -> [IntervalSliderSource] {
+    private func createSources() -> (sources: [IntervalSliderSource], options: [IntervalSliderOption]) {
         
         // Sample of equally spaced intervals
         var sources = [IntervalSliderSource]()
@@ -63,7 +64,17 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
             // sets the spacing between the duration text
             appearanceValue += 33
         }
-        return sources
+        
+        // image used for the thumb image on the interval slider
+        let image = UIImage(named: "grayCircle.png")!
+        
+        // sets the track tint color and the thumb image
+        let options: [IntervalSliderOption] = [
+            .MinimumTrackTintColor(UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)),
+            .ThumbImage(image)
+        ]
+        
+        return (sources, options)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -103,7 +114,6 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
             self.view.sendSubviewToBack(self.ramReel.view)
             self.ramReel.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         })
-        
         
     }
 
