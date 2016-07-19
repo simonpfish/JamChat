@@ -39,7 +39,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="usersLabel" destination="ID7-cx-oNE" id="rS8-Uj-9j9"/>
-                                            <segue destination="x4v-zO-RyJ" kind="show" id="t2c-Y2-kSv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

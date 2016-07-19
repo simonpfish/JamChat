@@ -13,6 +13,7 @@
 		8C20F5F81D38F5B500622892 /* ElectricBassC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C20F5F71D38F5B500622892 /* ElectricBassC.wav */; };
 		8C20F5FA1D38F5C300622892 /* PianoC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C20F5F91D38F5C300622892 /* PianoC.wav */; };
 		8C20F5FC1D38F5CD00622892 /* SaxC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C20F5FB1D38F5CD00622892 /* SaxC.wav */; };
+		8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D0FEB1D3D602C00380680 /* Instrument.swift */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
 		E717EC161D2ED34500AC812B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717EC151D2ED34500AC812B /* User.swift */; };
 		E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F1DF41D3869DB00A34409 /* JamViewController.swift */; };
@@ -53,6 +54,7 @@
 		8C20F5F71D38F5B500622892 /* ElectricBassC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ElectricBassC.wav; sourceTree = "<group>"; };
 		8C20F5F91D38F5C300622892 /* PianoC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PianoC.wav; sourceTree = "<group>"; };
 		8C20F5FB1D38F5CD00622892 /* SaxC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SaxC.wav; sourceTree = "<group>"; };
+		8C9D0FEB1D3D602C00380680 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		E717EC151D2ED34500AC812B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E74F1DF41D3869DB00A34409 /* JamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamViewController.swift; sourceTree = "<group>"; };
 		E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamHistoryViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		E717EC141D2ED32F00AC812B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8C9D0FEB1D3D602C00380680 /* Instrument.swift */,
 				E717EC151D2ED34500AC812B /* User.swift */,
 				E799567C1D31746300EE445B /* Jam.swift */,
 				E799567A1D31744500EE445B /* Message.swift */,
@@ -380,6 +383,7 @@
 				E799567B1D31744500EE445B /* Message.swift in Sources */,
 				E79956741D316E9D00EE445B /* AKAudioFile+ConvenienceInitializers.swift in Sources */,
 				E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */,
+				8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */,
 				E79956761D316E9D00EE445B /* AKAudioFile+Processing.swift in Sources */,
 				E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */,
 				E717EC161D2ED34500AC812B /* User.swift in Sources */,
