@@ -38,7 +38,7 @@
 		E7F0BB491D3D67B80059160B /* JamCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F0BB481D3D67B80059160B /* JamCreation.storyboard */; };
 		E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */; };
 		E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */; };
-		E7FE0FE61D356E2100452361 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE51D356E2100452361 /* ChatCell.swift */; };
+		E7FE0FE61D356E2100452361 /* JamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE51D356E2100452361 /* JamCell.swift */; };
 		E7FE0FE81D35706A00452361 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE71D35706A00452361 /* HomeViewController.swift */; };
 		E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */; };
 		E7FE0FF21D359B6600452361 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FF11D359B6600452361 /* ChatViewController.swift */; };
@@ -83,7 +83,7 @@
 		E7F0BB481D3D67B80059160B /* JamCreation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JamCreation.storyboard; sourceTree = "<group>"; };
 		E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
-		E7FE0FE51D356E2100452361 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		E7FE0FE51D356E2100452361 /* JamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamCell.swift; sourceTree = "<group>"; };
 		E7FE0FE71D35706A00452361 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamCreationViewController.swift; sourceTree = "<group>"; };
 		E7FE0FF11D359B6600452361 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 		E74F1DF11D38163900A34409 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				E7FE0FE51D356E2100452361 /* ChatCell.swift */,
+				E7FE0FE51D356E2100452361 /* JamCell.swift */,
 				E7FE0FFC1D359F4100452361 /* MessageCell.swift */,
 				E7E0D6971D3C0DCB005A840A /* UserCell.swift */,
 			);
@@ -208,6 +208,15 @@
 			path = "Audio File";
 			sourceTree = "<group>";
 		};
+		E7F0BB501D3D7D0B0059160B /* Jam */ = {
+			isa = PBXGroup;
+			children = (
+				E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */,
+				E74F1DF41D3869DB00A34409 /* JamViewController.swift */,
+			);
+			name = Jam;
+			sourceTree = "<group>";
+		};
 		E7FE0FE21D356D9B00452361 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,8 +235,7 @@
 		E7FE0FF41D359CA400452361 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */,
-				E74F1DF41D3869DB00A34409 /* JamViewController.swift */,
+				E7F0BB501D3D7D0B0059160B /* Jam */,
 				E7FE0FE71D35706A00452361 /* HomeViewController.swift */,
 				E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */,
 				E7FE0FF11D359B6600452361 /* ChatViewController.swift */,
@@ -392,7 +400,7 @@
 				E799567F1D31749F00EE445B /* Track.swift in Sources */,
 				E79956771D316E9D00EE445B /* AKAudioFile.swift in Sources */,
 				E799567D1D31746300EE445B /* Jam.swift in Sources */,
-				E7FE0FE61D356E2100452361 /* ChatCell.swift in Sources */,
+				E7FE0FE61D356E2100452361 /* JamCell.swift in Sources */,
 				E799567B1D31744500EE445B /* Message.swift in Sources */,
 				E79956741D316E9D00EE445B /* AKAudioFile+ConvenienceInitializers.swift in Sources */,
 				E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */,

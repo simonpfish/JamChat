@@ -25,6 +25,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -53,6 +54,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+        }
     }
     
     func loadFeed() {
@@ -91,12 +95,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    func addNewJam(userIDs: [String]) {
+    func addNewJam(duration: Int, userIDs: [String]) {
         var jam: Jam!
+        var jamLength = duration
+        
         if userIDs.count == 0 {
             print("Can't create jam without users")
         } else {
-            jam = Jam(messageDuration: 5, userIDs: userIDs)
+            jam = Jam(messageDuration: Double(jamLength), userIDs: userIDs)
             jam.push { (success: Bool, error: NSError?) in
                 if let error = error {
                     print(error.localizedDescription)
