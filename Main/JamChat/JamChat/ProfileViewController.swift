@@ -114,6 +114,11 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             topFriend1View.setImageWithURL(friend1URL)
         }
         
+        // format the text
+        topFriend1Label.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        topFriend2Label.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        topFriend3Label.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        numJamsLabel.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
     }
     
     override func didReceiveMemoryWarning() {
