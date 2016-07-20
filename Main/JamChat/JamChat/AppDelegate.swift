@@ -11,12 +11,14 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Parse
 import ParseFacebookUtilsV4
+import AudioKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    static var mainMixer: AKMixer?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Parse.initializeWithConfiguration(
@@ -29,7 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions);
         
-        Track.mainMixer.start()
+        // Audio setup
+        
+        print("Setting up audio")
+        AppDelegate.mainMixer = AKMixer(Track.mixer, Instrument.mixer)
+        AudioKit.output = AppDelegate.mainMixer
+        Track.mixer.start()
+        Instrument.mixer.start()
+        AppDelegate.mainMixer!.start()
+        AudioKit.start()
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

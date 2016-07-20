@@ -10,17 +10,27 @@ import UIKit
 import KTCenterFlowLayout
 import FDWaveformView
 import AudioKit
+import CircleMenu
 
-class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CircleMenuDelegate {
 
     var jam: Jam!
     
+    @IBOutlet weak var keyboardContainer: UIView!
     @IBOutlet weak var jamNameLabel: UILabel!
     @IBOutlet weak var userCollection: UICollectionView!
     @IBOutlet weak var waveformContainer: UIView!
     
+    @IBOutlet weak var keyboardButton: CircleMenu!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        keyboardButton.delegate = self
+        keyboardButton.layer.cornerRadius = keyboardButton.frame.size.width / 2.0
+        keyboardButton.setImage(UIImage(named: "icon_menu"), forState: .Normal)
+        keyboardButton.setImage(UIImage(named: "icon_close"), forState: .Selected)
+            
         
         // Set up user collection view:
         userCollection.dataSource = self
@@ -31,7 +41,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         layout.minimumLineSpacing = 0.0
         userCollection.collectionViewLayout = layout
         jamNameLabel.text = jam.title
-        
         
         // Set up waveform view:
         let lastMessage = jam.messages.last
@@ -85,6 +94,32 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         cell.user = jam.users[indexPath.row]
         return cell
     }
+    
+    let items: [(icon: String, color: UIColor)] = [
+        ("icon_home", UIColor(red:0.19, green:0.57, blue:1, alpha:1)),
+        ("icon_search", UIColor(red:0.22, green:0.74, blue:0, alpha:1)),
+        ("notifications-btn", UIColor(red:0.96, green:0.23, blue:0.21, alpha:1)),
+        ("settings-btn", UIColor(red:0.51, green:0.15, blue:1, alpha:1)),
+        ("nearby-btn", UIColor(red:1, green:0.39, blue:0, alpha:1)),
+        ]
+    
+    let instruments: [Instrument] = [Instrument.acousticBass, Instrument.choir, Instrument.electricBass, Instrument.electricGuitar, Instrument.saxophone, Instrument.piano]
+    
+    func circleMenu(circleMenu: CircleMenu, willDisplay button: UIButton, atIndex: Int) {
+        button.backgroundColor = instruments[atIndex].color
+        button.setImage(instruments[atIndex].image, forState: .Normal)
+        
+        // set highlited image
+        let highlightedImage  = instruments[atIndex].image!.imageWithRenderingMode(.AlwaysTemplate)
+        button.setImage(highlightedImage, forState: .Highlighted)
+        button.tintColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
+    }
+    
+    func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: UIButton, atIndex: Int) {
+        let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+        keyboardController.instrument = instruments[atIndex]
+    }
+    
 
     /*
     // MARK: - Navigation

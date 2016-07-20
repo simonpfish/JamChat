@@ -193,7 +193,6 @@ class User: NSObject {
         for jam in Jam.currentUserJams {
             for user in jam.users {
                 if(user.facebookID != User.currentUser?.facebookID) {
-                    print(numUserOccurrences.keys)
                     if (!numUserOccurrences.keys.contains(user.facebookID)) {
                         numUserOccurrences[user.facebookID] = 1
                         numUserObjOccurrences[user] = 1
