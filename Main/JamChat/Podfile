@@ -18,8 +18,9 @@ target 'JamChat' do
     pod 'ParseUI'
 
     # Audio
+#    pod 'AudioKit', :git => 'https://github.com/audiokit/AudioKit.git'
     pod 'AudioKit'
-    
+
     #Networking
     pod 'AFNetworking'
 

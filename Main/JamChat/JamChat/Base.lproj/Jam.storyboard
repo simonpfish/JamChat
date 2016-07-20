@@ -141,6 +141,10 @@
         <scene sceneID="2Hc-FO-EKy">
             <objects>
                 <viewController id="RLR-1N-ip0" customClass="KeyboardViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dvw-rc-mjY"/>
+                        <viewControllerLayoutGuide type="bottom" id="WaN-fA-JOQ"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vIF-XK-yOn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

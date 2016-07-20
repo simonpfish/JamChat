@@ -17,29 +17,76 @@ class Instrument: NSObject {
     private(set) var color: UIColor!
     private(set) var image: UIImage?
     
-    private let sampler =  AKSampler()
+    private var sampler: AKSampler!
+    
+    private var urls: [NSURL] = []
+    private var fileName: String!
     
     private init(name: String, color: UIColor, image: UIImage?, fileName: String) {
         self.name = name
         self.color = color
         self.image = image
+        self.fileName = fileName
         
-        let bundle = NSBundle.mainBundle()
-        let filepath = bundle.URLForResource(fileName, withExtension: "wav")
+        AudioKit.stop()
+        sampler = AKSampler()
         
+//        let url = NSBundle.mainBundle().URLForResource(fileName, withExtension: type)
+//        if let url = url {
+//            urls.append(url)
+//            print("Loading instrument file: ", url)
+//            try? sampler.samplerUnit.loadInstrumentAtURL(url)
+//        }
+//        
         sampler.loadWav(fileName)
         
-        print("Loaded instrument: " + filepath!.absoluteString)
         Instrument.mixer.connect(self.sampler)
+        
+        AudioKit.start()
+        
+        print("Loaded ", name)
+    }
+    
+    private init(name: String, color: UIColor, image: UIImage?, folderName: String, type: String) {
+        self.name = name
+        self.color = color
+        self.image = image
+        self.fileName = folderName
+
+        
+        sampler = AKSampler()
+        
+        let bundle = NSBundle.mainBundle()
+        let urls = bundle.URLsForResourcesWithExtension(type, subdirectory: folderName)
+        
+        if let urls = urls {
+            self.urls.appendContentsOf(urls)
+            print("Loading instrument files: ", urls)
+            try! sampler.samplerUnit.loadAudioFilesAtURLs(urls)
+        }
+        
+        Instrument.mixer.connect(self.sampler)
+        
+        
+        print("Loaded ", name)
     }
     
     func play(note: Int) {
-        sampler.playNote(note)
+        print("Playing " + name)
+        sampler.playNote(note, velocity: 60, channel: 1 )
     }
     
     func stop(note: Int) {
         sampler.stopNote(note)
     }
+    
+    func reload() {
+        print("Reloading ", name)
+        sampler = AKSampler()
+        sampler.loadWav(fileName)
+        Instrument.mixer.connect(sampler)
+    }
+    
     
     // Instruments:
     static let electricGuitar = Instrument(name: "Electric Guitar", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), image: UIImage(named: "electric_guitar"), fileName: "RockGuitarC")

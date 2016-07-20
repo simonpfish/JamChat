@@ -100,6 +100,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         button.tintColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
     }
     
+    func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: UIButton, atIndex: Int) {
+        let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+        keyboardController.instrument = instruments[atIndex]
+    }
+    
 
     /*
     // MARK: - Navigation

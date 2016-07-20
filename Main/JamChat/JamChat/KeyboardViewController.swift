@@ -8,6 +8,7 @@
 
 import UIKit
 import CircleMenu
+import AudioKit
 
 class KeyboardViewController: UIViewController, CircleMenuDelegate{
     
@@ -21,11 +22,32 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
     let totalKeys = 12
     let lowestKey = 60
     
+    var sharpKeyColor = UIColor.blackColor()
+    
+    var instrument: Instrument = Instrument.choir {
+        didSet {
+            
+            instrument.reload()
+            sharpKeyColor = instrument.color
+            
+            for key in onKeys {
+                if notesWithSharps[key.tag % 12].rangeOfString("#") != nil {
+                    key.backgroundColor = sharpKeyColor
+                } else {
+                    key.backgroundColor = UIColor.whiteColor()
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
+        renderKeyboard()
+        // Do any additional setup after loading the view.
+    }
+    
+    func renderKeyboard() {
         let allowedNotes = notesWithSharps //["A", "B", "C#", "D", "E", "F#", "G"]
         
         let keyWidth = Int(view.frame.width) / totalKeys - 1
@@ -44,7 +66,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
                 if notesWithSharps[(lowestKey + increment) % 12].rangeOfString("#") != nil {
                     newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: 200))
                     newButton.frame.origin.x = CGFloat(keyCount * (keyWidth + 1)) + 1
-                    newButton.backgroundColor = UIColor.blackColor()
+                    newButton.backgroundColor = sharpKeyColor
                 } else {
                     newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: 200))
                     newButton.frame.origin.x = CGFloat(keyCount * (keyWidth + 1)) + 1
@@ -67,8 +89,6 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
             increment += 1
             
         }
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,7 +105,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
             
             for key in keys where !onKeys.contains(key) {
                 if CGRectContainsPoint(key.frame, touch.locationInView(self.view)) {
-                    Instrument.electricGuitar.play(key.tag)
+                    instrument.play(key.tag)
                     unhighlightKeys()
                     key.backgroundColor = UIColor.redColor()
                     onKeys.insert(key)
@@ -100,7 +120,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
             
             for key in keys where !onKeys.contains(key) {
                 if CGRectContainsPoint(key.frame, touch.locationInView(self.view)) {
-                    Instrument.electricGuitar.play(key.tag)
+                    instrument.play(key.tag)
                     unhighlightKeys()
                     key.backgroundColor = UIColor.redColor()
                     onKeys.insert(key)
@@ -116,16 +136,20 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
         
         for key in keys where !onKeys.contains(key) {
             if CGRectContainsPoint(key.frame, sender.locationInView(self.view)) {
-                Instrument.electricGuitar.play(key.tag)
+                instrument.play(key.tag)
+                for key in onKeys {
+                    instrument.stop(key.tag)
+                }
                 unhighlightKeys()
                 key.backgroundColor = UIColor.redColor()
                 onKeys.insert(key)
             }
         }
+        
         if(sender.state == .Ended){
             for key in keys where onKeys.contains(key) {
                 if CGRectContainsPoint(key.frame, sender.locationInView(self.view)) {
-                    Instrument.electricGuitar.stop(key.tag)
+                    instrument.stop(key.tag)
                     unhighlightKeys()
                 }
             }
@@ -137,7 +161,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
         for touch in touches {
             for key in keys where onKeys.contains(key) {
                 if CGRectContainsPoint(key.frame, touch.locationInView(self.view)) {
-                    Instrument.electricGuitar.stop(key.tag)
+                    instrument.stop(key.tag)
                     unhighlightKeys()
                 }
             }
