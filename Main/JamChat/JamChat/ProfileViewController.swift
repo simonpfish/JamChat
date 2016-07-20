@@ -44,6 +44,13 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         topFriend3View.layer.cornerRadius = topFriend3View.frame.size.width / 2;
         topFriend3View.clipsToBounds = true;
         
+        // format the text
+        topFriend1Label.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        topFriend2Label.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        topFriend3Label.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        numJamsLabel.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        numTracksLabel.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        
         // Sets the user's profile picture
         profilePicture.setImageWithURL(User.currentUser!.profileImageURL)
         
