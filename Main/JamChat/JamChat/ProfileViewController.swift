@@ -23,9 +23,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var topFriend1Label: UILabel!
     @IBOutlet weak var topFriend2Label: UILabel!
     @IBOutlet weak var topFriend3Label: UILabel!
-    
-    
-    
+        
     var jams: [Jam] = []
     
     override func viewDidLoad() {
@@ -33,9 +31,18 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         
         // Do any additional setup after loading the view.
         
-        // Makes the profile picture circular
+        // Makes the profile picture views circular
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2;
         profilePicture.clipsToBounds = true;
+        
+        topFriend1View.layer.cornerRadius = topFriend1View.frame.size.width / 2;
+        topFriend1View.clipsToBounds = true;
+        
+        topFriend2View.layer.cornerRadius = topFriend2View.frame.size.width / 2;
+        topFriend2View.clipsToBounds = true;
+        
+        topFriend3View.layer.cornerRadius = topFriend3View.frame.size.width / 2;
+        topFriend3View.clipsToBounds = true;
         
         // Sets the user's profile picture
         profilePicture.setImageWithURL(User.currentUser!.profileImageURL)
@@ -52,6 +59,69 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         User.currentUser?.getNumberOfTracks({ (count: Int) in
             self.numTracksLabel.text = String(count)
         })
+        
+        // array of the current User's top friends' User ID
+        var topFriends = User.currentUser?.getTopFriends()
+        
+        // set of the top friends' names (gets rid of duplicates)
+        var topFriendsName = Set<String>()
+        
+        // set of the top friends' profile picture URLs (gets rid of duplicates)
+        var topFriendsImage = Set<NSURL>()
+        
+        for friend in topFriends! {
+            topFriendsName.insert(friend.firstName)
+            topFriendsImage.insert(friend.profileImageURL)
+        }
+        
+        var friend1Name: String = ""
+        var friend2Name: String = ""
+        var friend3Name: String = ""
+        
+        var friend1URL: NSURL = NSURL()
+        var friend2URL: NSURL = NSURL()
+        var friend3URL: NSURL = NSURL()
+        
+        if(topFriendsName.count >= 3) {
+            
+            // sets the top friends' names
+            friend1Name = topFriendsName.popFirst()!
+            friend2Name = topFriendsName.popFirst()!
+            friend3Name = topFriendsName.popFirst()!
+            
+            // sets the top friends' profile picture URL
+            friend3URL = topFriendsImage.popFirst()!
+            friend2URL = topFriendsImage.popFirst()!
+            friend1URL = topFriendsImage.popFirst()!
+            
+            topFriend1Label.text = friend1Name
+            topFriend1View.setImageWithURL(friend1URL)
+            
+            topFriend2Label.text = friend2Name
+            topFriend2View.setImageWithURL(friend2URL)
+            
+            topFriend3Label.text = friend3Name
+            topFriend3View.setImageWithURL(friend3URL)
+        } else if (topFriendsName.count == 2) {
+            friend1Name = topFriendsName.popFirst()!
+            friend2Name = topFriendsName.popFirst()!
+            
+            friend2URL = topFriendsImage.popFirst()!
+            friend1URL = topFriendsImage.popFirst()!
+            
+            topFriend1Label.text = friend1Name
+            topFriend1View.setImageWithURL(friend1URL)
+            
+            topFriend2Label.text = friend2Name
+            topFriend2View.setImageWithURL(friend2URL)
+        } else if (topFriendsName.count == 1) {
+            friend1Name = topFriendsName.popFirst()!
+        
+            friend1URL = topFriendsImage.popFirst()!
+            
+            topFriend1Label.text = friend1Name
+            topFriend1View.setImageWithURL(friend1URL)
+        }
         
     }
     

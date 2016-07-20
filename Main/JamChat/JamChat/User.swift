@@ -28,6 +28,7 @@ class User: NSObject {
     var email: String?
     
     var friends: [[String : String]]?
+    
     /**
      Initializes user object based on a Parse User.
      */
@@ -172,15 +173,71 @@ class User: NSObject {
         }
     }
     
-//    func getTopFriends(completion: ([Users] -> ()) {
-//        
-//        var numUserOccurrences: [String, Integer]
-//        
-//        let query = PFQuery(className: "Jam")
-//        query.whereKey("users", containsString: facebookID)
-//        
-//    }
+    func getTopFriends() -> [User] {
+        
+        var numUserOccurrences: [String: Int] = [:]
+        var numUserObjOccurrences: [User: Int] = [:]
+        var topIDs: [String] = []
+        var topFriends: [User] = []
+        
+        for jam in Jam.currentUserJams {
+            for user in jam.users {
+                if(user.facebookID != User.currentUser?.facebookID) {
+                    print(numUserOccurrences.keys)
+                    if (!numUserOccurrences.keys.contains(user.facebookID)) {
+                        numUserOccurrences[user.facebookID] = 1
+                        numUserObjOccurrences[user] = 1
+                    } else {
+                        var curNum = numUserOccurrences[user.facebookID]
+                        curNum = curNum! + 1
+                        numUserOccurrences[user.facebookID] = curNum
+                        numUserObjOccurrences[user] = curNum
+                    }
+                }
+            }
+        }
+        
+        topIDs = numUserOccurrences.keysSortedByValue(>)
+        topFriends = numUserObjOccurrences.keysSortedByValue(>)
+        
+        
+        getUserFromID(topIDs[0],success: { (resultArray: [User]) in
+
+        }) { (error: NSError) in
+            print(error.localizedDescription)
+        }
+
+        return topFriends
+        //return topIDs
+        
+    }
     
+    // need a way to get a user from the user's facebookID
+    
+        func getUserFromID(facebookID: String, success: ([User]) -> (), failure: (NSError) -> ()) -> User {
+            var responseObjects: [User] = []
+            var userFromID: User = User.currentUser!
+            
+            let query = PFQuery(className: "User")
+            query.whereKey("facebookID", equalTo: facebookID)
+            //query.whereKey("facebookID", containsString: facebookID)
+            
+            print("facebookID \(facebookID)")
+            
+            // skips over this block
+            query.findObjectsInBackgroundWithBlock ({ (objects: [PFObject]?, error: NSError?) in
+                if let error = error {
+                    failure(error)
+                } else {
+                    responseObjects = objects! as NSObject as! [User]
+                    success(responseObjects)
+                }
+            })
+            
+            // nothing in the responseObject array
+            //userFromID = responseObjects[0]
+            return userFromID
+        }
 }
 
 // Delegate used for the login view success and failure cases
@@ -211,5 +268,33 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
     // Called when the login fails
     func logInViewController(logInController: PFLogInViewController, didFailToLogInWithError error: NSError?) {
         loginFailure?(error)
+    }
+    
+}
+
+extension Dictionary {
+    func sortedKeys(isOrderedBefore:(Key,Key) -> Bool) -> [Key] {
+        return Array(self.keys).sort(isOrderedBefore)
+    }
+    
+    // Slower because of a lot of lookups, but probably takes less memory (this is equivalent to Pascals answer in an generic extension)
+    func sortedKeysByValue(isOrderedBefore:(Value, Value) -> Bool) -> [Key] {
+        return sortedKeys {
+            isOrderedBefore(self[$0]!, self[$1]!)
+        }
+    }
+    
+    // Faster because of no lookups, may take more memory because of duplicating contents
+    func keysSortedByValue(isOrderedBefore:(Value, Value) -> Bool) -> [Key] {
+        return Array(self)
+            .sort() {
+                let (_, lv) = $0
+                let (_, rv) = $1
+                return isOrderedBefore(lv, rv)
+            }
+            .map {
+                let (k, _) = $0
+                return k
+        }
     }
 }
