@@ -22,7 +22,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
     let totalKeys = 12
     let lowestKey = 60
     
-    var sharpKeyColor = UIColor.blackColor()
+    var sharpKeyColor = Instrument.choir.color
     
     var instrument: Instrument = Instrument.choir {
         didSet {
@@ -30,9 +30,12 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
             instrument.reload()
             sharpKeyColor = instrument.color
             
-            for key in onKeys {
+            for key in keys {
                 if notesWithSharps[key.tag % 12].rangeOfString("#") != nil {
-                    key.backgroundColor = sharpKeyColor
+                    print("changing color")
+                    UIView.animateWithDuration(0.5, animations: { 
+                        key.backgroundColor = self.sharpKeyColor
+                    })
                 } else {
                     key.backgroundColor = UIColor.whiteColor()
                 }
@@ -61,7 +64,6 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
         var increment = 0
         while keyCount < totalKeys {
             if  allowedNotes.indexOf(notesWithFlats[(lowestKey + increment) % 12]) != nil || allowedNotes.indexOf(notesWithSharps[(lowestKey + increment) % 12]) != nil {
-                print(height)
                 var newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: 100))
                 if notesWithSharps[(lowestKey + increment) % 12].rangeOfString("#") != nil {
                     newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: 200))
@@ -173,7 +175,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
     func unhighlightKeys() {
         for key in onKeys {
             if notesWithSharps[key.tag % 12].rangeOfString("#") != nil {
-                key.backgroundColor = UIColor.blackColor()
+                key.backgroundColor = sharpKeyColor
             } else {
                 key.backgroundColor = UIColor.whiteColor()
             }

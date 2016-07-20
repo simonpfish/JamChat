@@ -30,14 +30,6 @@ class Instrument: NSObject {
         
         AudioKit.stop()
         sampler = AKSampler()
-        
-//        let url = NSBundle.mainBundle().URLForResource(fileName, withExtension: type)
-//        if let url = url {
-//            urls.append(url)
-//            print("Loading instrument file: ", url)
-//            try? sampler.samplerUnit.loadInstrumentAtURL(url)
-//        }
-//        
         sampler.loadWav(fileName)
         
         Instrument.mixer.connect(self.sampler)
