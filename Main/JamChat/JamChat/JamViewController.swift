@@ -118,6 +118,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: UIButton, atIndex: Int) {
         let keyboardController = self.childViewControllers[0] as! KeyboardViewController
         keyboardController.instrument = instruments[atIndex]
+        keyboardButton.selected = false
     }
     
 
