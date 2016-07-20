@@ -24,9 +24,8 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
     
     var sharpKeyColor = Instrument.choir.color
     
-    var instrument: Instrument = Instrument.choir {
+    var instrument: Instrument! {
         didSet {
-            
             instrument.reload()
             sharpKeyColor = instrument.color
             
@@ -46,6 +45,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        instrument = Instrument.choir
         renderKeyboard()
         // Do any additional setup after loading the view.
     }
