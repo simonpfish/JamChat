@@ -71,7 +71,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         var friend2URL: NSURL = NSURL()
         var friend3URL: NSURL = NSURL()
         
-        if(topFriends!.count == 3) {
+        if(topFriends!.count >= 3) {
             
             friend1Name = topFriends![0].firstName
             friend1URL = topFriends![0].profileImageURL
