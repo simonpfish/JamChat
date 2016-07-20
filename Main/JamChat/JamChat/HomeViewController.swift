@@ -76,23 +76,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.jam = jams[indexPath.row]
         return cell
     }
-
-    @IBAction func onNewJam(sender: AnyObject) {
-        let newJamController = JamCreationViewController()
-        presentViewController(newJamController, animated: true, completion: nil)
-    }
-
-    
-    @IBAction func onLogout(sender: AnyObject) {
-        User.logout()
-        User.login(self, success: { 
-            self.loadFeed()
-        }) { (error: NSError?) in
-            print(error?.localizedDescription)
-        }
-    }
-    
-    
+        
     func addNewJam(duration: Double, userIDs: [String], name: String) {
         var jam: Jam!
         let jamLength = duration
