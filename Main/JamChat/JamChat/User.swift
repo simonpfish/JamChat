@@ -28,6 +28,7 @@ class User: NSObject {
     var email: String?
     
     var friends: [[String : String]]?
+    
     /**
      Initializes user object based on a Parse User.
      */
@@ -172,35 +173,51 @@ class User: NSObject {
         }
     }
     
-    func getTopFriends() -> [User] {
+    func getTopFriends() -> [String] {
         
         var numUserOccurrences: [String: Int] = [:]
         var numUserObjOccurrences: [User: Int] = [:]
         var topIDs: [String] = []
-        var topFriends: [User] = []
-        var userName: String
+        //var topFriends: [User] = []
         
         for jam in Jam.currentUserJams {
             for user in jam.users {
-                if (numUserOccurrences.keys.contains(user.facebookID)) {
-                    numUserOccurrences[user.facebookID] = 1
-                    numUserObjOccurrences[user] = 1
-                } else {
-                    var curNum = numUserOccurrences[user.facebookID]
-                    curNum = curNum! + 1
-                    numUserOccurrences[user.facebookID] = curNum
-                    numUserObjOccurrences[user] = curNum
+                if(user.facebookID != User.currentUser?.facebookID) {
+                    print(numUserOccurrences.keys)
+                    if (!numUserOccurrences.keys.contains(user.facebookID)) {
+                        numUserOccurrences[user.facebookID] = 1
+                        numUserObjOccurrences[user] = 1
+                    } else {
+                        var curNum = numUserOccurrences[user.facebookID]
+                        curNum = curNum! + 1
+                        numUserOccurrences[user.facebookID] = curNum
+                        numUserObjOccurrences[user] = curNum
+                    }
                 }
             }
-        
         }
         
         topIDs = numUserOccurrences.keysSortedByValue(>)
-        topFriends = numUserObjOccurrences.keysSortedByValue(>)
+        //topFriends = numUserObjOccurrences.keysSortedByValue(>)
         
-        return topFriends
+        getUserFromID(topIDs[0])
+        print()
+        
+        return topIDs
         
     }
+    
+    // need a way to get a user from the facebookID
+    
+        func getUserFromID(facebookID: String) -> User {
+            
+            var userFromID: User = User.currentUser!
+            
+            let query = PFQuery(className: "User")
+            query.whereKey("facebookID", equalTo: facebookID)
+            
+            return userFromID
+        }
     
 }
 
@@ -233,6 +250,7 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
     func logInViewController(logInController: PFLogInViewController, didFailToLogInWithError error: NSError?) {
         loginFailure?(error)
     }
+    
 }
 
 extension Dictionary {

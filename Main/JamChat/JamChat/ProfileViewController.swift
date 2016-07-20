@@ -37,13 +37,13 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2;
         profilePicture.clipsToBounds = true;
         
-        topFriend1View.layer.cornerRadius = profilePicture.frame.size.width / 2;
+        topFriend1View.layer.cornerRadius = topFriend1View.frame.size.width / 2;
         topFriend1View.clipsToBounds = true;
         
-        topFriend2View.layer.cornerRadius = profilePicture.frame.size.width / 2;
+        topFriend2View.layer.cornerRadius = topFriend2View.frame.size.width / 2;
         topFriend2View.clipsToBounds = true;
         
-        topFriend3View.layer.cornerRadius = profilePicture.frame.size.width / 2;
+        topFriend3View.layer.cornerRadius = topFriend3View.frame.size.width / 2;
         topFriend3View.clipsToBounds = true;
         
         // Sets the user's profile picture
@@ -64,17 +64,46 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         
         var topFriends = User.currentUser?.getTopFriends()
         
-//        topFriend1View.setImageWithURL(User.profileImageURL)
-//        topFriend1Label.text = User.firstName + " " User.lastName
+//        var friend1, friend2, friend3: User
 //        
-//        topFriend2View.setImageWithURL(User.profileImageURL)
-//        topFriend2Label.text = User.firstName + " " User.lastName
+//        if(topFriends.count >= 3) {
+//            friend1 = topFriends[0]
+//            friend2 = topFriends[1]
+//            friend3 = topFriends[2]
+//        } else if (topFriends.count == 2) {
+//            friend1 = topFriends[0]
+//            friend2 = topFriends[1]
+//        } else if (topFriends.count == 1) {
+//            friend1 = topFriends[0]
+//        }
 //        
-//        topFriend3View.setImageWithURL(User.profileImageURL)
-//        topFriend3Label.text = User.firstName + " " User.lastName
+//        if friend1.firstName == nil {
+//            
+//        } else if friend2.firstName == nil {
+//            topFriend1Label.text = topFriends![0]
+//            topFriend1View.setImageWithURL(topFriends![0].profileImageURL)
+//            
+//        } else if friend3.firstName == nil {
+//            topFriend1Label.text = topFriends![0]
+//            topFriend1View.setImageWithURL(topFriends![0].profileImageURL)
+//            
+//            topFriend2Label.text = topFriends![1]
+//            topFriend2View.setImageWithURL(topFriends![1].profileImageURL)
+//            
+//        } else {
+//            topFriend1Label.text = topFriends![0]
+//            topFriend1View.setImageWithURL(topFriends![0].profileImageURL)
+//            
+//            topFriend2Label.text = topFriends![1]
+//            topFriend2View.setImageWithURL(topFriends![1].profileImageURL)
+//            
+//            topFriend3Label.text = topFriends![2]
+//            topFriend3View.setImageWithURL(topFriends![2].profileImageURL)
+//            
+//        }
         
-//        topFriend1View.setImageWithURL(topFriends![0].profileImageURL)
-//        topFriend2View.setImageWithURL(topFriends![1].profileImageURL)
+        topFriend1Label.text = topFriends![0]
+        topFriend2Label.text = topFriends![1]
         
     }
     

@@ -52,7 +52,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                     self.waveformContainer.addSubview(waveformView)
                     
                     //adds tap gesture recognizer to view
-                    let waveTap = UITapGestureRecognizer(target: self, action: Selector("onPlay:"))
+                    let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
                      waveformView.addGestureRecognizer(waveTap)
                 }
             }
