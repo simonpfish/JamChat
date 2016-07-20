@@ -38,7 +38,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EIM-Qf-ukp">
-                                                    <rect key="frame" x="5" y="-3" width="50" height="53"/>
+                                                    <rect key="frame" x="5" y="-5" width="50" height="54"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="d3e-X5-z2B"/>
                                                         <constraint firstAttribute="height" constant="50" id="g7O-hq-N8G"/>
@@ -75,8 +75,8 @@
                                     <constraint firstAttribute="height" constant="130" id="JzI-ws-X0S"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-J2-ape">
-                                <rect key="frame" x="167" y="84" width="42" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-J2-ape">
+                                <rect key="frame" x="167" y="84" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -90,15 +90,33 @@
                                     <segue destination="RLR-1N-ip0" kind="embed" id="gm9-Wy-dxr"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Btw-D1-CzS" customClass="CircleMenu" customModule="CircleMenu">
+                                <rect key="frame" x="162" y="409" width="50" height="50"/>
+                                <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="b6o-Zz-C7g"/>
+                                    <constraint firstAttribute="width" constant="50" id="lbl-kg-5Md"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonsCount">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eBW-N3-riu" firstAttribute="leading" secondItem="3FR-Kb-TeC" secondAttribute="leading" id="7ed-gE-d87"/>
+                            <constraint firstItem="Btw-D1-CzS" firstAttribute="centerX" secondItem="FMT-nD-Qbk" secondAttribute="centerX" id="8OR-fJ-i9v"/>
                             <constraint firstItem="FMT-nD-Qbk" firstAttribute="centerY" secondItem="3FR-Kb-TeC" secondAttribute="centerY" id="OgI-st-s7X"/>
                             <constraint firstItem="p7U-1d-pb3" firstAttribute="top" secondItem="nbw-J2-ape" secondAttribute="bottom" constant="8" id="Pgi-9b-vDR"/>
                             <constraint firstItem="o63-bA-2ee" firstAttribute="top" secondItem="eBW-N3-riu" secondAttribute="bottom" id="S54-uB-TpQ"/>
                             <constraint firstItem="FMT-nD-Qbk" firstAttribute="leading" secondItem="3FR-Kb-TeC" secondAttribute="leading" id="Zkn-79-6cM"/>
                             <constraint firstItem="FMT-nD-Qbk" firstAttribute="top" secondItem="p7U-1d-pb3" secondAttribute="bottom" constant="28" id="j48-I2-zVl"/>
+                            <constraint firstItem="eBW-N3-riu" firstAttribute="top" secondItem="Btw-D1-CzS" secondAttribute="bottom" constant="8" id="ksN-6s-V3N"/>
                             <constraint firstAttribute="trailing" secondItem="FMT-nD-Qbk" secondAttribute="trailing" id="qRx-E3-1Mq"/>
                             <constraint firstItem="nbw-J2-ape" firstAttribute="centerX" secondItem="3FR-Kb-TeC" secondAttribute="centerX" id="qYw-7D-HFd"/>
                             <constraint firstAttribute="trailing" secondItem="p7U-1d-pb3" secondAttribute="trailing" id="uhT-0V-cuR"/>
@@ -109,6 +127,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="jamNameLabel" destination="nbw-J2-ape" id="3Z1-JL-cFF"/>
+                        <outlet property="keyboardButton" destination="Btw-D1-CzS" id="4w4-vA-bHC"/>
+                        <outlet property="keyboardContainer" destination="eBW-N3-riu" id="Qcu-9e-n1U"/>
                         <outlet property="userCollection" destination="p7U-1d-pb3" id="RpP-UM-wzn"/>
                         <outlet property="waveformContainer" destination="FMT-nD-Qbk" id="uIf-vL-0Bk"/>
                     </connections>
@@ -130,6 +150,8 @@
                             <outletCollection property="gestureRecognizers" destination="WGB-9i-kgh" appends="YES" id="vgU-GN-xIS"/>
                         </connections>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="200"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mc3-yC-YA8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="WGB-9i-kgh">
@@ -138,7 +160,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1826.5" y="558"/>
+            <point key="canvasLocation" x="1820.5" y="558"/>
         </scene>
     </scenes>
 </document>

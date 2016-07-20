@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "mic_large.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "guitar-xxl.png",
       "scale" : "2x"
     },
     {

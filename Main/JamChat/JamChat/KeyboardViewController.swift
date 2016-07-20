@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CircleMenu
 
-class KeyboardViewController: UIViewController {
+class KeyboardViewController: UIViewController, CircleMenuDelegate{
     
     var keys: [UIView] = []
     
@@ -22,6 +23,8 @@ class KeyboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
         
         let allowedNotes = notesWithSharps //["A", "B", "C#", "D", "E", "F#", "G"]
         
@@ -64,6 +67,7 @@ class KeyboardViewController: UIViewController {
             increment += 1
             
         }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -152,6 +156,8 @@ class KeyboardViewController: UIViewController {
         }
         onKeys.removeAll()
     }
+    
+    
 
     /*
     // MARK: - Navigation
