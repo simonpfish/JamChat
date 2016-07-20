@@ -16,10 +16,13 @@ class Jam: NSObject {
     var users: [User] = []
     let messageDuration: Double!
     var title: String = ""
+    static var currentUserJams: [Jam] = []
+    static var usersInCurrentUserJams: [User] = []
     
     private var messageIDs: [String] = []
     private var userIDs: [String] = []
     private var object: PFObject!
+    
     
     /**
      Loads jam from an exisiting PFObject.
@@ -232,10 +235,12 @@ class Jam: NSObject {
                 var loadedCount = 0
                 for object in objects ?? [] {
                     jams.append(Jam(object: object))
+                    //currentUserJams = jams
                     jams.last?.loadData({
                         loadedCount += 1
                         if loadedCount == objects!.count {
                             print("Succesfully downloaded jams for active user")
+                            currentUserJams = jams
                             success(jams)
                         }
                     })

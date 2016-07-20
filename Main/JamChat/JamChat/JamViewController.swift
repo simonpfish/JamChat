@@ -51,6 +51,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                     let fileURL = NSURL(fileURLWithPath: filepath)
                     
                     let waveformView = FDWaveformView(frame: self.waveformContainer.frame)
+                    
                     waveformView.frame.origin.y = 0
                     waveformView.audioURL = fileURL
                     waveformView.doesAllowScrubbing = false
@@ -58,13 +59,27 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                     waveformView.doesAllowStretch = false
                     
                     self.waveformContainer.addSubview(waveformView)
+                    
+                    //adds tap gesture recognizer to view
+                    let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
+                     waveformView.addGestureRecognizer(waveTap)
                 }
             }
             
         })
         
-    }
 
+    }
+    
+    //Plays chat when wave is tapped
+    func onPlay(sender: UITapGestureRecognizer? = nil) {
+        
+        let lastMessage = jam.messages.last
+        lastMessage?.loadTracks({
+            lastMessage?.play()
+        })
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

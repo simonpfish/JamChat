@@ -28,6 +28,7 @@ class User: NSObject {
     var email: String?
     
     var friends: [[String : String]]?
+    
     /**
      Initializes user object based on a Parse User.
      */
@@ -147,6 +148,9 @@ class User: NSObject {
         print("Updated \(name)'s data")
     }
     
+    /**
+     Returns the number of jams the current user is part of.
+     */
     func getNumberOfJams(completion: (Int) -> ()) {
         let query = PFQuery(className: "Jam")
         query.whereKey("users", containsString: facebookID)
@@ -159,6 +163,9 @@ class User: NSObject {
         }
     }
     
+    /**
+     Returns the number of tracks the current user has created.
+     */
     func getNumberOfTracks(completion: (Int) -> ()) {
         
         let query = PFQuery(className: "Track")
@@ -172,6 +179,65 @@ class User: NSObject {
         }
     }
     
+    /**
+     Returns an array of Users, that represents the current user's top three friends.
+     */
+    func getTopFriends() -> [User] {
+        
+        
+        var numUserOccurrences: [String: Int] = [:] // maps each facebookID to a number of occurrences
+        var numUserObjOccurrences: [User: Int] = [:] // maps each user Object to a number of occurrences
+        var topIDs: [String] = [] // an array of the facebookIDs of the user's top friends
+        var topFriends: [User] = [] // and array of the user's top friends
+        
+        for jam in Jam.currentUserJams {
+            for user in jam.users {
+                if(user.facebookID != User.currentUser?.facebookID) {
+                    print(numUserOccurrences.keys)
+                    if (!numUserOccurrences.keys.contains(user.facebookID)) {
+                        numUserOccurrences[user.facebookID] = 1
+                        numUserObjOccurrences[user] = 1
+                    } else {
+                        var curNum = numUserOccurrences[user.facebookID]
+                        curNum = curNum! + 1 // update the number of occurrences
+                        numUserOccurrences[user.facebookID] = curNum
+                        numUserObjOccurrences[user] = curNum
+                    }
+                }
+            }
+        }
+        
+        // sort the dictionaries by number of occurrences, from highest to lowest
+        topIDs = numUserOccurrences.keysSortedByValue(>)
+        topFriends = numUserObjOccurrences.keysSortedByValue(>)
+        
+
+        let arrayUsers = getUserFromID(topFriends, arrayOfIDs: topIDs)
+        
+        return arrayUsers
+        
+    }
+    
+    /**
+     Given an array of FacebookIDs, returns an array of Users containing the current user's top three friends.
+     */
+    func getUserFromID(arrayOfUsers: [User], arrayOfIDs: [String]) -> [User] {
+        var newArrayUsers = [User]()
+        
+        var index = 0
+        while (index < arrayOfIDs.count) {
+            for user in arrayOfUsers {
+                if user.facebookID == arrayOfIDs[index] {
+                    newArrayUsers.append(user)
+                    index += 1
+                    break;
+                }
+            }
+        }
+        
+        return newArrayUsers
+    }
+
 }
 
 // Delegate used for the login view success and failure cases
@@ -196,12 +262,39 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
                 print("Logged in \(User.currentUser!.name)")
             }
             
-            
         })
     }
     
     // Called when the login fails
     func logInViewController(logInController: PFLogInViewController, didFailToLogInWithError error: NSError?) {
         loginFailure?(error)
+    }
+    
+}
+
+extension Dictionary {
+    func sortedKeys(isOrderedBefore:(Key,Key) -> Bool) -> [Key] {
+        return Array(self.keys).sort(isOrderedBefore)
+    }
+    
+    // Slower because of a lot of lookups, but probably takes less memory (this is equivalent to Pascals answer in an generic extension)
+    func sortedKeysByValue(isOrderedBefore:(Value, Value) -> Bool) -> [Key] {
+        return sortedKeys {
+            isOrderedBefore(self[$0]!, self[$1]!)
+        }
+    }
+    
+    // Faster because of no lookups, may take more memory because of duplicating contents
+    func keysSortedByValue(isOrderedBefore:(Value, Value) -> Bool) -> [Key] {
+        return Array(self)
+            .sort() {
+                let (_, lv) = $0
+                let (_, rv) = $1
+                return isOrderedBefore(lv, rv)
+            }
+            .map {
+                let (k, _) = $0
+                return k
+        }
     }
 }
