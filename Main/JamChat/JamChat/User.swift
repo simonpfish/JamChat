@@ -148,6 +148,9 @@ class User: NSObject {
         print("Updated \(name)'s data")
     }
     
+    /**
+     Returns the number of jams the current user is part of.
+     */
     func getNumberOfJams(completion: (Int) -> ()) {
         let query = PFQuery(className: "Jam")
         query.whereKey("users", containsString: facebookID)
@@ -160,6 +163,9 @@ class User: NSObject {
         }
     }
     
+    /**
+     Returns the number of tracks the current user has created.
+     */
     func getNumberOfTracks(completion: (Int) -> ()) {
         
         let query = PFQuery(className: "Track")
@@ -173,12 +179,16 @@ class User: NSObject {
         }
     }
     
+    /**
+     Returns an array of Users, that represents the current user's top three friends.
+     */
     func getTopFriends() -> [User] {
         
-        var numUserOccurrences: [String: Int] = [:]
-        var numUserObjOccurrences: [User: Int] = [:]
-        var topIDs: [String] = []
-        var topFriends: [User] = []
+        
+        var numUserOccurrences: [String: Int] = [:] // maps each facebookID to a number of occurrences
+        var numUserObjOccurrences: [User: Int] = [:] // maps each user Object to a number of occurrences
+        var topIDs: [String] = [] // an array of the facebookIDs of the user's top friends
+        var topFriends: [User] = [] // and array of the user's top friends
         
         for jam in Jam.currentUserJams {
             for user in jam.users {
@@ -189,7 +199,7 @@ class User: NSObject {
                         numUserObjOccurrences[user] = 1
                     } else {
                         var curNum = numUserOccurrences[user.facebookID]
-                        curNum = curNum! + 1
+                        curNum = curNum! + 1 // update the number of occurrences
                         numUserOccurrences[user.facebookID] = curNum
                         numUserObjOccurrences[user] = curNum
                     }
@@ -197,47 +207,37 @@ class User: NSObject {
             }
         }
         
+        // sort the dictionaries by number of occurrences, from highest to lowest
         topIDs = numUserOccurrences.keysSortedByValue(>)
         topFriends = numUserObjOccurrences.keysSortedByValue(>)
         
+
+        let arrayUsers = getUserFromID(topFriends, arrayOfIDs: topIDs)
         
-        getUserFromID(topIDs[0],success: { (resultArray: [User]) in
-
-        }) { (error: NSError) in
-            print(error.localizedDescription)
-        }
-
-        return topFriends
-        //return topIDs
+        return arrayUsers
         
     }
     
-    // need a way to get a user from the user's facebookID
-    
-        func getUserFromID(facebookID: String, success: ([User]) -> (), failure: (NSError) -> ()) -> User {
-            var responseObjects: [User] = []
-            var userFromID: User = User.currentUser!
-            
-            let query = PFQuery(className: "User")
-            query.whereKey("facebookID", equalTo: facebookID)
-            //query.whereKey("facebookID", containsString: facebookID)
-            
-            print("facebookID \(facebookID)")
-            
-            // skips over this block
-            query.findObjectsInBackgroundWithBlock ({ (objects: [PFObject]?, error: NSError?) in
-                if let error = error {
-                    failure(error)
-                } else {
-                    responseObjects = objects! as NSObject as! [User]
-                    success(responseObjects)
+    /**
+     Given an array of FacebookIDs, returns an array of Users containing the current user's top three friends.
+     */
+    func getUserFromID(arrayOfUsers: [User], arrayOfIDs: [String]) -> [User] {
+        var newArrayUsers = [User]()
+        
+        var index = 0
+        while (index < arrayOfIDs.count) {
+            for user in arrayOfUsers {
+                if user.facebookID == arrayOfIDs[index] {
+                    newArrayUsers.append(user)
+                    index += 1
+                    break;
                 }
-            })
-            
-            // nothing in the responseObject array
-            //userFromID = responseObjects[0]
-            return userFromID
+            }
         }
+        
+        return newArrayUsers
+    }
+
 }
 
 // Delegate used for the login view success and failure cases
