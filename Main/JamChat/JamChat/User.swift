@@ -173,12 +173,12 @@ class User: NSObject {
         }
     }
     
-    func getTopFriends() -> [String] {
+    func getTopFriends() -> [User] {
         
         var numUserOccurrences: [String: Int] = [:]
         var numUserObjOccurrences: [User: Int] = [:]
         var topIDs: [String] = []
-        //var topFriends: [User] = []
+        var topFriends: [User] = []
         
         for jam in Jam.currentUserJams {
             for user in jam.users {
@@ -198,27 +198,46 @@ class User: NSObject {
         }
         
         topIDs = numUserOccurrences.keysSortedByValue(>)
-        //topFriends = numUserObjOccurrences.keysSortedByValue(>)
+        topFriends = numUserObjOccurrences.keysSortedByValue(>)
         
-        getUserFromID(topIDs[0])
-        print()
         
-        return topIDs
+        getUserFromID(topIDs[0],success: { (resultArray: [User]) in
+
+        }) { (error: NSError) in
+            print(error.localizedDescription)
+        }
+
+        return topFriends
+        //return topIDs
         
     }
     
-    // need a way to get a user from the facebookID
+    // need a way to get a user from the user's facebookID
     
-        func getUserFromID(facebookID: String) -> User {
-            
+        func getUserFromID(facebookID: String, success: ([User]) -> (), failure: (NSError) -> ()) -> User {
+            var responseObjects: [User] = []
             var userFromID: User = User.currentUser!
             
             let query = PFQuery(className: "User")
             query.whereKey("facebookID", equalTo: facebookID)
+            //query.whereKey("facebookID", containsString: facebookID)
             
+            print("facebookID \(facebookID)")
+            
+            // skips over this block
+            query.findObjectsInBackgroundWithBlock ({ (objects: [PFObject]?, error: NSError?) in
+                if let error = error {
+                    failure(error)
+                } else {
+                    responseObjects = objects! as NSObject as! [User]
+                    success(responseObjects)
+                }
+            })
+            
+            // nothing in the responseObject array
+            //userFromID = responseObjects[0]
             return userFromID
         }
-    
 }
 
 // Delegate used for the login view success and failure cases

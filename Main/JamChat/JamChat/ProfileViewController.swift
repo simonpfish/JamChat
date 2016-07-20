@@ -23,9 +23,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var topFriend1Label: UILabel!
     @IBOutlet weak var topFriend2Label: UILabel!
     @IBOutlet weak var topFriend3Label: UILabel!
-    
-    
-    
+        
     var jams: [Jam] = []
     
     override func viewDidLoad() {
@@ -62,48 +60,68 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             self.numTracksLabel.text = String(count)
         })
         
+        // array of the current User's top friends' User ID
         var topFriends = User.currentUser?.getTopFriends()
         
-//        var friend1, friend2, friend3: User
-//        
-//        if(topFriends.count >= 3) {
-//            friend1 = topFriends[0]
-//            friend2 = topFriends[1]
-//            friend3 = topFriends[2]
-//        } else if (topFriends.count == 2) {
-//            friend1 = topFriends[0]
-//            friend2 = topFriends[1]
-//        } else if (topFriends.count == 1) {
-//            friend1 = topFriends[0]
-//        }
-//        
-//        if friend1.firstName == nil {
-//            
-//        } else if friend2.firstName == nil {
-//            topFriend1Label.text = topFriends![0]
-//            topFriend1View.setImageWithURL(topFriends![0].profileImageURL)
-//            
-//        } else if friend3.firstName == nil {
-//            topFriend1Label.text = topFriends![0]
-//            topFriend1View.setImageWithURL(topFriends![0].profileImageURL)
-//            
-//            topFriend2Label.text = topFriends![1]
-//            topFriend2View.setImageWithURL(topFriends![1].profileImageURL)
-//            
-//        } else {
-//            topFriend1Label.text = topFriends![0]
-//            topFriend1View.setImageWithURL(topFriends![0].profileImageURL)
-//            
-//            topFriend2Label.text = topFriends![1]
-//            topFriend2View.setImageWithURL(topFriends![1].profileImageURL)
-//            
-//            topFriend3Label.text = topFriends![2]
-//            topFriend3View.setImageWithURL(topFriends![2].profileImageURL)
-//            
-//        }
+        // set of the top friends' names (gets rid of duplicates)
+        var topFriendsName = Set<String>()
         
-        topFriend1Label.text = topFriends![0]
-        topFriend2Label.text = topFriends![1]
+        // set of the top friends' profile picture URLs (gets rid of duplicates)
+        var topFriendsImage = Set<NSURL>()
+        
+        for friend in topFriends! {
+            topFriendsName.insert(friend.firstName)
+            topFriendsImage.insert(friend.profileImageURL)
+        }
+        
+        var friend1Name: String = ""
+        var friend2Name: String = ""
+        var friend3Name: String = ""
+        
+        var friend1URL: NSURL = NSURL()
+        var friend2URL: NSURL = NSURL()
+        var friend3URL: NSURL = NSURL()
+        
+        if(topFriendsName.count >= 3) {
+            
+            // sets the top friends' names
+            friend1Name = topFriendsName.popFirst()!
+            friend2Name = topFriendsName.popFirst()!
+            friend3Name = topFriendsName.popFirst()!
+            
+            // sets the top friends' profile picture URL
+            friend3URL = topFriendsImage.popFirst()!
+            friend2URL = topFriendsImage.popFirst()!
+            friend1URL = topFriendsImage.popFirst()!
+            
+            topFriend1Label.text = friend1Name
+            topFriend1View.setImageWithURL(friend1URL)
+            
+            topFriend2Label.text = friend2Name
+            topFriend2View.setImageWithURL(friend2URL)
+            
+            topFriend3Label.text = friend3Name
+            topFriend3View.setImageWithURL(friend3URL)
+        } else if (topFriendsName.count == 2) {
+            friend1Name = topFriendsName.popFirst()!
+            friend2Name = topFriendsName.popFirst()!
+            
+            friend2URL = topFriendsImage.popFirst()!
+            friend1URL = topFriendsImage.popFirst()!
+            
+            topFriend1Label.text = friend1Name
+            topFriend1View.setImageWithURL(friend1URL)
+            
+            topFriend2Label.text = friend2Name
+            topFriend2View.setImageWithURL(friend2URL)
+        } else if (topFriendsName.count == 1) {
+            friend1Name = topFriendsName.popFirst()!
+        
+            friend1URL = topFriendsImage.popFirst()!
+            
+            topFriend1Label.text = friend1Name
+            topFriend1View.setImageWithURL(friend1URL)
+        }
         
     }
     
