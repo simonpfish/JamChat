@@ -184,7 +184,7 @@ class User: NSObject {
      */
     func getTopFriends() -> [User] {
         
-        
+
         var numUserOccurrences: [String: Int] = [:] // maps each facebookID to a number of occurrences
         var numUserObjOccurrences: [User: Int] = [:] // maps each user Object to a number of occurrences
         var topIDs: [String] = [] // an array of the facebookIDs of the user's top friends
