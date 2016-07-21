@@ -32,5 +32,6 @@ target 'JamChat' do
     pod 'XLPagerTabStrip'
     pod 'CircleMenu'
     pod 'IntervalSlider'
+    pod 'BAPulseView'
 
 end
