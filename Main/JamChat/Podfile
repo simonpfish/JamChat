@@ -32,6 +32,7 @@ target 'JamChat' do
     pod 'XLPagerTabStrip'
     pod 'CircleMenu'
     pod 'IntervalSlider'
+    pod 'DGElasticPullToRefresh'
     pod 'DBProfileViewController'
 
 end
