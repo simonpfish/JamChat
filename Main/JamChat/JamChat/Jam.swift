@@ -128,7 +128,7 @@ class Jam: NSObject {
     /**
      Records a track from a certain audio node for the set track duration, adds it to a message and sends it immediately.
      */
-    func recordSend(instrument: AKNode, success: () -> (), failure: (NSError) -> ()) {
+    func recordSend(instrument: Instrument, success: () -> (), failure: (NSError) -> ()) {
         let message: Message
         if messages.count > 0 {
             message = Message(previousMessage: messages[messages.count-1])
@@ -137,7 +137,7 @@ class Jam: NSObject {
         }
         
         let track = Track()
-        track.record(instrument, duration: messageDuration) {
+        track.recordInstrument(instrument, duration: messageDuration) {
             message.add(track)
             message.send({ (_: Bool, error: NSError?) in
                 if let error = error {
