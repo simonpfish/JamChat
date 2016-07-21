@@ -25,7 +25,7 @@
                                     <constraint firstAttribute="height" constant="1" id="l3w-T1-td6"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ide-jJ-Qoh">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ide-jJ-Qoh">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -36,9 +36,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBY-2P-3VQ">
+                                                    <rect key="frame" x="2" y="2" width="371" height="96"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jam Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Ljl-KK-ak9">
-                                                    <rect key="frame" x="25" y="35" width="118" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
+                                                    <rect key="frame" x="25" y="37" width="108" height="27"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -79,11 +83,16 @@
                                             <constraints>
                                                 <constraint firstItem="Ljl-KK-ak9" firstAttribute="leading" secondItem="l8b-cR-tVz" secondAttribute="leadingMargin" constant="17" id="Bjj-xY-NVp"/>
                                                 <constraint firstItem="YEx-qK-Ety" firstAttribute="centerY" secondItem="l8b-cR-tVz" secondAttribute="centerY" id="FTO-CD-WEf"/>
+                                                <constraint firstItem="sBY-2P-3VQ" firstAttribute="leading" secondItem="l8b-cR-tVz" secondAttribute="leading" constant="2" id="ggJ-kf-PqE"/>
+                                                <constraint firstAttribute="bottom" secondItem="sBY-2P-3VQ" secondAttribute="bottom" constant="2" id="k7O-dq-A00"/>
+                                                <constraint firstAttribute="trailing" secondItem="sBY-2P-3VQ" secondAttribute="trailing" constant="2" id="nwF-fO-zaM"/>
+                                                <constraint firstItem="sBY-2P-3VQ" firstAttribute="top" secondItem="l8b-cR-tVz" secondAttribute="top" constant="2" id="okp-az-FVh"/>
                                                 <constraint firstItem="Ljl-KK-ak9" firstAttribute="centerY" secondItem="l8b-cR-tVz" secondAttribute="centerY" id="wnL-t9-rfF"/>
                                                 <constraint firstItem="YEx-qK-Ety" firstAttribute="trailing" secondItem="l8b-cR-tVz" secondAttribute="trailingMargin" id="yRk-yr-82Z"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="colorView" destination="sBY-2P-3VQ" id="CXd-NU-Xlh"/>
                                             <outlet property="jamNameLabel" destination="Ljl-KK-ak9" id="PmL-L3-SV1"/>
                                             <outlet property="userCollection" destination="YEx-qK-Ety" id="vqg-pd-Eii"/>
                                             <segue destination="x4v-zO-RyJ" kind="show" id="ZOx-pJ-uvm"/>

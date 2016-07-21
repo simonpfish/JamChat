@@ -80,6 +80,11 @@ import NVActivityIndicatorView
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     func loadFeed() {
         Jam.downloadCurrentUserJams({ (jams: [Jam]) in
             self.jams = jams
