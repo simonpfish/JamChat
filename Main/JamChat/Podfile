@@ -34,5 +34,6 @@ target 'JamChat' do
     pod 'IntervalSlider'
     pod 'DGElasticPullToRefresh'
     pod 'DBProfileViewController'
+    pod 'BAPulseView'
 
 end
