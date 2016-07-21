@@ -24,6 +24,14 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var topFriend1Label: UILabel!
     @IBOutlet weak var topFriend2Label: UILabel!
     @IBOutlet weak var topFriend3Label: UILabel!
+    
+    @IBOutlet weak var instrument1View: UIImageView!
+    @IBOutlet weak var instrument2View: UIImageView!
+    @IBOutlet weak var instrument3View: UIImageView!
+    
+    @IBOutlet weak var instrument1Label: UILabel!
+    @IBOutlet weak var instrument2Label: UILabel!
+    @IBOutlet weak var instrument3Label: UILabel!
         
     var jams: [Jam] = []
     
@@ -51,6 +59,16 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         topFriend3View.layer.cornerRadius = topFriend3View.frame.size.width / 2;
         topFriend3View.clipsToBounds = true;
         
+        instrument1View.layer.cornerRadius = instrument1View.frame.size.width / 2;
+        instrument1View.clipsToBounds = true;
+        
+        instrument2View.layer.cornerRadius = instrument2View.frame.size.width / 2;
+        instrument2View.clipsToBounds = true;
+        
+        instrument3View.layer.cornerRadius = instrument3View.frame.size.width / 2;
+        instrument3View.clipsToBounds = true;
+
+        
         // format the text
         topFriend1Label.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
         topFriend2Label.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
@@ -69,12 +87,16 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         
         // Sets the number of jams user is a member of
         setUpLabelsUser.getNumberOfJams({ (count: Int) in
-            self.numJamsLabel.text = String(count)
+            var labelText = String(count)
+            labelText += " Jams"
+            self.numJamsLabel.text = labelText
         })
         
         // Sets the number of tracks the user has sent
         setUpLabelsUser.getNumberOfTracks({ (count: Int) in
-            self.numTracksLabel.text = String(count)
+            var labelText = String(count)
+            labelText += " Tracks"
+            self.numTracksLabel.text = labelText
         })
         
         // array of the current User's top three friends
@@ -130,6 +152,24 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             topFriend1Label.text = friend1Name
             topFriend1View.setImageWithURL(friend1URL)
         }
+        
+        ///////INSTRUMENTS
+        var favInstruments = setUpLabelsUser.instrumentCount
+        var instruments: [Instrument] = []
+        
+        for instrument in favInstruments.keys {
+            instruments.append(instrument)
+        }
+        
+        
+        instrument1Label.text = instruments[0].name
+        instrument2Label.text = instruments[1].name
+        instrument3Label.text = instruments[2].name
+        
+        //instrument1View
+        
+        
+
     }
     
     override func didReceiveMemoryWarning() {

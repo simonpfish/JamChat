@@ -29,6 +29,7 @@ class User: NSObject {
     
     var friends: [[String : String]]?
     
+    // should store and retrieve this
     var instrumentCount: [Instrument : Int] = [Instrument.acousticBass:0, Instrument.choir:0, Instrument.electricBass:0, Instrument.electricGuitar:0, Instrument.piano:0, Instrument.saxophone:0]
     
     /**
@@ -238,6 +239,9 @@ class User: NSObject {
         return newArrayUsers
     }
     
+    /**
+     Updates the number of times a user has used a particular instrument.
+     */
     func incrementInstrument(instrumentUsed: Instrument) {
         for instrument in instrumentCount.keys {
             if(instrument.name == instrumentUsed.name) {
