@@ -10,14 +10,17 @@ import UIKit
 import RAMReel
 import XLPagerTabStrip
 import IntervalSlider
+import BAPulseView
 
 class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     
     var dataSource: SimplePrefixQueryDataSource!
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
     var selectedFriendIDs: [String] = []
-    var tempoSlider = UISlider()
     var intTempo = Int ()
+    var currentTempo: UILabel!
+    var pulseView: BAPulseView!
+    var timer = NSTimer()
     
     @IBOutlet weak var selectedUsersLabel: UILabel!
     @IBOutlet weak var sliderView1: UIView!
@@ -25,7 +28,8 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var tempoSliderView: UIView!
     @IBOutlet weak var minTempo: UILabel!
     @IBOutlet weak var maxTempo: UILabel!
-    @IBOutlet weak var currentTempo: UILabel!
+    @IBOutlet weak var tempoSlider: UISlider!
+    @IBOutlet weak var tempoPulseView: UIView!
     
     var titleGenerator: [String] = []
     
@@ -58,10 +62,32 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         setTempoSlider()
         
         initializeFriendPicker()
+        
+        setPulse()
+    }
+    
+    //creates pulse effect for tempo
+    func setPulse(){
+        pulseView = BAPulseView(frame: CGRectMake(view.frame.origin.x, view.frame.origin.y, tempoPulseView.frame.width-1, tempoPulseView.frame.height-1))
+        tempoPulseView.addSubview(pulseView)
+        
+        pulseView.layer.cornerRadius = pulseView.frame.size.width/2
+        let floatWidth = Float(pulseView.frame.size.width)
+        pulseView.pulseCornerRadius = floatWidth/2
+        pulseView.backgroundColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        
+        currentTempo = UILabel(frame: CGRectMake(view.frame.origin.x, view.frame.origin.y, tempoPulseView.frame.width-1, tempoPulseView.frame.height-1))
+        currentTempo.textAlignment = NSTextAlignment.Center
+        currentTempo.text = "80"
+        currentTempo.font = currentTempo.font.fontWithSize(12)
+        currentTempo.textColor = UIColor.whiteColor()
+        tempoPulseView.addSubview(currentTempo)
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(Double(tempoSlider.value/60), target: pulseView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
+        //tempoTimer.scheduledTimerWithTimeInterval(Double(tempoSlider.value/60), target: pulseView, selector: "popAndPulse", userInfo: nil, repeats: true)
     }
     
     func setTempoSlider () {
-        tempoSlider = UISlider(frame: tempoSliderView.frame)
         tempoSlider.minimumValue = 80
         tempoSlider.maximumValue = 180
         tempoSlider.continuous = true
@@ -72,17 +98,15 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         minTempo.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
         minTempo.text = "\(80)"
         maxTempo.text = "\(180)"
-        currentTempo.text = "\(80)"
-        
         intTempo = 80
-        
-        view.addSubview(tempoSlider)
     }
     
     //Changes displayed tempo with slider change
     func tempoValueDidChange(sender: UISlider){
         intTempo = Int(tempoSlider.value)
         currentTempo.text = "\(intTempo)"
+      timer.invalidate()
+        timer = NSTimer.scheduledTimerWithTimeInterval(Double(60/tempoSlider.value), target: pulseView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
     }
     
     // formats the slider and the jam duration text
