@@ -20,11 +20,13 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var friendsCollection: UICollectionView!
     @IBOutlet weak var instrumentCollection: UICollectionView!
     
-        
+    var userDelegate: UserCollectionDelegate!
+    var instrumentDelegate: InstrumentCollectionDelegate!
+    
     var jams: [Jam] = []
     
     var instrumentDic: [Instrument: Int] = [:]
-    var instruments: [Instrument] = []
+    var instrumentNames: [Instrument] = []
     var topFriends: [User] = []
     
     override func viewDidLoad() {
@@ -37,13 +39,15 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         instrumentDic = (User.currentUser?.instrumentCount)!
         
         for instrument in instrumentDic.keys {
-            instruments.append(instrument)
+            instrumentNames.append(instrument)
         }
         
         // Set up friends collection view:
-        let userDelegate = UserCollectionDelegate(users: topFriends)
+        userDelegate = UserCollectionDelegate(users: topFriends)
         friendsCollection.dataSource = userDelegate
         friendsCollection.delegate = userDelegate
+        friendsCollection.reloadData()
+        
         let friendsLayout = KTCenterFlowLayout()
         friendsLayout.minimumInteritemSpacing = 20.0
         friendsLayout.itemSize = CGSizeMake(60, 70)
@@ -51,14 +55,20 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         friendsCollection.collectionViewLayout = friendsLayout
         
         // Set up instrument collection view:
-        let instrumentDelegate = InstrumentCollectionDelegate(instruments: instruments)
+        instrumentDelegate = InstrumentCollectionDelegate(instruments: instrumentNames)
         instrumentCollection.dataSource = instrumentDelegate
         instrumentCollection.delegate = instrumentDelegate
+        instrumentCollection.reloadData()
+        
         let instrumentLayout = KTCenterFlowLayout()
         instrumentLayout.minimumInteritemSpacing = 20.0
         instrumentLayout.itemSize = CGSizeMake(60, 70)
         instrumentLayout.minimumLineSpacing = 0.0
         instrumentCollection.collectionViewLayout = instrumentLayout
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         
         setUpLabels(User.currentUser!)
 
@@ -69,7 +79,6 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         // Makes the profile picture views circular
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2;
         profilePicture.clipsToBounds = true;
-
         
         // format the text
         numJamsLabel.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
@@ -97,17 +106,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             labelText += " Tracks"
             self.numTracksLabel.text = labelText
         })
-        
-        // array of the current User's top three friends
-        //var topFriends = user.getTopFriends()
-        
-        
-        ///////INSTRUMENTS
-//        var favInstruments = user.instrumentCount
-//        
-//        for instrument in favInstruments.keys {
-//            instruments.append(instrument)
-//        }
+
     }
     
     override func didReceiveMemoryWarning() {

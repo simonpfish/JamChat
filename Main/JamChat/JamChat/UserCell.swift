@@ -10,6 +10,7 @@ import UIKit
 import AFNetworking
 
 class UserCell: UICollectionViewCell {
+    
     @IBOutlet weak var profilePictureView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     

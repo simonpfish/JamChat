@@ -7,9 +7,26 @@
 //
 
 import UIKit
+import AFNetworking
 
 class InstrumentCell: UICollectionViewCell {
     
-    var instrument: Instrument!
+    @IBOutlet weak var instrumentView: UIImageView!
+    @IBOutlet weak var instrumentLabel: UILabel!
+    
+    var instrument: Instrument! {
+        didSet {
+            instrumentLabel.text = instrument.name
+            instrumentView.image = instrument.image
+        }
+    }
+    
+    override func awakeFromNib() {
+        // Make image circular:
+        instrumentView.layer.cornerRadius = instrumentView.frame.size.width / 2;
+        instrumentView.clipsToBounds = true;
+        
+        //instrumentView.layer.borderColor = instrument.color.CGColor
+    }
     
 }
