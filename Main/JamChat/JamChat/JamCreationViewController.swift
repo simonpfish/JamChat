@@ -16,10 +16,16 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     var dataSource: SimplePrefixQueryDataSource!
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
     var selectedFriendIDs: [String] = []
+    var tempoSlider = UISlider()
+    var intTempo = Int ()
     
     @IBOutlet weak var selectedUsersLabel: UILabel!
     @IBOutlet weak var sliderView1: UIView!
     @IBOutlet weak var titleLabel: UITextField!
+    @IBOutlet weak var tempoSliderView: UIView!
+    @IBOutlet weak var minTempo: UILabel!
+    @IBOutlet weak var maxTempo: UILabel!
+    @IBOutlet weak var currentTempo: UILabel!
     
     var titleGenerator: [String] = []
     
@@ -49,7 +55,34 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         let result = self.createSources()
         self.messageDurationSlider = IntervalSlider(frame: self.sliderView1.bounds, sources: result.sources, options: result.options)
         
+        setTempoSlider()
+        
         initializeFriendPicker()
+    }
+    
+    func setTempoSlider () {
+        tempoSlider = UISlider(frame: tempoSliderView.frame)
+        tempoSlider.minimumValue = 80
+        tempoSlider.maximumValue = 180
+        tempoSlider.continuous = true
+        tempoSlider.tintColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        tempoSlider.value = 80
+        tempoSlider.addTarget(self, action: "tempoValueDidChange:", forControlEvents: .ValueChanged)
+        maxTempo.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        minTempo.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        minTempo.text = "\(80)"
+        maxTempo.text = "\(180)"
+        currentTempo.text = "\(80)"
+        
+        intTempo = 80
+        
+        view.addSubview(tempoSlider)
+    }
+    
+    //Changes displayed tempo with slider change
+    func tempoValueDidChange(sender: UISlider){
+        intTempo = Int(tempoSlider.value)
+        currentTempo.text = "\(intTempo)"
     }
     
     // formats the slider and the jam duration text
