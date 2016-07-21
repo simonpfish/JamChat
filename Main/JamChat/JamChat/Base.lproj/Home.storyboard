@@ -93,6 +93,11 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="9xd-mB-OhM"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backTint">
+                            <color key="value" red="0.98431372549999996" green="0.54901960780000003" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="tableView" destination="ide-jJ-Qoh" id="eab-A1-jAk"/>
                     </connections>
