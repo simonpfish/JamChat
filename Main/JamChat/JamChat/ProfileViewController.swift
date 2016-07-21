@@ -31,6 +31,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        var topInstruments = User.currentUser?.getTopInstrument()
         
         // Makes the profile picture views circular
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2;
