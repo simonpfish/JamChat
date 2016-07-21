@@ -60,7 +60,6 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     }
     
     func setUpLabels(setUpLabelsUser: User) {
-        var topInstruments = setUpLabelsUser.getTopInstrument()
         
         // Sets the user's profile picture
         profilePicture.setImageWithURL(setUpLabelsUser.profileImageURL)

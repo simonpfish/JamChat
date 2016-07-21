@@ -172,6 +172,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }) { (error: NSError) in
             print(error.localizedDescription)
         }
+        
+        User.currentUser?.incrementInstrument(keyboardController.instrument)
     }
     
 

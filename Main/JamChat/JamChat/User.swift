@@ -29,7 +29,7 @@ class User: NSObject {
     
     var friends: [[String : String]]?
     
-    var currentUserTracks: [Track] = []
+    var instrumentCount: [Instrument : Int] = [Instrument.acousticBass:0, Instrument.choir:0, Instrument.electricBass:0, Instrument.electricGuitar:0, Instrument.piano:0, Instrument.saxophone:0]
     
     /**
      Initializes user object based on a Parse User.
@@ -185,7 +185,6 @@ class User: NSObject {
      Returns an array of Users, that represents the current user's top three friends.
      */
     func getTopFriends() -> [User] {
-        
 
         var numUserOccurrences: [String: Int] = [:] // maps each facebookID to a number of occurrences
         var numUserObjOccurrences: [User: Int] = [:] // maps each user Object to a number of occurrences
@@ -239,47 +238,14 @@ class User: NSObject {
         return newArrayUsers
     }
     
-    // FIX this method
-    func downloadCurrentUserTracks(success: ([Track]) -> (), failure: (NSError) -> ()) {
-        
-        let query = PFQuery(className: "Track")
-        query.whereKey("author", containsString: parseUser.objectId)
-                query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
-            if let error = error {
-                failure(error)
-            } else {
-                //var tracks: [Track] = []
-                for object in objects ?? [] {
-                    self.currentUserTracks.append(Track(object: object))
-                    success(self.currentUserTracks)
-                }
+    func incrementInstrument(instrumentUsed: Instrument) {
+        for instrument in instrumentCount.keys {
+            if(instrument.name == instrumentUsed.name) {
+                var curNum = instrumentCount[instrument]
+                curNum = curNum! + 1
+                instrumentCount[instrument] = curNum
             }
         }
-    }
-    
-    func getTopInstrument() -> [String] {
-        
-        var countTracks: [String:Int] = [:]
-        var topInstruments: [String] = []
-        
-        downloadCurrentUserTracks({ (currentUserTracks) in
-            
-        }) { (error: NSError) in
-                print(error.localizedDescription)
-        }
-        
-        for track in currentUserTracks {
-            if !(countTracks.keys.contains(String(track.color))) {
-                countTracks[String(track.color)] = 1
-            } else {
-                var curNum = countTracks[String(track.color)]
-                curNum = curNum! + 1 // update the number of occurrences
-                countTracks[String(track.color)] = curNum
-            }
-        }
-        
-        topInstruments = countTracks.keysSortedByValue(>)
-        return topInstruments
     }
 
 }
