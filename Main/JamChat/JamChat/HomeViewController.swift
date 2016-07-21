@@ -77,15 +77,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
         
-    func addNewJam(duration: Double, userIDs: [String], name: String) {
+    func addNewJam(duration: Double, userIDs: [String], name: String, tempo: Int) {
         var jam: Jam!
         let jamLength = duration
         let jamName = name
+        let jamTempo = tempo
         
         if userIDs.count == 0 {
             print("Can't create jam without users")
         } else {
-            jam = Jam(messageDuration: Double(jamLength), userIDs: userIDs, title: jamName)
+            jam = Jam(messageDuration: Double(jamLength), userIDs: userIDs, title: jamName, tempo: jamTempo)
             jam.push { (success: Bool, error: NSError?) in
                 if let error = error {
                     print(error.localizedDescription)
