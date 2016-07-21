@@ -80,8 +80,20 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Yj-zQ-NrI" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="138" y="309" width="100" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="2oh-Mb-EsF"/>
+                                    <constraint firstAttribute="height" constant="50" id="gkd-ON-ZHk"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2Yj-zQ-NrI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Qtl-K7-kt6"/>
+                            <constraint firstItem="2Yj-zQ-NrI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VR8-az-9i1"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OGw-g0-NdJ">
                         <barButtonItem key="backBarButtonItem" title=" " id="9xd-mB-OhM"/>
@@ -99,6 +111,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="loadingIndicatorView" destination="2Yj-zQ-NrI" id="hvA-Dl-IWf"/>
                         <outlet property="tableView" destination="ide-jJ-Qoh" id="eab-A1-jAk"/>
                     </connections>
                 </viewController>
