@@ -12,7 +12,7 @@ import FDWaveformView
 import AudioKit
 import CircleMenu
 
-class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CircleMenuDelegate {
+class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, CircleMenuDelegate {
 
     var jam: Jam!
     
@@ -20,18 +20,25 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var jamNameLabel: UILabel!
     @IBOutlet weak var userCollection: UICollectionView!
     @IBOutlet weak var waveformContainer: UIView!
-    
+    @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var keyboardButton: CircleMenu!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let userTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onUserTap(_:) as (JamViewController) -> (UITapGestureRecognizer) -> ()))
+        //userTap.minimumPressDuration = 0.5
+        userTap.delegate = self
+        //userTap.delaysTouchesBegan = true
+        self.userCollection?.addGestureRecognizer(userTap)
+        
         keyboardButton.delegate = self
         keyboardButton.layer.cornerRadius = keyboardButton.frame.size.width / 2.0
         keyboardButton.setImage(UIImage(named: "icon_menu"), forState: .Normal)
         keyboardButton.setImage(UIImage(named: "icon_close"), forState: .Selected)
-            
         
+        recordButton.layer.cornerRadius = recordButton.frame.size.width / 2.0
+
         // Set up user collection view:
         userCollection.dataSource = self
         userCollection.delegate = self
@@ -42,7 +49,27 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         userCollection.collectionViewLayout = layout
         jamNameLabel.text = jam.title
         
-        // Set up waveform view:
+        drawWaveforms()
+    }
+    
+    func onUserTap(gestureRecognizer : UITapGestureRecognizer){
+        
+        if (gestureRecognizer.state != UIGestureRecognizerState.Ended){
+            return
+        }
+        
+        let tapPosition = gestureRecognizer.locationInView(self.userCollection)
+        
+        if let indexPath : NSIndexPath = (self.userCollection?.indexPathForItemAtPoint(tapPosition))!{
+            //do whatever you need to do
+            
+            PagerViewController.sharedInstance?.moveToViewControllerAtIndex(2, animated: false)
+            let profileNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
+        }
+        
+    }
+    
+    func drawWaveforms() {
         let lastMessage = jam.messages.last
         lastMessage?.loadTracks({
             for track in (lastMessage?.tracks)! {
@@ -57,18 +84,19 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                     waveformView.doesAllowScrubbing = false
                     waveformView.doesAllowScroll = false
                     waveformView.doesAllowStretch = false
+                    waveformView.wavesColor = track.color.colorWithAlphaComponent(0.6)
                     
                     self.waveformContainer.addSubview(waveformView)
                     
                     //adds tap gesture recognizer to view
                     let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
-                     waveformView.addGestureRecognizer(waveTap)
+                    waveformView.addGestureRecognizer(waveTap)
                 }
             }
             
+            let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+            keyboardController.instrument.reload()
         })
-        
-
     }
     
     //Plays chat when wave is tapped
@@ -119,6 +147,33 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let keyboardController = self.childViewControllers[0] as! KeyboardViewController
         keyboardController.instrument = instruments[atIndex]
         keyboardButton.selected = false
+    }
+    
+    @IBAction func onRecord(sender: UIButton) {
+        let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+        
+        UIView.animateKeyframesWithDuration(jam.messageDuration, delay: 0, options: [], animations: {
+            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/16, animations: {
+                self.recordButton.transform = CGAffineTransformScale(self.recordButton.transform, 2, 2)
+            })
+            UIView.addKeyframeWithRelativeStartTime(1/16, relativeDuration: 15/16, animations: {
+                self.recordButton.transform = CGAffineTransformScale(self.recordButton.transform, 0.5, 0.5)
+            })
+            }, completion: nil
+        )
+        
+        jam.recordSend(keyboardController.instrument, success: {
+            for waveform in self.waveformContainer.subviews {
+                waveform.removeFromSuperview()
+            }
+            self.drawWaveforms()
+            keyboardController.instrument.reload()
+            print("Message sent!")
+        }) { (error: NSError) in
+            print(error.localizedDescription)
+        }
+        
+        User.currentUser?.incrementInstrument(keyboardController.instrument)
     }
     
 

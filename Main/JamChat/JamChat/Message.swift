@@ -71,6 +71,7 @@ class Message: NSObject {
         super.init()
         
         tracks = previousMessage?.tracks ?? []
+        tracksAreLoaded = true
     }
     
     /**

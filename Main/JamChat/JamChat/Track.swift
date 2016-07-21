@@ -19,6 +19,8 @@ class Track: NSObject {
     
     var player: AKAudioPlayer?
     var filepath: String!
+    var color: UIColor = UIColor.grayColor()
+    
     private var object: PFObject!
     
     private var recorder: AKNodeRecorder?
@@ -33,6 +35,9 @@ class Track: NSObject {
         let parseUser = object["author"] as! PFUser
         author = User(user: parseUser)
         identifier = object["identifier"] as! String
+        if let hex = object["color"] as? String {
+            color = UIColor(hexString: hex)
+        }
         
         filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + self.identifier + ".m4a"
         
@@ -82,10 +87,15 @@ class Track: NSObject {
         player?.stop()
     }
     
+    func recordInstrument(instrument: Instrument, duration: Double, completion: () -> ()) {
+        color = instrument.color
+        recordNode(Instrument.mixer, duration: duration, completion: completion)
+    }
+    
     /**
      Records the track from an AKNode, overwriting any previous content
      */
-    func record(node: AKNode, duration: Double, completion: ()->()) {
+    private func recordNode(node: AKNode, duration: Double, completion: ()->()) {
         recorder = try? AKNodeRecorder(node: node)
         
         recorder!.record()
@@ -131,7 +141,46 @@ class Track: NSObject {
         object["media"] = PFFile(name: "audio.m4a", data: NSData(contentsOfFile: filepath)!)
         object["author"] = author.parseUser // Pointer column type that points to PFUser
         object["identifier"] = identifier
+        object["color"] = color.toHexString()
         
         object.saveInBackgroundWithBlock(completion)
+    }
+}
+
+extension UIColor {
+    convenience init(hexString:String) {
+        let hexString = hexString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let scanner = NSScanner(string: hexString)
+        
+        if (hexString.hasPrefix("#")) {
+            scanner.scanLocation = 1
+        }
+        
+        var color:UInt32 = 0
+        scanner.scanHexInt(&color)
+        
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        
+        self.init(red:red, green:green, blue:blue, alpha:1)
+    }
+    
+    func toHexString() -> String {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        
+        return String(format:"#%06x", rgb)
     }
 }
