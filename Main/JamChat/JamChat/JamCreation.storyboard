@@ -56,6 +56,11 @@
                             </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fnh-88-Duu">
                                 <rect key="frame" x="56" y="436" width="240" height="16"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="mvI-qo-jEz">
+                                        <rect key="frame" x="-2" y="-7" width="249" height="31"/>
+                                    </slider>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJ1-LZ-tDD">
@@ -70,12 +75,10 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Yj-iv-aM2">
-                                <rect key="frame" x="163" y="460" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rXK-By-0X8">
+                                <rect key="frame" x="164" y="453" width="37" height="35"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -88,11 +91,12 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="currentTempo" destination="9Yj-iv-aM2" id="tqd-Yc-Qzi"/>
                         <outlet property="maxTempo" destination="yVS-bt-hbS" id="89l-5q-bx0"/>
                         <outlet property="minTempo" destination="rJ1-LZ-tDD" id="xdG-ZE-GsJ"/>
                         <outlet property="selectedUsersLabel" destination="UtY-V3-lfq" id="tAT-Wf-ncv"/>
                         <outlet property="sliderView1" destination="XHu-qe-3er" id="Y6q-z6-MHq"/>
+                        <outlet property="tempoPulseView" destination="rXK-By-0X8" id="pww-ge-qF7"/>
+                        <outlet property="tempoSlider" destination="mvI-qo-jEz" id="QI1-Me-CRQ"/>
                         <outlet property="tempoSliderView" destination="Fnh-88-Duu" id="nwz-3J-m6f"/>
                         <outlet property="titleLabel" destination="Dla-u1-i4Y" id="4Hj-jt-rcx"/>
                     </connections>
