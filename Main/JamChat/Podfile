@@ -35,5 +35,6 @@ target 'JamChat' do
     pod 'DGElasticPullToRefresh'
     pod 'DBProfileViewController'
     pod 'BAPulseView'
+    pod 'DGElasticPullToRefresh'
 
 end
