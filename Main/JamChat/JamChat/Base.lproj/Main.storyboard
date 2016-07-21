@@ -55,6 +55,11 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                            <color key="value" red="0.98431372549999996" green="0.54901960780000003" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="buttonBarView" destination="Wvl-A8-1jW" id="mwx-6g-LGE"/>
                         <outlet property="containerView" destination="zEE-YY-lg8" id="CrG-Kn-6uY"/>

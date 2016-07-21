@@ -13,12 +13,14 @@ class PagerViewController: ButtonBarPagerTabStripViewController {
     
     static var sharedInstance: PagerViewController?
     
+    @IBInspectable var selectedColor: UIColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+    
     override func viewDidLoad() {
         PagerViewController.sharedInstance = self
         // change selected bar color
         settings.style.buttonBarBackgroundColor = UIColor.clearColor()
         settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
-        settings.style.selectedBarBackgroundColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        settings.style.selectedBarBackgroundColor = selectedColor
         settings.style.buttonBarItemFont = UIFont(name: "HelveticaNeue-Light", size:14) ?? UIFont.systemFontOfSize(14)
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarMinimumLineSpacing = 0
