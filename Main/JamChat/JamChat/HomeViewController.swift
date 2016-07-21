@@ -76,7 +76,8 @@ import NVActivityIndicatorView
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+            loadFeed()
+            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: false)
         }
     }
     
