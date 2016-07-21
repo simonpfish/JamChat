@@ -85,6 +85,7 @@ import NVActivityIndicatorView
             self.jams = jams
             print("Reloading table view")
             self.tableView.reloadData()
+            self.tableView.reloadData() // Reload twice in order to fix insets
             self.tableView.dg_stopLoading()
             self.loadingIndicatorView.stopAnimation()
         }) { (error: NSError) in

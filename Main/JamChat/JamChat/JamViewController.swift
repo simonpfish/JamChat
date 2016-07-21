@@ -37,7 +37,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         userCollection.dataSource = self
         userCollection.delegate = self
         let layout = KTCenterFlowLayout()
-        layout.minimumInteritemSpacing = 20.0
+        layout.minimumInteritemSpacing = 5.0
         layout.itemSize = CGSizeMake(60, 70)
         layout.minimumLineSpacing = 0.0
         userCollection.collectionViewLayout = layout
