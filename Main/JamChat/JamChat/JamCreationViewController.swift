@@ -67,7 +67,7 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         tempoSlider.continuous = true
         tempoSlider.tintColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
         tempoSlider.value = 80
-        tempoSlider.addTarget(self, action: "tempoValueDidChange:", forControlEvents: .ValueChanged)
+        tempoSlider.addTarget(self, action: #selector(JamCreationViewController.tempoValueDidChange(_:)), forControlEvents: .ValueChanged)
         maxTempo.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
         minTempo.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
         minTempo.text = "\(80)"
