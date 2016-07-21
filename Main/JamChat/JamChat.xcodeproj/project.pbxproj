@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		213089AD1D4154CF0030D099 /* InstrumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089AC1D4154CF0030D099 /* InstrumentCell.swift */; };
+		213089B11D41594A0030D099 /* UserCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089B01D41594A0030D099 /* UserCollectionDelegate.swift */; };
+		213089B31D415AB00030D099 /* InstrumentCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */; };
 		219AEAA41D403E39008DC61B /* jamNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 219AEAA31D403E39008DC61B /* jamNames.txt */; };
 		8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20F5F11D38F37800622892 /* SelectionView.swift */; };
 		8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D0FEB1D3D602C00380680 /* Instrument.swift */; };
@@ -51,6 +54,9 @@
 
 /* Begin PBXFileReference section */
 		06DC7EFB1EBB19B0747B99B1 /* Pods-JamChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.release.xcconfig"; sourceTree = "<group>"; };
+		213089AC1D4154CF0030D099 /* InstrumentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstrumentCell.swift; sourceTree = "<group>"; };
+		213089B01D41594A0030D099 /* UserCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionDelegate.swift; sourceTree = "<group>"; };
+		213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstrumentCollectionDelegate.swift; sourceTree = "<group>"; };
 		219AEAA31D403E39008DC61B /* jamNames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jamNames.txt; sourceTree = "<group>"; };
 		7F275E1B8FE709C2BCDCFD4D /* Pods-JamChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.debug.xcconfig"; sourceTree = "<group>"; };
 		8C20F5F11D38F37800622892 /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 				E7FE0FE51D356E2100452361 /* JamCell.swift */,
 				E7FE0FFC1D359F4100452361 /* MessageCell.swift */,
 				E7E0D6971D3C0DCB005A840A /* UserCell.swift */,
+				213089AC1D4154CF0030D099 /* InstrumentCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -244,6 +251,8 @@
 				E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */,
 				E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */,
 				219AEAA31D403E39008DC61B /* jamNames.txt */,
+				213089B01D41594A0030D099 /* UserCollectionDelegate.swift */,
+				213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -402,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E79956751D316E9D00EE445B /* AKAudioFile+Exporting.swift in Sources */,
+				213089AD1D4154CF0030D099 /* InstrumentCell.swift in Sources */,
 				E799567F1D31749F00EE445B /* Track.swift in Sources */,
 				E79956771D316E9D00EE445B /* AKAudioFile.swift in Sources */,
 				E799567D1D31746300EE445B /* Jam.swift in Sources */,
@@ -418,10 +428,12 @@
 				E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */,
 				E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */,
 				E79956791D316EA500EE445B /* AKNodeRecorder.swift in Sources */,
+				213089B11D41594A0030D099 /* UserCollectionDelegate.swift in Sources */,
 				E74F1DFA1D386A2E00A34409 /* JamHistoryViewController.swift in Sources */,
 				E7FE0FFD1D359F4100452361 /* MessageCell.swift in Sources */,
 				8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */,
 				E7F0BB3E1D3D61550059160B /* PagerViewController.swift in Sources */,
+				213089B31D415AB00030D099 /* InstrumentCollectionDelegate.swift in Sources */,
 				E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */,
 				E7F0BB561D3EA5070059160B /* PolyphonicKeyboardView.swift in Sources */,
 				E7E0D6981D3C0DCB005A840A /* UserCell.swift in Sources */,
