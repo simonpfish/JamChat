@@ -26,12 +26,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let userTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onUserTap(_:) as (JamViewController) -> (UITapGestureRecognizer) -> ()))
-        //userTap.minimumPressDuration = 0.5
-        userTap.delegate = self
-        //userTap.delaysTouchesBegan = true
-        self.userCollection?.addGestureRecognizer(userTap)
-        
         keyboardButton.delegate = self
         keyboardButton.layer.cornerRadius = keyboardButton.frame.size.width / 2.0
         keyboardButton.setImage(UIImage(named: "icon_menu"), forState: .Normal)
@@ -50,23 +44,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         jamNameLabel.text = jam.title
         
         drawWaveforms()
-    }
-    
-    func onUserTap(gestureRecognizer : UITapGestureRecognizer){
-        
-        if (gestureRecognizer.state != UIGestureRecognizerState.Ended){
-            return
-        }
-        
-        let tapPosition = gestureRecognizer.locationInView(self.userCollection)
-        
-        if let indexPath : NSIndexPath = (self.userCollection?.indexPathForItemAtPoint(tapPosition))!{
-            //do whatever you need to do
-            
-            PagerViewController.sharedInstance?.moveToViewControllerAtIndex(2, animated: false)
-            let profileNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
-        }
-        
     }
     
     func drawWaveforms() {

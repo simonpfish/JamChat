@@ -8,7 +8,6 @@
 
 import UIKit
 import XLPagerTabStrip
-import DBProfileViewController
 
 class ProfileViewController: UIViewController, IndicatorInfoProvider {
     
