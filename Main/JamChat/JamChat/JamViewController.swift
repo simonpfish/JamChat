@@ -12,7 +12,7 @@ import FDWaveformView
 import AudioKit
 import CircleMenu
 
-class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CircleMenuDelegate {
+class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, CircleMenuDelegate {
 
     var jam: Jam!
     
@@ -149,7 +149,10 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }) { (error: NSError) in
             print(error.localizedDescription)
         }
+        
+        User.currentUser?.incrementInstrument(keyboardController.instrument)
     }
+    
 
     /*
     // MARK: - Navigation

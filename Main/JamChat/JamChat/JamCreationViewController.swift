@@ -31,26 +31,33 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var tempoSlider: UISlider!
     @IBOutlet weak var tempoPulseView: UIView!
     
+    var titleGenerator: [String] = []
+    
     // creates an interval slider
-    private var intervalSlider1: IntervalSlider! {
+    private var messageDurationSlider: IntervalSlider! {
         didSet {
-            self.intervalSlider1.tag = 1
-            self.sliderView1.addSubview(self.intervalSlider1)
-            self.intervalSlider1.delegate = self
+            self.messageDurationSlider.tag = 1
+            self.sliderView1.addSubview(self.messageDurationSlider)
+            self.messageDurationSlider.delegate = self
         }
     }
     
     // array with all the possible jam duration lengths (in seconds)
-    private var data1: [Float] {
+    private var messageDurationValues: [Float] {
         return [5, 10, 15, 20]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // read in a text file of random jam titles and store it in an array
+        let path = NSBundle.mainBundle().pathForResource("jamNames", ofType: "txt")
+        let jamTitles = try! String(contentsOfFile: path!)
+        titleGenerator = jamTitles.componentsSeparatedByString("\n")
+        
         // set up interval slider
         let result = self.createSources()
-        self.intervalSlider1 = IntervalSlider(frame: self.sliderView1.bounds, sources: result.sources, options: result.options)
+        self.messageDurationSlider = IntervalSlider(frame: self.sliderView1.bounds, sources: result.sources, options: result.options)
         
         setTempoSlider()
         
@@ -109,7 +116,7 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         var sources = [IntervalSliderSource]()
         var appearanceValue: Float = 0.5
         
-        for data in self.data1 {
+        for data in self.messageDurationValues {
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 20))
             label.text = "\(Int(data))"
             label.font = UIFont.systemFontOfSize(CGFloat(12))
@@ -123,7 +130,11 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         }
         
         // image used for the thumb image on the interval slider
-        let image = UIImage(named: "grayCircle.png")!
+        let thumbView = UIView(frame: CGRectMake(0, 0 , 20, 20))
+        thumbView.backgroundColor = UIColor.lightGrayColor()
+        thumbView.layer.cornerRadius = thumbView.bounds.width * 0.5
+        thumbView.clipsToBounds = true
+        let image = imageFromViewWithCornerRadius(thumbView)
         
         // sets the track tint color and the thumb image
         let options: [IntervalSliderOption] = [
@@ -134,8 +145,33 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         return (sources, options)
     }
     
+    func imageFromViewWithCornerRadius(view: UIView) -> UIImage {
+        // maskImage
+        let imageBounds = CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height)
+        let path = UIBezierPath(roundedRect: imageBounds, cornerRadius: view.bounds.size.width * 0.5)
+        UIGraphicsBeginImageContextWithOptions(path.bounds.size, false, 0)
+        view.backgroundColor?.setFill()
+        path.fill()
+        let maskImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // drawImge
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
+        let context = UIGraphicsGetCurrentContext()
+        CGContextClipToMask(context, imageBounds, maskImage.CGImage)
+        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image;
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
+        let randomNumber = arc4random_uniform(UInt32(titleGenerator.count))
+        self.titleLabel.placeholder = titleGenerator[Int(randomNumber)]
+        
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -180,15 +216,20 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     }
     
     @IBAction func onCreate(sender: AnyObject) {
+        
+        // if the user does not enter a Jam Title, use the randomly generated one
+        if(titleLabel.text == "") {
+            self.titleLabel.text = self.titleLabel.placeholder
+        }
+        
         PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
         let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
         let home = homeNavigation.viewControllers[0] as! HomeViewController
-        home.addNewJam(Double(intervalSlider1.getValue()), userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: intTempo)
+        home.addNewJam(Double(messageDurationSlider.getValue()), userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: intTempo)
         self.selectedFriendIDs = []
         self.selectedUsersLabel.text = ""
         self.titleLabel.text = ""
     }
-    
 
     /*
     // MARK: - Navigation

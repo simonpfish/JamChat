@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		219AEAA41D403E39008DC61B /* jamNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 219AEAA31D403E39008DC61B /* jamNames.txt */; };
 		8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20F5F11D38F37800622892 /* SelectionView.swift */; };
 		8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D0FEB1D3D602C00380680 /* Instrument.swift */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		06DC7EFB1EBB19B0747B99B1 /* Pods-JamChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.release.xcconfig"; sourceTree = "<group>"; };
+		219AEAA31D403E39008DC61B /* jamNames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jamNames.txt; sourceTree = "<group>"; };
 		7F275E1B8FE709C2BCDCFD4D /* Pods-JamChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.debug.xcconfig"; sourceTree = "<group>"; };
 		8C20F5F11D38F37800622892 /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		8C9D0FEB1D3D602C00380680 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				E7F0BB3D1D3D61550059160B /* PagerViewController.swift */,
 				E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */,
 				E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */,
+				219AEAA31D403E39008DC61B /* jamNames.txt */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				E79AE2051D3D50F400899823 /* Profile.storyboard in Resources */,
 				E7F0BB471D3D67110059160B /* Home.storyboard in Resources */,
 				E74F1E031D3C06B800A34409 /* Jam.storyboard in Resources */,
+				219AEAA41D403E39008DC61B /* jamNames.txt in Resources */,
 				E723F2C81D40115700CF1C29 /* SaxC.wav in Resources */,
 				E723F2C61D40115700CF1C29 /* PianoC.wav in Resources */,
 			);

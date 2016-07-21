@@ -12,11 +12,21 @@ import FBSDKLoginKit
 import Parse
 import ParseUI
 import AudioKit
+import DGElasticPullToRefresh
+import NVActivityIndicatorView
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+@IBDesignable class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
+    @IBInspectable var refreshTint: UIColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+    @IBInspectable var refreshFill: UIColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+    @IBInspectable var refreshBackground: UIColor {
+        return tableView.backgroundColor!
+    }
     var jams: [Jam] = []
+    
+    @IBInspectable var backTint: UIColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,15 +35,27 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = backTint
 
+        // Set up the table view
         tableView.delegate = self
         tableView.dataSource = self
+        let loadingView = DGElasticPullToRefreshLoadingViewCircle()
+        loadingView.tintColor = refreshTint
+        tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+            self?.loadFeed()
+        }, loadingView: loadingView)
+        tableView.dg_setPullToRefreshFillColor(refreshFill)
+        tableView.dg_setPullToRefreshBackgroundColor(refreshBackground)
         
-        // Do any additional setup after loading the view.
+        loadingIndicatorView.hidesWhenStopped = true
+        loadingIndicatorView.type = .LineScaleParty
+        loadingIndicatorView.color = refreshFill
         
+        // Handle login and user persistance
         if (!User.isLoggedIn()) {
             User.login(self, success: {
+                self.loadingIndicatorView.startAnimation()
                 self.loadFeed()
                 }, failure: { (error: NSError?) in
                     print(error?.localizedDescription)
@@ -44,6 +66,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     print(error.localizedDescription)
                 } else {
                     User.currentUser?.updateDataFromProfile(profile)
+                    self.loadingIndicatorView.startAnimation()
                     self.loadFeed()
                 }
             })
@@ -62,8 +85,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.jams = jams
             print("Reloading table view")
             self.tableView.reloadData()
+            self.tableView.dg_stopLoading()
+            self.loadingIndicatorView.stopAnimation()
         }) { (error: NSError) in
             print(error.localizedDescription)
+            self.tableView.dg_stopLoading()
+            self.loadingIndicatorView.stopAnimation()
         }
     }
     
@@ -120,6 +147,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
     }
- 
+    
+}
 
+extension UIScrollView {
+    func dg_stopScrollingAnimation() {}
 }
