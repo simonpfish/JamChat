@@ -87,6 +87,14 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="9xd-mB-OhM"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="refreshFill">
+                            <color key="value" red="0.98431372549019602" green="0.5490196078431373" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="refreshTint">
+                            <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="tableView" destination="ide-jJ-Qoh" id="eab-A1-jAk"/>
                     </connections>
