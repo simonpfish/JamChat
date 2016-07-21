@@ -76,13 +76,9 @@ import NVActivityIndicatorView
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+            loadFeed()
+            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: false)
         }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
     }
     
     func loadFeed() {
@@ -90,7 +86,6 @@ import NVActivityIndicatorView
             self.jams = jams
             print("Reloading table view")
             self.tableView.reloadData()
-            self.tableView.reloadData() // Reload twice in order to fix insets
             self.tableView.dg_stopLoading()
             self.loadingIndicatorView.stopAnimation()
         }) { (error: NSError) in
