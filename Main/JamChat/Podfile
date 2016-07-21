@@ -33,8 +33,8 @@ target 'JamChat' do
     pod 'CircleMenu'
     pod 'IntervalSlider'
     pod 'DGElasticPullToRefresh'
-    pod 'DBProfileViewController'
     pod 'BAPulseView'
     pod 'DGElasticPullToRefresh'
+    pod 'NVActivityIndicatorView'
 
 end

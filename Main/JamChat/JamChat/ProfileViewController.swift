@@ -153,7 +153,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         }
         
         ///////INSTRUMENTS
-        var favInstruments = setUpLabelsUser.instrumentCount
+        let favInstruments = setUpLabelsUser.instrumentCount
         var instruments: [Instrument] = []
         
         for instrument in favInstruments.keys {
