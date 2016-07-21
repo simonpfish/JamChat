@@ -193,10 +193,9 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     
     @IBAction func onCreate(sender: AnyObject) {
         
-        // if the user does not enter a Jam Title, randomly generate one
+        // if the user does not enter a Jam Title, use the randomly generated one
         if(titleLabel.text == "") {
-            let randomNumberGen = arc4random_uniform(11)
-            self.titleLabel.text = titleGenerator[Int(randomNumberGen)]
+            self.titleLabel.text = self.titleLabel.placeholder
         }
         
         PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
