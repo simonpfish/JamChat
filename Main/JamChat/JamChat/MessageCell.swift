@@ -113,19 +113,5 @@ class MessageCell: UITableViewCell {
         )
     }
 
-    @IBAction func onPlay(sender: AnyObject) {
-        
-        message?.loadTracks({
-            self.sineWaveOn()
-            self.message?.play()
-        })
-        
-        // each track is 5 seconds
-        // allows the sine wave to play until the track is finished
-        
-        delay(5.0) {
-            self.sineWaveOff()
-        }
-    }
 }
 

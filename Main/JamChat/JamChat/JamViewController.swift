@@ -23,6 +23,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
     
+    @IBOutlet weak var progressIndicator: UIView!
     @IBOutlet weak var keyboardContainer: UIView!
     @IBOutlet weak var jamNameLabel: UILabel!
     @IBOutlet weak var userCollection: UICollectionView!
@@ -43,6 +44,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.type = .LineScaleParty
         loadingIndicatorView.color = loadingColor
+        
+        progressIndicator.layer.cornerRadius = progressIndicator.frame.width/2
 
         // Set up user collection view:
         userCollection.dataSource = self
@@ -60,7 +63,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         recordView.pulseCornerRadius = floatWidth/2
         recordView.backgroundColor = UIColor(red: 1, green: 0, blue: 0.298, alpha: 1.0)
         recordView.pulseStrokeColor = UIColor(red: 0.9569, green: 0.4471, blue: 0, alpha: 1.0).CGColor
-        let tap = UITapGestureRecognizer(target: self, action: Selector("onRecord:"))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onRecord(_:)))
         tap.delegate = self
         recordView.addGestureRecognizer(tap)
 
@@ -93,7 +96,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 keyboardController.instrument.reload()
                 
                 let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
-                self.waveformContainer.addGestureRecognizer(waveTap)
+                self.waveformContainer.subviews.last!.addGestureRecognizer(waveTap)
+                
+                self.waveformContainer.bringSubviewToFront(self.progressIndicator)
             })
 
         }
@@ -101,10 +106,15 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     //Plays chat when wave is tapped
     func onPlay(sender: UITapGestureRecognizer? = nil) {
-        
         let lastMessage = jam.messages.last
         lastMessage?.loadTracks({
-            lastMessage?.play()
+            UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
+                self.progressIndicator.frame.origin.x = self.view.frame.width
+            }) { (success: Bool) in
+                self.progressIndicator.frame.origin.x = -2
+            }
+            
+            lastMessage?.play(self.jam.messageDuration)
         })
     }
     
@@ -151,10 +161,12 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     func onRecord(sender: UITapGestureRecognizer) {
         countdownLabel.text = "\(countdown)"
-        countdownTimer = NSTimer.scheduledTimerWithTimeInterval(jam.tempo!/60, target: self, selector: Selector("startRecord"), userInfo: nil, repeats: true)
+        countdownTimer = NSTimer.scheduledTimerWithTimeInterval(jam.tempo!/60, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
+        recordView.popAndPulse()
     }
     
     func startRecord(){
+        recordView.popAndPulse()
         if (countdown == 1){
             countdownLabel.text = ""
             countdownTimer.invalidate()
@@ -162,10 +174,18 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             
             let keyboardController = self.childViewControllers[0] as! KeyboardViewController
             
+            UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
+                self.progressIndicator.frame.origin.x = self.view.frame.width
+            }) { (success: Bool) in
+                self.progressIndicator.frame.origin.x = -2
+            }
+            
             jam.recordSend(keyboardController.instrument, success: {
                 self.tempoTimer.invalidate()
-                for waveform in self.waveformContainer.subviews {
-                    waveform.removeFromSuperview()
+                for subview in self.waveformContainer.subviews {
+                    if let waveform = subview as? FDWaveformView {
+                        waveform.removeFromSuperview()
+                    }
                 }
                 self.drawWaveforms()
                 keyboardController.instrument.reload()

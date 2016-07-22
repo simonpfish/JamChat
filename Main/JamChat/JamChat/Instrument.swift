@@ -17,7 +17,7 @@ class Instrument: NSObject {
     private(set) var color: UIColor!
     private(set) var image: UIImage?
     
-    private var sampler: AKSampler!
+    private(set) var sampler: AKSampler!
     
     private var urls: [NSURL] = []
     private var fileName: String!
