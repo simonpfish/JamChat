@@ -67,9 +67,9 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         setTempoSlider()
         
-//        User.currentUser?.loadFriends({ 
-//            self.tableView.reloadData()
-//        })
+        User.currentUser?.loadFriends({ 
+            self.tableView.reloadData()
+        })
         
 //        initializeFriendPicker()
         

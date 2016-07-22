@@ -56,7 +56,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let floatWidth = Float(recordView.frame.size.width)
         recordView.pulseCornerRadius = floatWidth/2
         recordView.backgroundColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
-        let tap = UITapGestureRecognizer(target: self, action: Selector("onRecord:"))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onRecord(_:)))
         tap.delegate = self
         recordView.addGestureRecognizer(tap)
 

@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Set Jam Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dla-u1-i4Y">
-                                <rect key="frame" x="46" y="541" width="284" height="30"/>
+                                <rect key="frame" x="46" y="551" width="284" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Js5-bL-S0x"/>
                                     <constraint firstAttribute="width" constant="284" id="xja-B4-QcE"/>
@@ -45,10 +45,10 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fnh-88-Duu">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fnh-88-Duu">
                                 <rect key="frame" x="77" y="461" width="221" height="16"/>
                                 <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="mvI-qo-jEz">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="mvI-qo-jEz">
                                         <rect key="frame" x="-15" y="-7" width="238" height="31"/>
                                         <color key="thumbTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </slider>
@@ -82,7 +82,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXK-By-0X8" customClass="BAPulseView">
-                                <rect key="frame" x="164" y="478" width="37" height="35"/>
+                                <rect key="frame" x="164" y="491" width="37" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="37" id="KCA-bo-adk"/>
@@ -97,7 +97,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZqV-4Z-bcO" id="2Bp-4C-OTY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hSi-1p-fyb">
@@ -165,12 +165,12 @@
                             <constraint firstItem="rXK-By-0X8" firstAttribute="leading" secondItem="g8w-1D-pLU" secondAttribute="leading" id="2cE-OV-cOW"/>
                             <constraint firstItem="SjV-hl-34v" firstAttribute="centerX" secondItem="rXK-By-0X8" secondAttribute="centerX" id="34l-49-hmy"/>
                             <constraint firstItem="KZI-3w-WSZ" firstAttribute="leading" secondItem="V9c-Nr-m5X" secondAttribute="leading" id="46S-qX-vnW"/>
-                            <constraint firstItem="XHu-qe-3er" firstAttribute="trailing" secondItem="Fnh-88-Duu" secondAttribute="trailing" constant="38" id="4c5-vY-ijV"/>
+                            <constraint firstItem="XHu-qe-3er" firstAttribute="trailing" secondItem="Fnh-88-Duu" secondAttribute="trailing" constant="37" id="4c5-vY-ijV"/>
                             <constraint firstItem="KZI-3w-WSZ" firstAttribute="centerX" secondItem="Dla-u1-i4Y" secondAttribute="centerX" id="9WC-ot-KbY"/>
                             <constraint firstItem="1Sb-Wx-jRt" firstAttribute="leading" secondItem="Dla-u1-i4Y" secondAttribute="leading" constant="18" id="9yX-ib-1Gq"/>
                             <constraint firstItem="1Sb-Wx-jRt" firstAttribute="top" secondItem="XHu-qe-3er" secondAttribute="bottom" constant="27" id="BCy-B7-CUK"/>
                             <constraint firstItem="KZI-3w-WSZ" firstAttribute="top" secondItem="cW6-q9-b2P" secondAttribute="bottom" constant="76" id="Bz1-LP-9fn"/>
-                            <constraint firstItem="Dla-u1-i4Y" firstAttribute="top" secondItem="rXK-By-0X8" secondAttribute="bottom" constant="28" id="Jsx-6r-eYi"/>
+                            <constraint firstItem="Dla-u1-i4Y" firstAttribute="top" secondItem="rXK-By-0X8" secondAttribute="bottom" constant="25" id="Jsx-6r-eYi"/>
                             <constraint firstItem="yVS-bt-hbS" firstAttribute="leading" secondItem="rXK-By-0X8" secondAttribute="trailing" constant="75" id="O3k-AF-UjL"/>
                             <constraint firstItem="Fnh-88-Duu" firstAttribute="top" secondItem="1Sb-Wx-jRt" secondAttribute="bottom" constant="11" id="QwX-8V-jgP"/>
                             <constraint firstItem="rXK-By-0X8" firstAttribute="leading" secondItem="rJ1-LZ-tDD" secondAttribute="trailing" constant="77" id="Rk1-yY-6Ru"/>
@@ -180,8 +180,8 @@
                             <constraint firstItem="XHu-qe-3er" firstAttribute="top" secondItem="SjV-hl-34v" secondAttribute="bottom" constant="19" id="jQz-QX-gsf"/>
                             <constraint firstItem="Ys7-t7-ngS" firstAttribute="top" secondItem="V9c-Nr-m5X" secondAttribute="top" id="kmO-w5-VVK"/>
                             <constraint firstItem="g8w-1D-pLU" firstAttribute="centerX" secondItem="V9c-Nr-m5X" secondAttribute="centerX" id="o5x-nD-twM"/>
-                            <constraint firstItem="g8w-1D-pLU" firstAttribute="top" secondItem="Dla-u1-i4Y" secondAttribute="bottom" constant="40" id="tQg-DY-dS3"/>
-                            <constraint firstItem="rJ1-LZ-tDD" firstAttribute="centerY" secondItem="rXK-By-0X8" secondAttribute="centerY" id="uDl-LN-bc9"/>
+                            <constraint firstItem="g8w-1D-pLU" firstAttribute="top" secondItem="Dla-u1-i4Y" secondAttribute="bottom" constant="30" id="tQg-DY-dS3"/>
+                            <constraint firstItem="rJ1-LZ-tDD" firstAttribute="centerY" secondItem="rXK-By-0X8" secondAttribute="centerY" constant="-13" id="uDl-LN-bc9"/>
                             <constraint firstItem="KZI-3w-WSZ" firstAttribute="centerX" secondItem="g8w-1D-pLU" secondAttribute="centerX" id="uly-Ok-j3M"/>
                             <constraint firstItem="rJ1-LZ-tDD" firstAttribute="top" secondItem="Fnh-88-Duu" secondAttribute="bottom" constant="8" symbolic="YES" id="vtJ-gy-cEO"/>
                             <constraint firstItem="Fnh-88-Duu" firstAttribute="centerX" secondItem="g8w-1D-pLU" secondAttribute="centerX" id="w6G-R3-eBB"/>
