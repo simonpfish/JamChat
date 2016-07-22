@@ -21,7 +21,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     var currentTempo: UILabel!
     var timer = NSTimer()
     
-    @IBOutlet weak var selectedUsersLabel: UILabel!
     @IBOutlet weak var sliderView1: UIView!
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var tempoSliderView: UIView!
@@ -55,6 +54,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         tableView.delegate = self
         tableView.dataSource = self
+        self.tableView.allowsMultipleSelection = true
         
         // read in a text file of random jam titles and store it in an array
         let path = NSBundle.mainBundle().pathForResource("jamNames", ofType: "txt")
@@ -81,6 +81,18 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
 //        initializeFriendPicker()
         
+        //                if let index = friendNames.indexOf(self.ramReel.selectedItem!) {
+        //                    let selectedID = User.currentUser!.friends![index]["id"]!
+        //                    if !self.selectedFriendIDs.contains(selectedID) {
+        //                        self.selectedFriendIDs.append(selectedID)
+        //                        self.selectedUsersLabel.text?.appendContentsOf($0 + "\n")
+        //                        print("Added friend to chat in creation: ", $0)
+        //                        self.ramReel.prepareForReuse()
+        //                    }
+        //                } else {
+        //                    print("Friend does not exist: ", $0)
+        //                }
+        
         setPulse()
     }
     
@@ -95,15 +107,13 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-        
-        if(selectedCell.contentView.backgroundColor == UIColor.lightGrayColor()) {
-            selectedCell.contentView.backgroundColor = UIColor.whiteColor()
-        } else {
-            selectedCell.contentView.backgroundColor = UIColor.lightGrayColor()
-        }
-        
+        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
     }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
+    }
+    
     
     //creates pulse effect for tempo
     func setPulse(){
@@ -275,7 +285,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         let home = homeNavigation.viewControllers[0] as! HomeViewController
         home.addNewJam(Double(messageDurationSlider.getValue()), userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: intTempo)
         self.selectedFriendIDs = []
-        self.selectedUsersLabel.text = ""
+        //self.selectedUsersLabel.text = ""
         self.titleLabel.text = ""
     }
 
