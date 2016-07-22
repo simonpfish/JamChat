@@ -79,20 +79,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
             }
         })
         
-//        initializeFriendPicker()
-        
-        //                if let index = friendNames.indexOf(self.ramReel.selectedItem!) {
-        //                    let selectedID = User.currentUser!.friends![index]["id"]!
-        //                    if !self.selectedFriendIDs.contains(selectedID) {
-        //                        self.selectedFriendIDs.append(selectedID)
-        //                        self.selectedUsersLabel.text?.appendContentsOf($0 + "\n")
-        //                        print("Added friend to chat in creation: ", $0)
-        //                        self.ramReel.prepareForReuse()
-        //                    }
-        //                } else {
-        //                    print("Friend does not exist: ", $0)
-        //                }
-        
         setPulse()
     }
     
@@ -106,12 +92,63 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+    /**
+     Highlights and added a check mark to a selected cell
+     */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
+        
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! FriendCell
+        let selectedFriend = currentCell.nameLabel.text
+        
+        // Loops through all of the user's friends
+        for friend in (User.currentUser?.friends)! {
+            
+            // Finds the selected friend
+            if friend.name == selectedFriend {
+                let selectedID = friend.facebookID
+                
+                // Adds the selected friend to an array of selected friends
+                if !self.selectedFriendIDs.contains(selectedID) {
+                    self.selectedFriendIDs.append(selectedID)
+                    print("Added friend to chat in creation: \(friend.firstName)")
+                } else {
+                    print("Friend does not exist: \(friend.firstName)")
+                }
+            }
+        }
+
+        
     }
     
+    /**
+     Unhighlights and removes a check mark from an unselected cell
+     */
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
+        
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! FriendCell
+        let selectedFriend = currentCell.nameLabel.text
+        
+        var count = 0
+        
+        // Loops through all of the user's friends
+        for friend in (User.currentUser?.friends)! {
+            
+            // Finds the friend that was unselected
+            if friend.name == selectedFriend {
+                let selectedID = friend.facebookID
+                
+                // Removes the friend from the array of selected friends if he/she was previously selected
+                if self.selectedFriendIDs.contains(selectedID) {
+                    self.selectedFriendIDs.removeAtIndex(count)
+                    print("Removed friend from chat in creation: \(friend.firstName)")
+                } else {
+                    print("Friend does not exist: \(friend.firstName)")
+                }
+            }
+            count += 1
+        }
     }
     
     
@@ -235,38 +272,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "New")
     }
-    
-//    func initializeFriendPicker() {
-//        
-//        var friendNames: [String] = []
-//        
-//        User.currentUser?.loadFriends({ 
-//            for friend in User.currentUser!.friends! {
-//                friendNames.append(friend["name"]!)
-//            }
-//            
-//            self.dataSource = SimplePrefixQueryDataSource(friendNames)
-//            self.ramReel = RAMReel(frame: self.view.bounds, dataSource: self.dataSource, placeholder: "Start by typing…") {
-//                if let index = friendNames.indexOf(self.ramReel.selectedItem!) {
-//                    let selectedID = User.currentUser!.friends![index]["id"]!
-//                    if !self.selectedFriendIDs.contains(selectedID) {
-//                        self.selectedFriendIDs.append(selectedID)
-//                        self.selectedUsersLabel.text?.appendContentsOf($0 + "\n")
-//                        print("Added friend to chat in creation: ", $0)
-//                        self.ramReel.prepareForReuse()
-//                    }
-//                } else {
-//                    print("Friend does not exist: ", $0)
-//                }
-//            }
-//            
-//            self.ramReel.theme = FriendSearchTheme()
-//            self.view.addSubview(self.ramReel.view)
-//            self.view.sendSubviewToBack(self.ramReel.view)
-//            self.ramReel.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-//        })
-//        
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -285,7 +290,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         let home = homeNavigation.viewControllers[0] as! HomeViewController
         home.addNewJam(Double(messageDurationSlider.getValue()), userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: intTempo)
         self.selectedFriendIDs = []
-        //self.selectedUsersLabel.text = ""
         self.titleLabel.text = ""
     }
 
