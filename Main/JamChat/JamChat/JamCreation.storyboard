@@ -86,7 +86,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="37" id="KCA-bo-adk"/>
-                                    <constraint firstAttribute="height" constant="35" id="fJh-Qo-cMT"/>
+                                    <constraint firstAttribute="height" constant="35" id="fJh-Qo-cMT" userLabel="height = 37"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KZI-3w-WSZ">
@@ -104,6 +104,7 @@
                                                     <rect key="frame" x="15" y="9" width="35" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="35" id="RxM-fF-tBG"/>
+                                                        <constraint firstAttribute="height" constant="35" id="XDK-jq-0h4"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8p2-sA-bJj">
@@ -117,7 +118,6 @@
                                                 <constraint firstItem="8p2-sA-bJj" firstAttribute="top" secondItem="2Bp-4C-OTY" secondAttribute="topMargin" constant="9" id="4ta-nU-qf4"/>
                                                 <constraint firstItem="hSi-1p-fyb" firstAttribute="leading" secondItem="2Bp-4C-OTY" secondAttribute="leadingMargin" constant="7" id="7Xy-Bq-kly"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="8p2-sA-bJj" secondAttribute="trailing" constant="24" id="Pul-p2-jxE"/>
-                                                <constraint firstItem="hSi-1p-fyb" firstAttribute="top" secondItem="2Bp-4C-OTY" secondAttribute="topMargin" constant="1" id="aIr-xQ-qiu"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="hSi-1p-fyb" secondAttribute="bottom" constant="-2.5" id="lqU-uC-taz"/>
                                                 <constraint firstItem="8p2-sA-bJj" firstAttribute="leading" secondItem="hSi-1p-fyb" secondAttribute="trailing" constant="29" id="zQL-eF-b3i"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="8p2-sA-bJj" secondAttribute="bottom" constant="3.5" id="ztf-0f-HOT"/>

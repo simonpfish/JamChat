@@ -128,27 +128,10 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
         
         let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! FriendCell
-        let selectedFriend = currentCell.nameLabel.text
         
-        var count = 0
-        
-        // Loops through all of the user's friends
-        for friend in (User.currentUser?.friends)! {
-            
-            // Finds the friend that was unselected
-            if friend.name == selectedFriend {
-                let selectedID = friend.facebookID
-                
-                // Removes the friend from the array of selected friends if he/she was previously selected
-                if self.selectedFriendIDs.contains(selectedID) {
-                    self.selectedFriendIDs.removeAtIndex(count)
-                    print("Removed friend from chat in creation: \(friend.firstName)")
-                } else {
-                    print("Friend does not exist: \(friend.firstName)")
-                }
-            }
-            count += 1
-        }
+        self.selectedFriendIDs.removeAtIndex(selectedFriendIDs.indexOf(currentCell.user.facebookID)!)
+
+        print("Removed friend from chat in creation: \(currentCell.nameLabel.text)")
     }
     
     
@@ -291,6 +274,13 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         home.addNewJam(Double(messageDurationSlider.getValue()), userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: intTempo)
         self.selectedFriendIDs = []
         self.titleLabel.text = ""
+        
+        // unselects previously selected friends from the table view
+        let paths = self.tableView.indexPathsForSelectedRows ?? []
+        for path in paths {
+            tableView.deselectRowAtIndexPath(path, animated: false)
+            tableView.cellForRowAtIndexPath(path)?.accessoryType = UITableViewCellAccessoryType.None
+        }
     }
 
     /*
