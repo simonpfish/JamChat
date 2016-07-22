@@ -1,0 +1,24 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "92DBF9FD02FE3B1DAE88CFC967753A7B0110A4B3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "92DBF9FD02FE3B1DAE88CFC967753A7B0110A4B3" : 0,
+    "92CBA65579F61C75FEC665D01E78C47FFFAA6B01" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C1742693-DFF9-4B30-925A-F24EB00E2C85",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "92DBF9FD02FE3B1DAE88CFC967753A7B0110A4B3" : "JamChat\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "JamChat",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Main\/JamChat\/JamChat.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/simonlimon\/JamChat.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "92DBF9FD02FE3B1DAE88CFC967753A7B0110A4B3"
+    }
+  ]
+}
