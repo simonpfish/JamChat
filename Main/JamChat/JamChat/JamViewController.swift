@@ -110,7 +110,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 self.progressIndicator.frame.origin.x = -2
             }
             
-            lastMessage?.play()
+            lastMessage?.play(self.jam.messageDuration)
         })
     }
     
@@ -159,16 +159,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         timer = NSTimer.scheduledTimerWithTimeInterval((jam.tempo!/60), target: recordView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         let keyboardController = self.childViewControllers[0] as! KeyboardViewController
         
-        UIView.animateKeyframesWithDuration(jam.messageDuration, delay: 0, options: [], animations: {
-            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/16, animations: {
-                self.recordButton.transform = CGAffineTransformScale(self.recordButton.transform, 2, 2)
-            })
-            UIView.addKeyframeWithRelativeStartTime(1/16, relativeDuration: 15/16, animations: {
-                self.recordButton.transform = CGAffineTransformScale(self.recordButton.transform, 0.5, 0.5)
-            })
-            }, completion: nil
-        )
-        
         UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
             self.progressIndicator.frame.origin.x = self.view.frame.width
         }) { (success: Bool) in
@@ -176,6 +166,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
         
         jam.recordSend(keyboardController.instrument, success: {
+            self.timer.invalidate()
             for subview in self.waveformContainer.subviews {
                 if let waveform = subview as? FDWaveformView {
                     waveform.removeFromSuperview()

@@ -162,7 +162,7 @@
                         <outlet property="keyboardContainer" destination="eBW-N3-riu" id="wmR-0R-fIi"/>
                         <outlet property="loadingIndicatorView" destination="DYJ-TE-25B" id="bED-UA-u4e"/>
                         <outlet property="progressIndicator" destination="mCu-xY-0ex" id="VHv-Ip-wPN"/>
-                        <outlet property="recordButton" destination="VtQ-95-YxY" id="Kii-Fq-GQI"/>
+                        <outlet property="recordView" destination="kdg-MZ-tsA" id="h79-ro-L8h"/>
                         <outlet property="userCollection" destination="VLa-Qf-sge" id="ZyP-YY-sg2"/>
                         <outlet property="waveformContainer" destination="UEt-Ra-c4T" id="8gT-ad-AZw"/>
                     </connections>

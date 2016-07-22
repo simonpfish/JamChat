@@ -78,12 +78,18 @@ class Track: NSObject {
         filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + identifier + ".m4a"
     }
     
-    func play() {
+    func playLooping() {
+        player?.looping = true
         player?.play()
     }
     
-    func stop() {
+    func play(duration: Double) {
+        player?.playFrom(0, to: duration)
+    }
+    
+    func stopLooping() {
         player?.stop()
+        player?.looping = false
     }
     
     func recordInstrument(instrument: Instrument, duration: Double, completion: () -> ()) {
