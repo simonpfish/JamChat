@@ -162,9 +162,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func onRecord(sender: UITapGestureRecognizer) {
         countdownLabel.text = "\(countdown)"
         countdownTimer = NSTimer.scheduledTimerWithTimeInterval(jam.tempo!/60, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
+        recordView.popAndPulse()
     }
     
     func startRecord(){
+        recordView.popAndPulse()
         if (countdown == 1){
             countdownLabel.text = ""
             countdownTimer.invalidate()
