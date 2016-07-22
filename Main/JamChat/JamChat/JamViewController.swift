@@ -160,21 +160,36 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func onRecord(sender: UITapGestureRecognizer) {
-        timer = NSTimer.scheduledTimerWithTimeInterval((jam.tempo!/60), target: recordView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
-        let keyboardController = self.childViewControllers[0] as! KeyboardViewController
-        
-        UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
-            self.progressIndicator.frame.origin.x = self.view.frame.width
-        }) { (success: Bool) in
-            self.progressIndicator.frame.origin.x = -2
-        }
-        
-        jam.recordSend(keyboardController.instrument, success: {
-            self.timer.invalidate()
-            for subview in self.waveformContainer.subviews {
-                if let waveform = subview as? FDWaveformView {
-                    waveform.removeFromSuperview()
+        countdownLabel.text = "\(countdown)"
+        countdownTimer = NSTimer.scheduledTimerWithTimeInterval(jam.tempo!/60, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
+    }
+    
+    func startRecord(){
+        if (countdown == 1){
+            countdownLabel.text = ""
+            countdownTimer.invalidate()
+            countdown = 4
+            
+            let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+            
+            UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
+                self.progressIndicator.frame.origin.x = self.view.frame.width
+            }) { (success: Bool) in
+                self.progressIndicator.frame.origin.x = -2
+            }
+            
+            jam.recordSend(keyboardController.instrument, success: {
+                self.tempoTimer.invalidate()
+                for subview in self.waveformContainer.subviews {
+                    if let waveform = subview as? FDWaveformView {
+                        waveform.removeFromSuperview()
+                    }
                 }
+                self.drawWaveforms()
+                keyboardController.instrument.reload()
+                print("Message sent!")
+            }) { (error: NSError) in
+                print(error.localizedDescription)
             }
             
             User.currentUser?.incrementInstrument(keyboardController.instrument)
