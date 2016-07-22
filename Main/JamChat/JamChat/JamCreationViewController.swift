@@ -85,6 +85,17 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+        
+        if(selectedCell.contentView.backgroundColor == UIColor.lightGrayColor()) {
+            selectedCell.contentView.backgroundColor = UIColor.whiteColor()
+        } else {
+            selectedCell.contentView.backgroundColor = UIColor.lightGrayColor()
+        }
+        
+    }
+    
     //creates pulse effect for tempo
     func setPulse(){
         
@@ -183,7 +194,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         let maskImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        // drawImge
+        // drawImage
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
         let context = UIGraphicsGetCurrentContext()
         CGContextClipToMask(context, imageBounds, maskImage.CGImage)
