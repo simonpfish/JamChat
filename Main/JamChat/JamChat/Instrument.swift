@@ -65,11 +65,11 @@ class Instrument: NSObject {
     
     func play(note: Int) {
         print("Playing " + name)
-        sampler.playNote(note, velocity: 60, channel: 1 )
+        sampler.play(noteNumber: note)
     }
     
     func stop(note: Int) {
-        sampler.stopNote(note)
+        sampler.stop(noteNumber: note)
     }
     
     func reload() {

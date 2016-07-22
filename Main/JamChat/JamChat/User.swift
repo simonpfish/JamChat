@@ -239,6 +239,35 @@ class User: NSObject {
         return newArrayUsers
     }
     
+    func getTopFriendNumbers() -> [Int] {
+        var friendCountArray: [Int] = []
+        
+        var numUserOccurrences: [String: Int] = [:] // maps each facebookID to a number of occurrences
+        var numUserObjOccurrences: [User: Int] = [:] // maps each user Object to a number of occurrences
+        
+        for jam in Jam.currentUserJams {
+            for user in jam.users {
+                if(user.facebookID != User.currentUser?.facebookID) {
+                    if (!numUserOccurrences.keys.contains(user.facebookID)) {
+                        numUserOccurrences[user.facebookID] = 1
+                        numUserObjOccurrences[user] = 1
+                    } else {
+                        var curNum = numUserOccurrences[user.facebookID]
+                        curNum = curNum! + 1 // update the number of occurrences
+                        numUserOccurrences[user.facebookID] = curNum
+                        numUserObjOccurrences[user] = curNum
+                    }
+                }
+            }
+        }
+        
+        for number in numUserOccurrences.values {
+            friendCountArray.append(number)
+        }
+        
+        return friendCountArray
+    }
+    
     /**
      Updates the number of times a user has used a particular instrument.
      */

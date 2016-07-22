@@ -77,17 +77,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VtQ-95-YxY">
-                                <rect key="frame" x="337" y="429" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.99001848697662354" green="0.48768150806427002" blue="0.51051509380340576" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="VdJ-4D-yun"/>
-                                    <constraint firstAttribute="height" constant="30" id="dMn-Gm-EZN"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="onRecord:" destination="MkN-39-iBX" eventType="touchUpInside" id="tKB-Bz-TT3"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VLa-Qf-sge">
                                 <rect key="frame" x="0.0" y="35" width="375" height="83"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -138,6 +127,10 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kdg-MZ-tsA" customClass="BAPulseView">
+                                <rect key="frame" x="322" y="355" width="33" height="32"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -146,9 +139,7 @@
                             <constraint firstItem="eBW-N3-riu" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" id="Fp2-0Z-rO1"/>
                             <constraint firstItem="giU-0X-45U" firstAttribute="top" secondItem="eBW-N3-riu" secondAttribute="bottom" id="HcD-IL-9V9"/>
                             <constraint firstItem="Btw-D1-CzS" firstAttribute="top" secondItem="UEt-Ra-c4T" secondAttribute="bottom" constant="46" id="JAk-L6-t8a"/>
-                            <constraint firstAttribute="trailing" secondItem="VtQ-95-YxY" secondAttribute="trailing" constant="8" id="XhR-Js-hQQ"/>
                             <constraint firstItem="UEt-Ra-c4T" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" id="avB-wc-Sya"/>
-                            <constraint firstItem="eBW-N3-riu" firstAttribute="top" secondItem="VtQ-95-YxY" secondAttribute="bottom" constant="8" id="en0-5S-Lqq"/>
                             <constraint firstItem="VLa-Qf-sge" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" id="k64-hq-lvH"/>
                             <constraint firstAttribute="trailing" secondItem="eBW-N3-riu" secondAttribute="trailing" id="oDc-dz-C5Z"/>
                             <constraint firstAttribute="trailing" secondItem="UEt-Ra-c4T" secondAttribute="trailing" id="rpV-e3-msv"/>
