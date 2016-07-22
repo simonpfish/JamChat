@@ -119,6 +119,14 @@
                             </collectionView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kdg-MZ-tsA" customClass="BAPulseView">
                                 <rect key="frame" x="322" y="355" width="33" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zq-6X-eaA">
+                                        <rect key="frame" x="0.0" y="0.0" width="33" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -147,6 +155,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="countdownLabel" destination="0Zq-6X-eaA" id="Ivp-l7-VVQ"/>
                         <outlet property="jamNameLabel" destination="gHF-9c-CYD" id="k4F-zs-I0b"/>
                         <outlet property="keyboardButton" destination="Btw-D1-CzS" id="8UG-oZ-117"/>
                         <outlet property="keyboardContainer" destination="eBW-N3-riu" id="wmR-0R-fIi"/>
