@@ -39,30 +39,33 @@ class UserCell: UICollectionViewCell {
     @IBAction func onUserTap(sender: AnyObject) {
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             
-            let friendsNames = User.currentUser?.getTopFriends()
-            var topThreeFriends = [User]()
+            var friendsNames: [User] = []
+                
+            friendsNames = (User.currentUser?.getTopFriends())!
             
-            var topFriendsNum = User.currentUser?.getTopFriendNumbers()
-            
-            //topFriendsNum!.sort()
-            
-            if friendsNames!.count > 3 {
-                for i in 0...2 {
-                    topThreeFriends.append(friendsNames![i])
+            if friendsNames.count > 3 {
+                while(friendsNames.count > 3) {
+                    friendsNames.removeAtIndex(friendsNames.count-1)
                 }
             }
             
+            var topFriendsNum = User.currentUser?.getTopFriendNumbers()
+            topFriendsNum!.sortInPlace()
+            
+            var topThreeNums: [Int] = []
+            
+            for i in 1...3 {
+                topThreeNums.append(topFriendsNum![topFriendsNum!.count-i])
+            }
+
             var index = 0
 
-            for curUser in friendsNames! {
-                index = index + 1
+            for curUser in friendsNames {
                 if curUser.name == self.user.name {
                     break;
                 }
+                index += 1
             }
-            
-            index = index-1
-            index = topFriendsNum!.count - index
             
             if (self.countView.alpha == 0.0) {
                 self.countView.alpha = 1.0
@@ -71,7 +74,7 @@ class UserCell: UICollectionViewCell {
                 self.countImageView.layer.cornerRadius = self.countImageView.frame.size.width / 2;
                 self.countImageView.clipsToBounds = true;
                 
-                self.countLabel.text = String(topFriendsNum![index-1])
+                self.countLabel.text = String(topThreeNums[index])
 
                 self.mainUserView.alpha = 0.0
                 
