@@ -34,8 +34,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     
     var titleGenerator: [String] = []
     
-    var userFriends: [User] = []
-    
     // creates an interval slider
     private var messageDurationSlider: IntervalSlider! {
         didSet {
@@ -54,7 +52,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         
         // need to make it so all friends appear
-        userFriends = (User.currentUser?.getTopFriends())!
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -70,23 +67,27 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         setTempoSlider()
         
-        initializeFriendPicker()
+//        User.currentUser?.loadFriends({ 
+//            self.tableView.reloadData()
+//        })
+        
+//        initializeFriendPicker()
         
         setPulse()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userFriends.count
+        return User.currentUser?.friends?.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell
-        cell.user = userFriends[indexPath.row]
+        cell.user = User.currentUser?.friends?[indexPath.row]
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+        let selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         
         if(selectedCell.contentView.backgroundColor == UIColor.lightGrayColor()) {
             selectedCell.contentView.backgroundColor = UIColor.whiteColor()
@@ -217,15 +218,15 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         return IndicatorInfo(title: "New")
     }
     
-    func initializeFriendPicker() {
-        
-        var friendNames: [String] = []
-        
-        User.currentUser?.loadFriends({ 
-            for friend in User.currentUser!.friends! {
-                friendNames.append(friend["name"]!)
-            }
-            
+//    func initializeFriendPicker() {
+//        
+//        var friendNames: [String] = []
+//        
+//        User.currentUser?.loadFriends({ 
+//            for friend in User.currentUser!.friends! {
+//                friendNames.append(friend["name"]!)
+//            }
+//            
 //            self.dataSource = SimplePrefixQueryDataSource(friendNames)
 //            self.ramReel = RAMReel(frame: self.view.bounds, dataSource: self.dataSource, placeholder: "Start by typing…") {
 //                if let index = friendNames.indexOf(self.ramReel.selectedItem!) {
@@ -245,9 +246,9 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
 //            self.view.addSubview(self.ramReel.view)
 //            self.view.sendSubviewToBack(self.ramReel.view)
 //            self.ramReel.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        })
-        
-    }
+//        })
+//        
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

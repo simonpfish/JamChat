@@ -27,7 +27,7 @@ class User: NSObject {
     var profileImageURL: NSURL!
     var email: String?
     
-    var friends: [[String : String]]?
+    var friends: [User]?
     
     // should store and retrieve this
     var instrumentCount: [Instrument : Int] = [Instrument.acousticBass:0, Instrument.choir:0, Instrument.electricBass:0, Instrument.electricGuitar:0, Instrument.piano:0, Instrument.saxophone:0]
@@ -74,11 +74,29 @@ class User: NSObject {
                 let friendDict = userData["friends"] as! NSDictionary
                 let friendData = friendDict["data"] as! [[String : String]]
                 
-                self.friends = []
-                self.friends?.appendContentsOf(friendData)
+                var friendIDs: [String] = []
                 
-                print("Succesfully loaded \(self.name)'s friends: \(self.friends!)")
-                completion?()
+                for friend in friendData {
+                    friendIDs.append(friend["id"]!)
+                }
+                                
+                let query = PFQuery(className: "User")
+                query.whereKey("facebookID", containedIn: friendIDs)
+                query.includeKey("name")
+                query.includeKey("facebookID")
+                query.includeKey("firstName")
+                query.includeKey("lastName")
+                query.includeKey("profileImageURL")
+                query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
+                    
+                    if let users = objects as? [PFUser] {
+                        for user in users {
+                            self.friends?.append(User(user: user))
+                        }
+                        print("Succesfully loaded \(self.name)'s friends: \(self.friends!)")
+                        completion?()
+                    }
+                })
             }
         }
     }
