@@ -119,7 +119,7 @@ import NVActivityIndicatorView
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    self.jams.append(jam)
+                    self.jams.insert(jam, atIndex: 0)
                     print("Succesfully created jam, reloading data")
                     jam.loadData({
                         self.tableView.reloadData()

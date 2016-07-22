@@ -89,7 +89,7 @@ class Track: NSObject {
     
     func recordInstrument(instrument: Instrument, duration: Double, completion: () -> ()) {
         color = instrument.color
-        recordNode(Instrument.mixer, duration: duration, completion: completion)
+        recordNode(instrument.sampler, duration: duration, completion: completion)
     }
     
     /**

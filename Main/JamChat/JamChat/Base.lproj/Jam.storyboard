@@ -34,11 +34,21 @@
                                             <constraint firstAttribute="height" constant="50" id="moy-K9-qSK"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mCu-xY-0ex">
+                                        <rect key="frame" x="-2" y="20" width="2" height="80"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="74X-Rw-dnb"/>
+                                            <constraint firstAttribute="width" constant="2" id="dI6-BR-uBm"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="mCu-xY-0ex" firstAttribute="centerY" secondItem="UEt-Ra-c4T" secondAttribute="centerY" id="58i-6z-COK"/>
                                     <constraint firstItem="DYJ-TE-25B" firstAttribute="centerY" secondItem="UEt-Ra-c4T" secondAttribute="centerY" id="FQ3-1S-bQb"/>
                                     <constraint firstAttribute="height" constant="120" id="YMr-XN-iQm"/>
+                                    <constraint firstItem="mCu-xY-0ex" firstAttribute="leading" secondItem="UEt-Ra-c4T" secondAttribute="leading" constant="-2" id="gTd-X0-qnx"/>
                                     <constraint firstItem="DYJ-TE-25B" firstAttribute="centerX" secondItem="UEt-Ra-c4T" secondAttribute="centerX" id="zQL-35-Cil"/>
                                 </constraints>
                             </view>
@@ -160,6 +170,7 @@
                         <outlet property="keyboardButton" destination="Btw-D1-CzS" id="8UG-oZ-117"/>
                         <outlet property="keyboardContainer" destination="eBW-N3-riu" id="wmR-0R-fIi"/>
                         <outlet property="loadingIndicatorView" destination="DYJ-TE-25B" id="bED-UA-u4e"/>
+                        <outlet property="progressIndicator" destination="mCu-xY-0ex" id="VHv-Ip-wPN"/>
                         <outlet property="recordButton" destination="VtQ-95-YxY" id="Kii-Fq-GQI"/>
                         <outlet property="userCollection" destination="VLa-Qf-sge" id="ZyP-YY-sg2"/>
                         <outlet property="waveformContainer" destination="UEt-Ra-c4T" id="8gT-ad-AZw"/>

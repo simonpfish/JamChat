@@ -19,6 +19,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
     
+    @IBOutlet weak var progressIndicator: UIView!
     @IBOutlet weak var keyboardContainer: UIView!
     @IBOutlet weak var jamNameLabel: UILabel!
     @IBOutlet weak var userCollection: UICollectionView!
@@ -40,6 +41,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.type = .LineScaleParty
         loadingIndicatorView.color = loadingColor
+        
+        progressIndicator.layer.cornerRadius = progressIndicator.frame.width/2
 
         // Set up user collection view:
         userCollection.dataSource = self
@@ -80,7 +83,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 keyboardController.instrument.reload()
                 
                 let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
-                self.waveformContainer.addGestureRecognizer(waveTap)
+                self.waveformContainer.subviews.last!.addGestureRecognizer(waveTap)
+                
+                self.waveformContainer.bringSubviewToFront(self.progressIndicator)
             })
 
         }
@@ -88,9 +93,14 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     //Plays chat when wave is tapped
     func onPlay(sender: UITapGestureRecognizer? = nil) {
-        
         let lastMessage = jam.messages.last
         lastMessage?.loadTracks({
+            UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
+                self.progressIndicator.frame.origin.x = self.view.frame.width
+            }) { (success: Bool) in
+                self.progressIndicator.frame.origin.x = -2
+            }
+            
             lastMessage?.play()
         })
     }
@@ -149,9 +159,17 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             }, completion: nil
         )
         
+        UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
+            self.progressIndicator.frame.origin.x = self.view.frame.width
+        }) { (success: Bool) in
+            self.progressIndicator.frame.origin.x = -2
+        }
+        
         jam.recordSend(keyboardController.instrument, success: {
-            for waveform in self.waveformContainer.subviews {
-                waveform.removeFromSuperview()
+            for subview in self.waveformContainer.subviews {
+                if let waveform = subview as? FDWaveformView {
+                    waveform.removeFromSuperview()
+                }
             }
             self.drawWaveforms()
             keyboardController.instrument.reload()

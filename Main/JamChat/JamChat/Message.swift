@@ -32,33 +32,34 @@ class Message: NSObject {
         if tracksAreLoaded {
             print("Tracks are already loaded for message \(self.id ?? "NEW")")
             completion()
-            return
-        }
-        object.fetchIfNeededInBackgroundWithBlock { (_: PFObject?, error: NSError?) in
-            let trackIDs = self.object["tracks"] as! [String]
-            
-            let query = PFQuery(className: "Track")
-            query.orderByDescending("createdAt")
-            query.whereKey("identifier", containedIn: trackIDs)
-            
-            query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
-                for object in objects! {
-                    let track = Track(object: object)
-                    self.tracks.append(track)
-                }
+        } else {
+            tracks = []
+            object.fetchIfNeededInBackgroundWithBlock { (_: PFObject?, error: NSError?) in
+                let trackIDs = self.object["tracks"] as! [String]
                 
-                var loadedCount = 0
-                for track in self.tracks {
-                    track.loadMedia({
-                        loadedCount += 1
-                        if loadedCount == self.tracks.count {
-                            print("Succesfully loaded tracks for message \(self.id ?? "NEW")")
-                            self.tracksAreLoaded = true
-                            completion()
-                        }
-                        }, failure: { (error: NSError) in
-                            print(error.localizedDescription)
-                    })
+                let query = PFQuery(className: "Track")
+                query.orderByAscending("createdAt")
+                query.whereKey("identifier", containedIn: trackIDs)
+                
+                query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
+                    for object in objects! {
+                        let track = Track(object: object)
+                        self.tracks.append(track)
+                    }
+                    
+                    var loadedCount = 0
+                    for track in self.tracks {
+                        track.loadMedia({
+                            loadedCount += 1
+                            if loadedCount == self.tracks.count {
+                                print("Succesfully loaded tracks for message \(self.id ?? "NEW")")
+                                self.tracksAreLoaded = true
+                                completion()
+                            }
+                            }, failure: { (error: NSError) in
+                                print(error.localizedDescription)
+                        })
+                    }
                 }
             }
         }
@@ -71,7 +72,6 @@ class Message: NSObject {
         super.init()
         
         tracks = previousMessage?.tracks ?? []
-        tracksAreLoaded = true
     }
     
     /**
