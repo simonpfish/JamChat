@@ -12,7 +12,7 @@ import XLPagerTabStrip
 import IntervalSlider
 import BAPulseView
 
-class JamCreationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IndicatorInfoProvider {
+class JamCreationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, IndicatorInfoProvider {
     
     var dataSource: SimplePrefixQueryDataSource!
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
@@ -20,6 +20,9 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     var intTempo = Int ()
     var currentTempo: UILabel!
     var timer = NSTimer()
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    var resultSearchController = UISearchController()
     
     @IBOutlet weak var sliderView1: UIView!
     @IBOutlet weak var titleLabel: UITextField!
@@ -32,6 +35,8 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     
     var titleGenerator: [String] = []
+    
+    var filtered: [User] = []
     
     // creates an interval slider
     private var messageDurationSlider: IntervalSlider! {
@@ -50,7 +55,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // need to make it so all friends appear
+        searchBar.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -73,22 +78,71 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
                 friend.loadData() {
                     loadedCount += 1
                     if loadedCount == User.currentUser?.friends.count {
+                        for friend in User.currentUser!.friends {
+                            self.filtered.append(friend)
+                        }
+                        
                         self.tableView.reloadData()
                     }
                 }
             }
         })
+
         
         setPulse()
     }
     
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        self.filtered.removeAll(keepCapacity: false)
+        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
+        let array = ((User.currentUser?.friends)! as NSArray).filteredArrayUsingPredicate(searchPredicate)
+        self.filtered = array as! [User]
+        self.tableView.reloadData()
+        
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filtered = (User.currentUser?.friends)!
+        } else {
+            filtered = ((User.currentUser?.friends)!).filter({(dataItem: User) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+                let title = dataItem.name
+                if title.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil {
+                    return true
+                } else {
+                    return false
+                }
+            })
+            
+        }
+
+        tableView.reloadData()
+    }
+    
+    // Show cancel button on searchbar when being used
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    // Clear search bar when cancel is hit
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        filtered = (User.currentUser?.friends)!
+        tableView.reloadData()
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return User.currentUser?.friends.count ?? 0
+        //return User.currentUser?.friends.count ?? 0
+        return filtered.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell
-        cell.user = User.currentUser?.friends[indexPath.row]
+        //cell.user = User.currentUser?.friends[indexPath.row]
+        cell.user = filtered[indexPath.row]
         return cell
     }
     
