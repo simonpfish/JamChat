@@ -11,6 +11,7 @@
 		213089B11D41594A0030D099 /* UserCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089B01D41594A0030D099 /* UserCollectionDelegate.swift */; };
 		213089B31D415AB00030D099 /* InstrumentCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */; };
 		219AEAA41D403E39008DC61B /* jamNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 219AEAA31D403E39008DC61B /* jamNames.txt */; };
+		21ECC9ED1D41D47800E4E695 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ECC9EC1D41D47800E4E695 /* FriendCell.swift */; };
 		8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20F5F11D38F37800622892 /* SelectionView.swift */; };
 		8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D0FEB1D3D602C00380680 /* Instrument.swift */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
@@ -58,6 +59,7 @@
 		213089B01D41594A0030D099 /* UserCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionDelegate.swift; sourceTree = "<group>"; };
 		213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstrumentCollectionDelegate.swift; sourceTree = "<group>"; };
 		219AEAA31D403E39008DC61B /* jamNames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jamNames.txt; sourceTree = "<group>"; };
+		21ECC9EC1D41D47800E4E695 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		7F275E1B8FE709C2BCDCFD4D /* Pods-JamChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.debug.xcconfig"; sourceTree = "<group>"; };
 		8C20F5F11D38F37800622892 /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		8C9D0FEB1D3D602C00380680 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				E7FE0FFC1D359F4100452361 /* MessageCell.swift */,
 				E7E0D6971D3C0DCB005A840A /* UserCell.swift */,
 				213089AC1D4154CF0030D099 /* InstrumentCell.swift */,
+				21ECC9EC1D41D47800E4E695 /* FriendCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				E799567D1D31746300EE445B /* Jam.swift in Sources */,
 				E7FE0FE61D356E2100452361 /* JamCell.swift in Sources */,
 				E799567B1D31744500EE445B /* Message.swift in Sources */,
+				21ECC9ED1D41D47800E4E695 /* FriendCell.swift in Sources */,
 				E79956741D316E9D00EE445B /* AKAudioFile+ConvenienceInitializers.swift in Sources */,
 				E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */,
 				8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */,

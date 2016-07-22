@@ -39,7 +39,7 @@ class UserCell: UICollectionViewCell {
     @IBAction func onUserTap(sender: AnyObject) {
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             
-            var friendsNames = User.currentUser?.getTopFriends()
+            let friendsNames = User.currentUser?.getTopFriends()
             
             var topFriendsNum = User.currentUser?.getTopFriendNumbers()
             //topFriendsNum!.sort()

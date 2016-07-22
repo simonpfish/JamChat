@@ -12,7 +12,7 @@ import XLPagerTabStrip
 import IntervalSlider
 import BAPulseView
 
-class JamCreationViewController: UIViewController, IndicatorInfoProvider {
+class JamCreationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IndicatorInfoProvider {
     
     var dataSource: SimplePrefixQueryDataSource!
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
@@ -30,8 +30,11 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var tempoSlider: UISlider!
     @IBOutlet weak var tempoPulseView: BAPulseView!
 
+    @IBOutlet weak var tableView: UITableView!
     
     var titleGenerator: [String] = []
+    
+    var userFriends: [User] = []
     
     // creates an interval slider
     private var messageDurationSlider: IntervalSlider! {
@@ -50,6 +53,12 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // need to make it so all friends appear
+        userFriends = (User.currentUser?.getTopFriends())!
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         // read in a text file of random jam titles and store it in an array
         let path = NSBundle.mainBundle().pathForResource("jamNames", ofType: "txt")
         let jamTitles = try! String(contentsOfFile: path!)
@@ -64,6 +73,16 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         initializeFriendPicker()
         
         setPulse()
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return userFriends.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell
+        cell.user = userFriends[indexPath.row]
+        return cell
     }
     
     //creates pulse effect for tempo
@@ -85,6 +104,18 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     }
     
     func setTempoSlider () {
+        
+        let thumbView = UIView(frame: CGRectMake(0, 0 , 20, 20))
+        thumbView.backgroundColor = UIColor.lightGrayColor()
+        thumbView.layer.cornerRadius = thumbView.bounds.width * 0.5
+        thumbView.clipsToBounds = true
+        let image = imageFromViewWithCornerRadius(thumbView)
+        
+        tempoSlider.setThumbImage(image, forState: .Normal)
+        tempoSlider.setThumbImage(image, forState: .Selected)
+        tempoSlider.setThumbImage(image, forState: .Application)
+        tempoSlider.setThumbImage(image, forState: .Highlighted)
+        
         tempoSlider.minimumValue = 80
         tempoSlider.maximumValue = 180
         tempoSlider.continuous = true
@@ -184,25 +215,25 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
                 friendNames.append(friend["name"]!)
             }
             
-            self.dataSource = SimplePrefixQueryDataSource(friendNames)
-            self.ramReel = RAMReel(frame: self.view.bounds, dataSource: self.dataSource, placeholder: "Start by typing…") {
-                if let index = friendNames.indexOf(self.ramReel.selectedItem!) {
-                    let selectedID = User.currentUser!.friends![index]["id"]!
-                    if !self.selectedFriendIDs.contains(selectedID) {
-                        self.selectedFriendIDs.append(selectedID)
-                        self.selectedUsersLabel.text?.appendContentsOf($0 + "\n")
-                        print("Added friend to chat in creation: ", $0)
-                        self.ramReel.prepareForReuse()
-                    }
-                } else {
-                    print("Friend does not exist: ", $0)
-                }
-            }
-            
-            self.ramReel.theme = FriendSearchTheme()
-            self.view.addSubview(self.ramReel.view)
-            self.view.sendSubviewToBack(self.ramReel.view)
-            self.ramReel.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+//            self.dataSource = SimplePrefixQueryDataSource(friendNames)
+//            self.ramReel = RAMReel(frame: self.view.bounds, dataSource: self.dataSource, placeholder: "Start by typing…") {
+//                if let index = friendNames.indexOf(self.ramReel.selectedItem!) {
+//                    let selectedID = User.currentUser!.friends![index]["id"]!
+//                    if !self.selectedFriendIDs.contains(selectedID) {
+//                        self.selectedFriendIDs.append(selectedID)
+//                        self.selectedUsersLabel.text?.appendContentsOf($0 + "\n")
+//                        print("Added friend to chat in creation: ", $0)
+//                        self.ramReel.prepareForReuse()
+//                    }
+//                } else {
+//                    print("Friend does not exist: ", $0)
+//                }
+//            }
+//            
+//            self.ramReel.theme = FriendSearchTheme()
+//            self.view.addSubview(self.ramReel.view)
+//            self.view.sendSubviewToBack(self.ramReel.view)
+//            self.ramReel.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         })
         
     }
