@@ -75,7 +75,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rXK-By-0X8">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rXK-By-0X8" customClass="BAPulseView">
                                 <rect key="frame" x="164" y="453" width="37" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -95,7 +95,7 @@
                         <outlet property="minTempo" destination="rJ1-LZ-tDD" id="xdG-ZE-GsJ"/>
                         <outlet property="selectedUsersLabel" destination="UtY-V3-lfq" id="tAT-Wf-ncv"/>
                         <outlet property="sliderView1" destination="XHu-qe-3er" id="Y6q-z6-MHq"/>
-                        <outlet property="tempoPulseView" destination="rXK-By-0X8" id="pww-ge-qF7"/>
+                        <outlet property="tempoPulseView" destination="rXK-By-0X8" id="oST-K7-RVm"/>
                         <outlet property="tempoSlider" destination="mvI-qo-jEz" id="QI1-Me-CRQ"/>
                         <outlet property="tempoSliderView" destination="Fnh-88-Duu" id="nwz-3J-m6f"/>
                         <outlet property="titleLabel" destination="Dla-u1-i4Y" id="4Hj-jt-rcx"/>

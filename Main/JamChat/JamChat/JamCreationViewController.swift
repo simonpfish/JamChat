@@ -19,7 +19,6 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     var selectedFriendIDs: [String] = []
     var intTempo = Int ()
     var currentTempo: UILabel!
-    var pulseView: BAPulseView!
     var timer = NSTimer()
     
     @IBOutlet weak var selectedUsersLabel: UILabel!
@@ -29,7 +28,8 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var minTempo: UILabel!
     @IBOutlet weak var maxTempo: UILabel!
     @IBOutlet weak var tempoSlider: UISlider!
-    @IBOutlet weak var tempoPulseView: UIView!
+    @IBOutlet weak var tempoPulseView: BAPulseView!
+
     
     var titleGenerator: [String] = []
     
@@ -68,13 +68,11 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
     
     //creates pulse effect for tempo
     func setPulse(){
-        pulseView = BAPulseView(frame: CGRectMake(view.frame.origin.x, view.frame.origin.y, tempoPulseView.frame.width-1, tempoPulseView.frame.height-1))
-        tempoPulseView.addSubview(pulseView)
         
-        pulseView.layer.cornerRadius = pulseView.frame.size.width/2
-        let floatWidth = Float(pulseView.frame.size.width)
-        pulseView.pulseCornerRadius = floatWidth/2
-        pulseView.backgroundColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        tempoPulseView.layer.cornerRadius = tempoPulseView.frame.size.width/2
+        let floatWidth = Float(tempoPulseView.frame.size.width)
+        tempoPulseView.pulseCornerRadius = floatWidth/2
+        tempoPulseView.backgroundColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
         
         currentTempo = UILabel(frame: CGRectMake(view.frame.origin.x, view.frame.origin.y, tempoPulseView.frame.width-1, tempoPulseView.frame.height-1))
         currentTempo.textAlignment = NSTextAlignment.Center
@@ -83,8 +81,7 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         currentTempo.textColor = UIColor.whiteColor()
         tempoPulseView.addSubview(currentTempo)
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(Double(tempoSlider.value/60), target: pulseView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
-        //tempoTimer.scheduledTimerWithTimeInterval(Double(tempoSlider.value/60), target: pulseView, selector: "popAndPulse", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(Double(tempoSlider.value/60), target: tempoPulseView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
     }
     
     func setTempoSlider () {
@@ -106,7 +103,7 @@ class JamCreationViewController: UIViewController, IndicatorInfoProvider {
         intTempo = Int(tempoSlider.value)
         currentTempo.text = "\(intTempo)"
       timer.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(Double(60/tempoSlider.value), target: pulseView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(Double(60/tempoSlider.value), target: tempoPulseView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
     }
     
     // formats the slider and the jam duration text
