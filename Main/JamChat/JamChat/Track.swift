@@ -24,7 +24,7 @@ class Track: NSObject {
     private var object: PFObject!
     
     private var recorder: AKNodeRecorder?
-    private var exportSession: AKAudioFile.ExportSession?
+    private var exportSession: AKAudioFile.ExportSessionFixed?
     
     /**
      Initializes a track based on a PFObject, useful for downloading them from Parse.
@@ -49,7 +49,7 @@ class Track: NSObject {
         let file = object["media"] as! PFFile
         
         if fileManager.fileExistsAtPath(filepath) {
-            self.player = AKAudioPlayer(self.filepath)
+            self.player = try? AKAudioPlayer(file: AKAudioFile(forReading: NSURL(string: self.filepath)!))
             Track.mixer.connect(self.player!)
             success()
         } else {
@@ -59,8 +59,7 @@ class Track: NSObject {
                 } else {
                     
                     fileManager.createFileAtPath(self.filepath, contents: data, attributes: nil)
-                    //                    data?.writeToURL(NSURL(string: self.filepath)!, atomically: true)
-                    self.player = AKAudioPlayer(self.filepath)
+                    self.player = try? AKAudioPlayer(file: AKAudioFile(forReading: NSURL(string: self.filepath)!))
                     Track.mixer.connect(self.player!)
                     
                     success()
@@ -98,18 +97,18 @@ class Track: NSObject {
     private func recordNode(node: AKNode, duration: Double, completion: ()->()) {
         recorder = try? AKNodeRecorder(node: node)
         
-        recorder!.record()
+        try! recorder!.record()
         
         delay(duration) { 
             self.recorder!.stop()
             
-            self.exportSession =  try! self.recorder?.internalAudioFile.export(self.identifier, ext: .m4a, baseDir: .Documents, callBack: { () in
+            self.exportSession =  try! self.recorder?.audioFile!.exportFixed(self.identifier, ext: .m4a, baseDir: .Documents, callBack: { () in
                 
                 if self.exportSession!.succeeded {
                     
                     self.filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + self.identifier + ".m4a"
                     
-                    self.player = AKAudioPlayer(self.filepath)
+                    self.player = try? AKAudioPlayer(file: AKAudioFile(forReading: NSURL(string: self.filepath)!))
                     Track.mixer.connect(self.player!)
                     
                     completion()

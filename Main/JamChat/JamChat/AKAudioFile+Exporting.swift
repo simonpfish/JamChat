@@ -83,13 +83,13 @@ extension AKAudioFile {
     /// - throws: NSError if init failed
     /// - returns: An AKAudioFile ExportSession object, or nil if init failed.
     ///
-    public func export(
+    public func exportFixed(
         name: String,
-        ext: ExportFormat,
+        ext: ExportFormatFixed,
         baseDir: BaseDirectory,
         callBack: (AKCallback),
         inTime: Double = 0,
-        outTime: Double  = 0 ) throws -> ExportSession {
+        outTime: Double  = 0 ) throws -> ExportSessionFixed {
         
         let fromFileExt = fileExt.lowercaseString
         
@@ -123,7 +123,7 @@ extension AKAudioFile {
         }
         
         
-        return try ExportSession(fileName: name,
+        return try ExportSessionFixed(fileName: name,
                                  baseDir: baseDir,
                                  callBack: callBack,
                                  presetName: avExportPreset,
@@ -171,10 +171,10 @@ extension AKAudioFile {
             
             self.callBack = callBack
             
-            let assetUrl = file.url
-            let asset  = AVURLAsset(URL: assetUrl)
-            
-            // let asset = file.avAsset
+//            let assetUrl = file.url
+//            let asset  = AVURLAsset(URL: assetUrl)
+//            
+            let asset = file.avAsset
             
             let process = AVAssetExportSession(asset: asset, presetName:presetName)
             
@@ -189,7 +189,7 @@ extension AKAudioFile {
                 throw NSError(domain: NSURLErrorDomain, code: NSURLErrorUnknown, userInfo: nil)
             }
             
-            
+            exporter.shouldOptimizeForNetworkUse = true
             
             var filePath: String
             switch baseDir {
