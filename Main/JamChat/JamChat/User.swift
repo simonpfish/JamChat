@@ -27,7 +27,7 @@ class User: NSObject {
     var profileImageURL: NSURL!
     var email: String?
     
-    var friends: [User]?
+    var friends: [User] = []
     
     var users: [User] = []
     
@@ -84,20 +84,14 @@ class User: NSObject {
                 
                 let query = PFQuery(className: "_User")
                 query.whereKey("facebookID", containedIn: friendIDs)
-            
-                query.includeKey("name")
-                query.includeKey("facebookID")
-                query.includeKey("firstName")
-                query.includeKey("lastName")
-                query.includeKey("profileImageURL")
-                
+    
                 query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
                     
                     if let users = objects as? [PFUser] {
                         for user in users {
-                            self.friends?.append(User(user: user))
+                            self.friends.append(User(user: user))
                         }
-                        print("Succesfully loaded \(self.name)'s friends: \(self.friends!)")
+                        print("Succesfully loaded \(self.name)'s friends: \(self.friends)")
                         completion?()
                     }
 

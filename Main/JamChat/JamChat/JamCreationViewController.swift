@@ -67,8 +67,16 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         setTempoSlider()
         
-        User.currentUser?.loadFriends({ 
-            self.tableView.reloadData()
+        User.currentUser?.loadFriends({
+            var loadedCount = 0
+            for friend in User.currentUser!.friends {
+                friend.loadData() {
+                    loadedCount += 1
+                    if loadedCount == User.currentUser?.friends.count {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
         })
         
 //        initializeFriendPicker()
@@ -77,12 +85,12 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return User.currentUser?.friends?.count ?? 0
+        return User.currentUser?.friends.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell
-        cell.user = User.currentUser?.friends?[indexPath.row]
+        cell.user = User.currentUser?.friends[indexPath.row]
         return cell
     }
     
