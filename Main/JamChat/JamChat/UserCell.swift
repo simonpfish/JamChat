@@ -15,7 +15,9 @@ class UserCell: UICollectionViewCell {
     
     var user: User! {
         didSet {
-            nameLabel.text = user.firstName
+            if let nameLabel = nameLabel {
+                nameLabel.text = user.firstName
+            }
             profilePictureView.setImageWithURL(user.profileImageURL)
         }
     }

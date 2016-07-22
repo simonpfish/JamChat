@@ -11,10 +11,13 @@ import KTCenterFlowLayout
 import FDWaveformView
 import AudioKit
 import CircleMenu
+import NVActivityIndicatorView
 
 class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, CircleMenuDelegate {
 
     var jam: Jam!
+    
+    @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
     
     @IBOutlet weak var keyboardContainer: UIView!
     @IBOutlet weak var jamNameLabel: UILabel!
@@ -22,6 +25,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var waveformContainer: UIView!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var keyboardButton: CircleMenu!
+    @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +36,16 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         keyboardButton.setImage(UIImage(named: "icon_close"), forState: .Selected)
         
         recordButton.layer.cornerRadius = recordButton.frame.size.width / 2.0
+        
+        loadingIndicatorView.hidesWhenStopped = true
+        loadingIndicatorView.type = .LineScaleParty
+        loadingIndicatorView.color = loadingColor
 
         // Set up user collection view:
         userCollection.dataSource = self
         userCollection.delegate = self
         let layout = KTCenterFlowLayout()
-        layout.minimumInteritemSpacing = 20.0
+        layout.minimumInteritemSpacing = 5.0
         layout.itemSize = CGSizeMake(60, 70)
         layout.minimumLineSpacing = 0.0
         userCollection.collectionViewLayout = layout
@@ -47,33 +55,35 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func drawWaveforms() {
-        let lastMessage = jam.messages.last
-        lastMessage?.loadTracks({
-            for track in (lastMessage?.tracks)! {
-                if let filepath = track.filepath {
-                    
-                    let fileURL = NSURL(fileURLWithPath: filepath)
-                    
-                    let waveformView = FDWaveformView(frame: self.waveformContainer.frame)
-                    
-                    waveformView.frame.origin.y = 0
-                    waveformView.audioURL = fileURL
-                    waveformView.doesAllowScrubbing = false
-                    waveformView.doesAllowScroll = false
-                    waveformView.doesAllowStretch = false
-                    waveformView.wavesColor = track.color.colorWithAlphaComponent(0.6)
-                    
-                    self.waveformContainer.addSubview(waveformView)
-                    
-                    //adds tap gesture recognizer to view
-                    let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
-                    waveformView.addGestureRecognizer(waveTap)
+        if let lastMessage = jam.messages.last {
+            loadingIndicatorView.startAnimation()
+            lastMessage.loadTracks({
+                for track in (lastMessage.tracks) {
+                    if let filepath = track.filepath {
+                        
+                        let fileURL = NSURL(fileURLWithPath: filepath)
+                        
+                        let waveformView = FDWaveformView(frame: self.waveformContainer.frame)
+                        
+                        waveformView.frame.origin.y = 0
+                        waveformView.audioURL = fileURL
+                        waveformView.doesAllowScrubbing = false
+                        waveformView.doesAllowScroll = false
+                        waveformView.doesAllowStretch = false
+                        waveformView.wavesColor = track.color.colorWithAlphaComponent(0.6)
+                        
+                        self.waveformContainer.addSubview(waveformView)
+                    }
                 }
-            }
-            
-            let keyboardController = self.childViewControllers[0] as! KeyboardViewController
-            keyboardController.instrument.reload()
-        })
+                self.loadingIndicatorView.stopAnimation()
+                let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+                keyboardController.instrument.reload()
+                
+                let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
+                self.waveformContainer.addGestureRecognizer(waveTap)
+            })
+
+        }
     }
     
     //Plays chat when wave is tapped

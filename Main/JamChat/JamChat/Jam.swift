@@ -230,7 +230,7 @@ class Jam: NSObject {
         let query = PFQuery(className: "Jam")
         
         query.whereKey("users", containsString: User.currentUser!.facebookID)
-        query.orderByDescending("modifiedAt")
+        query.orderByDescending("updatedAt")
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
             if let error = error {
                 failure(error)
