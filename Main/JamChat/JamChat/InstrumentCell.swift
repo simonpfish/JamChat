@@ -38,12 +38,25 @@ class InstrumentCell: UICollectionViewCell {
     @IBAction func onInstrumentTap(sender: AnyObject) {
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             
+            var instrumentNum: [Instrument : Int] = [:]
+            instrumentNum = User.currentUser!.instrumentCount
+            
+            var num = 0
+            
+            for curInstrument in instrumentNum.keys {
+                if curInstrument.name == self.instrument.name {
+                    num = instrumentNum[curInstrument]!
+                }
+            }
+            
             if (self.countView.alpha == 0.0) {
                 self.countView.alpha = 1.0
                 
                 self.countImageView.backgroundColor = self.instrument.color
                 self.countImageView.layer.cornerRadius = self.countImageView.frame.size.width / 2;
                 self.countImageView.clipsToBounds = true;
+                
+                self.countLabel.text = String(num)
                 
                 self.mainInstrumentView.alpha = 0.0
                 
