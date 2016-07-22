@@ -17,9 +17,6 @@ target 'JamChat' do
     pod 'Parse'
     pod 'ParseUI'
 
-    # Audio
-    pod 'AudioKit'
-
     #Networking
     pod 'AFNetworking'
 
