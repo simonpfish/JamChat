@@ -38,7 +38,6 @@ class InstrumentCell: UICollectionViewCell {
     @IBAction func onInstrumentTap(sender: AnyObject) {
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             
-            
             if (self.countView.alpha == 0.0) {
                 self.countView.alpha = 1.0
                 
