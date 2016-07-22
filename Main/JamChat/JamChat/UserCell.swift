@@ -40,9 +40,9 @@ class UserCell: UICollectionViewCell {
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             
             var friendsNames: [User] = []
-                
             friendsNames = (User.currentUser?.getTopFriends())!
             
+            //retrieve the names of the top three friends
             if friendsNames.count > 3 {
                 while(friendsNames.count > 3) {
                     friendsNames.removeAtIndex(friendsNames.count-1)
@@ -51,15 +51,15 @@ class UserCell: UICollectionViewCell {
             
             var topFriendsNum = User.currentUser?.getTopFriendNumbers()
             topFriendsNum!.sortInPlace()
-            
             var topThreeNums: [Int] = []
             
+            //retrieves the top three highest numbers
             for i in 1...3 {
                 topThreeNums.append(topFriendsNum![topFriendsNum!.count-i])
             }
 
+            //maps the number to the friend
             var index = 0
-
             for curUser in friendsNames {
                 if curUser.name == self.user.name {
                     break;

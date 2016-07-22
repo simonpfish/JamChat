@@ -36,7 +36,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     
     var titleGenerator: [String] = []
     
-    var filtered: [User] = []
+    var filtered: [User] = [] // stores the friends who match the user's search
     
     // creates an interval slider
     private var messageDurationSlider: IntervalSlider! {
@@ -55,8 +55,10 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set up the search bar
         searchBar.delegate = self
         
+        // set up the table view
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.allowsMultipleSelection = true
@@ -72,12 +74,14 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         setTempoSlider()
         
+        // wait for the user's friends to load, then reload the table view
         User.currentUser?.loadFriends({
             var loadedCount = 0
             for friend in User.currentUser!.friends {
                 friend.loadData() {
                     loadedCount += 1
                     if loadedCount == User.currentUser?.friends.count {
+                        
                         for friend in User.currentUser!.friends {
                             self.filtered.append(friend)
                         }
@@ -120,7 +124,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.reloadData()
     }
     
-    // Show cancel button on searchbar when being used
+    // Show cancel button on search bar when being used
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         self.searchBar.setShowsCancelButton(true, animated: true)
     }

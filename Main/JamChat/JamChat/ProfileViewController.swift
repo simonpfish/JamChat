@@ -36,6 +36,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         
         topFriends = (User.currentUser?.getTopFriends())!
         
+        // retrieves the user's top three friends
         if topFriends.count > 3 {
             while(topFriends.count > 3) {
                 topFriends.removeAtIndex(topFriends.count-1)
