@@ -31,8 +31,6 @@ class User: NSObject {
     
     var users: [User] = []
     
-//    var friendIDs: [String] = []
-    
     // should store and retrieve this
     var instrumentCount: [Instrument : Int] = [Instrument.acousticBass:0, Instrument.choir:0, Instrument.electricBass:0, Instrument.electricGuitar:0, Instrument.piano:0, Instrument.saxophone:0]
     
@@ -94,40 +92,15 @@ class User: NSObject {
                 query.includeKey("profileImageURL")
                 
                 query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
-//                    
-//                    if let users = objects as? [PFUser] {
-//                        for user in users {
-//                            self.friends?.append(User(user: user))
-//                        }
-//                        print("Succesfully loaded \(self.name)'s friends: \(self.friends!)")
-//                        completion?()
-//                    }
                     
-                    
-                    /////
-                    
-//                    if let error = error {
-//                        print(error.localizedDescription)
-//                    } else {
-//                        self.users = []
-//                        for object in objects! {
-//                            self.users.append(User(user: object as! PFUser))
-//                        }
-//                        
-//                        var loadedCount = 0
-//                        for user in self.users {
-//                            user.loadData({
-//                                loadedCount += 1
-//                                if loadedCount == self.users.count {
-//                                    print("Successfully loaded jam \(self.object.objectId ?? "NEW") users")
-//                                    completion()
-//                                }
-//                            })
-//                        }
-//                    }
-                    
-                    
-                    /////
+                    if let users = objects as? [PFUser] {
+                        for user in users {
+                            self.friends?.append(User(user: user))
+                        }
+                        print("Succesfully loaded \(self.name)'s friends: \(self.friends!)")
+                        completion?()
+                    }
+
                 })
             }
         }
