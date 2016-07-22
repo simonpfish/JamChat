@@ -17,7 +17,9 @@ import BAPulseView
 class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, CircleMenuDelegate {
 
     var jam: Jam!
-    var timer = NSTimer()
+    var tempoTimer = NSTimer()
+    var countdownTimer = NSTimer()
+    var countdown: Int = 4
     
     @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
     
@@ -28,6 +30,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var keyboardButton: CircleMenu!
     @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var recordView: BAPulseView!
+    @IBOutlet weak var countdownLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +58,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         recordView.layer.cornerRadius = recordView.frame.size.width/2
         let floatWidth = Float(recordView.frame.size.width)
         recordView.pulseCornerRadius = floatWidth/2
-        recordView.backgroundColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onRecord(_:)))
+        recordView.backgroundColor = UIColor(red: 1, green: 0, blue: 0.298, alpha: 1.0)
+        recordView.pulseStrokeColor = UIColor(red: 0.9569, green: 0.4471, blue: 0, alpha: 1.0).CGColor
+        let tap = UITapGestureRecognizer(target: self, action: Selector("onRecord:"))
         tap.delegate = self
         recordView.addGestureRecognizer(tap)
 
@@ -146,23 +150,40 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func onRecord(sender: UITapGestureRecognizer) {
-        timer = NSTimer.scheduledTimerWithTimeInterval((jam.tempo!/60), target: recordView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
-        let keyboardController = self.childViewControllers[0] as! KeyboardViewController
-        
-        jam.recordSend(keyboardController.instrument, success: {
-            self.timer.invalidate()
-            for waveform in self.waveformContainer.subviews {
-                waveform.removeFromSuperview()
+        countdownLabel.text = "\(countdown)"
+        countdownTimer = NSTimer.scheduledTimerWithTimeInterval(jam.tempo!/60, target: self, selector: Selector("startRecord"), userInfo: nil, repeats: true)
+    }
+    
+    func startRecord(){
+        if (countdown == 1){
+            countdownLabel.text = ""
+            countdownTimer.invalidate()
+            countdown = 4
+            
+            let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+            
+            jam.recordSend(keyboardController.instrument, success: {
+                self.tempoTimer.invalidate()
+                for waveform in self.waveformContainer.subviews {
+                    waveform.removeFromSuperview()
+                }
+                self.drawWaveforms()
+                keyboardController.instrument.reload()
+                print("Message sent!")
+            }) { (error: NSError) in
+                print(error.localizedDescription)
             }
-            self.drawWaveforms()
-            keyboardController.instrument.reload()
-            print("Message sent!")
-        }) { (error: NSError) in
-            print(error.localizedDescription)
+            
+            User.currentUser?.incrementInstrument(keyboardController.instrument)
         }
-        
-        User.currentUser?.incrementInstrument(keyboardController.instrument)
- 
+            
+        else{
+            countdownLabel.text = "\(countdown-1)"
+            if (countdown == 2){
+                tempoTimer = NSTimer.scheduledTimerWithTimeInterval(jam.tempo!/60, target: recordView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
+            }
+            countdown = countdown - 1
+        }
     }
     
 
