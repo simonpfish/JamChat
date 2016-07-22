@@ -36,6 +36,12 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         
         topFriends = (User.currentUser?.getTopFriends())!
         
+        if topFriends.count > 3 {
+            while(topFriends.count > 3) {
+                topFriends.removeAtIndex(topFriends.count-1)
+            }
+        }
+        
         instrumentDic = (User.currentUser?.instrumentCount)!
         
         for instrument in instrumentDic.keys {

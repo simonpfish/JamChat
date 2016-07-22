@@ -171,7 +171,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
         }
-
         
     }
     

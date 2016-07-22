@@ -40,9 +40,17 @@ class UserCell: UICollectionViewCell {
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             
             let friendsNames = User.currentUser?.getTopFriends()
+            var topThreeFriends = [User]()
             
             var topFriendsNum = User.currentUser?.getTopFriendNumbers()
+            
             //topFriendsNum!.sort()
+            
+            if friendsNames!.count > 3 {
+                for i in 0...2 {
+                    topThreeFriends.append(friendsNames![i])
+                }
+            }
             
             var index = 0
 
