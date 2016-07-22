@@ -12,10 +12,12 @@ import FDWaveformView
 import AudioKit
 import CircleMenu
 import NVActivityIndicatorView
+import BAPulseView
 
 class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, CircleMenuDelegate {
 
     var jam: Jam!
+    var timer = NSTimer()
     
     @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
     
@@ -23,9 +25,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var jamNameLabel: UILabel!
     @IBOutlet weak var userCollection: UICollectionView!
     @IBOutlet weak var waveformContainer: UIView!
-    @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var keyboardButton: CircleMenu!
     @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
+    @IBOutlet weak var recordView: BAPulseView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +36,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         keyboardButton.layer.cornerRadius = keyboardButton.frame.size.width / 2.0
         keyboardButton.setImage(UIImage(named: "icon_menu"), forState: .Normal)
         keyboardButton.setImage(UIImage(named: "icon_close"), forState: .Selected)
-        
-        recordButton.layer.cornerRadius = recordButton.frame.size.width / 2.0
         
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.type = .LineScaleParty
@@ -51,9 +51,18 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         userCollection.collectionViewLayout = layout
         jamNameLabel.text = jam.title
         
+        //Creates recording view
+        recordView.layer.cornerRadius = recordView.frame.size.width/2
+        let floatWidth = Float(recordView.frame.size.width)
+        recordView.pulseCornerRadius = floatWidth/2
+        recordView.backgroundColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        let tap = UITapGestureRecognizer(target: self, action: Selector("onRecord:"))
+        tap.delegate = self
+        recordView.addGestureRecognizer(tap)
+
         drawWaveforms()
     }
-    
+
     func drawWaveforms() {
         if let lastMessage = jam.messages.last {
             loadingIndicatorView.startAnimation()
@@ -136,20 +145,12 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         keyboardButton.selected = false
     }
     
-    @IBAction func onRecord(sender: UIButton) {
+    func onRecord(sender: UITapGestureRecognizer) {
+        timer = NSTimer.scheduledTimerWithTimeInterval((jam.tempo!/60), target: recordView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         let keyboardController = self.childViewControllers[0] as! KeyboardViewController
         
-        UIView.animateKeyframesWithDuration(jam.messageDuration, delay: 0, options: [], animations: {
-            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/16, animations: {
-                self.recordButton.transform = CGAffineTransformScale(self.recordButton.transform, 2, 2)
-            })
-            UIView.addKeyframeWithRelativeStartTime(1/16, relativeDuration: 15/16, animations: {
-                self.recordButton.transform = CGAffineTransformScale(self.recordButton.transform, 0.5, 0.5)
-            })
-            }, completion: nil
-        )
-        
         jam.recordSend(keyboardController.instrument, success: {
+            self.timer.invalidate()
             for waveform in self.waveformContainer.subviews {
                 waveform.removeFromSuperview()
             }
@@ -161,6 +162,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
         
         User.currentUser?.incrementInstrument(keyboardController.instrument)
+ 
     }
     
 
