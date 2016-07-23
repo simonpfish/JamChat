@@ -24,5 +24,5 @@ class InstrumentCollectionDelegate: NSObject, UICollectionViewDelegate, UICollec
         cell.instrument = instruments[indexPath.row]
         return cell
     }
-    
+        
 }

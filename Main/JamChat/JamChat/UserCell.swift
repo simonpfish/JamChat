@@ -68,7 +68,7 @@ class UserCell: UICollectionViewCell {
             index += 1
         }
         
-        self.countButton.backgroundColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        self.countButton.backgroundColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
         self.countLabel.hidden = false
         self.countLabel.text = String(topThreeNums[index])
         

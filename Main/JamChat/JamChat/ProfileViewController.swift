@@ -12,6 +12,8 @@ import KTCenterFlowLayout
 
 class ProfileViewController: UIViewController, IndicatorInfoProvider {
     
+    @IBInspectable var selectedColor: UIColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
+    
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var numJamsLabel: UILabel!
@@ -88,8 +90,8 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         profilePicture.clipsToBounds = true;
         
         // format the text
-        numJamsLabel.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
-        numTracksLabel.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        numJamsLabel.textColor = selectedColor
+        numTracksLabel.textColor = selectedColor
     }
     
     func setUpLabels(user: User) {
