@@ -21,7 +21,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     var currentTempo: UILabel!
     var timer = NSTimer()
     
-    @IBOutlet weak var selectedUsersLabel: UILabel!
     @IBOutlet weak var sliderView1: UIView!
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var tempoSliderView: UIView!
@@ -33,8 +32,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     
     var titleGenerator: [String] = []
-    
-    var userFriends: [User] = []
     
     // creates an interval slider
     private var messageDurationSlider: IntervalSlider! {
@@ -54,10 +51,10 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         
         // need to make it so all friends appear
-        userFriends = (User.currentUser?.getTopFriends())!
         
         tableView.delegate = self
         tableView.dataSource = self
+        self.tableView.allowsMultipleSelection = true
         
         // read in a text file of random jam titles and store it in an array
         let path = NSBundle.mainBundle().pathForResource("jamNames", ofType: "txt")
@@ -70,20 +67,73 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         setTempoSlider()
         
-        initializeFriendPicker()
+        User.currentUser?.loadFriends({
+            var loadedCount = 0
+            for friend in User.currentUser!.friends {
+                friend.loadData() {
+                    loadedCount += 1
+                    if loadedCount == User.currentUser?.friends.count {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        })
         
         setPulse()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userFriends.count
+        return User.currentUser?.friends.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell
-        cell.user = userFriends[indexPath.row]
+        cell.user = User.currentUser?.friends[indexPath.row]
         return cell
     }
+    
+    /**
+     Highlights and added a check mark to a selected cell
+     */
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
+        
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! FriendCell
+        let selectedFriend = currentCell.nameLabel.text
+        
+        // Loops through all of the user's friends
+        for friend in (User.currentUser?.friends)! {
+            
+            // Finds the selected friend
+            if friend.name == selectedFriend {
+                let selectedID = friend.facebookID
+                
+                // Adds the selected friend to an array of selected friends
+                if !self.selectedFriendIDs.contains(selectedID) {
+                    self.selectedFriendIDs.append(selectedID)
+                    print("Added friend to chat in creation: \(friend.firstName)")
+                } else {
+                    print("Friend does not exist: \(friend.firstName)")
+                }
+            }
+        }
+
+        
+    }
+    
+    /**
+     Unhighlights and removes a check mark from an unselected cell
+     */
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
+        
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! FriendCell
+        
+        self.selectedFriendIDs.removeAtIndex(selectedFriendIDs.indexOf(currentCell.user.facebookID)!)
+
+        print("Removed friend from chat in creation: \(currentCell.nameLabel.text)")
+    }
+    
     
     //creates pulse effect for tempo
     func setPulse(){
@@ -183,7 +233,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         let maskImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        // drawImge
+        // drawImage
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
         let context = UIGraphicsGetCurrentContext()
         CGContextClipToMask(context, imageBounds, maskImage.CGImage)
@@ -205,38 +255,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "New")
     }
-    
-    func initializeFriendPicker() {
-        
-        var friendNames: [String] = []
-        
-        User.currentUser?.loadFriends({ 
-            for friend in User.currentUser!.friends! {
-                friendNames.append(friend["name"]!)
-            }
-            
-//            self.dataSource = SimplePrefixQueryDataSource(friendNames)
-//            self.ramReel = RAMReel(frame: self.view.bounds, dataSource: self.dataSource, placeholder: "Start by typing…") {
-//                if let index = friendNames.indexOf(self.ramReel.selectedItem!) {
-//                    let selectedID = User.currentUser!.friends![index]["id"]!
-//                    if !self.selectedFriendIDs.contains(selectedID) {
-//                        self.selectedFriendIDs.append(selectedID)
-//                        self.selectedUsersLabel.text?.appendContentsOf($0 + "\n")
-//                        print("Added friend to chat in creation: ", $0)
-//                        self.ramReel.prepareForReuse()
-//                    }
-//                } else {
-//                    print("Friend does not exist: ", $0)
-//                }
-//            }
-//            
-//            self.ramReel.theme = FriendSearchTheme()
-//            self.view.addSubview(self.ramReel.view)
-//            self.view.sendSubviewToBack(self.ramReel.view)
-//            self.ramReel.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        })
-        
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -255,8 +273,14 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         let home = homeNavigation.viewControllers[0] as! HomeViewController
         home.addNewJam(Double(messageDurationSlider.getValue()), userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: intTempo)
         self.selectedFriendIDs = []
-        self.selectedUsersLabel.text = ""
         self.titleLabel.text = ""
+        
+        // unselects previously selected friends from the table view
+        let paths = self.tableView.indexPathsForSelectedRows ?? []
+        for path in paths {
+            tableView.deselectRowAtIndexPath(path, animated: false)
+            tableView.cellForRowAtIndexPath(path)?.accessoryType = UITableViewCellAccessoryType.None
+        }
     }
 
     /*
