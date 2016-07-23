@@ -59,9 +59,12 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // set up create button
+        // format create button
         createButton.layer.cornerRadius = 7
-        createButton.backgroundColor? = selectedColor
+        createButton.backgroundColor = UIColor.clearColor()
+        createButton.layer.borderWidth = 1
+        createButton.layer.borderColor = selectedColor.CGColor
+        createButton.titleLabel!.textColor = selectedColor
         
         // set up the search bar
         searchBar.delegate = self

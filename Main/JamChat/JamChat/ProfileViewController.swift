@@ -22,6 +22,8 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var friendsCollection: UICollectionView!
     @IBOutlet weak var instrumentCollection: UICollectionView!
     
+    @IBOutlet weak var logoutButton: UIButton!
+    
     var userDelegate: UserCollectionDelegate!
     var instrumentDelegate: InstrumentCollectionDelegate!
     
@@ -35,6 +37,13 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        // format logout button
+        logoutButton.layer.cornerRadius = 7
+        logoutButton.backgroundColor = UIColor.clearColor()
+        logoutButton.layer.borderWidth = 1
+        logoutButton.layer.borderColor = selectedColor.CGColor
+        logoutButton.titleLabel!.textColor = selectedColor
         
         topFriends = (User.currentUser?.getTopFriends())!
         
