@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import KTCenterFlowLayout
+import UICollectionViewRightAlignedLayout
 
 class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -30,11 +30,11 @@ class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSo
         userCollection.dataSource = self
         userCollection.delegate = self
         
-        let layout = KTCenterFlowLayout()
+        let layout = UICollectionViewRightAlignedLayout()
         layout.minimumInteritemSpacing = 5.0
         layout.itemSize = CGSizeMake(29, 29)
         layout.minimumLineSpacing = 0.0
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         userCollection.collectionViewLayout = layout
         
         self.layer.cornerRadius = 20
@@ -52,10 +52,6 @@ class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSo
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    override func prepareForReuse() {
-        userCollection.contentInset.top = max((userCollection.frame.height - userCollection.contentSize.height) / 2, 0)
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

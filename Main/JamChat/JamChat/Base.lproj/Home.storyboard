@@ -47,18 +47,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YEx-qK-Ety">
-                                                    <rect key="frame" x="287" y="10" width="80" height="80"/>
+                                                    <rect key="frame" x="192" y="8" width="175" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="80" id="5Lw-To-aqY"/>
-                                                        <constraint firstAttribute="width" constant="80" id="tXk-Il-YFc"/>
+                                                        <constraint firstAttribute="height" constant="30" id="5Lw-To-aqY"/>
+                                                        <constraint firstAttribute="width" constant="175" id="tXk-Il-YFc"/>
                                                     </constraints>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1LC-OI-xZR">
-                                                        <size key="itemSize" width="29" height="29"/>
-                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    </collectionViewFlowLayout>
+                                                    <collectionViewLayout key="collectionViewLayout" id="YjP-o1-CzH" customClass="UICollectionViewRightAlignedLayout"/>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCell" id="Boz-gf-2yX" customClass="UserCell" customModule="JamChat" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="29" height="29"/>
@@ -73,6 +68,7 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </view>
+                                                            <size key="customSize" width="29" height="29"/>
                                                             <connections>
                                                                 <outlet property="profilePictureView" destination="Jkp-Pg-Kfp" id="TOU-c4-vpY"/>
                                                             </connections>
@@ -83,6 +79,7 @@
                                             <constraints>
                                                 <constraint firstItem="Ljl-KK-ak9" firstAttribute="leading" secondItem="l8b-cR-tVz" secondAttribute="leadingMargin" constant="17" id="Bjj-xY-NVp"/>
                                                 <constraint firstItem="YEx-qK-Ety" firstAttribute="centerY" secondItem="l8b-cR-tVz" secondAttribute="centerY" id="FTO-CD-WEf"/>
+                                                <constraint firstItem="YEx-qK-Ety" firstAttribute="top" secondItem="l8b-cR-tVz" secondAttribute="top" constant="8" id="anb-WH-APu"/>
                                                 <constraint firstItem="sBY-2P-3VQ" firstAttribute="leading" secondItem="l8b-cR-tVz" secondAttribute="leading" constant="2" id="ggJ-kf-PqE"/>
                                                 <constraint firstAttribute="bottom" secondItem="sBY-2P-3VQ" secondAttribute="bottom" constant="2" id="k7O-dq-A00"/>
                                                 <constraint firstAttribute="trailing" secondItem="sBY-2P-3VQ" secondAttribute="trailing" constant="2" id="nwF-fO-zaM"/>
@@ -90,6 +87,11 @@
                                                 <constraint firstItem="Ljl-KK-ak9" firstAttribute="centerY" secondItem="l8b-cR-tVz" secondAttribute="centerY" id="wnL-t9-rfF"/>
                                                 <constraint firstItem="YEx-qK-Ety" firstAttribute="trailing" secondItem="l8b-cR-tVz" secondAttribute="trailingMargin" id="yRk-yr-82Z"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="FTO-CD-WEf"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="colorView" destination="sBY-2P-3VQ" id="CXd-NU-Xlh"/>

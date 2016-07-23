@@ -33,5 +33,6 @@ target 'JamChat' do
     pod 'BAPulseView'
     pod 'DGElasticPullToRefresh'
     pod 'NVActivityIndicatorView'
+    pod 'UICollectionViewRightAlignedLayout'
 
 end
