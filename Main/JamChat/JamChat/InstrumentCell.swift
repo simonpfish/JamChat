@@ -17,9 +17,9 @@ class InstrumentCell: UICollectionViewCell {
     @IBOutlet weak var instrumentView: UIImageView!
     @IBOutlet weak var instrumentLabel: UILabel!
     
-    @IBOutlet weak var countView: UIView!
     @IBOutlet weak var countLabel: UILabel!
-    @IBOutlet weak var countImageView: UIImageView!
+    @IBOutlet weak var countButton: UIButton!
+    
     
     var instrument: Instrument! {
         didSet {
@@ -33,38 +33,44 @@ class InstrumentCell: UICollectionViewCell {
         // Make image circular:
         instrumentView.layer.cornerRadius = instrumentView.frame.size.width / 2;
         instrumentView.clipsToBounds = true;
+        
+        if let button = countButton {
+            button.layer.cornerRadius = countButton.frame.size.width / 2;
+        }
     }
     
+    var numberIsDisplayed = false
+    
     @IBAction func onInstrumentTap(sender: AnyObject) {
+        
+        var instrumentNum: [Instrument : Int] = [:]
+        instrumentNum = User.currentUser!.instrumentCount
+        
+        var num = 0
+        
+        for curInstrument in instrumentNum.keys {
+            if curInstrument.name == self.instrument.name {
+                num = instrumentNum[curInstrument]!
+            }
+        }
+        
+        self.countButton.backgroundColor = instrument.color
+        self.countLabel.hidden = false
+        self.countLabel.text = String(num)
+        
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             
-            var instrumentNum: [Instrument : Int] = [:]
-            instrumentNum = User.currentUser!.instrumentCount
-            
-            var num = 0
-            
-            for curInstrument in instrumentNum.keys {
-                if curInstrument.name == self.instrument.name {
-                    num = instrumentNum[curInstrument]!
-                }
-            }
-            
-            if (self.countView.alpha == 0.0) {
-                self.countView.alpha = 1.0
-                
-                self.countImageView.backgroundColor = self.instrument.color
-                self.countImageView.layer.cornerRadius = self.countImageView.frame.size.width / 2;
-                self.countImageView.clipsToBounds = true;
-                
-                self.countLabel.text = String(num)
-                
-                self.mainInstrumentView.alpha = 0.0
-                
+            if self.numberIsDisplayed {
+                self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(0.0)
+                self.countLabel.hidden = true
+                self.numberIsDisplayed = false
             } else {
-                self.countView.alpha = 0.0
-                self.mainInstrumentView.alpha = 1.0
+                self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(1)
+                self.countLabel.hidden = false
+                self.numberIsDisplayed = true
             }
             
             }, completion: nil)
     }
+    
 }
