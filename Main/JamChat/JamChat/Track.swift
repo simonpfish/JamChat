@@ -83,8 +83,8 @@ class Track: NSObject {
         player?.play()
     }
     
-    func play(duration: Double) {
-        player?.playFrom(0, to: duration)
+    func play() {
+        self.player?.playFrom(0, to: (self.player?.audioFile.duration)!)
     }
     
     func stopLooping() {
