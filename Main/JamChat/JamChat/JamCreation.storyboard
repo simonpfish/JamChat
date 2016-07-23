@@ -90,11 +90,16 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KZI-3w-WSZ">
-                                <rect key="frame" x="0.0" y="61" width="375" height="286"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="319"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="FE1-59-YWX">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendCell" rowHeight="50" id="ZqV-4Z-bcO" customClass="FriendCell" customModule="JamChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="72" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZqV-4Z-bcO" id="2Bp-4C-OTY">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
@@ -150,10 +155,6 @@
                                     <action selector="onCreate:" destination="eq8-ox-paN" eventType="touchUpInside" id="HkW-tc-fOD"/>
                                 </connections>
                             </button>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FE1-59-YWX">
-                                <rect key="frame" x="1" y="0.0" width="375" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -166,7 +167,7 @@
                             <constraint firstItem="KZI-3w-WSZ" firstAttribute="centerX" secondItem="Dla-u1-i4Y" secondAttribute="centerX" id="9WC-ot-KbY"/>
                             <constraint firstItem="1Sb-Wx-jRt" firstAttribute="leading" secondItem="Dla-u1-i4Y" secondAttribute="leading" constant="18" id="9yX-ib-1Gq"/>
                             <constraint firstItem="1Sb-Wx-jRt" firstAttribute="top" secondItem="XHu-qe-3er" secondAttribute="bottom" constant="23" id="BCy-B7-CUK"/>
-                            <constraint firstItem="KZI-3w-WSZ" firstAttribute="top" secondItem="cW6-q9-b2P" secondAttribute="bottom" constant="41" id="Bz1-LP-9fn"/>
+                            <constraint firstItem="KZI-3w-WSZ" firstAttribute="top" secondItem="cW6-q9-b2P" secondAttribute="bottom" constant="8" id="Bz1-LP-9fn"/>
                             <constraint firstItem="Dla-u1-i4Y" firstAttribute="top" secondItem="rXK-By-0X8" secondAttribute="bottom" constant="26" id="Jsx-6r-eYi"/>
                             <constraint firstItem="yVS-bt-hbS" firstAttribute="leading" secondItem="rXK-By-0X8" secondAttribute="trailing" constant="75" id="O3k-AF-UjL"/>
                             <constraint firstItem="Fnh-88-Duu" firstAttribute="top" secondItem="1Sb-Wx-jRt" secondAttribute="bottom" constant="11" id="QwX-8V-jgP"/>
