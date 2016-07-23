@@ -28,9 +28,7 @@ class User: NSObject {
     var email: String?
     
     var friends: [User] = []
-    
-    //var friendNames: [String : String] = [:]
-    
+        
     var users: [User] = []
     
     // should store and retrieve this

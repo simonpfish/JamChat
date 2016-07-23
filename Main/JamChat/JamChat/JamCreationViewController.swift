@@ -12,7 +12,9 @@ import XLPagerTabStrip
 import IntervalSlider
 import BAPulseView
 
-class JamCreationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IndicatorInfoProvider {
+class JamCreationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, IndicatorInfoProvider {
+    
+    @IBInspectable var selectedColor: UIColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
     
     var dataSource: SimplePrefixQueryDataSource!
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
@@ -20,6 +22,9 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     var intTempo = Int ()
     var currentTempo: UILabel!
     var timer = NSTimer()
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    var resultSearchController = UISearchController()
     
     @IBOutlet weak var sliderView1: UIView!
     @IBOutlet weak var titleLabel: UITextField!
@@ -31,7 +36,11 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var createButton: UIButton!
+    
     var titleGenerator: [String] = []
+    
+    var filtered: [User] = [] // stores the friends who match the user's search
     
     // creates an interval slider
     private var messageDurationSlider: IntervalSlider! {
@@ -50,8 +59,17 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // need to make it so all friends appear
+        // format create button
+        createButton.layer.cornerRadius = 7
+        createButton.backgroundColor = UIColor.clearColor()
+        createButton.layer.borderWidth = 1
+        createButton.layer.borderColor = selectedColor.CGColor
+        createButton.titleLabel!.textColor = selectedColor
         
+        // set up the search bar
+        searchBar.delegate = self
+        
+        // set up the table view
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.allowsMultipleSelection = true
@@ -67,28 +85,79 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         setTempoSlider()
         
+        // wait for the user's friends to load, then reload the table view
         User.currentUser?.loadFriends({
             var loadedCount = 0
             for friend in User.currentUser!.friends {
                 friend.loadData() {
                     loadedCount += 1
                     if loadedCount == User.currentUser?.friends.count {
+                        
+                        for friend in User.currentUser!.friends {
+                            self.filtered.append(friend)
+                        }
+                        
                         self.tableView.reloadData()
                     }
                 }
             }
         })
+
         
         setPulse()
     }
     
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        self.filtered.removeAll(keepCapacity: false)
+        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
+        let array = ((User.currentUser?.friends)! as NSArray).filteredArrayUsingPredicate(searchPredicate)
+        self.filtered = array as! [User]
+        self.tableView.reloadData()
+        
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filtered = (User.currentUser?.friends)!
+        } else {
+            filtered = ((User.currentUser?.friends)!).filter({(dataItem: User) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+                let title = dataItem.name
+                if title.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil {
+                    return true
+                } else {
+                    return false
+                }
+            })
+            
+        }
+
+        tableView.reloadData()
+    }
+    
+    // Show cancel button on search bar when being used
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    // Clear search bar when cancel is hit
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        filtered = (User.currentUser?.friends)!
+        tableView.reloadData()
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return User.currentUser?.friends.count ?? 0
+        //return User.currentUser?.friends.count ?? 0
+        return filtered.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell
-        cell.user = User.currentUser?.friends[indexPath.row]
+        //cell.user = User.currentUser?.friends[indexPath.row]
+        cell.user = filtered[indexPath.row]
         return cell
     }
     
@@ -117,7 +186,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
         }
-
         
     }
     
@@ -141,7 +209,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         tempoPulseView.layer.cornerRadius = tempoPulseView.frame.size.width/2
         let floatWidth = Float(tempoPulseView.frame.size.width)
         tempoPulseView.pulseCornerRadius = floatWidth/2
-        tempoPulseView.backgroundColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        tempoPulseView.backgroundColor = selectedColor
         
         currentTempo = UILabel(frame: CGRectMake(view.frame.origin.x, view.frame.origin.y, tempoPulseView.frame.width-1, tempoPulseView.frame.height-1))
         currentTempo.textAlignment = NSTextAlignment.Center
@@ -169,11 +237,11 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         tempoSlider.minimumValue = 80
         tempoSlider.maximumValue = 180
         tempoSlider.continuous = true
-        tempoSlider.tintColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        tempoSlider.tintColor = selectedColor
         tempoSlider.value = 80
         tempoSlider.addTarget(self, action: #selector(JamCreationViewController.tempoValueDidChange(_:)), forControlEvents: .ValueChanged)
-        maxTempo.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
-        minTempo.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        maxTempo.textColor = selectedColor
+        minTempo.textColor = selectedColor
         minTempo.text = "\(80)"
         maxTempo.text = "\(180)"
         intTempo = 80
@@ -198,7 +266,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 20))
             label.text = "\(Int(data))"
             label.font = UIFont.systemFontOfSize(CGFloat(12))
-            label.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+            label.textColor = selectedColor
             label.textAlignment = .Center
             let source = IntervalSliderSource(validValue: data, appearanceValue: appearanceValue, label: label)
             sources.append(source)
@@ -216,7 +284,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         // sets the track tint color and the thumb image
         let options: [IntervalSliderOption] = [
-            .MinimumTrackTintColor(UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)),
+            .MinimumTrackTintColor(selectedColor),
             .ThumbImage(image)
         ]
         

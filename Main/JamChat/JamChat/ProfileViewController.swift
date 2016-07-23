@@ -12,6 +12,8 @@ import KTCenterFlowLayout
 
 class ProfileViewController: UIViewController, IndicatorInfoProvider {
     
+    @IBInspectable var selectedColor: UIColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
+    
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var numJamsLabel: UILabel!
@@ -19,6 +21,8 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     
     @IBOutlet weak var friendsCollection: UICollectionView!
     @IBOutlet weak var instrumentCollection: UICollectionView!
+    
+    @IBOutlet weak var logoutButton: UIButton!
     
     var userDelegate: UserCollectionDelegate!
     var instrumentDelegate: InstrumentCollectionDelegate!
@@ -34,7 +38,21 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         
         // Do any additional setup after loading the view.
         
+        // format logout button
+        logoutButton.layer.cornerRadius = 7
+        logoutButton.backgroundColor = UIColor.clearColor()
+        logoutButton.layer.borderWidth = 1
+        logoutButton.layer.borderColor = selectedColor.CGColor
+        logoutButton.titleLabel!.textColor = selectedColor
+        
         topFriends = (User.currentUser?.getTopFriends())!
+        
+        // retrieves the user's top three friends
+        if topFriends.count > 3 {
+            while(topFriends.count > 3) {
+                topFriends.removeAtIndex(topFriends.count-1)
+            }
+        }
         
         instrumentDic = (User.currentUser?.instrumentCount)!
         
@@ -81,8 +99,8 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         profilePicture.clipsToBounds = true;
         
         // format the text
-        numJamsLabel.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
-        numTracksLabel.textColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
+        numJamsLabel.textColor = selectedColor
+        numTracksLabel.textColor = selectedColor
     }
     
     func setUpLabels(user: User) {
