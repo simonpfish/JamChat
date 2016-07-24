@@ -202,14 +202,24 @@ class User: NSObject {
     }
     
     func getUserTracks(completion: () -> ()) {
-        let query = PFQuery(className: "Track")
-        query.whereKey("author", containsString: parseUser.objectId)
-        query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
-            for object in objects! {
-                let track = Track(object: object)
-                self.tracks.append(track)
+        
+        User.currentUser!.getNumberOfTracks({ (count: Int) in
+            var numTracks = count
+            
+            if(numTracks != 0) {
+                let query = PFQuery(className: "Track")
+                query.whereKey("author", containsString: self.parseUser.objectId)
+                query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
+                    for object in objects! {
+                        let track = Track(object: object)
+                        self.tracks.append(track)
+                    }
+                }
             }
-        }
+
+        })
+        
+
     }
     
     /**
