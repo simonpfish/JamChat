@@ -236,19 +236,26 @@ class User: NSObject {
         var topIDs: [String] = [] // an array of the facebookIDs of the user's top friends
         var topFriends: [User] = [] // and array of the user's top friends
         
+        var friendIDs: [String] = []
+        for friend in friends {
+            friendIDs.append(friend.facebookID)
+        }
+        
         for jam in Jam.currentUserJams {
             for user in jam.users {
-                if(user.facebookID != User.currentUser?.facebookID) {
-                    if (!numUserOccurrences.keys.contains(user.facebookID)) {
-                        numUserOccurrences[user.facebookID] = 1
-                        numUserObjOccurrences[user] = 1
-                    } else {
-                        var curNum = numUserOccurrences[user.facebookID]
-                        curNum = curNum! + 1 // update the number of occurrences
-                        numUserOccurrences[user.facebookID] = curNum
-                        numUserObjOccurrences[user] = curNum
+                //if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
+                    if(user.facebookID != User.currentUser?.facebookID) {
+                        if (!numUserOccurrences.keys.contains(user.facebookID)) {
+                            numUserOccurrences[user.facebookID] = 1
+                            numUserObjOccurrences[user] = 1
+                        } else {
+                            var curNum = numUserOccurrences[user.facebookID]
+                            curNum = curNum! + 1 // update the number of occurrences
+                            numUserOccurrences[user.facebookID] = curNum
+                            numUserObjOccurrences[user] = curNum
+                        }
                     }
-                }
+                //}
             }
         }
         

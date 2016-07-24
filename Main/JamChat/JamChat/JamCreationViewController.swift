@@ -40,7 +40,8 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     
     var titleGenerator: [String] = []
     
-    var filtered: [User] = [] // stores the friends who match the user's search
+    // stores the friends who match the user's search
+    var filtered: [User] = []
     
     // creates an interval slider
     private var messageDurationSlider: IntervalSlider! {
@@ -84,25 +85,13 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         self.messageDurationSlider = IntervalSlider(frame: self.sliderView1.bounds, sources: result.sources, options: result.options)
         
         setTempoSlider()
-        
-        // wait for the user's friends to load, then reload the table view
-        User.currentUser?.loadFriends({
-            var loadedCount = 0
-            for friend in User.currentUser!.friends {
-                friend.loadData() {
-                    loadedCount += 1
-                    if loadedCount == User.currentUser?.friends.count {
-                        
-                        for friend in User.currentUser!.friends {
-                            self.filtered.append(friend)
-                        }
-                        
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-        })
 
+        // sets up the table view with the user's friends
+        for friend in User.currentUser!.friends {
+            self.filtered.append(friend)
+        }
+        
+        self.tableView.reloadData()
         
         setPulse()
     }
