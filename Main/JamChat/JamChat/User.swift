@@ -243,7 +243,7 @@ class User: NSObject {
         
         for jam in Jam.currentUserJams {
             for user in jam.users {
-                //if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
+                if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
                     if(user.facebookID != User.currentUser?.facebookID) {
                         if (!numUserOccurrences.keys.contains(user.facebookID)) {
                             numUserOccurrences[user.facebookID] = 1
@@ -255,7 +255,7 @@ class User: NSObject {
                             numUserObjOccurrences[user] = curNum
                         }
                     }
-                //}
+                }
             }
         }
         
