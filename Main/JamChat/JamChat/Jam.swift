@@ -22,7 +22,7 @@ class Jam: NSObject {
     
     private var messageIDs: [String] = []
     private var userIDs: [String] = []
-    private var object: PFObject!
+    var object: PFObject!
     
     
     /**
@@ -252,4 +252,63 @@ class Jam: NSObject {
             }
         }
     }
+    
+    ////////////////
+    class func lowestReached(unit: String, value: Double) -> Bool {
+        let value = Int(round(value));
+        switch unit {
+        case "s":
+            return value < 60;
+        case "m":
+            return value < 60;
+        case "h":
+            return value < 24;
+        case "d":
+            return value < 7;
+        case "w":
+            return value < 4;
+        default:
+            return true;
+        }
+    }
+    
+    class func timeSince(date: NSDate) -> String {
+        var unit = "s";
+        var timeSince = abs(date.timeIntervalSinceNow as Double); // in seconds
+        let reductionComplete = lowestReached(unit, value: timeSince);
+        
+        while(reductionComplete != true){
+            unit = "m";
+            timeSince = round(timeSince / 60);
+            if lowestReached(unit, value: timeSince) { break; }
+            
+            unit = "h";
+            timeSince = round(timeSince / 60);
+            if lowestReached(unit, value: timeSince) { break; }
+            
+            unit = "d";
+            timeSince = round(timeSince / 24);
+            if lowestReached(unit, value: timeSince) { break; }
+            
+            unit = "w";
+            timeSince = round(timeSince / 7);
+            if lowestReached(unit, value: timeSince) { break; }
+            
+            (unit, timeSince) = localizedDate(date);   break;
+        }
+        
+        let value = Int(timeSince);
+        return "\(value)\(unit)";
+    }
+    
+    class func localizedDate(date: NSDate) -> (unit: String, timeSince: Double) {
+        var unit = "/";
+        let formatter = NSDateFormatter();
+        formatter.dateFormat = "M";
+        let timeSince = Double(formatter.stringFromDate(date))!;
+        formatter.dateFormat = "d/yy";
+        unit += formatter.stringFromDate(date);
+        return (unit, timeSince);
+    }
+
 }
