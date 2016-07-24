@@ -31,6 +31,8 @@ class User: NSObject {
         
     var users: [User] = []
     
+    var tracks: [Track] = []
+    
     // should store and retrieve this
     var instrumentCount: [Instrument : Int] = [Instrument.acousticBass:0, Instrument.choir:0, Instrument.electricBass:0, Instrument.electricGuitar:0, Instrument.piano:0, Instrument.saxophone:0]
     
@@ -195,6 +197,17 @@ class User: NSObject {
                 print(error.localizedDescription)
             } else {
                 completion(Int(count))
+            }
+        }
+    }
+    
+    func getUserTracks(completion: () -> ()) {
+        let query = PFQuery(className: "Track")
+        query.whereKey("author", containsString: parseUser.objectId)
+        query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
+            for object in objects! {
+                let track = Track(object: object)
+                self.tracks.append(track)
             }
         }
     }

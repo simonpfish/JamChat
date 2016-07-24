@@ -82,6 +82,11 @@ import NVActivityIndicatorView
     }
     
     func loadFeed() {
+        
+        User.currentUser?.getUserTracks(){
+            
+        }
+        
         Jam.downloadCurrentUserJams({ (jams: [Jam]) in
             self.jams = jams
             print("Reloading table view")
