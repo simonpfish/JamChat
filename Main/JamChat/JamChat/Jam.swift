@@ -253,7 +253,8 @@ class Jam: NSObject {
         }
     }
     
-    ////////////////
+    // utilities for calculating and displaying a jam's time stamp on the home feed
+    
     class func lowestReached(unit: String, value: Double) -> Bool {
         let value = Int(round(value));
         switch unit {

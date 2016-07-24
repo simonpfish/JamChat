@@ -15,7 +15,6 @@ class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var jamNameLabel: UILabel!
-    
     @IBOutlet weak var timeStampLabel: UILabel!
     
     var jam: Jam? {
