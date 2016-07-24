@@ -31,6 +31,8 @@ class User: NSObject {
         
     var users: [User] = []
     
+    var tracks: [Track] = []
+    
     // should store and retrieve this
     var instrumentCount: [Instrument : Int] = [Instrument.acousticBass:0, Instrument.choir:0, Instrument.electricBass:0, Instrument.electricGuitar:0, Instrument.piano:0, Instrument.saxophone:0]
     
@@ -200,6 +202,31 @@ class User: NSObject {
     }
     
     /**
+     Returns an array with the tracks the current user has created.
+     */
+    func getUserTracks(completion: () -> ()) {
+        
+        User.currentUser!.getNumberOfTracks({ (count: Int) in
+            let numTracks = count
+            
+            // if the user has not created any tracks, do not create a query
+            if(numTracks != 0) {
+                let query = PFQuery(className: "Track")
+                query.whereKey("author", containsString: self.parseUser.objectId)
+                query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
+                    for object in objects! {
+                        let track = Track(object: object)
+                        self.tracks.append(track)
+                    }
+                }
+            }
+
+        })
+        
+
+    }
+    
+    /**
      Returns an array of Users, that represents the current user's top three friends.
      */
     func getTopFriends() -> [User] {
@@ -209,17 +236,24 @@ class User: NSObject {
         var topIDs: [String] = [] // an array of the facebookIDs of the user's top friends
         var topFriends: [User] = [] // and array of the user's top friends
         
+        var friendIDs: [String] = []
+        for friend in friends {
+            friendIDs.append(friend.facebookID)
+        }
+        
         for jam in Jam.currentUserJams {
             for user in jam.users {
-                if(user.facebookID != User.currentUser?.facebookID) {
-                    if (!numUserOccurrences.keys.contains(user.facebookID)) {
-                        numUserOccurrences[user.facebookID] = 1
-                        numUserObjOccurrences[user] = 1
-                    } else {
-                        var curNum = numUserOccurrences[user.facebookID]
-                        curNum = curNum! + 1 // update the number of occurrences
-                        numUserOccurrences[user.facebookID] = curNum
-                        numUserObjOccurrences[user] = curNum
+                if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
+                    if(user.facebookID != User.currentUser?.facebookID) {
+                        if (!numUserOccurrences.keys.contains(user.facebookID)) {
+                            numUserOccurrences[user.facebookID] = 1
+                            numUserObjOccurrences[user] = 1
+                        } else {
+                            var curNum = numUserOccurrences[user.facebookID]
+                            curNum = curNum! + 1 // update the number of occurrences
+                            numUserOccurrences[user.facebookID] = curNum
+                            numUserObjOccurrences[user] = curNum
+                        }
                     }
                 }
             }

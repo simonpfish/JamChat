@@ -46,6 +46,12 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2H-4C-peH">
+                                                    <rect key="frame" x="25" y="71" width="108" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YEx-qK-Ety">
                                                     <rect key="frame" x="287" y="10" width="80" height="80"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -94,6 +100,7 @@
                                         <connections>
                                             <outlet property="colorView" destination="sBY-2P-3VQ" id="CXd-NU-Xlh"/>
                                             <outlet property="jamNameLabel" destination="Ljl-KK-ak9" id="PmL-L3-SV1"/>
+                                            <outlet property="timeStampLabel" destination="H2H-4C-peH" id="yje-Yy-zJ8"/>
                                             <outlet property="userCollection" destination="YEx-qK-Ety" id="vqg-pd-Eii"/>
                                             <segue destination="x4v-zO-RyJ" kind="show" id="ZOx-pJ-uvm"/>
                                         </connections>

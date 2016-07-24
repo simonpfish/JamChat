@@ -54,11 +54,19 @@ class UserCell: UICollectionViewCell {
         topFriendsNum!.sortInPlace()
         var topThreeNums: [Int] = []
         
-        //retrieves the top three highest numbers
-        for i in 1...3 {
-            topThreeNums.append(topFriendsNum![topFriendsNum!.count-i])
+        //retrieves the number of jams from highest to lowest
+        if (topFriendsNum!.count == 1) {
+            topThreeNums.append(topFriendsNum![0])
+        } else if (topFriendsNum!.count == 2) {
+            topThreeNums.append(topFriendsNum![1])
+            topThreeNums.append(topFriendsNum![0])
+        } else {
+            //retrieves the top three highest numbers
+            for i in 1...3 {
+                topThreeNums.append(topFriendsNum![topFriendsNum!.count-i])
+            }
         }
-        
+
         //maps the number to the friend
         var index = 0
         for curUser in friendsNames {

@@ -15,12 +15,13 @@ class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var jamNameLabel: UILabel!
-    
+    @IBOutlet weak var timeStampLabel: UILabel!
     
     var jam: Jam? {
         didSet {
             userCollection.reloadData()
             jamNameLabel.text = jam!.title
+            timeStampLabel.text = Jam.timeSince(jam!.object.createdAt!)
             self.setColor()
         }
     }
