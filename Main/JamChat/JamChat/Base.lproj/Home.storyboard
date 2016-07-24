@@ -38,7 +38,19 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBY-2P-3VQ">
                                                     <rect key="frame" x="2" y="2" width="371" height="96"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GvX-YU-g1W">
+                                                            <rect key="frame" x="328.5" y="67" width="34.5" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="GvX-YU-g1W" firstAttribute="trailing" secondItem="sBY-2P-3VQ" secondAttribute="trailingMargin" id="N8I-Yr-AhC"/>
+                                                        <constraint firstItem="GvX-YU-g1W" firstAttribute="bottom" secondItem="sBY-2P-3VQ" secondAttribute="bottomMargin" id="asN-jz-Jkb"/>
+                                                    </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jam Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Ljl-KK-ak9">
                                                     <rect key="frame" x="25" y="37" width="108" height="27"/>
@@ -95,6 +107,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="colorView" destination="sBY-2P-3VQ" id="CXd-NU-Xlh"/>
+                                            <outlet property="dateLabel" destination="GvX-YU-g1W" id="29c-Ae-Tdq"/>
                                             <outlet property="jamNameLabel" destination="Ljl-KK-ak9" id="PmL-L3-SV1"/>
                                             <outlet property="userCollection" destination="YEx-qK-Ety" id="vqg-pd-Eii"/>
                                             <segue destination="x4v-zO-RyJ" kind="show" id="ZOx-pJ-uvm"/>

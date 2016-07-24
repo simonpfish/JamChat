@@ -34,5 +34,9 @@ target 'JamChat' do
     pod 'DGElasticPullToRefresh'
     pod 'NVActivityIndicatorView'
     pod 'UICollectionViewRightAlignedLayout'
+    
+    # Utilities
+    pod 'TFGRelativeDateFormatter'
+
 
 end

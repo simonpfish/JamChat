@@ -14,6 +14,7 @@ class Jam: NSObject {
     
     var messages: [Message] = []
     var users: [User] = []
+    private(set) var updatedAt: NSDate!
     let messageDuration: Double!
     var title: String = ""
     static var currentUserJams: [Jam] = []
@@ -37,6 +38,7 @@ class Jam: NSObject {
         userIDs = object["users"] as! [String]
         title = object["title"] as? String ?? ""
         tempo = object["tempo"] as? Int
+        updatedAt = object.updatedAt
         
         super.init()
     }
@@ -56,6 +58,7 @@ class Jam: NSObject {
         object = PFObject(className: "Jam")
         self.messageDuration = messageDuration
         self.title = title
+        self.updatedAt = NSDate()
         
         super.init()
         

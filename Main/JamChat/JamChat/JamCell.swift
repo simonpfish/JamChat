@@ -8,19 +8,24 @@
 
 import UIKit
 import UICollectionViewRightAlignedLayout
+import TFGRelativeDateFormatter
 
 class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var userCollection: UICollectionView!
-    
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var jamNameLabel: UILabel!
-    
+    @IBOutlet weak var dateLabel: UILabel!
     
     var jam: Jam? {
         didSet {
             userCollection.reloadData()
             jamNameLabel.text = jam!.title
+        
+            let dateString = TFGRelativeDateFormatter.sharedFormatter().stringForDate(jam!.updatedAt)
+            
+            dateLabel.text = dateString
+
             self.setColor()
         }
     }
