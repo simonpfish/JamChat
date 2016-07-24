@@ -83,6 +83,7 @@ import NVActivityIndicatorView
     
     func loadFeed() {
         
+        // download the tracks the user has created
         User.currentUser?.getUserTracks(){
             
         }

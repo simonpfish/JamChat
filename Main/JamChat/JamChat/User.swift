@@ -201,11 +201,15 @@ class User: NSObject {
         }
     }
     
+    /**
+     Returns an array with the tracks the current user has created.
+     */
     func getUserTracks(completion: () -> ()) {
         
         User.currentUser!.getNumberOfTracks({ (count: Int) in
-            var numTracks = count
+            let numTracks = count
             
+            // if the user has not created any tracks, do not create a query
             if(numTracks != 0) {
                 let query = PFQuery(className: "Track")
                 query.whereKey("author", containsString: self.parseUser.objectId)
