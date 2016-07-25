@@ -21,7 +21,7 @@ class Track: NSObject {
     var filepath: String!
     var color: UIColor = UIColor.grayColor()
     
-    var instrumentName: String!
+    var instrumentName: String?
     
     private var object: PFObject!
     
@@ -87,8 +87,8 @@ class Track: NSObject {
         player?.play()
     }
     
-    func play(duration: Double) {
-        player?.playFrom(0, to: duration)
+    func play() {
+        self.player?.playFrom(0, to: (self.player?.audioFile.duration)!)
     }
     
     func stopLooping() {

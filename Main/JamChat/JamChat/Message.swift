@@ -77,11 +77,12 @@ class Message: NSObject {
     /**
      Plays the message to the main audio output
      */
-    func play(duration: Double) {
+    func play(startedPlaying: (() -> ())?) {
         print("Playing message \(self.id ?? "NEW")")
         for track in tracks {
-            track.play(duration)
+            track.play()
         }
+        startedPlaying?()
     }
     
     func stop() {

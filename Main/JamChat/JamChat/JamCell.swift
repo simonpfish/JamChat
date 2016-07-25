@@ -7,21 +7,25 @@
 //
 
 import UIKit
-import KTCenterFlowLayout
+import UICollectionViewRightAlignedLayout
+import TFGRelativeDateFormatter
 
 class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var userCollection: UICollectionView!
-    
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var jamNameLabel: UILabel!
-    @IBOutlet weak var timeStampLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     var jam: Jam? {
         didSet {
             userCollection.reloadData()
             jamNameLabel.text = jam!.title
-            timeStampLabel.text = Jam.timeSince(jam!.object.createdAt!)
+        
+            let dateString = TFGRelativeDateFormatter.sharedFormatter().stringForDate(jam!.updatedAt)
+            
+            dateLabel.text = dateString
+
             self.setColor()
         }
     }
@@ -31,11 +35,11 @@ class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSo
         userCollection.dataSource = self
         userCollection.delegate = self
         
-        let layout = KTCenterFlowLayout()
+        let layout = UICollectionViewRightAlignedLayout()
         layout.minimumInteritemSpacing = 5.0
         layout.itemSize = CGSizeMake(29, 29)
         layout.minimumLineSpacing = 0.0
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         userCollection.collectionViewLayout = layout
         
         self.layer.cornerRadius = 20
@@ -53,10 +57,6 @@ class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSo
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    override func prepareForReuse() {
-        userCollection.contentInset.top = max((userCollection.frame.height - userCollection.contentSize.height) / 2, 0)
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
