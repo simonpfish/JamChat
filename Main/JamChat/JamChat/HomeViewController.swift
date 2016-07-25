@@ -14,8 +14,11 @@ import ParseUI
 import AudioKit
 import DGElasticPullToRefresh
 import NVActivityIndicatorView
+import PubNub
 
 @IBDesignable class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    let appDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
 
     @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
@@ -25,6 +28,7 @@ import NVActivityIndicatorView
         return tableView.backgroundColor!
     }
     var jams: [Jam] = []
+    var jamIDs: [String] = []
     
     @IBInspectable var backTint: UIColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
     
@@ -111,6 +115,19 @@ import NVActivityIndicatorView
             self.tableView.reloadData()
             self.tableView.dg_stopLoading()
             self.loadingIndicatorView.stopAnimation()
+            
+            if self.jamIDs.count == 0 {
+                for jam in jams {
+                    self.jamIDs.append(jam.id)
+                }
+                
+                self.appDelegate.client.subscribeToChannels(self.jamIDs, withPresence: true)
+                let userToken = NSUserDefaults.standardUserDefaults().objectForKey("DeviceToken") as! NSData
+                self.appDelegate.client.addPushNotificationsOnChannels(self.jamIDs, withDevicePushToken: userToken) { (status: PNAcknowledgmentStatus) in
+                    print(status.debugDescription)
+                }
+            }
+            
         }) { (error: NSError) in
             print(error.localizedDescription)
             self.tableView.dg_stopLoading()
