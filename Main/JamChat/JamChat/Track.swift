@@ -21,7 +21,7 @@ class Track: NSObject {
     var filepath: String!
     var color: UIColor = UIColor.grayColor()
     
-    var instrumentName: String!
+    var instrumentName: String?
     
     private var object: PFObject!
     
