@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import AudioKit
+import PubNub
 
 class Jam: NSObject {
     
@@ -18,8 +19,13 @@ class Jam: NSObject {
     let messageDuration: Double!
     var title: String = ""
     static var currentUserJams: [Jam] = []
-    static var usersInCurrentUserJams: [User] = []
+    static var usersInCurreentUserJams: [User] = []
     var tempo: Int?
+    var id: String {
+        get {
+            return object.objectId!
+        }
+    }
     
     private var messageIDs: [String] = []
     private var userIDs: [String] = []
@@ -151,6 +157,7 @@ class Jam: NSObject {
                         if let error = error {
                             failure(error)
                         } else {
+                            self.sendNotification()
                             success()
                         }
                     })
@@ -225,6 +232,13 @@ class Jam: NSObject {
             print("Finished pushing jam \(self.object.objectId ?? "NEW")")
             completion?(success, error)
         })
+    }
+    
+    func sendNotification() {
+        let appDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
+        appDelegate.client.publish("New+Message", toChannel: object.objectId!) { (status: PNPublishStatus) in
+            print(status.debugDescription)
+        }
     }
     
     class func downloadCurrentUserJams(success: ([Jam]) -> (), failure: (NSError) -> ()) {

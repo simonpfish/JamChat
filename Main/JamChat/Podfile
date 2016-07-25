@@ -19,6 +19,7 @@ target 'JamChat' do
 
     #Networking
     pod 'AFNetworking'
+    pod 'PubNub'
 
     # UI
     pod 'RAMReel'

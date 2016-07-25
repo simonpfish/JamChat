@@ -12,27 +12,50 @@ import FBSDKLoginKit
 import Parse
 import ParseFacebookUtilsV4
 import AudioKit
+import PubNub
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
 
     var window: UIWindow?
     
     static var mainMixer: AKMixer?
+    
+    var client : PubNub
+    var config : PNConfiguration
+    
+    override init() {
+        config = PNConfiguration(publishKey: "pub-c-9d14846c-d67e-4d85-b279-b189919c1ed6", subscribeKey: "sub-c-df45123e-52aa-11e6-ba28-02ee2ddab7fe")
+        client = PubNub.clientWithConfiguration(config)
+        client.subscribeToChannels(["global"], withPresence: false)
+        client.publish("Swift+PubNub!", toChannel: "global", compressed: false, withCompletion: nil)
+        
+        super.init()
+        client.addListener(self)
+    }
+    
+    func client(client: PubNub, didReceiveMessage message: PNMessageResult) {
+        print(message.data)
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Parse.initializeWithConfiguration(
             ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
                 configuration.applicationId = "jamchat-parse"
-                configuration.clientKey = nil  // set to nil assuming you have not set clientKey
+                configuration.clientKey = "a308h2fenwdjalskmdkland#@!DSa"
                 configuration.server = "https://jamchat-parse.herokuapp.com/parse"
             })
         )
         
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions);
         
-        // Audio setup
+        // Push
+        let types: UIUserNotificationType = [.Alert, .Badge, .Sound]
+        let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
         
+        // Audio setup
         print("Setting up audio")
         AppDelegate.mainMixer = AKMixer(Track.mixer, Instrument.mixer)
         AudioKit.output = AppDelegate.mainMixer
@@ -73,6 +96,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    // Push setup:
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let installation = PFInstallation.currentInstallation()
+        installation!.setDeviceTokenFromData(deviceToken)
+        installation!.channels = ["global"]
+        installation!.saveInBackground()
+        NSUserDefaults.standardUserDefaults().setObject(deviceToken, forKey: "DeviceToken")
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        if error.code == 3010 {
+            print("Push notifications are not supported in the iOS Simulator.")
+        } else {
+            print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+        }
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        PFPush.handlePush(userInfo)
     }
     
 }
