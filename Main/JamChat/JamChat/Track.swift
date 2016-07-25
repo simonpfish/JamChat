@@ -21,6 +21,8 @@ class Track: NSObject {
     var filepath: String!
     var color: UIColor = UIColor.grayColor()
     
+    var instrumentName: String!
+    
     private var object: PFObject!
     
     private var recorder: AKNodeRecorder?
@@ -40,6 +42,8 @@ class Track: NSObject {
         }
         
         filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + self.identifier + ".m4a"
+        
+        instrumentName = object["instrumentName"] as? String
         
         super.init()
     }
@@ -94,6 +98,7 @@ class Track: NSObject {
     
     func recordInstrument(instrument: Instrument, duration: Double, completion: () -> ()) {
         color = instrument.color
+        instrumentName = instrument.name
         recordNode(instrument.sampler, duration: duration, completion: completion)
     }
     
@@ -147,6 +152,7 @@ class Track: NSObject {
         object["author"] = author.parseUser // Pointer column type that points to PFUser
         object["identifier"] = identifier
         object["color"] = color.toHexString()
+        object["instrumentName"] = instrumentName
         
         object.saveInBackgroundWithBlock(completion)
     }

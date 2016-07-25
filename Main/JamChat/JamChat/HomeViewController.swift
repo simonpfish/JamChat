@@ -82,6 +82,27 @@ import NVActivityIndicatorView
     }
     
     func loadFeed() {
+        
+        // download the current user's friends, if they haven't already been downloaded
+        if User.currentUser!.friends.count == 0 {
+            User.currentUser?.loadFriends({
+                var loadedCount = 0
+                for friend in User.currentUser!.friends {
+                    friend.loadData() {
+                        loadedCount += 1
+                        if loadedCount == User.currentUser?.friends.count {
+                        }
+                    }
+                }
+            })
+        }
+        
+        // download the tracks the user has created, if they haven't already been downloaded
+        if User.currentUser?.tracks.count == 0 {
+            User.currentUser?.getUserTracks(){
+            }
+        }
+        
         Jam.downloadCurrentUserJams({ (jams: [Jam]) in
             self.jams = jams
             print("Reloading table view")

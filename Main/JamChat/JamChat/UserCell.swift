@@ -11,15 +11,12 @@ import AFNetworking
 
 class UserCell: UICollectionViewCell {
     
-    @IBOutlet weak var mainUserView: UIView!
     @IBOutlet weak var profilePictureView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    @IBOutlet weak var countView: UIView!
+    @IBOutlet weak var countButton: UIButton!
     @IBOutlet weak var countLabel: UILabel!
-    @IBOutlet weak var countImageView: UIImageView!
-    
-    
+
     var user: User! {
         didSet {
             if let nameLabel = nameLabel {
@@ -34,42 +31,65 @@ class UserCell: UICollectionViewCell {
         profilePictureView.layer.cornerRadius = profilePictureView.frame.size.width / 2;
         profilePictureView.clipsToBounds = true;
         
+        if let button = countButton {
+            button.layer.cornerRadius = countButton.frame.size.width / 2;
+        }
     }
     
+    var numberIsDisplayed = false
+    
     @IBAction func onUserTap(sender: AnyObject) {
-        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            
-            let friendsNames = User.currentUser?.getTopFriends()
-            
-            var topFriendsNum = User.currentUser?.getTopFriendNumbers()
-            //topFriendsNum!.sort()
-            
-            var index = 0
-
-            for curUser in friendsNames! {
-                index = index + 1
-                if curUser.name == self.user.name {
-                    break;
-                }
+        
+        var friendsNames: [User] = []
+        friendsNames = (User.currentUser?.getTopFriends())!
+        
+        //retrieve the names of the top three friends
+        if friendsNames.count > 3 {
+            while(friendsNames.count > 3) {
+                friendsNames.removeAtIndex(friendsNames.count-1)
             }
-            
-            index = index-1
-            index = topFriendsNum!.count - index
-            
-            if (self.countView.alpha == 0.0) {
-                self.countView.alpha = 1.0
-                
-                self.countImageView.backgroundColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
-                self.countImageView.layer.cornerRadius = self.countImageView.frame.size.width / 2;
-                self.countImageView.clipsToBounds = true;
-                
-                self.countLabel.text = String(topFriendsNum![index-1])
+        }
+        
+        var topFriendsNum = User.currentUser?.getTopFriendNumbers()
+        topFriendsNum!.sortInPlace()
+        var topThreeNums: [Int] = []
+        
+        //retrieves the number of jams from highest to lowest
+        if (topFriendsNum!.count == 1) {
+            topThreeNums.append(topFriendsNum![0])
+        } else if (topFriendsNum!.count == 2) {
+            topThreeNums.append(topFriendsNum![1])
+            topThreeNums.append(topFriendsNum![0])
+        } else {
+            //retrieves the top three highest numbers
+            for i in 1...3 {
+                topThreeNums.append(topFriendsNum![topFriendsNum!.count-i])
+            }
+        }
 
-                self.mainUserView.alpha = 0.0
-                
+        //maps the number to the friend
+        var index = 0
+        for curUser in friendsNames {
+            if curUser.name == self.user.name {
+                break;
+            }
+            index += 1
+        }
+        
+        self.countButton.backgroundColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
+        self.countLabel.hidden = false
+        self.countLabel.text = String(topThreeNums[index])
+        
+        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+
+            if self.numberIsDisplayed {
+                self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(0.0)
+                self.countLabel.hidden = true
+                self.numberIsDisplayed = false
             } else {
-                self.countView.alpha = 0.0
-                self.mainUserView.alpha = 1.0
+                self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(1)
+                self.countLabel.hidden = false
+                self.numberIsDisplayed = true
             }
             
             }, completion: nil)
