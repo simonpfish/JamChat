@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var dismissProfileButton: UIButton!
     
+    var user: User?
     
     var userDelegate: UserCollectionDelegate!
     var instrumentDelegate: InstrumentCollectionDelegate!
@@ -34,8 +35,6 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     var instrumentDic: [Instrument: Int] = [:]
     var instrumentNames: [Instrument] = []
     var topFriends: [User] = []
-    
-    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()

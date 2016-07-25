@@ -34,6 +34,18 @@ class UserCell: UICollectionViewCell {
         if let button = countButton {
             button.layer.cornerRadius = countButton.frame.size.width / 2;
         }
+
+        
+        // download the tracks the user has created, if they haven't already been downloaded
+        
+        if user != nil {
+            if user.tracks.count == 0 {
+                user.getUserTracks(){
+                    print("Loading user tracks")
+                }
+            }
+        }
+        
     }
     
     var numberIsDisplayed = false
@@ -98,12 +110,32 @@ class UserCell: UICollectionViewCell {
     @IBAction func toProfileView(sender: AnyObject) {
         print("clicked user's name")
         
+        
         let profileStoryboard = UIStoryboard(name: "Profile", bundle: NSBundle.mainBundle())
         let profileViewController = profileStoryboard.instantiateViewControllerWithIdentifier("ProfileView") as! ProfileViewController
-
-        profileViewController.user = user
         
-        PagerViewController.sharedInstance?.presentViewController(profileViewController, animated: true, completion: nil)
+        profileViewController.user = self.user
+        
+        if user != nil {
+            if user.friends.count == 0 {
+                user.loadFriends({
+                    var loadedCount = 0
+                    for friend in self.user.friends {
+                        friend.loadData() {
+                            loadedCount += 1
+                            print("Loading friend number \(loadedCount) of \(self.user.friends.count)")
+                            if loadedCount == self.user.friends.count {
+                                
+                                PagerViewController.sharedInstance?.presentViewController(profileViewController, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                })
+            } else {
+                
+                PagerViewController.sharedInstance?.presentViewController(profileViewController, animated: true, completion: nil)
+            }
+        }
 
     }
     

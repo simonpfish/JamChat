@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Set Jam Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dla-u1-i4Y">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Set Jam Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dla-u1-i4Y">
                                 <rect key="frame" x="45" y="511" width="284" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -158,7 +158,7 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5s-7h-Ljw">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5s-7h-Ljw">
                                 <rect key="frame" x="243" y="488" width="42" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -174,10 +174,10 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="createButton" destination="g8w-1D-pLU" id="Plq-9H-jJv"/>
+                        <outlet property="durationSliderView" destination="XHu-qe-3er" id="wuZ-90-gXW"/>
                         <outlet property="fastTempoView" destination="wbA-Je-byF" id="8CI-xV-bMU"/>
                         <outlet property="mediumTempoView" destination="rXK-By-0X8" id="Sg8-nR-KmL"/>
                         <outlet property="searchBar" destination="FE1-59-YWX" id="6vy-vg-Ep0"/>
-                        <outlet property="sliderView1" destination="XHu-qe-3er" id="Y6q-z6-MHq"/>
                         <outlet property="slowTempoView" destination="v8V-iD-XXw" id="D5n-iu-cLd"/>
                         <outlet property="tableView" destination="KZI-3w-WSZ" id="kxE-EH-vcP"/>
                         <outlet property="titleLabel" destination="Dla-u1-i4Y" id="4Hj-jt-rcx"/>
