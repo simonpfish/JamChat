@@ -94,4 +94,8 @@ class UserCell: UICollectionViewCell {
             
             }, completion: nil)
     }
+    
+    @IBAction func toProfileView(sender: AnyObject) {
+    }
+    
 }

@@ -33,10 +33,17 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     var instrumentNames: [Instrument] = []
     var topFriends: [User] = []
     
+    var user: User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        if user == nil {
+            user = User.currentUser!
+        } else {
+            logoutButton.hidden = true
+        }
         
         // format logout button
         logoutButton.layer.cornerRadius = 7
@@ -45,7 +52,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         logoutButton.layer.borderColor = selectedColor.CGColor
         logoutButton.titleLabel!.textColor = selectedColor
         
-        topFriends = (User.currentUser?.getTopFriends())!
+        topFriends = (user?.getTopFriends())!
         
         // retrieves the user's top three friends
         if topFriends.count > 3 {
@@ -54,7 +61,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             }
         }
         
-        instrumentDic = (User.currentUser?.instrumentCount)!
+        instrumentDic = (user?.instrumentCount)!
         
         for instrument in instrumentDic.keys {
             instrumentNames.append(instrument)
@@ -88,8 +95,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
-        setUpLabels(User.currentUser!)
-
+        setUpLabels()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -103,23 +109,23 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         numTracksLabel.textColor = selectedColor
     }
     
-    func setUpLabels(user: User) {
+    func setUpLabels() {
         
         // Sets the user's profile picture
-        profilePicture.setImageWithURL(user.profileImageURL)
+        profilePicture.setImageWithURL(user!.profileImageURL)
         
         // Sets the user's name
-        userNameLabel.text = User.currentUser!.firstName + " " + User.currentUser!.lastName
+        userNameLabel.text = user!.firstName + " " + user!.lastName
         
         // Sets the number of jams user is a member of
-        user.getNumberOfJams({ (count: Int) in
+        user!.getNumberOfJams({ (count: Int) in
             var labelText = String(count)
             labelText += " Jams"
             self.numJamsLabel.text = labelText
         })
         
         // Sets the number of tracks the user has sent
-        user.getNumberOfTracks({ (count: Int) in
+        user!.getNumberOfTracks({ (count: Int) in
             var labelText = String(count)
             labelText += " Tracks"
             self.numTracksLabel.text = labelText
@@ -127,12 +133,12 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         
         // Goes through the user's tracks, and updates the instrumentCount array
         // The instrumentCount array is used to determine a user's "Favorite Instruments"
-        for track in user.tracks {
-            for instrument in user.instrumentCount.keys {
+        for track in user!.tracks {
+            for instrument in user!.instrumentCount.keys {
                 if(instrument.name == track.instrumentName) {
-                    var curNum = user.instrumentCount[instrument]
+                    var curNum = user!.instrumentCount[instrument]
                     curNum = curNum! + 1
-                    user.instrumentCount[instrument] = curNum
+                    user!.instrumentCount[instrument] = curNum
                 }
             }
         }

@@ -202,7 +202,7 @@ class User: NSObject {
     }
     
     /**
-     Returns an array with the tracks the current user has created.
+     Updates an array with the tracks the current user has created.
      */
     func getUserTracks(completion: () -> ()) {
         

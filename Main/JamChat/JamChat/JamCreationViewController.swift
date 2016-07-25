@@ -26,7 +26,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var searchBar: UISearchBar!
     var resultSearchController = UISearchController()
     
-    @IBOutlet weak var sliderView1: UIView!
+    @IBOutlet weak var durationSliderView: UIView!
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var tempoSliderView: UIView!
     @IBOutlet weak var minTempo: UILabel!
@@ -47,7 +47,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     private var messageDurationSlider: IntervalSlider! {
         didSet {
             self.messageDurationSlider.tag = 1
-            self.sliderView1.addSubview(self.messageDurationSlider)
+            self.durationSliderView.addSubview(self.messageDurationSlider)
             self.messageDurationSlider.delegate = self
         }
     }
@@ -82,7 +82,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         // set up interval slider
         let result = self.createSources()
-        self.messageDurationSlider = IntervalSlider(frame: self.sliderView1.bounds, sources: result.sources, options: result.options)
+        self.messageDurationSlider = IntervalSlider(frame: self.durationSliderView.bounds, sources: result.sources, options: result.options)
         
         setTempoSlider()
 

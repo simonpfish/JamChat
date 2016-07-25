@@ -19,17 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Set Jam Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dla-u1-i4Y">
-                                <rect key="frame" x="46" y="562" width="284" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Js5-bL-S0x"/>
-                                    <constraint firstAttribute="width" constant="284" id="xja-B4-QcE"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XHu-qe-3er">
-                                <rect key="frame" x="59" y="402" width="250" height="17"/>
+                                <rect key="frame" x="58" y="402" width="250" height="17"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="Hq0-yU-wlj"/>
@@ -37,7 +28,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a jam tempo:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Sb-Wx-jRt">
-                                <rect key="frame" x="64" y="442" width="236" height="18"/>
+                                <rect key="frame" x="63" y="442" width="236" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="1Sb-Wx-jRt" secondAttribute="height" multiplier="275:21" id="OSb-RI-J9l"/>
                                 </constraints>
@@ -46,10 +37,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fnh-88-Duu">
-                                <rect key="frame" x="77" y="471" width="221" height="16"/>
+                                <rect key="frame" x="78" y="471" width="219" height="16"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="mvI-qo-jEz">
-                                        <rect key="frame" x="-15" y="-7" width="238" height="31"/>
+                                        <rect key="frame" x="-15" y="-7" width="236" height="31"/>
                                         <color key="thumbTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </slider>
                                 </subviews>
@@ -158,6 +149,15 @@
                                     <action selector="onCreate:" destination="eq8-ox-paN" eventType="touchUpInside" id="HkW-tc-fOD"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Set Jam Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dla-u1-i4Y">
+                                <rect key="frame" x="45" y="562" width="284" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Js5-bL-S0x"/>
+                                    <constraint firstAttribute="width" constant="284" id="xja-B4-QcE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -189,10 +189,10 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="createButton" destination="g8w-1D-pLU" id="Plq-9H-jJv"/>
+                        <outlet property="durationSliderView" destination="XHu-qe-3er" id="0nK-2V-9vy"/>
                         <outlet property="maxTempo" destination="yVS-bt-hbS" id="89l-5q-bx0"/>
                         <outlet property="minTempo" destination="rJ1-LZ-tDD" id="xdG-ZE-GsJ"/>
                         <outlet property="searchBar" destination="FE1-59-YWX" id="6vy-vg-Ep0"/>
-                        <outlet property="sliderView1" destination="XHu-qe-3er" id="Y6q-z6-MHq"/>
                         <outlet property="tableView" destination="KZI-3w-WSZ" id="kxE-EH-vcP"/>
                         <outlet property="tempoPulseView" destination="rXK-By-0X8" id="oST-K7-RVm"/>
                         <outlet property="tempoSlider" destination="mvI-qo-jEz" id="QI1-Me-CRQ"/>

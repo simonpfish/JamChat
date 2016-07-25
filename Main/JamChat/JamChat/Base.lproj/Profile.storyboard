@@ -89,8 +89,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="64" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lou-uY-fR0">
-                                                    <rect key="frame" x="8" y="49" width="49" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lou-uY-fR0">
+                                                    <rect key="frame" x="17" y="49" width="31" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="0FY-Eg-EPW"/>
                                                     </constraints>
@@ -101,6 +101,12 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6qI-WJ-Q3J">
                                                     <rect key="frame" x="8" y="0.0" width="49" height="49"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2a1-Hn-5K6">
+                                                    <rect key="frame" x="8" y="0.0" width="49" height="49"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJt-U1-ikm">
                                                     <rect key="frame" x="8" y="0.0" width="49" height="49"/>
                                                     <color key="backgroundColor" red="0.47848317347905323" green="1" blue="0.47344333478882805" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -109,17 +115,18 @@
                                                         <action selector="onUserTap:" destination="5GY-cD-RrX" eventType="touchUpInside" id="oaE-hg-2PX"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2a1-Hn-5K6">
-                                                    <rect key="frame" x="8" y="0.0" width="49" height="49"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MnN-Cc-IF1" userLabel="toProfile Button">
+                                                    <rect key="frame" x="9" y="49" width="46" height="15"/>
+                                                    <connections>
+                                                        <action selector="toProfileView:" destination="5GY-cD-RrX" eventType="touchUpInside" id="ATe-hj-zHp"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Lou-uY-fR0" secondAttribute="bottom" id="BBA-KD-avv"/>
+                                            <constraint firstItem="Lou-uY-fR0" firstAttribute="centerX" secondItem="5GY-cD-RrX" secondAttribute="centerX" id="H4t-3L-HS6"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="countButton" destination="lJt-U1-ikm" id="67J-Yx-txN"/>
