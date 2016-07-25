@@ -90,6 +90,7 @@ import NVActivityIndicatorView
                 for friend in User.currentUser!.friends {
                     friend.loadData() {
                         loadedCount += 1
+                        print("Loading friend number \(loadedCount) of \(User.currentUser!.friends.count)")
                         if loadedCount == User.currentUser?.friends.count {
                         }
                     }
@@ -100,6 +101,7 @@ import NVActivityIndicatorView
         // download the tracks the user has created, if they haven't already been downloaded
         if User.currentUser?.tracks.count == 0 {
             User.currentUser?.getUserTracks(){
+                print("Loading user tracks")
             }
         }
         

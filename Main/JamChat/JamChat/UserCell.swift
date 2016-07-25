@@ -41,7 +41,7 @@ class UserCell: UICollectionViewCell {
     @IBAction func onUserTap(sender: AnyObject) {
         
         var friendsNames: [User] = []
-        friendsNames = (User.currentUser?.getTopFriends())!
+        friendsNames = (user.getTopFriends())
         
         //retrieve the names of the top three friends
         if friendsNames.count > 3 {
@@ -50,20 +50,20 @@ class UserCell: UICollectionViewCell {
             }
         }
         
-        var topFriendsNum = User.currentUser?.getTopFriendNumbers()
-        topFriendsNum!.sortInPlace()
+        var topFriendsNum = user.getTopFriendNumbers()
+        topFriendsNum.sortInPlace()
         var topThreeNums: [Int] = []
         
         //retrieves the number of jams from highest to lowest
-        if (topFriendsNum!.count == 1) {
-            topThreeNums.append(topFriendsNum![0])
-        } else if (topFriendsNum!.count == 2) {
-            topThreeNums.append(topFriendsNum![1])
-            topThreeNums.append(topFriendsNum![0])
+        if (topFriendsNum.count == 1) {
+            topThreeNums.append(topFriendsNum[0])
+        } else if (topFriendsNum.count == 2) {
+            topThreeNums.append(topFriendsNum[1])
+            topThreeNums.append(topFriendsNum[0])
         } else {
             //retrieves the top three highest numbers
             for i in 1...3 {
-                topThreeNums.append(topFriendsNum![topFriendsNum!.count-i])
+                topThreeNums.append(topFriendsNum[topFriendsNum.count-i])
             }
         }
 
@@ -96,9 +96,15 @@ class UserCell: UICollectionViewCell {
     }
     
     @IBAction func toProfileView(sender: AnyObject) {
+        print("clicked user's name")
+        
         let profileStoryboard = UIStoryboard(name: "Profile", bundle: NSBundle.mainBundle())
         let profileViewController = profileStoryboard.instantiateViewControllerWithIdentifier("ProfileView") as! ProfileViewController
+
         profileViewController.user = user
+        
+        PagerViewController.sharedInstance?.presentViewController(profileViewController, animated: true, completion: nil)
+
     }
     
 }

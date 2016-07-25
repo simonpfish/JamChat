@@ -23,6 +23,8 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var instrumentCollection: UICollectionView!
     
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var dismissProfileButton: UIButton!
+    
     
     var userDelegate: UserCollectionDelegate!
     var instrumentDelegate: InstrumentCollectionDelegate!
@@ -41,6 +43,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         // Do any additional setup after loading the view.
         if user == nil {
             user = User.currentUser!
+            dismissProfileButton.hidden = true
         } else {
             logoutButton.hidden = true
         }
@@ -51,7 +54,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         logoutButton.layer.borderWidth = 1
         logoutButton.layer.borderColor = selectedColor.CGColor
         logoutButton.titleLabel!.textColor = selectedColor
-        
+
         topFriends = (user?.getTopFriends())!
         
         // retrieves the user's top three friends
@@ -133,13 +136,13 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         
         // Goes through the user's tracks, and updates the instrumentCount array
         // The instrumentCount array is used to determine a user's "Favorite Instruments"
-        for track in user.tracks {
-            for instrument in user.instrumentCount.keys {
+        for track in user!.tracks {
+            for instrument in user!.instrumentCount.keys {
                 if let instrumentname = track.instrumentName {
                     if(instrument.name == instrumentname) {
-                        var curNum = user.instrumentCount[instrument]
+                        var curNum = user!.instrumentCount[instrument]
                         curNum = curNum! + 1
-                        user.instrumentCount[instrument] = curNum
+                        user!.instrumentCount[instrument] = curNum
                     }
                 }
             }
@@ -163,6 +166,12 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             print(error?.localizedDescription)
         }
     }
+    
+    @IBAction func onDismissProfile(sender: AnyObject) {
+        print("dismiss profile clicked")
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Profile")
