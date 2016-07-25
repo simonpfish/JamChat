@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import AudioKit
+import PubNub
 
 class Jam: NSObject {
     
@@ -18,8 +19,13 @@ class Jam: NSObject {
     let messageDuration: Double!
     var title: String = ""
     static var currentUserJams: [Jam] = []
-    static var usersInCurrentUserJams: [User] = []
+    static var usersInCurreentUserJams: [User] = []
     var tempo: Int?
+    var id: String {
+        get {
+            return object.objectId!
+        }
+    }
     
     private var messageIDs: [String] = []
     private var userIDs: [String] = []
@@ -229,12 +235,9 @@ class Jam: NSObject {
     }
     
     func sendNotification() {
-        for user in users {
-            PFCloud.callFunctionInBackground("sendPushToUser", withParameters: ["recipientId" : user.parseUser.objectId!, "message" : "WOW!"], block: { (result: AnyObject?, error: NSError?) in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-            })
+        let appDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
+        appDelegate.client.publish("New+Message", toChannel: object.objectId!) { (status: PNPublishStatus) in
+            print(status.debugDescription)
         }
     }
     
