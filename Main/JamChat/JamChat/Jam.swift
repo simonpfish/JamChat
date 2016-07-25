@@ -151,6 +151,7 @@ class Jam: NSObject {
                         if let error = error {
                             failure(error)
                         } else {
+                            self.sendNotification()
                             success()
                         }
                     })
@@ -225,6 +226,16 @@ class Jam: NSObject {
             print("Finished pushing jam \(self.object.objectId ?? "NEW")")
             completion?(success, error)
         })
+    }
+    
+    func sendNotification() {
+        for user in users {
+            PFCloud.callFunctionInBackground("sendPushToUser", withParameters: ["recipientId" : user.parseUser.objectId!, "message" : "WOW!"], block: { (result: AnyObject?, error: NSError?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            })
+        }
     }
     
     class func downloadCurrentUserJams(success: ([Jam]) -> (), failure: (NSError) -> ()) {
