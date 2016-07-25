@@ -82,7 +82,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         friendsCollection.collectionViewLayout = friendsLayout
         
         // Set up instrument collection view:
-        instrumentDelegate = InstrumentCollectionDelegate(instruments: instrumentNames)
+        instrumentDelegate = InstrumentCollectionDelegate(instruments: instrumentNames, user: (user)!)
         instrumentCollection.dataSource = instrumentDelegate
         instrumentCollection.delegate = instrumentDelegate
         instrumentCollection.reloadData()

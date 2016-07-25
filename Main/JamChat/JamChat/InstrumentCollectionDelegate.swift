@@ -9,10 +9,13 @@
 import UIKit
 
 class InstrumentCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
-    var instruments: [Instrument]
     
-    init (instruments: [Instrument]) {
+    var instruments: [Instrument]
+    var user: User
+    
+    init (instruments: [Instrument], user: User) {
         self.instruments = instruments
+        self.user = user
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

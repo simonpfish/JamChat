@@ -44,7 +44,7 @@ class InstrumentCell: UICollectionViewCell {
     @IBAction func onInstrumentTap(sender: AnyObject) {
         
         var instrumentNum: [Instrument : Int] = [:]
-        instrumentNum = User.currentUser!.instrumentCount
+        instrumentNum = (User.currentUser?.instrumentCount)!
         
         var num = 0
         
