@@ -232,7 +232,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.selectedFriendIDs.removeAtIndex(selectedFriendIDs.indexOf(currentCell.user.facebookID)!)
 
-        print("Removed friend from chat in creation: \(currentCell.nameLabel.text)")
+        print("Removed friend from chat in creation: \(currentCell.nameLabel.text!)")
     }
     
     // formats the slider and the jam duration text

@@ -108,13 +108,13 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func onPlay(sender: UITapGestureRecognizer? = nil) {
         let lastMessage = jam.messages.last
         lastMessage?.loadTracks({
-            UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
-                self.progressIndicator.frame.origin.x = self.view.frame.width
-            }) { (success: Bool) in
-                self.progressIndicator.frame.origin.x = -2
-            }
-            
-            lastMessage?.play(self.jam.messageDuration)
+            lastMessage?.play({ 
+                UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
+                    self.progressIndicator.frame.origin.x = self.view.frame.width
+                }) { (success: Bool) in
+                    self.progressIndicator.frame.origin.x = -2
+                }
+            })
         })
     }
     

@@ -129,10 +129,12 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         // The instrumentCount array is used to determine a user's "Favorite Instruments"
         for track in user.tracks {
             for instrument in user.instrumentCount.keys {
-                if(instrument.name == track.instrumentName) {
-                    var curNum = user.instrumentCount[instrument]
-                    curNum = curNum! + 1
-                    user.instrumentCount[instrument] = curNum
+                if let instrumentname = track.instrumentName {
+                    if(instrument.name == instrumentname) {
+                        var curNum = user.instrumentCount[instrument]
+                        curNum = curNum! + 1
+                        user.instrumentCount[instrument] = curNum
+                    }
                 }
             }
         }
