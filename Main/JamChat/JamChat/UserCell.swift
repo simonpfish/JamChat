@@ -96,6 +96,9 @@ class UserCell: UICollectionViewCell {
     }
     
     @IBAction func toProfileView(sender: AnyObject) {
+        let profileStoryboard = UIStoryboard(name: "Profile", bundle: NSBundle.mainBundle())
+        let profileViewController = profileStoryboard.instantiateViewControllerWithIdentifier("ProfileView") as! ProfileViewController
+        profileViewController.user = user
     }
     
 }
