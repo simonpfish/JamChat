@@ -22,6 +22,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     var tempo: Int = 80
     var timer = NSTimer()
     
+    @IBOutlet weak var totaltime: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     var resultSearchController = UISearchController()
     @IBOutlet weak var sliderView1: UIView!
@@ -48,7 +49,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     
     // array with all the possible jam duration lengths (in seconds)
     private var messageDurationValues: [Float] {
-        return [5, 10, 15, 20]
+        return [4, 8, 12, 16]
     }
     
     override func viewDidLoad() {
@@ -80,6 +81,8 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         //sets up tempo buttons
         setTempoButtons()
+        
+        totaltime.text = ""
 
         // sets up the table view with the user's friends
         for friend in User.currentUser!.friends {
@@ -88,6 +91,12 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.tableView.reloadData()
 
+    }
+    
+    //updates jam time label
+    func updateJamTime(){
+        let duration = Int(60.0/Double(tempo)*4.0*Double(messageDurationSlider.getValue()))
+        totaltime.text = "\(duration)"
     }
     
     func setTempoButtons (){
@@ -114,18 +123,21 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/80, target: slowTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 80
+        updateJamTime()
     }
     
     func onMedium (sender: UITapGestureRecognizer){
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/130, target: mediumTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 130
+        updateJamTime()
     }
     
     func onFast (sender: UITapGestureRecognizer){
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/180, target: fastTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 180
+        updateJamTime()
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -307,7 +319,8 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
         let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
         let home = homeNavigation.viewControllers[0] as! HomeViewController
-        home.addNewJam(Double(messageDurationSlider.getValue()), userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
+        let duration = Int(60.0/Double(tempo)*4.0*Double(messageDurationSlider.getValue()))
+        home.addNewJam(Double(duration), userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
         self.selectedFriendIDs = []
         self.titleLabel.text = ""
         
@@ -333,6 +346,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
 
 extension JamCreationViewController: IntervalSliderDelegate {
     func confirmValue(slider: IntervalSlider, validValue: Float) {
+        updateJamTime()
         switch slider.tag {
         //case 1:
             //self.valueLabel1.text = "\(Int(validValue))"
