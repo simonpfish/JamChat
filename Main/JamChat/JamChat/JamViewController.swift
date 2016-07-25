@@ -108,13 +108,13 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func onPlay(sender: UITapGestureRecognizer? = nil) {
         let lastMessage = jam.messages.last
         lastMessage?.loadTracks({
-            UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
-                self.progressIndicator.frame.origin.x = self.view.frame.width
-            }) { (success: Bool) in
-                self.progressIndicator.frame.origin.x = -2
-            }
-            
-            lastMessage?.play(self.jam.messageDuration)
+            lastMessage?.play({ 
+                UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
+                    self.progressIndicator.frame.origin.x = self.view.frame.width
+                }) { (success: Bool) in
+                    self.progressIndicator.frame.origin.x = -2
+                }
+            })
         })
     }
     
@@ -161,7 +161,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     func onRecord(sender: UITapGestureRecognizer) {
         countdownLabel.text = "\(countdown)"
-        countdownTimer = NSTimer.scheduledTimerWithTimeInterval(jam.tempo!/60, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
+        countdownTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
         recordView.popAndPulse()
     }
     
@@ -200,7 +200,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         else{
             countdownLabel.text = "\(countdown-1)"
             if (countdown == 2){
-                tempoTimer = NSTimer.scheduledTimerWithTimeInterval(jam.tempo!/60, target: recordView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
+                tempoTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: recordView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
             }
             countdown = countdown - 1
         }

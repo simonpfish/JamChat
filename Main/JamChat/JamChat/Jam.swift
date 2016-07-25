@@ -14,6 +14,7 @@ class Jam: NSObject {
     
     var messages: [Message] = []
     var users: [User] = []
+    private(set) var updatedAt: NSDate!
     let messageDuration: Double!
     var title: String = ""
     static var currentUserJams: [Jam] = []
@@ -22,7 +23,7 @@ class Jam: NSObject {
     
     private var messageIDs: [String] = []
     private var userIDs: [String] = []
-    var object: PFObject!
+    private var object: PFObject!
     
     
     /**
@@ -37,6 +38,7 @@ class Jam: NSObject {
         userIDs = object["users"] as! [String]
         title = object["title"] as? String ?? ""
         tempo = object["tempo"] as? Int
+        updatedAt = object.updatedAt
         
         super.init()
     }
@@ -56,6 +58,7 @@ class Jam: NSObject {
         object = PFObject(className: "Jam")
         self.messageDuration = messageDuration
         self.title = title
+        self.updatedAt = NSDate()
         
         super.init()
         
@@ -252,64 +255,4 @@ class Jam: NSObject {
             }
         }
     }
-    
-    // utilities for calculating and displaying a jam's time stamp on the home feed
-    
-    class func lowestReached(unit: String, value: Double) -> Bool {
-        let value = Int(round(value));
-        switch unit {
-        case "s":
-            return value < 60;
-        case "m":
-            return value < 60;
-        case "h":
-            return value < 24;
-        case "d":
-            return value < 7;
-        case "w":
-            return value < 4;
-        default:
-            return true;
-        }
-    }
-    
-    class func timeSince(date: NSDate) -> String {
-        var unit = "s";
-        var timeSince = abs(date.timeIntervalSinceNow as Double); // in seconds
-        let reductionComplete = lowestReached(unit, value: timeSince);
-        
-        while(reductionComplete != true){
-            unit = "m";
-            timeSince = round(timeSince / 60);
-            if lowestReached(unit, value: timeSince) { break; }
-            
-            unit = "h";
-            timeSince = round(timeSince / 60);
-            if lowestReached(unit, value: timeSince) { break; }
-            
-            unit = "d";
-            timeSince = round(timeSince / 24);
-            if lowestReached(unit, value: timeSince) { break; }
-            
-            unit = "w";
-            timeSince = round(timeSince / 7);
-            if lowestReached(unit, value: timeSince) { break; }
-            
-            (unit, timeSince) = localizedDate(date);   break;
-        }
-        
-        let value = Int(timeSince);
-        return "\(value)\(unit)";
-    }
-    
-    class func localizedDate(date: NSDate) -> (unit: String, timeSince: Double) {
-        var unit = "/";
-        let formatter = NSDateFormatter();
-        formatter.dateFormat = "M";
-        let timeSince = Double(formatter.stringFromDate(date))!;
-        formatter.dateFormat = "d/yy";
-        unit += formatter.stringFromDate(date);
-        return (unit, timeSince);
-    }
-
 }
