@@ -129,15 +129,15 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     
     func onMedium (sender: UITapGestureRecognizer){
         timer.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(60/130, target: mediumTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
-        tempo = 130
+        timer = NSTimer.scheduledTimerWithTimeInterval(60/110, target: mediumTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
+        tempo = 110
         updateJamTime()
     }
     
     func onFast (sender: UITapGestureRecognizer){
         timer.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(60/180, target: fastTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
-        tempo = 180
+        timer = NSTimer.scheduledTimerWithTimeInterval(60/140, target: fastTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
+        tempo = 140
         updateJamTime()
     }
     
@@ -320,8 +320,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
         let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
         let home = homeNavigation.viewControllers[0] as! HomeViewController
-        let duration = Int(60.0/Double(tempo)*4.0*Double(messageDurationSlider.getValue()))
-        home.addNewJam(Double(duration), userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
+        home.addNewJam(Double(totaltime.text!)!, userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
         self.selectedFriendIDs = []
         self.titleLabel.text = ""
         
