@@ -138,11 +138,11 @@ class User: NSObject {
         loginDelegate.controller = controller
         
         // Initialize login view
-        let loginViewController = PFLogInViewController()
+        let loginViewController = LoginViewController()
         loginViewController.delegate = loginDelegate
         
         // Configure custom login
-        loginViewController.fields = [.UsernameAndPassword, .LogInButton, .PasswordForgotten, .Facebook]
+        loginViewController.fields = [.Facebook]
         loginViewController.facebookPermissions = ["email", "public_profile", "user_friends"]
         loginViewController.emailAsUsername = true
         
