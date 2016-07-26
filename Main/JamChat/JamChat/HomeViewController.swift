@@ -87,6 +87,20 @@ import PubNub
     
     func loadFeed() {
         
+        if User.currentUser?.friends.count == 0 {
+            User.currentUser?.loadFriends({
+                var loadedCount = 0
+                for friend in (User.currentUser?.friends)! {
+                    friend.loadData() {
+                        loadedCount += 1
+                        print("Loading friend number \(loadedCount) of \(User.currentUser?.friends.count)")
+                        if loadedCount == User.currentUser?.friends.count {
+                        }
+                    }
+                }
+            })
+        }
+        
         Jam.downloadCurrentUserJams({ (jams: [Jam]) in
             self.jams = jams
             print("Reloading table view")

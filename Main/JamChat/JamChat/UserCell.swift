@@ -47,7 +47,6 @@ class UserCell: UICollectionViewCell {
                 }
             }
         }
-        
     }
     
     var numberIsDisplayed = false
@@ -65,18 +64,14 @@ class UserCell: UICollectionViewCell {
                         print("Loading friend number \(loadedCount) of \(self.curUser.friends.count)")
                         if loadedCount == self.curUser.friends.count {
                             
-                            
                             var friendNum: [User : Int] = [:]
                             friendNum = (self.curUser.friendCount)
-                            
                             
                             for curFriend in friendNum.keys {
                                 if curFriend.facebookID == self.user!.facebookID {
                                     num = friendNum[curFriend]!
                                 }
                             }
-                            
-                            
                         }
                     }
                 }
@@ -85,7 +80,6 @@ class UserCell: UICollectionViewCell {
             
             var friendNum: [User : Int] = [:]
             friendNum = (curUser.friendCount)
-            
             
             for curFriend in friendNum.keys {
                 if curFriend.facebookID == user!.facebookID {
