@@ -17,6 +17,8 @@ class UserCell: UICollectionViewCell {
     @IBOutlet weak var countButton: UIButton!
     @IBOutlet weak var countLabel: UILabel!
 
+    var curUser: User!
+    
     var user: User! {
         didSet {
             if let nameLabel = nameLabel {
@@ -53,7 +55,7 @@ class UserCell: UICollectionViewCell {
     @IBAction func onUserTap(sender: AnyObject) {
         
         var friendNum: [User : Int] = [:]
-        friendNum = (User.currentUser?.friendCount)!
+        friendNum = (curUser.friendCount)
         
         var num = 0
         

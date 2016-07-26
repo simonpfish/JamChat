@@ -115,7 +115,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
                             }
                             
                             // Set up friends collection view:
-                            self.userDelegate = UserCollectionDelegate(users: self.topFriends)
+                            self.userDelegate = UserCollectionDelegate(users: self.topFriends, curUser: self.user!)
                             self.friendsCollection.dataSource = self.userDelegate
                             self.friendsCollection.delegate = self.userDelegate
                             self.friendsCollection.reloadData()
