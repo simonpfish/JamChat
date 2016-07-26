@@ -139,12 +139,6 @@ class UserCell: UICollectionViewCell {
                             print("Loading friend number \(loadedCount) of \(self.user.friends.count)")
                             if loadedCount == self.user.friends.count {
                                 
-//                                for friend in self.user!.friends {
-//                                    self.user!.friendCount[friend] = 0
-//                                }
-                                
-                                
-                                
                                 // display the user's profile after the user's friends have been loaded
                                 PagerViewController.sharedInstance?.presentViewController(profileViewController, animated: true, completion: nil)
                             }

@@ -254,7 +254,7 @@ class User: NSObject {
         }
         
         if self == User.currentUser! {
-            for jam in Jam.currentUserJams { //PROBLEM IS HERE (need to get user specific jams)
+            for jam in Jam.currentUserJams {
                 for user in jam.users {
                     
                     if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
@@ -270,7 +270,6 @@ class User: NSObject {
                             }
                         }
                     }
-                    
                     
                     for friend in friendCount.keys {
                         if(friend.facebookID == user.facebookID) {
@@ -284,13 +283,13 @@ class User: NSObject {
             }
         } else {
             
-            Jam.downloadSpecificUserJams(self, success: {(jams: [Jam]) in
-                self.jams = jams
-                
-            }) 
+            if self.jams.count == 0 {
+                Jam.downloadSpecificUserJams(self, success: {(jams: [Jam]) in
+                    self.jams = jams
+                })
+            }
             
-            
-            for jam in self.jams { //PROBLEM IS HERE (need to get user specific jams)
+            for jam in self.jams {
                 for user in jam.users {
                     
                     if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
@@ -307,7 +306,6 @@ class User: NSObject {
                         }
                     }
                     
-                    
                     for friend in friendCount.keys {
                         if(friend.facebookID == user.facebookID) {
                             var curNum = friendCount[friend]
@@ -319,10 +317,6 @@ class User: NSObject {
                 }
             }
         }
-        
-
-        
-        
         
         // sort the dictionaries by number of occurrences, from highest to lowest
         topIDs = numUserOccurrences.keysSortedByValue(>)

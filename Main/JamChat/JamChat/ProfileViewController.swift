@@ -119,19 +119,6 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
                             self.friendsCollection.dataSource = self.userDelegate
                             self.friendsCollection.delegate = self.userDelegate
                             self.friendsCollection.reloadData()
-
-                            
-//                            for jam in Jam.currentUserJams {
-//                                for user in jam.users {
-//                                    for friend in self.user!.friendCount.keys {
-//                                        if(friend.facebookID == user.facebookID) {
-//                                            var curNum = self.user!.friendCount[friend]
-//                                            curNum = curNum! + 1
-//                                            self.user!.friendCount[friend] = curNum
-//                                        }
-//                                    }
-//                                }
-//                            }
                         }
                     }
                 }
@@ -151,12 +138,12 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
                     self.topFriends.removeAtIndex(self.topFriends.count-1)
                 }
             }
-            
-            // Set up friends collection view:
-            self.userDelegate = UserCollectionDelegate(users: self.topFriends, curUser: self.user!)
-            self.friendsCollection.dataSource = self.userDelegate
-            self.friendsCollection.delegate = self.userDelegate
-            self.friendsCollection.reloadData()
+//            
+//            // Set up friends collection view:
+//            self.userDelegate = UserCollectionDelegate(users: self.topFriends, curUser: self.user!)
+//            self.friendsCollection.dataSource = self.userDelegate
+//            self.friendsCollection.delegate = self.userDelegate
+//            self.friendsCollection.reloadData()
         }
         
 //        if user!.friends.count == 0 {
@@ -206,6 +193,15 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
+        
+        // Set up friends collection view:
+        self.userDelegate = UserCollectionDelegate(users: self.topFriends, curUser: self.user!)
+        self.friendsCollection.dataSource = self.userDelegate
+        self.friendsCollection.delegate = self.userDelegate
+        self.friendsCollection.reloadData()
+
+
+        
         setUpLabels()
     }
     
@@ -234,7 +230,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         instrumentCollection.reloadData()
 
 //        // Set up friends collection view:
-//        userDelegate = UserCollectionDelegate(users: topFriends)
+//        userDelegate = UserCollectionDelegate(users: topFriends, curUser: user!)
 //        friendsCollection.dataSource = userDelegate
 //        friendsCollection.delegate = userDelegate
 //        friendsCollection.reloadData()
