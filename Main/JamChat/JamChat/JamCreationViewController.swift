@@ -361,6 +361,18 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         self.selectedFriendIDs = []
         self.titleLabel.text = ""
         
+//        self.totaltime.text = ""
+//        
+//        slowLabel.textColor = UIColor.darkGrayColor()
+//        mediumLabel.textColor = UIColor.darkGrayColor()
+//        fastLabel.textColor = UIColor.darkGrayColor()
+//        
+//        slowLabel.font = UIFont.systemFontOfSize(13.0)
+//        mediumLabel.font = UIFont.systemFontOfSize(13.0)
+//        fastLabel.font = UIFont.systemFontOfSize(13.0)
+//        
+//        timer.invalidate()
+        
         // unselects previously selected friends from the table view
         let paths = self.tableView.indexPathsForSelectedRows ?? []
         for path in paths {
