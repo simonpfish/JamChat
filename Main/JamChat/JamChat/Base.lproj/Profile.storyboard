@@ -116,7 +116,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MnN-Cc-IF1" userLabel="toProfile Button">
-                                                    <rect key="frame" x="9" y="49" width="46" height="15"/>
+                                                    <rect key="frame" x="9" y="47.5" width="46" height="18"/>
                                                     <connections>
                                                         <action selector="toProfileView:" destination="5GY-cD-RrX" eventType="touchUpInside" id="ATe-hj-zHp"/>
                                                     </connections>
