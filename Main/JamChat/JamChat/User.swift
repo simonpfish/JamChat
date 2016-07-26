@@ -286,6 +286,9 @@ class User: NSObject {
             if self.jams.count == 0 {
                 Jam.downloadSpecificUserJams(self, success: {(jams: [Jam]) in
                     self.jams = jams
+                    
+                    //completion()
+                    
                 })
             }
             
