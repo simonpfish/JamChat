@@ -110,6 +110,12 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzN-ND-u34" userLabel="toProfile Button">
+                                                    <rect key="frame" x="7" y="53" width="46" height="14"/>
+                                                    <connections>
+                                                        <action selector="toProfileView:" destination="5gB-Vd-X60" eventType="touchUpInside" id="048-Eb-hQJ"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>

@@ -25,13 +25,19 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var totaltime: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     var resultSearchController = UISearchController()
-    @IBOutlet weak var sliderView1: UIView!
+    
+    @IBOutlet weak var durationSliderView: UIView!
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var slowTempoView: BAPulseView!
     @IBOutlet weak var mediumTempoView: BAPulseView!
     @IBOutlet weak var fastTempoView: BAPulseView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var createButton: UIButton!
+    
+    @IBOutlet weak var slowLabel: UILabel!
+    @IBOutlet weak var mediumLabel: UILabel!
+    @IBOutlet weak var fastLabel: UILabel!
+    
     
     var titleGenerator: [String] = []
     
@@ -42,7 +48,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     private var messageDurationSlider: IntervalSlider! {
         didSet {
             self.messageDurationSlider.tag = 1
-            self.sliderView1.addSubview(self.messageDurationSlider)
+            self.durationSliderView.addSubview(self.messageDurationSlider)
             self.messageDurationSlider.delegate = self
         }
     }
@@ -77,7 +83,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         // set up interval slider
         let result = self.createSources()
-        self.messageDurationSlider = IntervalSlider(frame: self.sliderView1.bounds, sources: result.sources, options: result.options)
+        self.messageDurationSlider = IntervalSlider(frame: self.durationSliderView.bounds, sources: result.sources, options: result.options)
         
         //sets up tempo buttons
         setTempoButtons()
@@ -96,7 +102,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     //updates jam time label
     func updateJamTime(){
         let duration = Int(60.0/Double(tempo)*4.0*Double(messageDurationSlider.getValue()))
-        totaltime.text = "\(duration)"
+        totaltime.text = "\(duration) seconds"
     }
     
     func setTempoButtons (){
@@ -123,6 +129,17 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/80, target: slowTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 80
+        
+        // modify tempo labels when selected
+        slowLabel.textColor = selectedColor
+        mediumLabel.textColor = UIColor.darkGrayColor()
+        fastLabel.textColor = UIColor.darkGrayColor()
+        
+        slowLabel.font = UIFont.boldSystemFontOfSize(13.0)
+        mediumLabel.font = UIFont.systemFontOfSize(13.0)
+        fastLabel.font = UIFont.systemFontOfSize(13.0)
+
+        
         updateJamTime()
     }
     
@@ -130,6 +147,17 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/110, target: mediumTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 110
+        
+        // modify tempo labels when selected
+        slowLabel.textColor = UIColor.darkGrayColor()
+        mediumLabel.textColor = selectedColor
+        fastLabel.textColor = UIColor.darkGrayColor()
+        
+        slowLabel.font = UIFont.systemFontOfSize(13.0)
+        mediumLabel.font = UIFont.boldSystemFontOfSize(13.0)
+        fastLabel.font = UIFont.systemFontOfSize(13.0)
+
+        
         updateJamTime()
     }
     
@@ -137,6 +165,16 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/140, target: fastTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 140
+        
+        // modify tempo labels when selected
+        slowLabel.textColor = UIColor.darkGrayColor()
+        mediumLabel.textColor = UIColor.darkGrayColor()
+        fastLabel.textColor = selectedColor
+        
+        slowLabel.font = UIFont.systemFontOfSize(13.0)
+        mediumLabel.font = UIFont.systemFontOfSize(13.0)
+        fastLabel.font = UIFont.boldSystemFontOfSize(13.0)
+        
         updateJamTime()
     }
     
@@ -322,6 +360,18 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         home.addNewJam(Double(totaltime.text!)!, userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
         self.selectedFriendIDs = []
         self.titleLabel.text = ""
+        
+//        self.totaltime.text = ""
+//        
+//        slowLabel.textColor = UIColor.darkGrayColor()
+//        mediumLabel.textColor = UIColor.darkGrayColor()
+//        fastLabel.textColor = UIColor.darkGrayColor()
+//        
+//        slowLabel.font = UIFont.systemFontOfSize(13.0)
+//        mediumLabel.font = UIFont.systemFontOfSize(13.0)
+//        fastLabel.font = UIFont.systemFontOfSize(13.0)
+//        
+//        timer.invalidate()
         
         // unselects previously selected friends from the table view
         let paths = self.tableView.indexPathsForSelectedRows ?? []

@@ -89,8 +89,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="64" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lou-uY-fR0">
-                                                    <rect key="frame" x="8" y="49" width="49" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lou-uY-fR0">
+                                                    <rect key="frame" x="17" y="49" width="31" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="0FY-Eg-EPW"/>
                                                     </constraints>
@@ -115,11 +115,18 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MnN-Cc-IF1" userLabel="toProfile Button">
+                                                    <rect key="frame" x="9" y="47.5" width="46" height="18"/>
+                                                    <connections>
+                                                        <action selector="toProfileView:" destination="5GY-cD-RrX" eventType="touchUpInside" id="ATe-hj-zHp"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Lou-uY-fR0" secondAttribute="bottom" id="BBA-KD-avv"/>
+                                            <constraint firstItem="Lou-uY-fR0" firstAttribute="centerX" secondItem="5GY-cD-RrX" secondAttribute="centerX" id="H4t-3L-HS6"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="countButton" destination="lJt-U1-ikm" id="67J-Yx-txN"/>
@@ -199,6 +206,16 @@
                                     <action selector="onLogout:" destination="jRB-x8-kvV" eventType="touchUpInside" id="nCE-tH-ChB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lf3-ED-ZDb">
+                                <rect key="frame" x="0.0" y="22" width="46" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onDismissProfile:" destination="jRB-x8-kvV" eventType="touchUpInside" id="Hzp-5s-NPM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -233,6 +250,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="dismissProfileButton" destination="Lf3-ED-ZDb" id="OOx-eG-8JL"/>
                         <outlet property="friendsCollection" destination="Wbc-9I-DoN" id="p6D-Kg-173"/>
                         <outlet property="instrumentCollection" destination="tAy-xa-9ap" id="ajf-cC-tO5"/>
                         <outlet property="logoutButton" destination="75s-fI-Opk" id="C3v-CG-LcE"/>
@@ -244,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H10-ED-XUo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="628.5" y="-125.5"/>
+            <point key="canvasLocation" x="499.5" y="-106.5"/>
         </scene>
     </scenes>
 </document>
