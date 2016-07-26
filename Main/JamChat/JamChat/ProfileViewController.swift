@@ -105,20 +105,23 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
                                 self.user!.friendCount[friend] = 0
                             }
                             
-                            self.topFriends = (self.user?.getTopFriends())!
-                            
-                            // retrieves the user's top three friends
-                            if self.topFriends.count > 3 {
-                                while(self.topFriends.count > 3) {
-                                    self.topFriends.removeAtIndex(self.topFriends.count-1)
+                            self.user?.getTopFriends({ (users: [User]) in
+                                self.topFriends = users
+                                
+                                // retrieves the user's top three friends
+                                if self.topFriends.count > 3 {
+                                    while(self.topFriends.count > 3) {
+                                        self.topFriends.removeAtIndex(self.topFriends.count-1)
+                                    }
                                 }
-                            }
-                            
-                            // Set up friends collection view:
-                            self.userDelegate = UserCollectionDelegate(users: self.topFriends, curUser: self.user!)
-                            self.friendsCollection.dataSource = self.userDelegate
-                            self.friendsCollection.delegate = self.userDelegate
-                            self.friendsCollection.reloadData()
+                                
+                                // Set up friends collection view:
+                                self.userDelegate = UserCollectionDelegate(users: self.topFriends, curUser: self.user!)
+                                self.friendsCollection.dataSource = self.userDelegate
+                                self.friendsCollection.delegate = self.userDelegate
+                                self.friendsCollection.reloadData()
+                            })
+
                         }
                     }
                 }
@@ -130,20 +133,23 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
                 self.user!.friendCount[friend] = 0
             }
             
-            self.topFriends = (self.user?.getTopFriends())!
-            
-            // retrieves the user's top three friends
-            if self.topFriends.count > 3 {
-                while(self.topFriends.count > 3) {
-                    self.topFriends.removeAtIndex(self.topFriends.count-1)
+            self.user?.getTopFriends({ (users: [User]) in
+                self.topFriends = users
+                
+                // retrieves the user's top three friends
+                if self.topFriends.count > 3 {
+                    while(self.topFriends.count > 3) {
+                        self.topFriends.removeAtIndex(self.topFriends.count-1)
+                    }
                 }
-            }
-            
-            // Set up friends collection view:
-            self.userDelegate = UserCollectionDelegate(users: self.topFriends, curUser: self.user!)
-            self.friendsCollection.dataSource = self.userDelegate
-            self.friendsCollection.delegate = self.userDelegate
-            self.friendsCollection.reloadData()
+                
+                // Set up friends collection view:
+                self.userDelegate = UserCollectionDelegate(users: self.topFriends, curUser: self.user!)
+                self.friendsCollection.dataSource = self.userDelegate
+                self.friendsCollection.delegate = self.userDelegate
+                self.friendsCollection.reloadData()
+            })
+
         }
         
         
@@ -198,12 +204,6 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         instrumentCollection.dataSource = instrumentDelegate
         instrumentCollection.delegate = instrumentDelegate
         instrumentCollection.reloadData()
-
-//        // Set up friends collection view:
-//        userDelegate = UserCollectionDelegate(users: topFriends, curUser: user!)
-//        friendsCollection.dataSource = userDelegate
-//        friendsCollection.delegate = userDelegate
-//        friendsCollection.reloadData()
 
     }
     
