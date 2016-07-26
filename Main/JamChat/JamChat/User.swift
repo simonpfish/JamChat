@@ -334,6 +334,43 @@ class User: NSObject {
                     completion(users: arrayUsers)
                     
                 })
+            } else {
+                for jam in self.jams {
+                    for user in jam.users {
+                        
+                        if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
+                            if(user.facebookID != self.facebookID) {
+                                if (!numUserOccurrences.keys.contains(user.facebookID)) {
+                                    numUserOccurrences[user.facebookID] = 1
+                                    numUserObjOccurrences[user] = 1
+                                } else {
+                                    var curNum = numUserOccurrences[user.facebookID]
+                                    curNum = curNum! + 1 // update the number of occurrences
+                                    numUserOccurrences[user.facebookID] = curNum
+                                    numUserObjOccurrences[user] = curNum
+                                }
+                            }
+                        }
+                        
+                        for friend in self.friendCount.keys {
+                            if(friend.facebookID == user.facebookID) {
+                                var curNum = self.friendCount[friend]
+                                curNum = curNum! + 1
+                                self.friendCount[friend] = curNum
+                            }
+                        }
+                        
+                    }
+                }
+                
+                // sort the dictionaries by number of occurrences, from highest to lowest
+                topIDs = numUserOccurrences.keysSortedByValue(>)
+                topFriends = numUserObjOccurrences.keysSortedByValue(>)
+                
+                let arrayUsers = self.getUserFromID(topFriends, arrayOfIDs: topIDs)
+                
+                completion(users: arrayUsers)
+
             }
             
         }
