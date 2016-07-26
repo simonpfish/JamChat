@@ -17,6 +17,8 @@ class UserCell: UICollectionViewCell {
     @IBOutlet weak var countButton: UIButton!
     @IBOutlet weak var countLabel: UILabel!
 
+    var curUser: User!
+    
     var user: User! {
         didSet {
             if let nameLabel = nameLabel {
@@ -45,52 +47,54 @@ class UserCell: UICollectionViewCell {
                 }
             }
         }
-        
     }
     
     var numberIsDisplayed = false
     
     @IBAction func onUserTap(sender: AnyObject) {
         
-        var friendsNames: [User] = []
-        friendsNames = (user.getTopFriends())
+        var num = 0
         
-        //retrieve the names of the top three friends
-        if friendsNames.count > 3 {
-            while(friendsNames.count > 3) {
-                friendsNames.removeAtIndex(friendsNames.count-1)
-            }
-        }
-        
-        var topFriendsNum = user.getTopFriendNumbers()
-        topFriendsNum.sortInPlace()
-        var topThreeNums: [Int] = []
-        
-        //retrieves the number of jams from highest to lowest
-        if (topFriendsNum.count == 1) {
-            topThreeNums.append(topFriendsNum[0])
-        } else if (topFriendsNum.count == 2) {
-            topThreeNums.append(topFriendsNum[1])
-            topThreeNums.append(topFriendsNum[0])
+        // if the user's friends have not been counted, count them
+        if curUser.friends.count == 0 {
+            curUser.loadFriends({
+                var loadedCount = 0
+                for friend in self.curUser.friends {
+                    friend.loadData() {
+                        loadedCount += 1
+                        print("Loading friend number \(loadedCount) of \(self.curUser.friends.count)")
+                        if loadedCount == self.curUser.friends.count {
+                            
+                            var friendNum: [User : Int] = [:]
+                            friendNum = (self.curUser.friendCount)
+                            
+                            for curFriend in friendNum.keys {
+                                if curFriend.facebookID == self.user!.facebookID {
+                                    num = friendNum[curFriend]!
+                                }
+                            }
+                        }
+                    }
+                }
+            })
         } else {
-            //retrieves the top three highest numbers
-            for i in 1...3 {
-                topThreeNums.append(topFriendsNum[topFriendsNum.count-i])
+            
+            //if the user's friends have already been counted
+            
+            var friendNum: [User : Int] = [:]
+            friendNum = (curUser.friendCount)
+            
+            for curFriend in friendNum.keys {
+                if curFriend.facebookID == user!.facebookID {
+                    num = friendNum[curFriend]!
+                }
             }
         }
 
-        //maps the number to the friend
-        var index = 0
-        for curUser in friendsNames {
-            if curUser.name == self.user.name {
-                break;
-            }
-            index += 1
-        }
         
         self.countButton.backgroundColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
         self.countLabel.hidden = false
-        self.countLabel.text = String(topThreeNums[index])
+        self.countLabel.text = String(num)
         
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
 

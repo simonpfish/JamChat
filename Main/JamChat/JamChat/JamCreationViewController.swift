@@ -59,8 +59,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         // format create button
         createButton.layer.cornerRadius = 7
         createButton.backgroundColor = UIColor.clearColor()
@@ -108,6 +106,14 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
                     }
                 }
             })
+        } else {
+            
+            // if the friends have already been downloaded
+            
+            for friend in User.currentUser!.friends {
+                self.filtered.append(friend)
+            }
+            self.tableView.reloadData()
         }
         
         //adds tap to dismiss keyboard
