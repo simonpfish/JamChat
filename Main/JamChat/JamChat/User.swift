@@ -33,6 +33,8 @@ class User: NSObject {
     
     var tracks: [Track] = []
     
+    var jams: [Jam] = []
+    
     var instrumentCount: [Instrument : Int] = [Instrument.acousticBass:0, Instrument.choir:0, Instrument.electricBass:0, Instrument.electricGuitar:0, Instrument.piano:0, Instrument.saxophone:0]
     
     var friendCount: [User: Int] = [:]
@@ -251,34 +253,76 @@ class User: NSObject {
             friendIDs.append(friend.facebookID)
         }
         
-        for jam in Jam.currentUserJams {
-            for user in jam.users {
-                
-                if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
-                    if(user.facebookID != self.facebookID) {
-                        if (!numUserOccurrences.keys.contains(user.facebookID)) {
-                            numUserOccurrences[user.facebookID] = 1
-                            numUserObjOccurrences[user] = 1
-                        } else {
-                            var curNum = numUserOccurrences[user.facebookID]
-                            curNum = curNum! + 1 // update the number of occurrences
-                            numUserOccurrences[user.facebookID] = curNum
-                            numUserObjOccurrences[user] = curNum
+        if self == User.currentUser! {
+            for jam in Jam.currentUserJams { //PROBLEM IS HERE (need to get user specific jams)
+                for user in jam.users {
+                    
+                    if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
+                        if(user.facebookID != self.facebookID) {
+                            if (!numUserOccurrences.keys.contains(user.facebookID)) {
+                                numUserOccurrences[user.facebookID] = 1
+                                numUserObjOccurrences[user] = 1
+                            } else {
+                                var curNum = numUserOccurrences[user.facebookID]
+                                curNum = curNum! + 1 // update the number of occurrences
+                                numUserOccurrences[user.facebookID] = curNum
+                                numUserObjOccurrences[user] = curNum
+                            }
                         }
                     }
-                }
-                
-                
-                for friend in friendCount.keys {
-                    if(friend.facebookID == user.facebookID) {
-                        var curNum = friendCount[friend]
-                        curNum = curNum! + 1
-                        friendCount[friend] = curNum
+                    
+                    
+                    for friend in friendCount.keys {
+                        if(friend.facebookID == user.facebookID) {
+                            var curNum = friendCount[friend]
+                            curNum = curNum! + 1
+                            friendCount[friend] = curNum
+                        }
                     }
+                    
                 }
+            }
+        } else {
+            
+            Jam.downloadSpecificUserJams(self, success: {(jams: [Jam]) in
+                self.jams = jams
                 
+            }) 
+            
+            
+            for jam in self.jams { //PROBLEM IS HERE (need to get user specific jams)
+                for user in jam.users {
+                    
+                    if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
+                        if(user.facebookID != self.facebookID) {
+                            if (!numUserOccurrences.keys.contains(user.facebookID)) {
+                                numUserOccurrences[user.facebookID] = 1
+                                numUserObjOccurrences[user] = 1
+                            } else {
+                                var curNum = numUserOccurrences[user.facebookID]
+                                curNum = curNum! + 1 // update the number of occurrences
+                                numUserOccurrences[user.facebookID] = curNum
+                                numUserObjOccurrences[user] = curNum
+                            }
+                        }
+                    }
+                    
+                    
+                    for friend in friendCount.keys {
+                        if(friend.facebookID == user.facebookID) {
+                            var curNum = friendCount[friend]
+                            curNum = curNum! + 1
+                            friendCount[friend] = curNum
+                        }
+                    }
+                    
+                }
             }
         }
+        
+
+        
+        
         
         // sort the dictionaries by number of occurrences, from highest to lowest
         topIDs = numUserOccurrences.keysSortedByValue(>)
