@@ -96,6 +96,7 @@ import PubNub
                         loadedCount += 1
                         print("Loading friend number \(loadedCount) of \(User.currentUser!.friends.count)")
                         if loadedCount == User.currentUser?.friends.count {
+                            //for friend
                         }
                     }
                 }

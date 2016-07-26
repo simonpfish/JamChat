@@ -84,45 +84,14 @@ class Instrument: NSObject {
      */
     func instrumentCount(instrument: Instrument, user: User) -> Int {
         
+        var instrumentNum: [Instrument : Int] = [:]
+        instrumentNum = (user.instrumentCount)
+        
         var num = 0
         
-        if user.tracks.count == 0 {
-            user.getUserTracks(){
-                print("Loading user tracks")
-                
-                for track in user.tracks {
-                    for instrument in user.instrumentCount.keys {
-                        if let instrumentname = track.instrumentName {
-                            if(instrument.name == instrumentname) {
-                                var curNum = user.instrumentCount[instrument]
-                                curNum = curNum! + 1
-                                user.instrumentCount[instrument] = curNum
-                            }
-                        }
-                    }
-                }
-                
-                var instrumentNum: [Instrument : Int] = [:]
-                instrumentNum = (user.instrumentCount)
-                
-                num = 0
-                
-                for curInstrument in instrumentNum.keys {
-                    if curInstrument.name == instrument.name {
-                        num = instrumentNum[curInstrument]!
-                    }
-                }
-            }
-        } else {
-            var instrumentNum: [Instrument : Int] = [:]
-            instrumentNum = (user.instrumentCount)
-            
-            num = 0
-            
-            for curInstrument in instrumentNum.keys {
-                if curInstrument.name == instrument.name {
-                    num = instrumentNum[curInstrument]!
-                }
+        for curInstrument in instrumentNum.keys {
+            if curInstrument.name == instrument.name {
+                num = instrumentNum[curInstrument]!
             }
         }
         

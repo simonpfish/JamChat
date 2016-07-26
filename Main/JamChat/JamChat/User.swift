@@ -214,9 +214,24 @@ class User: NSObject {
                 let query = PFQuery(className: "Track")
                 query.whereKey("author", containsString: self.parseUser.objectId)
                 query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
+                    var loadedCount = 0;
                     for object in objects! {
                         let track = Track(object: object)
                         self.tracks.append(track)
+                        loadedCount += 1
+                        if loadedCount == numTracks {
+                            for track in self.tracks {
+                                for instrument in self.instrumentCount.keys {
+                                    if let instrumentname = track.instrumentName {
+                                        if(instrument.name == instrumentname) {
+                                            var curNum = self.instrumentCount[instrument]
+                                            curNum = curNum! + 1
+                                            self.instrumentCount[instrument] = curNum
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

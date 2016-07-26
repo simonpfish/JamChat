@@ -44,7 +44,16 @@ class InstrumentCell: UICollectionViewCell {
     
     @IBAction func onInstrumentTap(sender: AnyObject) {
         
-        let num = instrument.instrumentCount(instrument, user: user)
+        var instrumentNum: [Instrument : Int] = [:]
+        instrumentNum = (user.instrumentCount)
+        
+        var num = 0
+        
+        for curInstrument in instrumentNum.keys {
+            if curInstrument.name == instrument.name {
+                num = instrumentNum[curInstrument]!
+            }
+        }
         
         self.countButton.backgroundColor = instrument.color
         self.countLabel.hidden = false
