@@ -54,53 +54,58 @@ class UserCell: UICollectionViewCell {
     
     @IBAction func onUserTap(sender: AnyObject) {
         
-        var friendNum: [User : Int] = [:]
-        friendNum = (curUser.friendCount)
-        
         var num = 0
         
-        for curFriend in friendNum.keys {
-            if curFriend.facebookID == user!.facebookID {
-                num = friendNum[curFriend]!
+        if curUser.friends.count == 0 {
+            curUser.loadFriends({
+                var loadedCount = 0
+                for friend in self.curUser.friends {
+                    friend.loadData() {
+                        loadedCount += 1
+                        print("Loading friend number \(loadedCount) of \(self.curUser.friends.count)")
+                        if loadedCount == self.curUser.friends.count {
+                            
+                            
+                            var friendNum: [User : Int] = [:]
+                            friendNum = (self.curUser.friendCount)
+                            
+                            
+                            for curFriend in friendNum.keys {
+                                if curFriend.facebookID == self.user!.facebookID {
+                                    num = friendNum[curFriend]!
+                                }
+                            }
+                            
+                            
+                        }
+                    }
+                }
+            })
+        } else {
+            
+            var friendNum: [User : Int] = [:]
+            friendNum = (curUser.friendCount)
+            
+            
+            for curFriend in friendNum.keys {
+                if curFriend.facebookID == user!.facebookID {
+                    num = friendNum[curFriend]!
+                }
             }
         }
-        
-        
-//        var friendsNames: [User] = []
-//        friendsNames = (user.getTopFriends())
+
 //        
-//        //retrieve the names of the top three friends
-//        if friendsNames.count > 3 {
-//            while(friendsNames.count > 3) {
-//                friendsNames.removeAtIndex(friendsNames.count-1)
+//        var friendNum: [User : Int] = [:]
+//        friendNum = (curUser.friendCount)
+//        
+//        var num = 0
+//        
+//        for curFriend in friendNum.keys {
+//            if curFriend.facebookID == user!.facebookID {
+//                num = friendNum[curFriend]!
 //            }
 //        }
-//        
-//        var topFriendsNum = user.getTopFriendNumbers()
-//        topFriendsNum.sortInPlace()
-//        var topThreeNums: [Int] = []
-//        
-//        //retrieves the number of jams from highest to lowest
-//        if (topFriendsNum.count == 1) {
-//            topThreeNums.append(topFriendsNum[0])
-//        } else if (topFriendsNum.count == 2) {
-//            topThreeNums.append(topFriendsNum[1])
-//            topThreeNums.append(topFriendsNum[0])
-//        } else {
-//            //retrieves the top three highest numbers
-//            for i in 1...3 {
-//                topThreeNums.append(topFriendsNum[topFriendsNum.count-i])
-//            }
-//        }
-//
-//        //maps the number to the friend
-//        var index = 0
-//        for curUser in friendsNames {
-//            if curUser.name == self.user.name {
-//                break;
-//            }
-//            index += 1
-//        }
+
         
         self.countButton.backgroundColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
         self.countLabel.hidden = false
@@ -139,6 +144,12 @@ class UserCell: UICollectionViewCell {
                             loadedCount += 1
                             print("Loading friend number \(loadedCount) of \(self.user.friends.count)")
                             if loadedCount == self.user.friends.count {
+                                
+//                                for friend in self.user!.friends {
+//                                    self.user!.friendCount[friend] = 0
+//                                }
+                                
+                                
                                 
                                 // display the user's profile after the user's friends have been loaded
                                 PagerViewController.sharedInstance?.presentViewController(profileViewController, animated: true, completion: nil)

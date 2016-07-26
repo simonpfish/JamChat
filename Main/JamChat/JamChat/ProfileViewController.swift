@@ -138,6 +138,27 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             })
         }
         
+        if user!.friends.count != 0 {
+            for friend in self.user!.friends {
+                self.user!.friendCount[friend] = 0
+            }
+            
+            self.topFriends = (self.user?.getTopFriends())!
+            
+            // retrieves the user's top three friends
+            if self.topFriends.count > 3 {
+                while(self.topFriends.count > 3) {
+                    self.topFriends.removeAtIndex(self.topFriends.count-1)
+                }
+            }
+            
+            // Set up friends collection view:
+            self.userDelegate = UserCollectionDelegate(users: self.topFriends, curUser: self.user!)
+            self.friendsCollection.dataSource = self.userDelegate
+            self.friendsCollection.delegate = self.userDelegate
+            self.friendsCollection.reloadData()
+        }
+        
 //        if user!.friends.count == 0 {
 //            user!.loadFriends({
 //                var loadedCount = 0

@@ -268,26 +268,15 @@ class User: NSObject {
                     }
                 }
                 
-//                for friend in friends {
-//                    friendCount[friend] = 0
-//                }
                 
-                //for jam in Jam.currentUserJams {
-                    //for user in jam.users {
-                        
-//                        for friend in friends {
-//                            friendCount[friend] = 0
-//                        }
-                        
-                        for friend in friendCount.keys {
-                            if(friend.facebookID == user.facebookID) {
-                                var curNum = friendCount[friend]
-                                curNum = curNum! + 1
-                                friendCount[friend] = curNum
-                            }
-                        }
-                    //}
-                //}
+                for friend in friendCount.keys {
+                    if(friend.facebookID == user.facebookID) {
+                        var curNum = friendCount[friend]
+                        curNum = curNum! + 1
+                        friendCount[friend] = curNum
+                    }
+                }
+                
             }
         }
         
