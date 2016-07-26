@@ -63,6 +63,31 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             }
         }
         
+        // need to add loaded count!nhgkdfngtinvvfjndcvktgtuugffkivj
+        
+        if user!.tracks.count == 0 {
+            user!.getUserTracks(){
+                for track in self.user!.tracks {
+                    for instrument in self.user!.instrumentCount.keys {
+                        if let instrumentname = track.instrumentName {
+                            if(instrument.name == instrumentname) {
+                                var curNum = self.user!.instrumentCount[instrument]
+                                curNum = curNum! + 1
+                                self.user!.instrumentCount[instrument] = curNum
+                            }
+                        }
+                    }
+                }
+                
+                self.instrumentDic = (self.user?.instrumentCount)!
+                
+                for instrument in self.instrumentDic.keys {
+                    self.instrumentNames.append(instrument)
+                }
+            }
+        }
+
+        
         instrumentDic = (user?.instrumentCount)!
         
         for instrument in instrumentDic.keys {
@@ -82,7 +107,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         friendsCollection.collectionViewLayout = friendsLayout
         
         // Set up instrument collection view:
-        instrumentDelegate = InstrumentCollectionDelegate(instruments: instrumentNames, user: (user)!)
+        instrumentDelegate = InstrumentCollectionDelegate(instruments: instrumentNames, user: user!)
         instrumentCollection.dataSource = instrumentDelegate
         instrumentCollection.delegate = instrumentDelegate
         instrumentCollection.reloadData()
@@ -135,13 +160,16 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         
         // Goes through the user's tracks, and updates the instrumentCount array
         // The instrumentCount array is used to determine a user's "Favorite Instruments"
-        for track in user!.tracks {
-            for instrument in user!.instrumentCount.keys {
-                if let instrumentname = track.instrumentName {
-                    if(instrument.name == instrumentname) {
-                        var curNum = user!.instrumentCount[instrument]
-                        curNum = curNum! + 1
-                        user!.instrumentCount[instrument] = curNum
+        
+        if user! == ((User.currentUser)!) {
+            for track in user!.tracks {
+                for instrument in user!.instrumentCount.keys {
+                    if let instrumentname = track.instrumentName {
+                        if(instrument.name == instrumentname) {
+                            var curNum = user!.instrumentCount[instrument]
+                            curNum = curNum! + 1
+                            user!.instrumentCount[instrument] = curNum
+                        }
                     }
                 }
             }

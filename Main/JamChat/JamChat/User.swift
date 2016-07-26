@@ -206,7 +206,7 @@ class User: NSObject {
      */
     func getUserTracks(completion: () -> ()) {
         
-        User.currentUser!.getNumberOfTracks({ (count: Int) in
+        self.getNumberOfTracks({ (count: Int) in
             let numTracks = count
             
             // if the user has not created any tracks, do not create a query

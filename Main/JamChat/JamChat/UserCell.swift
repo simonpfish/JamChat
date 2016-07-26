@@ -110,12 +110,12 @@ class UserCell: UICollectionViewCell {
     @IBAction func toProfileView(sender: AnyObject) {
         print("clicked user's name")
         
-        
         let profileStoryboard = UIStoryboard(name: "Profile", bundle: NSBundle.mainBundle())
         let profileViewController = profileStoryboard.instantiateViewControllerWithIdentifier("ProfileView") as! ProfileViewController
         
         profileViewController.user = self.user
         
+        // load the user's friends if they have not already been loaded
         if user != nil {
             if user.friends.count == 0 {
                 user.loadFriends({
@@ -126,6 +126,7 @@ class UserCell: UICollectionViewCell {
                             print("Loading friend number \(loadedCount) of \(self.user.friends.count)")
                             if loadedCount == self.user.friends.count {
                                 
+                                // display the user's profile after the user's friends have been loaded
                                 PagerViewController.sharedInstance?.presentViewController(profileViewController, animated: true, completion: nil)
                             }
                         }

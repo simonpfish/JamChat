@@ -25,6 +25,7 @@ class InstrumentCollectionDelegate: NSObject, UICollectionViewDelegate, UICollec
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("InstrumentCell", forIndexPath: indexPath) as! InstrumentCell
         cell.instrument = instruments[indexPath.row]
+        cell.user = user
         return cell
     }
         
