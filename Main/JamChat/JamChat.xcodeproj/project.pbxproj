@@ -12,6 +12,9 @@
 		213089B31D415AB00030D099 /* InstrumentCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */; };
 		219AEAA41D403E39008DC61B /* jamNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 219AEAA31D403E39008DC61B /* jamNames.txt */; };
 		21ECC9ED1D41D47800E4E695 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ECC9EC1D41D47800E4E695 /* FriendCell.swift */; };
+		8C0EC4C81D46D9C200092B88 /* 80BPM.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C0EC4C71D46D9C200092B88 /* 80BPM.wav */; };
+		8C0EC4CA1D46E16D00092B88 /* 110BPM.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C0EC4C91D46E16D00092B88 /* 110BPM.wav */; };
+		8C0EC4CC1D46E33000092B88 /* 140BPM.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C0EC4CB1D46E33000092B88 /* 140BPM.wav */; };
 		8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20F5F11D38F37800622892 /* SelectionView.swift */; };
 		8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D0FEB1D3D602C00380680 /* Instrument.swift */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
@@ -77,6 +80,9 @@
 		219AEAA31D403E39008DC61B /* jamNames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jamNames.txt; sourceTree = "<group>"; };
 		21ECC9EC1D41D47800E4E695 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		7F275E1B8FE709C2BCDCFD4D /* Pods-JamChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.debug.xcconfig"; sourceTree = "<group>"; };
+		8C0EC4C71D46D9C200092B88 /* 80BPM.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 80BPM.wav; sourceTree = "<group>"; };
+		8C0EC4C91D46E16D00092B88 /* 110BPM.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 110BPM.wav; sourceTree = "<group>"; };
+		8C0EC4CB1D46E33000092B88 /* 140BPM.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 140BPM.wav; sourceTree = "<group>"; };
 		8C20F5F11D38F37800622892 /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		8C9D0FEB1D3D602C00380680 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		E717EC151D2ED34500AC812B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -274,6 +280,9 @@
 		E7FE0FF51D359CB000452361 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C0EC4C71D46D9C200092B88 /* 80BPM.wav */,
+				8C0EC4C91D46E16D00092B88 /* 110BPM.wav */,
+				8C0EC4CB1D46E33000092B88 /* 140BPM.wav */,
 				E723F2C91D40116100CF1C29 /* AcousticBassC.wav */,
 				E723F2BF1D40115700CF1C29 /* ChoirC.wav */,
 				E723F2C01D40115700CF1C29 /* ElectricBassC.wav */,
@@ -355,6 +364,7 @@
 			files = (
 				E723F2BD1D400B8300CF1C29 /* Vintage Strat.exs in Resources */,
 				E723F2C71D40115700CF1C29 /* RockGuitarC.wav in Resources */,
+				8C0EC4CC1D46E33000092B88 /* 140BPM.wav in Resources */,
 				E756A87E1D2D7E74007C0590 /* LaunchScreen.storyboard in Resources */,
 				E723F2C51D40115700CF1C29 /* ElectricBassC.wav in Resources */,
 				E7F0BB491D3D67B80059160B /* JamCreation.storyboard in Resources */,
@@ -365,7 +375,9 @@
 				E723F3081D4292AB00CF1C29 /* AudioKit.framework.dSYM in Resources */,
 				E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */,
 				E79AE2051D3D50F400899823 /* Profile.storyboard in Resources */,
+				8C0EC4C81D46D9C200092B88 /* 80BPM.wav in Resources */,
 				E7F0BB471D3D67110059160B /* Home.storyboard in Resources */,
+				8C0EC4CA1D46E16D00092B88 /* 110BPM.wav in Resources */,
 				E74F1E031D3C06B800A34409 /* Jam.storyboard in Resources */,
 				219AEAA41D403E39008DC61B /* jamNames.txt in Resources */,
 				E723F2C81D40115700CF1C29 /* SaxC.wav in Resources */,
