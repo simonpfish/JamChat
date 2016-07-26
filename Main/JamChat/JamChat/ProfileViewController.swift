@@ -91,6 +91,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             }
         }
         
+        // if the user's friends have not been counted, count them
         if user!.friends.count == 0 {
             user!.loadFriends({
                 var loadedCount = 0
@@ -128,6 +129,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             })
         }
         
+        // if the user's friends have already been counted
         if user!.friends.count != 0 {
             for friend in self.user!.friends {
                 self.user!.friendCount[friend] = 0

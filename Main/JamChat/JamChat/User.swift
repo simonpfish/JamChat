@@ -253,6 +253,7 @@ class User: NSObject {
             friendIDs.append(friend.facebookID)
         }
         
+        // if the user is the current user, no need to load the jams
         if self == User.currentUser! {
             for jam in Jam.currentUserJams {
                 for user in jam.users {
@@ -293,6 +294,7 @@ class User: NSObject {
             
         } else {
             
+            // if the user has not already loaded their jams, load them
             if self.jams.count == 0 {
                 Jam.downloadSpecificUserJams(self, success: {(jams: [Jam]) in
                     self.jams = jams
@@ -335,6 +337,8 @@ class User: NSObject {
                     
                 })
             } else {
+                
+                // if the user's jams are already loaded
                 for jam in self.jams {
                     for user in jam.users {
                         

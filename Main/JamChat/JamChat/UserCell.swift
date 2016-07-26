@@ -55,6 +55,7 @@ class UserCell: UICollectionViewCell {
         
         var num = 0
         
+        // if the user's friends have not been counted, count them
         if curUser.friends.count == 0 {
             curUser.loadFriends({
                 var loadedCount = 0
@@ -78,6 +79,8 @@ class UserCell: UICollectionViewCell {
             })
         } else {
             
+            //if the user's friends have already been counted
+            
             var friendNum: [User : Int] = [:]
             friendNum = (curUser.friendCount)
             
@@ -87,18 +90,6 @@ class UserCell: UICollectionViewCell {
                 }
             }
         }
-
-//        
-//        var friendNum: [User : Int] = [:]
-//        friendNum = (curUser.friendCount)
-//        
-//        var num = 0
-//        
-//        for curFriend in friendNum.keys {
-//            if curFriend.facebookID == user!.facebookID {
-//                num = friendNum[curFriend]!
-//            }
-//        }
 
         
         self.countButton.backgroundColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
