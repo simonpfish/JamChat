@@ -69,7 +69,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let tap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onRecord(_:)))
         tap.delegate = self
         recordView.addGestureRecognizer(tap)
-
+    
         drawWaveforms()
     }
 
