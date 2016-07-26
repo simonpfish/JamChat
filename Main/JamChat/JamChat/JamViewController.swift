@@ -165,7 +165,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func onRecord(sender: UITapGestureRecognizer) {
         countdownLabel.text = "\(countdown)"
         countdownTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
-        //metronomeCount()
+        metronomeCount()
         recordView.popAndPulse()
     }
     
