@@ -28,11 +28,8 @@ class User: NSObject {
     var email: String?
     
     var friends: [User] = []
-        
     var users: [User] = []
-    
     var tracks: [Track] = []
-    
     var jams: [Jam] = []
     
     var instrumentCount: [Instrument : Int] = [Instrument.acousticBass:0, Instrument.choir:0, Instrument.electricBass:0, Instrument.electricGuitar:0, Instrument.piano:0, Instrument.saxophone:0]
@@ -208,7 +205,6 @@ class User: NSObject {
      Updates an array with the tracks the current user has created.
      */
     func getUserTracks(completion: () -> ()) {
-        
             
         // if the user has not created any tracks, do not create a query
         let query = PFQuery(className: "Track")
@@ -218,6 +214,7 @@ class User: NSObject {
             for object in objects ?? [] {
                 let track = Track(object: object)
                 self.tracks.append(track)
+                print("Loading track \(track)")
                 loadedCount += 1
                 if loadedCount == objects!.count {
                     
@@ -287,7 +284,6 @@ class User: NSObject {
             topIDs = numUserOccurrences.keysSortedByValue(>)
             topFriends = numUserObjOccurrences.keysSortedByValue(>)
             
-            
             let arrayUsers = getUserFromID(topFriends, arrayOfIDs: topIDs)
             
             completion(users: arrayUsers)
@@ -301,7 +297,6 @@ class User: NSObject {
                     
                     for jam in self.jams {
                         for user in jam.users {
-                            
                             if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
                                 if(user.facebookID != self.facebookID) {
                                     if (!numUserOccurrences.keys.contains(user.facebookID)) {

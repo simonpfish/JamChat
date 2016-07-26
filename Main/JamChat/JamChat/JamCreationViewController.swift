@@ -108,6 +108,14 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
                     }
                 }
             })
+        } else {
+            
+            // if the friends have already been downloaded
+            
+            for friend in User.currentUser!.friends {
+                self.filtered.append(friend)
+            }
+            self.tableView.reloadData()
         }
         
         //adds tap to dismiss keyboard
