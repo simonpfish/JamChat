@@ -89,6 +89,7 @@ import PubNub
         
         // download the current user's friends, if they haven't already been downloaded
         if User.currentUser!.friends.count == 0 {
+            print("loading friends")
             User.currentUser?.loadFriends({
                 var loadedCount = 0
                 for friend in User.currentUser!.friends {

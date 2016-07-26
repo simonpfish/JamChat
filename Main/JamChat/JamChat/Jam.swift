@@ -132,6 +132,9 @@ class Jam: NSObject {
         self.userIDs.append(User.currentUser!.facebookID)
         self.title = title
         self.tempo = tempo
+        
+        super.init()
+        PubNubHandler.notifyNewJam(self)
     }
     
     /**
