@@ -87,23 +87,6 @@ import PubNub
     
     func loadFeed() {
         
-        // download the current user's friends, if they haven't already been downloaded
-        if User.currentUser!.friends.count == 0 {
-            print("loading friends")
-            User.currentUser?.loadFriends({
-                var loadedCount = 0
-                for friend in User.currentUser!.friends {
-                    friend.loadData() {
-                        loadedCount += 1
-                        print("Loading friend number \(loadedCount) of \(User.currentUser!.friends.count)")
-                        if loadedCount == User.currentUser?.friends.count {
-                            //for friend
-                        }
-                    }
-                }
-            })
-        }
-        
         // download the tracks the user has created, if they haven't already been downloaded
         if User.currentUser?.tracks.count == 0 {
             User.currentUser?.getUserTracks(){

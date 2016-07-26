@@ -59,6 +59,8 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         // format create button
         createButton.layer.cornerRadius = 7
         createButton.backgroundColor = UIColor.clearColor()
@@ -86,11 +88,26 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         //sets up tempo buttons
         setTempoButtons()
         
-        totaltime.text = ""
-
-        // sets up the table view with the user's friends
-        for friend in User.currentUser!.friends {
-            self.filtered.append(friend)
+        // download the current user's friends, if they haven't already been downloaded
+        if User.currentUser!.friends.count == 0 {
+            print("loading friends")
+            User.currentUser?.loadFriends({
+                var loadedCount = 0
+                for friend in User.currentUser!.friends {
+                    friend.loadData() {
+                        loadedCount += 1
+                        print("Loading friend number \(loadedCount) of \(User.currentUser!.friends.count)")
+                        if loadedCount == User.currentUser?.friends.count {
+                            print("reloading table view")
+                            // sets up the table view with the user's friends
+                            for friend in User.currentUser!.friends {
+                                self.filtered.append(friend)
+                            }
+                            self.tableView.reloadData()
+                        }
+                    }
+                }
+            })
         }
         
         //adds tap to dismiss keyboard
@@ -99,7 +116,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         titleLabel.delegate = self
         titleLabel.returnKeyType = .Done
         
-        self.tableView.reloadData()
+        onMedium(nil)
     }
     
     //dismisses keyboard on "Done"
@@ -119,7 +136,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         totaltime.text = "\(duration)"
     }
     
-    func setTempoButtons (){
+    func setTempoButtons(){
         slowTempoView.layer.cornerRadius = slowTempoView.bounds.width * 0.5
         slowTempoView.clipsToBounds = true
         slowTempoView.backgroundColor = selectedColor
@@ -139,7 +156,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         fastTempoView.addGestureRecognizer(fastTap)
     }
     
-    func onSlow (sender: UITapGestureRecognizer){
+    func onSlow (sender: UITapGestureRecognizer?){
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/80, target: slowTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 80
@@ -157,7 +174,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         updateJamTime()
     }
     
-    func onMedium (sender: UITapGestureRecognizer){
+    func onMedium (sender: UITapGestureRecognizer?){
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/110, target: mediumTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 110
@@ -175,7 +192,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         updateJamTime()
     }
     
-    func onFast (sender: UITapGestureRecognizer){
+    func onFast (sender: UITapGestureRecognizer?){
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/140, target: fastTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 140
@@ -377,22 +394,22 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.totaltime.text = ""
         
-        slowLabel.textColor = UIColor.darkGrayColor()
+        slowLabel.textColor = selectedColor
         mediumLabel.textColor = UIColor.darkGrayColor()
         fastLabel.textColor = UIColor.darkGrayColor()
         
-        slowLabel.font = UIFont.systemFontOfSize(13.0)
+        slowLabel.font = UIFont.boldSystemFontOfSize(13.0)
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
-        
-        timer.invalidate()
-        
+                
         // unselects previously selected friends from the table view
         let paths = self.tableView.indexPathsForSelectedRows ?? []
         for path in paths {
             tableView.deselectRowAtIndexPath(path, animated: false)
             tableView.cellForRowAtIndexPath(path)?.accessoryType = UITableViewCellAccessoryType.None
         }
+        
+        onMedium(nil)
     }
 
     /*

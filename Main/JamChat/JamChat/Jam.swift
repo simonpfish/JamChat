@@ -132,9 +132,6 @@ class Jam: NSObject {
         self.userIDs.append(User.currentUser!.facebookID)
         self.title = title
         self.tempo = tempo
-        
-        super.init()
-        PubNubHandler.notifyNewJam(self)
     }
     
     /**
@@ -233,6 +230,9 @@ class Jam: NSObject {
         
         object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
             print("Finished pushing jam \(self.object.objectId ?? "NEW")")
+            if self.messages.count == 0 {
+                PubNubHandler.notifyNewJam(self)
+            }
             completion?(success, error)
         })
     }
