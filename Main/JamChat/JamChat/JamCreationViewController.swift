@@ -102,7 +102,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     //updates jam time label
     func updateJamTime(){
         let duration = Int(60.0/Double(tempo)*4.0*Double(messageDurationSlider.getValue()))
-        totaltime.text = "\(duration) seconds"
+        totaltime.text = "\(duration)"
     }
     
     func setTempoButtons (){
@@ -110,7 +110,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         slowTempoView.clipsToBounds = true
         slowTempoView.backgroundColor = selectedColor
         let slowTap = UITapGestureRecognizer(target: self, action: #selector(JamCreationViewController.onSlow(_:)))
-    slowTempoView.addGestureRecognizer(slowTap)
+        slowTempoView.addGestureRecognizer(slowTap)
         
         mediumTempoView.layer.cornerRadius = mediumTempoView.bounds.width * 0.5
         mediumTempoView.clipsToBounds = true
@@ -361,17 +361,17 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         self.selectedFriendIDs = []
         self.titleLabel.text = ""
         
-//        self.totaltime.text = ""
-//        
-//        slowLabel.textColor = UIColor.darkGrayColor()
-//        mediumLabel.textColor = UIColor.darkGrayColor()
-//        fastLabel.textColor = UIColor.darkGrayColor()
-//        
-//        slowLabel.font = UIFont.systemFontOfSize(13.0)
-//        mediumLabel.font = UIFont.systemFontOfSize(13.0)
-//        fastLabel.font = UIFont.systemFontOfSize(13.0)
-//        
-//        timer.invalidate()
+        self.totaltime.text = ""
+        
+        slowLabel.textColor = UIColor.darkGrayColor()
+        mediumLabel.textColor = UIColor.darkGrayColor()
+        fastLabel.textColor = UIColor.darkGrayColor()
+        
+        slowLabel.font = UIFont.systemFontOfSize(13.0)
+        mediumLabel.font = UIFont.systemFontOfSize(13.0)
+        fastLabel.font = UIFont.systemFontOfSize(13.0)
+        
+        timer.invalidate()
         
         // unselects previously selected friends from the table view
         let paths = self.tableView.indexPathsForSelectedRows ?? []
