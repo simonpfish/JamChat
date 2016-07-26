@@ -33,8 +33,9 @@ class User: NSObject {
     
     var tracks: [Track] = []
     
-    // should store and retrieve this
     var instrumentCount: [Instrument : Int] = [Instrument.acousticBass:0, Instrument.choir:0, Instrument.electricBass:0, Instrument.electricGuitar:0, Instrument.piano:0, Instrument.saxophone:0]
+    
+    var friendCount: [User: Int] = [:]
     
     /**
      Initializes user object based on a Parse User.
@@ -206,41 +207,33 @@ class User: NSObject {
      */
     func getUserTracks(completion: () -> ()) {
         
-        self.getNumberOfTracks({ (count: Int) in
-            let numTracks = count
             
-            // if the user has not created any tracks, do not create a query
-            if(numTracks != 0) {
-                let query = PFQuery(className: "Track")
-                query.whereKey("author", containsString: self.parseUser.objectId)
-                query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
-                    var loadedCount = 0;
-                    for object in objects! {
-                        let track = Track(object: object)
-                        self.tracks.append(track)
-                        loadedCount += 1
-                        if loadedCount == numTracks {
-                            
-                            // update the user's instrumentCount
-                            for track in self.tracks {
-                                for instrument in self.instrumentCount.keys {
-                                    if let instrumentname = track.instrumentName {
-                                        if(instrument.name == instrumentname) {
-                                            var curNum = self.instrumentCount[instrument]
-                                            curNum = curNum! + 1
-                                            self.instrumentCount[instrument] = curNum
-                                        }
-                                    }
+        // if the user has not created any tracks, do not create a query
+        let query = PFQuery(className: "Track")
+        query.whereKey("author", containsString: self.parseUser.objectId)
+        query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
+            var loadedCount = 0;
+            for object in objects ?? [] {
+                let track = Track(object: object)
+                self.tracks.append(track)
+                loadedCount += 1
+                if loadedCount == objects!.count {
+                    
+                    // update the user's instrumentCount
+                    for track in self.tracks {
+                        for instrument in self.instrumentCount.keys {
+                            if let instrumentname = track.instrumentName {
+                                if(instrument.name == instrumentname) {
+                                    var curNum = self.instrumentCount[instrument]
+                                    curNum = curNum! + 1
+                                    self.instrumentCount[instrument] = curNum
                                 }
                             }
                         }
                     }
                 }
             }
-
-        })
-        
-
+        }
     }
     
     /**
@@ -260,6 +253,7 @@ class User: NSObject {
         
         for jam in Jam.currentUserJams {
             for user in jam.users {
+                
                 if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
                     if(user.facebookID != self.facebookID) {
                         if (!numUserOccurrences.keys.contains(user.facebookID)) {
@@ -273,6 +267,27 @@ class User: NSObject {
                         }
                     }
                 }
+                
+//                for friend in friends {
+//                    friendCount[friend] = 0
+//                }
+                
+                //for jam in Jam.currentUserJams {
+                    //for user in jam.users {
+                        
+//                        for friend in friends {
+//                            friendCount[friend] = 0
+//                        }
+                        
+                        for friend in friendCount.keys {
+                            if(friend.facebookID == user.facebookID) {
+                                var curNum = friendCount[friend]
+                                curNum = curNum! + 1
+                                friendCount[friend] = curNum
+                            }
+                        }
+                    //}
+                //}
             }
         }
         

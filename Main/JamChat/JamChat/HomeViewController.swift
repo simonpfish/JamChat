@@ -88,27 +88,34 @@ import PubNub
     func loadFeed() {
         
         // download the current user's friends, if they haven't already been downloaded
-        if User.currentUser!.friends.count == 0 {
-            User.currentUser?.loadFriends({
-                var loadedCount = 0
-                for friend in User.currentUser!.friends {
-                    friend.loadData() {
-                        loadedCount += 1
-                        print("Loading friend number \(loadedCount) of \(User.currentUser!.friends.count)")
-                        if loadedCount == User.currentUser?.friends.count {
-                            //for friend
-                        }
-                    }
-                }
-            })
-        }
-        
-        // download the tracks the user has created, if they haven't already been downloaded
-        if User.currentUser?.tracks.count == 0 {
-            User.currentUser?.getUserTracks(){
-                print("Loading user tracks")
-            }
-        }
+//        if User.currentUser!.friends.count == 0 {
+//            User.currentUser?.loadFriends({
+//                var loadedCount = 0
+//                for friend in User.currentUser!.friends {
+//                    friend.loadData() {
+//                        loadedCount += 1
+//                        print("Loading friend number \(loadedCount) of \(User.currentUser!.friends.count)")
+//                        if loadedCount == User.currentUser?.friends.count {
+//                            for friend in (User.currentUser?.friends)! {
+//                                User.currentUser?.friendCount[friend] = 0
+//                            }
+//                            
+//                            for jam in Jam.currentUserJams {
+//                                for user in jam.users {
+//                                    for friend in (User.currentUser?.friendCount.keys)! {
+//                                        if(friend.facebookID == user.facebookID) {
+//                                            var curNum = User.currentUser?.friendCount[friend]
+//                                            curNum = curNum! + 1
+//                                            User.currentUser?.friendCount[friend] = curNum
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            })
+//        }
         
         Jam.downloadCurrentUserJams({ (jams: [Jam]) in
             self.jams = jams

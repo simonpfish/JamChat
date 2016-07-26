@@ -52,45 +52,57 @@ class UserCell: UICollectionViewCell {
     
     @IBAction func onUserTap(sender: AnyObject) {
         
-        var friendsNames: [User] = []
-        friendsNames = (user.getTopFriends())
+        var friendNum: [User : Int] = [:]
+        friendNum = (User.currentUser?.friendCount)!
         
-        //retrieve the names of the top three friends
-        if friendsNames.count > 3 {
-            while(friendsNames.count > 3) {
-                friendsNames.removeAtIndex(friendsNames.count-1)
+        var num = 0
+        
+        for curFriend in friendNum.keys {
+            if curFriend.facebookID == user!.facebookID {
+                num = friendNum[curFriend]!
             }
         }
         
-        var topFriendsNum = user.getTopFriendNumbers()
-        topFriendsNum.sortInPlace()
-        var topThreeNums: [Int] = []
         
-        //retrieves the number of jams from highest to lowest
-        if (topFriendsNum.count == 1) {
-            topThreeNums.append(topFriendsNum[0])
-        } else if (topFriendsNum.count == 2) {
-            topThreeNums.append(topFriendsNum[1])
-            topThreeNums.append(topFriendsNum[0])
-        } else {
-            //retrieves the top three highest numbers
-            for i in 1...3 {
-                topThreeNums.append(topFriendsNum[topFriendsNum.count-i])
-            }
-        }
-
-        //maps the number to the friend
-        var index = 0
-        for curUser in friendsNames {
-            if curUser.name == self.user.name {
-                break;
-            }
-            index += 1
-        }
+//        var friendsNames: [User] = []
+//        friendsNames = (user.getTopFriends())
+//        
+//        //retrieve the names of the top three friends
+//        if friendsNames.count > 3 {
+//            while(friendsNames.count > 3) {
+//                friendsNames.removeAtIndex(friendsNames.count-1)
+//            }
+//        }
+//        
+//        var topFriendsNum = user.getTopFriendNumbers()
+//        topFriendsNum.sortInPlace()
+//        var topThreeNums: [Int] = []
+//        
+//        //retrieves the number of jams from highest to lowest
+//        if (topFriendsNum.count == 1) {
+//            topThreeNums.append(topFriendsNum[0])
+//        } else if (topFriendsNum.count == 2) {
+//            topThreeNums.append(topFriendsNum[1])
+//            topThreeNums.append(topFriendsNum[0])
+//        } else {
+//            //retrieves the top three highest numbers
+//            for i in 1...3 {
+//                topThreeNums.append(topFriendsNum[topFriendsNum.count-i])
+//            }
+//        }
+//
+//        //maps the number to the friend
+//        var index = 0
+//        for curUser in friendsNames {
+//            if curUser.name == self.user.name {
+//                break;
+//            }
+//            index += 1
+//        }
         
         self.countButton.backgroundColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
         self.countLabel.hidden = false
-        self.countLabel.text = String(topThreeNums[index])
+        self.countLabel.text = String(num)
         
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
 
