@@ -220,6 +220,8 @@ class User: NSObject {
                         self.tracks.append(track)
                         loadedCount += 1
                         if loadedCount == numTracks {
+                            
+                            // update the user's instrumentCount
                             for track in self.tracks {
                                 for instrument in self.instrumentCount.keys {
                                     if let instrumentname = track.instrumentName {

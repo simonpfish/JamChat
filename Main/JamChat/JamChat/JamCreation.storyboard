@@ -184,16 +184,16 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total jam time: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P37-r7-BN0">
-                                <rect key="frame" x="98" y="537" width="95" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total jam time (seconds): " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P37-r7-BN0">
+                                <rect key="frame" x="89" y="537" width="162" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5s-7h-Ljw">
-                                <rect key="frame" x="195" y="537" width="94" height="15"/>
+                                <rect key="frame" x="252" y="537" width="37" height="15"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="94" id="98r-vj-JdU"/>
+                                    <constraint firstAttribute="width" constant="37" id="98r-vj-JdU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -240,8 +240,8 @@
                             <constraint firstItem="g8w-1D-pLU" firstAttribute="centerX" secondItem="V9c-Nr-m5X" secondAttribute="centerX" constant="2" id="o5x-nD-twM"/>
                             <constraint firstItem="aTu-nh-F0h" firstAttribute="top" secondItem="1Sb-Wx-jRt" secondAttribute="bottom" constant="6" id="oN3-2q-Zc2"/>
                             <constraint firstItem="aTu-nh-F0h" firstAttribute="centerX" secondItem="Dla-u1-i4Y" secondAttribute="centerX" id="scu-Vs-iBG"/>
-                            <constraint firstItem="D5s-7h-Ljw" firstAttribute="leading" secondItem="P37-r7-BN0" secondAttribute="trailing" constant="2" id="tZU-hs-lZX"/>
-                            <constraint firstItem="P37-r7-BN0" firstAttribute="leading" secondItem="V9c-Nr-m5X" secondAttribute="leadingMargin" constant="82" id="th2-YT-gii"/>
+                            <constraint firstItem="D5s-7h-Ljw" firstAttribute="leading" secondItem="P37-r7-BN0" secondAttribute="trailing" constant="1" id="tZU-hs-lZX"/>
+                            <constraint firstItem="P37-r7-BN0" firstAttribute="leading" secondItem="V9c-Nr-m5X" secondAttribute="leadingMargin" constant="73" id="th2-YT-gii"/>
                             <constraint firstItem="d03-yB-z1N" firstAttribute="leading" secondItem="V9c-Nr-m5X" secondAttribute="leadingMargin" constant="44" id="tlL-1F-wt0"/>
                             <constraint firstItem="rXK-By-0X8" firstAttribute="bottom" secondItem="wbA-Je-byF" secondAttribute="bottom" id="uL7-Hx-aOD"/>
                             <constraint firstItem="1Sb-Wx-jRt" firstAttribute="top" secondItem="XHu-qe-3er" secondAttribute="bottom" constant="30" id="uog-bo-gEs"/>

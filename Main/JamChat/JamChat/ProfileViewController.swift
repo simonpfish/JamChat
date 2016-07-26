@@ -151,6 +151,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             }
         }
         
+        // retrieves the user's current instrument count
         instrumentDic = (user?.instrumentCount)!
         
         for instrument in instrumentDic.keys {
