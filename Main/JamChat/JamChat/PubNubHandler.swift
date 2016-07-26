@@ -17,7 +17,8 @@ class PubNubHandler: NSObject {
     }
     
     static func notifyNewMessage(jam: Jam) {
-        client.publish("new_message", toChannel: jam.id, mobilePushPayload: ["aps" : ["alert" : "\(User.currentUser!.name!) jammed on \(jam.title)"]]) { (status: PNPublishStatus) in
+        let payload = ["aps" : ["alert" : "\(User.currentUser!.name!) jammed on \(jam.title)"]]
+        client.publish("new_message", toChannel: jam.id, mobilePushPayload: payload) { (status: PNPublishStatus) in
             print(status.debugDescription)
         }
     }
