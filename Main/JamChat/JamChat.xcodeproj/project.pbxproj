@@ -26,8 +26,6 @@
 		E723F2C71D40115700CF1C29 /* RockGuitarC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E723F2C21D40115700CF1C29 /* RockGuitarC.wav */; };
 		E723F2C81D40115700CF1C29 /* SaxC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E723F2C31D40115700CF1C29 /* SaxC.wav */; };
 		E723F2CA1D40116100CF1C29 /* AcousticBassC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E723F2C91D40116100CF1C29 /* AcousticBassC.wav */; };
-		E723F3081D4292AB00CF1C29 /* AudioKit.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = E723F3061D4292AB00CF1C29 /* AudioKit.framework.dSYM */; };
-		E723F30A1D4292B300CF1C29 /* AudioKit.docset in Resources */ = {isa = PBXBuildFile; fileRef = E723F3091D4292B300CF1C29 /* AudioKit.docset */; };
 		E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F1DF41D3869DB00A34409 /* JamViewController.swift */; };
 		E74F1DFA1D386A2E00A34409 /* JamHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */; };
 		E74F1E031D3C06B800A34409 /* Jam.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74F1E011D3C06B800A34409 /* Jam.storyboard */; };
@@ -94,7 +92,6 @@
 		E723F2C31D40115700CF1C29 /* SaxC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SaxC.wav; sourceTree = "<group>"; };
 		E723F2C91D40116100CF1C29 /* AcousticBassC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AcousticBassC.wav; sourceTree = "<group>"; };
 		E723F3051D4292AB00CF1C29 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
-		E723F3061D4292AB00CF1C29 /* AudioKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = AudioKit.framework.dSYM; sourceTree = "<group>"; };
 		E723F3091D4292B300CF1C29 /* AudioKit.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AudioKit.docset; sourceTree = "<group>"; };
 		E74F1DF41D3869DB00A34409 /* JamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamViewController.swift; sourceTree = "<group>"; };
 		E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamHistoryViewController.swift; sourceTree = "<group>"; };
@@ -145,7 +142,6 @@
 			children = (
 				E723F3091D4292B300CF1C29 /* AudioKit.docset */,
 				E723F3051D4292AB00CF1C29 /* AudioKit.framework */,
-				E723F3061D4292AB00CF1C29 /* AudioKit.framework.dSYM */,
 				EB46293530A6261983676B0D /* Pods_JamChat.framework */,
 			);
 			name = Frameworks;
@@ -371,8 +367,6 @@
 				E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */,
 				E723F2CA1D40116100CF1C29 /* AcousticBassC.wav in Resources */,
 				E723F2C41D40115700CF1C29 /* ChoirC.wav in Resources */,
-				E723F30A1D4292B300CF1C29 /* AudioKit.docset in Resources */,
-				E723F3081D4292AB00CF1C29 /* AudioKit.framework.dSYM in Resources */,
 				E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */,
 				E79AE2051D3D50F400899823 /* Profile.storyboard in Resources */,
 				8C0EC4C81D46D9C200092B88 /* 80BPM.wav in Resources */,
@@ -610,10 +604,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = JamChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Jammers.JamChatRocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -629,10 +625,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = JamChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Jammers.JamChatRocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
