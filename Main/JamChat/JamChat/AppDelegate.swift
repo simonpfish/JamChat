@@ -116,7 +116,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        PFPush.handlePush(userInfo)
     }
     
 }
