@@ -19,7 +19,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     var dataSource: SimplePrefixQueryDataSource!
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
     var selectedFriendIDs: [String] = []
-    var tempo: Int = 80
+    var tempo: Int = 110
     var timer = NSTimer()
     
     @IBOutlet weak var keyboardDismissView: UIView!
@@ -175,7 +175,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         slowLabel.font = UIFont.boldSystemFontOfSize(13.0)
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
-
         
         updateJamTime()
     }
@@ -193,7 +192,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         slowLabel.font = UIFont.systemFontOfSize(13.0)
         mediumLabel.font = UIFont.boldSystemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
-
         
         updateJamTime()
     }
