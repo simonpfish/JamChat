@@ -110,8 +110,24 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
             })
         }
         
+        //adds tap to dismiss keyboard
+        let dismissTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(JamCreationViewController.dismissKeyboard))
+        keyboardDismissView.addGestureRecognizer(dismissTap)
+        titleLabel.delegate = self
+        titleLabel.returnKeyType = .Done
         
         onMedium(nil)
+    }
+    
+    //dismisses keyboard on "Done"
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        titleLabel.resignFirstResponder()
+        return true
+    }
+    
+    //dismisses keyboard on tap
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     //updates jam time label
