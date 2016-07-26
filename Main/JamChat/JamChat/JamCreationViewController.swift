@@ -12,7 +12,7 @@ import XLPagerTabStrip
 import IntervalSlider
 import BAPulseView
 
-class JamCreationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, IndicatorInfoProvider {
+class JamCreationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, IndicatorInfoProvider, UITextFieldDelegate {
     
     @IBInspectable var selectedColor: UIColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
     
@@ -22,10 +22,10 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     var tempo: Int = 80
     var timer = NSTimer()
     
+    @IBOutlet weak var keyboardDismissView: UIView!
     @IBOutlet weak var totaltime: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     var resultSearchController = UISearchController()
-    
     @IBOutlet weak var durationSliderView: UIView!
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var slowTempoView: BAPulseView!
@@ -33,11 +33,9 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var fastTempoView: BAPulseView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var createButton: UIButton!
-    
     @IBOutlet weak var slowLabel: UILabel!
     @IBOutlet weak var mediumLabel: UILabel!
     @IBOutlet weak var fastLabel: UILabel!
-    
     
     var titleGenerator: [String] = []
     
