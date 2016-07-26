@@ -132,6 +132,9 @@ class Jam: NSObject {
         self.userIDs.append(User.currentUser!.facebookID)
         self.title = title
         self.tempo = tempo
+        
+        super.init()
+        PubNubHandler.notifyNewJam(self)
     }
     
     /**
@@ -157,7 +160,7 @@ class Jam: NSObject {
                         if let error = error {
                             failure(error)
                         } else {
-                            self.sendNotification()
+                            PubNubHandler.notifyNewMessage(self)
                             success()
                         }
                     })
@@ -232,13 +235,6 @@ class Jam: NSObject {
             print("Finished pushing jam \(self.object.objectId ?? "NEW")")
             completion?(success, error)
         })
-    }
-    
-    func sendNotification() {
-        let appDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
-        appDelegate.client.publish("New+Message", toChannel: object.objectId!) { (status: PNPublishStatus) in
-            print(status.debugDescription)
-        }
     }
     
     class func downloadCurrentUserJams(success: ([Jam]) -> (), failure: (NSError) -> ()) {

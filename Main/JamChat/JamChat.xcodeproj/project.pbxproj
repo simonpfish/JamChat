@@ -18,6 +18,8 @@
 		8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20F5F11D38F37800622892 /* SelectionView.swift */; };
 		8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D0FEB1D3D602C00380680 /* Instrument.swift */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
+		E70DC3BE1D46E28900B76CE7 /* PubNubHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */; };
+		E70DC3C01D46EA0C00B76CE7 /* AKAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70DC3BF1D46EA0C00B76CE7 /* AKAudioPlayer.swift */; };
 		E717EC161D2ED34500AC812B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717EC151D2ED34500AC812B /* User.swift */; };
 		E723F2BD1D400B8300CF1C29 /* Vintage Strat.exs in Resources */ = {isa = PBXBuildFile; fileRef = E723F2BC1D400B6B00CF1C29 /* Vintage Strat.exs */; };
 		E723F2C41D40115700CF1C29 /* ChoirC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E723F2BF1D40115700CF1C29 /* ChoirC.wav */; };
@@ -26,8 +28,6 @@
 		E723F2C71D40115700CF1C29 /* RockGuitarC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E723F2C21D40115700CF1C29 /* RockGuitarC.wav */; };
 		E723F2C81D40115700CF1C29 /* SaxC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E723F2C31D40115700CF1C29 /* SaxC.wav */; };
 		E723F2CA1D40116100CF1C29 /* AcousticBassC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E723F2C91D40116100CF1C29 /* AcousticBassC.wav */; };
-		E723F3081D4292AB00CF1C29 /* AudioKit.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = E723F3061D4292AB00CF1C29 /* AudioKit.framework.dSYM */; };
-		E723F30A1D4292B300CF1C29 /* AudioKit.docset in Resources */ = {isa = PBXBuildFile; fileRef = E723F3091D4292B300CF1C29 /* AudioKit.docset */; };
 		E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F1DF41D3869DB00A34409 /* JamViewController.swift */; };
 		E74F1DFA1D386A2E00A34409 /* JamHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */; };
 		E74F1E031D3C06B800A34409 /* Jam.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74F1E011D3C06B800A34409 /* Jam.storyboard */; };
@@ -85,6 +85,8 @@
 		8C0EC4CB1D46E33000092B88 /* 140BPM.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 140BPM.wav; sourceTree = "<group>"; };
 		8C20F5F11D38F37800622892 /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		8C9D0FEB1D3D602C00380680 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
+		E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PubNubHandler.swift; sourceTree = "<group>"; };
+		E70DC3BF1D46EA0C00B76CE7 /* AKAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAudioPlayer.swift; sourceTree = "<group>"; };
 		E717EC151D2ED34500AC812B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E723F2BC1D400B6B00CF1C29 /* Vintage Strat.exs */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vintage Strat.exs"; sourceTree = "<group>"; };
 		E723F2BF1D40115700CF1C29 /* ChoirC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ChoirC.wav; sourceTree = "<group>"; };
@@ -94,7 +96,6 @@
 		E723F2C31D40115700CF1C29 /* SaxC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SaxC.wav; sourceTree = "<group>"; };
 		E723F2C91D40116100CF1C29 /* AcousticBassC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AcousticBassC.wav; sourceTree = "<group>"; };
 		E723F3051D4292AB00CF1C29 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
-		E723F3061D4292AB00CF1C29 /* AudioKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = AudioKit.framework.dSYM; sourceTree = "<group>"; };
 		E723F3091D4292B300CF1C29 /* AudioKit.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AudioKit.docset; sourceTree = "<group>"; };
 		E74F1DF41D3869DB00A34409 /* JamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamViewController.swift; sourceTree = "<group>"; };
 		E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamHistoryViewController.swift; sourceTree = "<group>"; };
@@ -145,7 +146,6 @@
 			children = (
 				E723F3091D4292B300CF1C29 /* AudioKit.docset */,
 				E723F3051D4292AB00CF1C29 /* AudioKit.framework */,
-				E723F3061D4292AB00CF1C29 /* AudioKit.framework.dSYM */,
 				EB46293530A6261983676B0D /* Pods_JamChat.framework */,
 			);
 			name = Frameworks;
@@ -168,6 +168,7 @@
 				E799567C1D31746300EE445B /* Jam.swift */,
 				E799567A1D31744500EE445B /* Message.swift */,
 				E799567E1D31749F00EE445B /* Track.swift */,
+				E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -229,6 +230,7 @@
 		E7AB055B1D429EDD00A92C9E /* AudioKit-fixed */ = {
 			isa = PBXGroup;
 			children = (
+				E70DC3BF1D46EA0C00B76CE7 /* AKAudioPlayer.swift */,
 				E7FBA05E1D469F3D0011B689 /* AKSettings.swift */,
 				E7FBA05C1D469F020011B689 /* AKNodeRecorder.swift */,
 				E7AB05511D429ED800A92C9E /* AKAudioFile+Exporting.swift */,
@@ -332,6 +334,9 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = CJM86M89CW;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -371,8 +376,6 @@
 				E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */,
 				E723F2CA1D40116100CF1C29 /* AcousticBassC.wav in Resources */,
 				E723F2C41D40115700CF1C29 /* ChoirC.wav in Resources */,
-				E723F30A1D4292B300CF1C29 /* AudioKit.docset in Resources */,
-				E723F3081D4292AB00CF1C29 /* AudioKit.framework.dSYM in Resources */,
 				E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */,
 				E79AE2051D3D50F400899823 /* Profile.storyboard in Resources */,
 				8C0EC4C81D46D9C200092B88 /* 80BPM.wav in Resources */,
@@ -445,6 +448,7 @@
 				E7FBA05F1D469F3D0011B689 /* AKSettings.swift in Sources */,
 				E799567D1D31746300EE445B /* Jam.swift in Sources */,
 				E7FE0FE61D356E2100452361 /* JamCell.swift in Sources */,
+				E70DC3BE1D46E28900B76CE7 /* PubNubHandler.swift in Sources */,
 				E799567B1D31744500EE445B /* Message.swift in Sources */,
 				21ECC9ED1D41D47800E4E695 /* FriendCell.swift in Sources */,
 				E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */,
@@ -464,6 +468,7 @@
 				213089B31D415AB00030D099 /* InstrumentCollectionDelegate.swift in Sources */,
 				E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */,
 				E7AB05571D429ED800A92C9E /* AKAudioFile+Exporting.swift in Sources */,
+				E70DC3C01D46EA0C00B76CE7 /* AKAudioPlayer.swift in Sources */,
 				E7F0BB561D3EA5070059160B /* PolyphonicKeyboardView.swift in Sources */,
 				E7E0D6981D3C0DCB005A840A /* UserCell.swift in Sources */,
 			);
@@ -610,10 +615,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = JamChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Jammers.JamChatRocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -629,10 +636,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = JamChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Jammers.JamChatRocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
