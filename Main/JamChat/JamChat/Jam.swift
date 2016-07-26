@@ -284,7 +284,6 @@ class Jam: NSObject {
                 for object in objects ?? [] {
                     jams.append(Jam(object: object))
                     jams.last?.loadData({
-                        print("Loading jam \(Jam(object: object))")
                         loadedCount += 1
                         if loadedCount == objects!.count {
                             print("Succesfully downloaded jams for user: \(specificUser.name!)")
