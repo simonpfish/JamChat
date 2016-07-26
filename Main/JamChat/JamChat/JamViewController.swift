@@ -13,6 +13,7 @@ import AudioKit
 import CircleMenu
 import NVActivityIndicatorView
 import BAPulseView
+import AVFoundation
 
 class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, CircleMenuDelegate {
 
@@ -20,6 +21,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var tempoTimer = NSTimer()
     var countdownTimer = NSTimer()
     var countdown: Int = 4
+    var metronome: AVAudioPlayer!
+    var stringBPM: String = ""
     
     @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
     
@@ -162,7 +165,31 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func onRecord(sender: UITapGestureRecognizer) {
         countdownLabel.text = "\(countdown)"
         countdownTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
+        metronomeCount()
         recordView.popAndPulse()
+    }
+    
+    //Plays metronome count-in
+    func metronomeCount(){
+        if (jam.tempo! == 80){
+            stringBPM = "80BPM"
+        }
+        else if (jam.tempo! == 110){
+            stringBPM = "110BPM"
+        }
+        else if (jam.tempo! == 140){
+            stringBPM = "140BPM"
+        }
+        
+        let path = NSBundle.mainBundle().pathForResource(stringBPM, ofType: "wav")!
+        let url = NSURL(fileURLWithPath: path)
+        do {
+            let sound = try AVAudioPlayer(contentsOfURL: url)
+            metronome = sound
+            sound.play()
+        } catch {
+            print("Couldn't load metronome sound file")
+        }
     }
     
     func startRecord(){

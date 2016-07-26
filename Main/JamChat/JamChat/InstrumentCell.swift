@@ -20,6 +20,7 @@ class InstrumentCell: UICollectionViewCell {
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var countButton: UIButton!
     
+    var user: User!
     
     var instrument: Instrument! {
         didSet {
@@ -44,12 +45,12 @@ class InstrumentCell: UICollectionViewCell {
     @IBAction func onInstrumentTap(sender: AnyObject) {
         
         var instrumentNum: [Instrument : Int] = [:]
-        instrumentNum = User.currentUser!.instrumentCount
+        instrumentNum = (user.instrumentCount)
         
         var num = 0
         
         for curInstrument in instrumentNum.keys {
-            if curInstrument.name == self.instrument.name {
+            if curInstrument.name == instrument.name {
                 num = instrumentNum[curInstrument]!
             }
         }

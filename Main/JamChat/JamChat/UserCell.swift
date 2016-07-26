@@ -34,6 +34,18 @@ class UserCell: UICollectionViewCell {
         if let button = countButton {
             button.layer.cornerRadius = countButton.frame.size.width / 2;
         }
+
+        
+        // download the tracks the user has created, if they haven't already been downloaded
+        
+        if user != nil {
+            if user.tracks.count == 0 {
+                user.getUserTracks(){
+                    print("Loading user tracks")
+                }
+            }
+        }
+        
     }
     
     var numberIsDisplayed = false
@@ -41,7 +53,7 @@ class UserCell: UICollectionViewCell {
     @IBAction func onUserTap(sender: AnyObject) {
         
         var friendsNames: [User] = []
-        friendsNames = (User.currentUser?.getTopFriends())!
+        friendsNames = (user.getTopFriends())
         
         //retrieve the names of the top three friends
         if friendsNames.count > 3 {
@@ -50,20 +62,20 @@ class UserCell: UICollectionViewCell {
             }
         }
         
-        var topFriendsNum = User.currentUser?.getTopFriendNumbers()
-        topFriendsNum!.sortInPlace()
+        var topFriendsNum = user.getTopFriendNumbers()
+        topFriendsNum.sortInPlace()
         var topThreeNums: [Int] = []
         
         //retrieves the number of jams from highest to lowest
-        if (topFriendsNum!.count == 1) {
-            topThreeNums.append(topFriendsNum![0])
-        } else if (topFriendsNum!.count == 2) {
-            topThreeNums.append(topFriendsNum![1])
-            topThreeNums.append(topFriendsNum![0])
+        if (topFriendsNum.count == 1) {
+            topThreeNums.append(topFriendsNum[0])
+        } else if (topFriendsNum.count == 2) {
+            topThreeNums.append(topFriendsNum[1])
+            topThreeNums.append(topFriendsNum[0])
         } else {
             //retrieves the top three highest numbers
             for i in 1...3 {
-                topThreeNums.append(topFriendsNum![topFriendsNum!.count-i])
+                topThreeNums.append(topFriendsNum[topFriendsNum.count-i])
             }
         }
 
@@ -94,4 +106,38 @@ class UserCell: UICollectionViewCell {
             
             }, completion: nil)
     }
+    
+    @IBAction func toProfileView(sender: AnyObject) {
+        print("clicked user's name")
+        
+        let profileStoryboard = UIStoryboard(name: "Profile", bundle: NSBundle.mainBundle())
+        let profileViewController = profileStoryboard.instantiateViewControllerWithIdentifier("ProfileView") as! ProfileViewController
+        
+        profileViewController.user = self.user
+        
+        // load the user's friends if they have not already been loaded
+        if user != nil {
+            if user.friends.count == 0 {
+                user.loadFriends({
+                    var loadedCount = 0
+                    for friend in self.user.friends {
+                        friend.loadData() {
+                            loadedCount += 1
+                            print("Loading friend number \(loadedCount) of \(self.user.friends.count)")
+                            if loadedCount == self.user.friends.count {
+                                
+                                // display the user's profile after the user's friends have been loaded
+                                PagerViewController.sharedInstance?.presentViewController(profileViewController, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                })
+            } else {
+                
+                PagerViewController.sharedInstance?.presentViewController(profileViewController, animated: true, completion: nil)
+            }
+        }
+
+    }
+    
 }
