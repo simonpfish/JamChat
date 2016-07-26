@@ -90,19 +90,19 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             }
         }
         
-        if user!.friends.count == 0 {
-            user!.loadFriends({
-                var loadedCount = 0
-                for friend in self.user!.friends {
-                    friend.loadData() {
-                        loadedCount += 1
-                        print("Loading friend number \(loadedCount) of \(self.user!.friends.count)")
-                        if loadedCount == self.user!.friends.count {
-                        }
-                    }
-                }
-            })
-        }
+//        if user!.friends.count == 0 {
+//            user!.loadFriends({
+//                var loadedCount = 0
+//                for friend in self.user!.friends {
+//                    friend.loadData() {
+//                        loadedCount += 1
+//                        print("Loading friend number \(loadedCount) of \(self.user!.friends.count)")
+//                        if loadedCount == self.user!.friends.count {
+//                        }
+//                    }
+//                }
+//            })
+//        }
         
         // Makes the profile picture views circular
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2;
@@ -119,7 +119,6 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         logoutButton.layer.borderColor = selectedColor.CGColor
         logoutButton.titleLabel!.textColor = selectedColor
 
-
         
         let friendsLayout = KTCenterFlowLayout()
         friendsLayout.minimumInteritemSpacing = 20.0
@@ -128,7 +127,6 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         friendsCollection.collectionViewLayout = friendsLayout
         
 
-        
         let instrumentLayout = KTCenterFlowLayout()
         instrumentLayout.minimumInteritemSpacing = 20.0
         instrumentLayout.itemSize = CGSizeMake(60, 70)
@@ -143,18 +141,6 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     }
     
     func setUpLabels() {
-        
-//        for track in user!.tracks {
-//            for instrument in user!.instrumentCount.keys {
-//                if let instrumentname = track.instrumentName {
-//                    if(instrument.name == instrumentname) {
-//                        var curNum = user!.instrumentCount[instrument]
-//                        curNum = curNum! + 1
-//                        user!.instrumentCount[instrument] = curNum
-//                    }
-//                }
-//            }
-//        }
         
         topFriends = (user?.getTopFriends())!
         
