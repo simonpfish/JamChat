@@ -270,7 +270,7 @@ class Jam: NSObject {
      Downloads the specific user's jams, and stores them in an array
      */
     class func downloadSpecificUserJams(specificUser: User, success: ([Jam]) -> ()) {
-        print("Downloading jams for active user")
+        print("Downloading jams for user: \(specificUser.name!)")
         
         let query = PFQuery(className: "Jam")
         

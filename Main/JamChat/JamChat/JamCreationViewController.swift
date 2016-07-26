@@ -59,8 +59,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         // format create button
         createButton.layer.cornerRadius = 7
         createButton.backgroundColor = UIColor.clearColor()

@@ -87,8 +87,6 @@ import PubNub
     
     func loadFeed() {
         
-        
-        
         Jam.downloadCurrentUserJams({ (jams: [Jam]) in
             self.jams = jams
             print("Reloading table view")
