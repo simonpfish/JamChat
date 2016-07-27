@@ -18,33 +18,23 @@ class LoginViewController: PFLogInViewController {
         super.viewDidLoad()
 
         backgroundImage = UIImageView(image: UIImage(named: "LoginBackground"))
-        backgroundImage.contentMode = UIViewContentMode.ScaleAspectFill
+        backgroundImage.contentMode = UIViewContentMode.Center
         self.logInView!.insertSubview(backgroundImage, atIndex: 0)
-        // Do any additional setup after loading the view.
         
-        // remove the parse Logo
         let logo = UILabel()
         logo.text = "JamChat"
-        logo.textColor = UIColor.whiteColor()
+        logo.textColor = UIColor.orangeColor().colorWithAlphaComponent(0.9)
         logo.font = UIFont(name: "ArialRoundedMTBold", size: 70)
-        logo.shadowColor = UIColor.lightGrayColor()
-        logo.shadowOffset = CGSizeMake(2, 2)
         logInView?.logo = logo
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        // stretch background image to fill screen
+
         backgroundImage.frame = CGRectMake( 0,  0,  self.logInView!.frame.width,  self.logInView!.frame.height)
         logInView?.logo?.frame.origin.y = view.frame.height/6
-        
-        logInView?.facebookButton?.frame = CGRectMake(0, 0, 50, 50)
         logInView?.facebookButton?.frame.origin.y = view.frame.height/5 * 4
-        logInView?.facebookButton?.frame.origin.x = view.frame.width/2 - 25
-
-
-        
     }
     
     override func didReceiveMemoryWarning() {
