@@ -27,6 +27,8 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var keyboardDismissView: UIView!
     
     @IBOutlet weak var stepperView: GMStepper!
+    @IBOutlet weak var jamLengthLabel: UILabel!
+    
     
     @IBOutlet weak var searchBar: UISearchBar!
     var resultSearchController = UISearchController()
@@ -51,20 +53,17 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         super.viewDidLoad()
         
         // formats jam duration stepper
-        stepperView.value = 17
-        stepperView.minimumValue = 6
-        stepperView.maximumValue = 36
+        //updateStepperValues(17, min: 8, max: 26, stepper: 9)
         
         stepperView.buttonsBackgroundColor = selectedColor
-        stepperView.labelBackgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0) 
-
+        stepperView.labelBackgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        stepperView.limitHitAnimationColor = UIColor.redColor()
         
         // format create button
         createButton.layer.cornerRadius = 7
-        createButton.backgroundColor = UIColor.clearColor()
+        createButton.backgroundColor = selectedColor
         createButton.layer.borderWidth = 1
         createButton.layer.borderColor = selectedColor.CGColor
-        createButton.titleLabel!.textColor = selectedColor
         
         // set up the search bar
         searchBar.delegate = self
@@ -122,6 +121,15 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         onMedium(nil)
     }
     
+    
+    // updates stepper values
+    func updateStepperValues(defaultValue: Double, min: Double, max: Double, stepper: Double) {
+        stepperView.value = defaultValue
+        stepperView.minimumValue = min
+        stepperView.maximumValue = max
+        stepperView.stepValue = stepper
+    }
+    
     //updates jam time label
     func updateJamTime(){
         //let duration = Int(60.0/Double(tempo)*4.0*Double(messageDurationSlider.getValue()))
@@ -154,13 +162,16 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         tempo = 80
         
         // modify tempo labels when selected
-        slowLabel.textColor = selectedColor
-        mediumLabel.textColor = UIColor.darkGrayColor()
-        fastLabel.textColor = UIColor.darkGrayColor()
+        slowLabel.textColor = UIColor.whiteColor()
+        mediumLabel.textColor = UIColor.whiteColor()
+        fastLabel.textColor = UIColor.whiteColor()
         
         slowLabel.font = UIFont.boldSystemFontOfSize(13.0)
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
+        
+        updateStepperValues(24, min: 12, max: 36, stepper: 12)
+        updateStepperValues(24, min: 12, max: 36, stepper: 12)
         
         updateJamTime()
     }
@@ -171,13 +182,16 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         tempo = 110
         
         // modify tempo labels when selected
-        slowLabel.textColor = UIColor.darkGrayColor()
-        mediumLabel.textColor = selectedColor
-        fastLabel.textColor = UIColor.darkGrayColor()
+        slowLabel.textColor = UIColor.whiteColor()
+        mediumLabel.textColor = UIColor.whiteColor()
+        fastLabel.textColor = UIColor.whiteColor()
         
         slowLabel.font = UIFont.systemFontOfSize(13.0)
         mediumLabel.font = UIFont.boldSystemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
+        
+        updateStepperValues(17, min: 8, max: 26, stepper: 9)
+        updateStepperValues(17, min: 8, max: 26, stepper: 9)
         
         updateJamTime()
     }
@@ -188,13 +202,16 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         tempo = 140
         
         // modify tempo labels when selected
-        slowLabel.textColor = UIColor.darkGrayColor()
-        mediumLabel.textColor = UIColor.darkGrayColor()
-        fastLabel.textColor = selectedColor
+        slowLabel.textColor = UIColor.whiteColor()
+        mediumLabel.textColor = UIColor.whiteColor()
+        fastLabel.textColor = UIColor.whiteColor()
         
         slowLabel.font = UIFont.systemFontOfSize(13.0)
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.boldSystemFontOfSize(13.0)
+        
+        updateStepperValues(13, min: 6, max: 20, stepper: 7)
+        updateStepperValues(13, min: 6, max: 20, stepper: 7)
         
         updateJamTime()
     }
