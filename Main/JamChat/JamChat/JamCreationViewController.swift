@@ -11,52 +11,39 @@ import RAMReel
 import XLPagerTabStrip
 import IntervalSlider
 import BAPulseView
+import GMStepper
 
 class JamCreationViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, IndicatorInfoProvider, UITextFieldDelegate {
     
     @IBInspectable var selectedColor: UIColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
     
-    var dataSource: SimplePrefixQueryDataSource!
-    var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
     var selectedFriendIDs: [String] = []
+    
     var tempo: Int = 110
     var timer = NSTimer()
-    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var keyboardDismissView: UIView!
-    @IBOutlet weak var totaltime: UILabel!
+    
     @IBOutlet weak var searchBar: UISearchBar!
     var resultSearchController = UISearchController()
-    @IBOutlet weak var durationSliderView: UIView!
+    
     @IBOutlet weak var titleLabel: UITextField!
+    
     @IBOutlet weak var slowTempoView: BAPulseView!
     @IBOutlet weak var mediumTempoView: BAPulseView!
     @IBOutlet weak var fastTempoView: BAPulseView!
-    @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var slowLabel: UILabel!
     @IBOutlet weak var mediumLabel: UILabel!
     @IBOutlet weak var fastLabel: UILabel!
+    
+    @IBOutlet weak var createButton: UIButton!
     
     var titleGenerator: [String] = []
     
     // stores the friends who match the user's search
     var filtered: [User] = []
-    
-    // creates an interval slider
-    private var messageDurationSlider: IntervalSlider! {
-        didSet {
-            self.messageDurationSlider.tag = 1
-            self.durationSliderView.addSubview(self.messageDurationSlider)
-            self.messageDurationSlider.delegate = self
-        }
-    }
-    
-    // array with all the possible jam duration lengths (in seconds)
-    private var messageDurationValues: [Float] {
-        return [4, 8, 12, 16]
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,9 +68,6 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         let jamTitles = try! String(contentsOfFile: path!)
         titleGenerator = jamTitles.componentsSeparatedByString("\n")
         
-        // set up interval slider
-        let result = self.createSources()
-        self.messageDurationSlider = IntervalSlider(frame: self.durationSliderView.bounds, sources: result.sources, options: result.options)
         
         //sets up tempo buttons
         setTempoButtons()
@@ -127,21 +111,10 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         onMedium(nil)
     }
     
-    //dismisses keyboard on "Done"
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        titleLabel.resignFirstResponder()
-        return true
-    }
-    
-    //dismisses keyboard on tap
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
     //updates jam time label
     func updateJamTime(){
-        let duration = Int(60.0/Double(tempo)*4.0*Double(messageDurationSlider.getValue()))
-        totaltime.text = "\(duration)"
+        //let duration = Int(60.0/Double(tempo)*4.0*Double(messageDurationSlider.getValue()))
+        let duration = Int(60.0/Double(tempo)*4.0*Double(0))
     }
     
     func setTempoButtons(){
@@ -310,81 +283,6 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         print("Removed friend from chat in creation: \(currentCell.nameLabel.text!)")
     }
-
-    
-    // formats the slider and the jam duration text
-    private func createSources() -> (sources: [IntervalSliderSource], options: [IntervalSliderOption]) {
-        
-        // Sample of equally spaced intervals
-        var sources = [IntervalSliderSource]()
-        var appearanceValue: Float = 0.5
-        
-        for data in self.messageDurationValues {
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 20))
-            label.text = "\(Int(data))"
-            label.font = UIFont.systemFontOfSize(CGFloat(12))
-            label.textColor = selectedColor
-            label.textAlignment = .Center
-            let source = IntervalSliderSource(validValue: data, appearanceValue: appearanceValue, label: label)
-            sources.append(source)
-            
-            // sets the spacing between the duration text
-            appearanceValue += 33
-        }
-        
-        // image used for the thumb image on the interval slider
-        let thumbView = UIView(frame: CGRectMake(0, 0 , 20, 20))
-        thumbView.backgroundColor = UIColor.lightGrayColor()
-        thumbView.layer.cornerRadius = thumbView.bounds.width * 0.5
-        thumbView.clipsToBounds = true
-        let image = imageFromViewWithCornerRadius(thumbView)
-        
-        // sets the track tint color and the thumb image
-        let options: [IntervalSliderOption] = [
-            .MinimumTrackTintColor(selectedColor),
-            .ThumbImage(image)
-        ]
-        
-        return (sources, options)
-    }
-    
-    func imageFromViewWithCornerRadius(view: UIView) -> UIImage {
-        // maskImage
-        let imageBounds = CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height)
-        let path = UIBezierPath(roundedRect: imageBounds, cornerRadius: view.bounds.size.width * 0.5)
-        UIGraphicsBeginImageContextWithOptions(path.bounds.size, false, 0)
-        view.backgroundColor?.setFill()
-        path.fill()
-        let maskImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        // drawImage
-        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
-        let context = UIGraphicsGetCurrentContext()
-        CGContextClipToMask(context, imageBounds, maskImage.CGImage)
-        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image;
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-        let randomNumber = arc4random_uniform(UInt32(titleGenerator.count))
-        self.titleLabel.placeholder = titleGenerator[Int(randomNumber)]
-        
-    }
-    
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "New")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func onCreate(sender: AnyObject) {
         
@@ -396,11 +294,11 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
         let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
         let home = homeNavigation.viewControllers[0] as! HomeViewController
-        home.addNewJam(Double(totaltime.text!)!, userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
+//        home.addNewJam(Double(totaltime.text!)!, userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
+        home.addNewJam(Double(0), userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
+
         self.selectedFriendIDs = []
         self.titleLabel.text = ""
-        
-        self.totaltime.text = ""
         
         slowLabel.textColor = selectedColor
         mediumLabel.textColor = UIColor.darkGrayColor()
@@ -419,6 +317,35 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         onMedium(nil)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let randomNumber = arc4random_uniform(UInt32(titleGenerator.count))
+        self.titleLabel.placeholder = titleGenerator[Int(randomNumber)]
+        
+    }
+    
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "New")
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    //dismisses keyboard on "Done"
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        titleLabel.resignFirstResponder()
+        return true
+    }
+    
+    //dismisses keyboard on tap
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 
     /*
     // MARK: - Navigation
@@ -430,22 +357,4 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     */
 
-}
-
-extension JamCreationViewController: IntervalSliderDelegate {
-    func confirmValue(slider: IntervalSlider, validValue: Float) {
-        updateJamTime()
-        switch slider.tag {
-        //case 1:
-            //self.valueLabel1.text = "\(Int(validValue))"
-        default:
-            break
-        }
-    }
-}
-
-struct FriendSearchTheme: Theme {
-    let font: UIFont = UIFont(name: "Roboto", size: 30)!
-    let listBackgroundColor: UIColor = UIColor.clearColor()
-    let textColor: UIColor = UIColor.blackColor()
 }
