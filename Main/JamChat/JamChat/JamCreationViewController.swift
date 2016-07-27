@@ -12,7 +12,7 @@ import XLPagerTabStrip
 import IntervalSlider
 import BAPulseView
 
-class JamCreationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, IndicatorInfoProvider, UITextFieldDelegate {
+class JamCreationViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, IndicatorInfoProvider, UITextFieldDelegate {
     
     @IBInspectable var selectedColor: UIColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
     
@@ -21,6 +21,9 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     var selectedFriendIDs: [String] = []
     var tempo: Int = 110
     var timer = NSTimer()
+    
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var keyboardDismissView: UIView!
     @IBOutlet weak var totaltime: UILabel!
@@ -31,7 +34,6 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var slowTempoView: BAPulseView!
     @IBOutlet weak var mediumTempoView: BAPulseView!
     @IBOutlet weak var fastTempoView: BAPulseView!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var slowLabel: UILabel!
     @IBOutlet weak var mediumLabel: UILabel!
@@ -70,9 +72,9 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         searchBar.delegate = self
         
         // set up the table view
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.tableView.allowsMultipleSelection = true
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        self.collectionView.allowsMultipleSelection = true
         
         // read in a text file of random jam titles and store it in an array
         let path = NSBundle.mainBundle().pathForResource("jamNames", ofType: "txt")
@@ -101,7 +103,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
                             for friend in User.currentUser!.friends {
                                 self.filtered.append(friend)
                             }
-                            self.tableView.reloadData()
+                            self.collectionView.reloadData()
                         }
                     }
                 }
@@ -113,7 +115,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
             for friend in User.currentUser!.friends {
                 self.filtered.append(friend)
             }
-            self.tableView.reloadData()
+            self.collectionView.reloadData()
         }
         
         //adds tap to dismiss keyboard
@@ -218,7 +220,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
         let array = ((User.currentUser?.friends)! as NSArray).filteredArrayUsingPredicate(searchPredicate)
         self.filtered = array as! [User]
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
         
     }
     
@@ -238,7 +240,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
             
         }
 
-        tableView.reloadData()
+        collectionView.reloadData()
     }
     
     // Show cancel button on search bar when being used
@@ -252,28 +254,29 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         searchBar.resignFirstResponder()
         searchBar.text = ""
         filtered = (User.currentUser?.friends)!
-        tableView.reloadData()
+        collectionView.reloadData()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return User.currentUser?.friends.count ?? 0
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filtered.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell
-        //cell.user = User.currentUser?.friends[indexPath.row]
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
         cell.user = filtered[indexPath.row]
         return cell
     }
+
     
     /**
-     Highlights and added a check mark to a selected cell
+     Highlights a selected cell
      */
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! FriendCell
+        let currentCell = collectionView.cellForItemAtIndexPath(indexPath) as! FriendCell
+        currentCell.backgroundColor = UIColor.lightGrayColor()
+        
         let selectedFriend = currentCell.nameLabel.text
         
         // Loops through all of the user's friends
@@ -292,21 +295,22 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
         }
-        
     }
+    
     
     /**
      Unhighlights and removes a check mark from an unselected cell
      */
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! FriendCell
+        let currentCell = collectionView.cellForItemAtIndexPath(indexPath) as! FriendCell
+        currentCell.backgroundColor = UIColor.whiteColor()
         
         self.selectedFriendIDs.removeAtIndex(selectedFriendIDs.indexOf(currentCell.user.facebookID)!)
-
+        
         print("Removed friend from chat in creation: \(currentCell.nameLabel.text!)")
     }
+
     
     // formats the slider and the jam duration text
     private func createSources() -> (sources: [IntervalSliderSource], options: [IntervalSliderOption]) {
@@ -407,10 +411,10 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         fastLabel.font = UIFont.systemFontOfSize(13.0)
                 
         // unselects previously selected friends from the table view
-        let paths = self.tableView.indexPathsForSelectedRows ?? []
+        let paths = self.collectionView.indexPathsForSelectedItems() ?? []
         for path in paths {
-            tableView.deselectRowAtIndexPath(path, animated: false)
-            tableView.cellForRowAtIndexPath(path)?.accessoryType = UITableViewCellAccessoryType.None
+            collectionView.deselectItemAtIndexPath(path, animated: false)
+            //collectionView.cellForItemAtIndexPath(path)?.accessoryType = UITableViewCellAccessoryType.None
         }
         
         onMedium(nil)
