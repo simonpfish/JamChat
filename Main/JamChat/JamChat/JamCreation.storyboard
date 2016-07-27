@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZi-CH-IDO">
-                                <rect key="frame" x="0.0" y="177" width="375" height="490"/>
+                                <rect key="frame" x="0.0" y="396" width="375" height="271"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kDa-Kr-m9u" userLabel="Tempo View">
-                                        <rect key="frame" x="31" y="159" width="308" height="72"/>
+                                        <rect key="frame" x="31" y="31" width="308" height="72"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeB-x4-Reg">
                                                 <rect key="frame" x="246" y="10" width="42" height="21"/>
@@ -56,7 +56,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8w-1D-pLU">
-                                        <rect key="frame" x="126" y="337" width="125" height="29"/>
+                                        <rect key="frame" x="126" y="118" width="125" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Start Jammin'!">
                                             <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -113,6 +113,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1jL-TM-TyA" customClass="GMStepper" customModule="GMStepper">
+                                <rect key="frame" x="0.0" y="194" width="375" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -128,6 +132,7 @@
                         <outlet property="searchBar" destination="FE1-59-YWX" id="6vy-vg-Ep0"/>
                         <outlet property="slowLabel" destination="d03-yB-z1N" id="hdf-ED-dRC"/>
                         <outlet property="slowTempoView" destination="v8V-iD-XXw" id="D5n-iu-cLd"/>
+                        <outlet property="stepperView" destination="1jL-TM-TyA" id="rnC-HP-Hio"/>
                         <outlet property="titleLabel" destination="Dla-u1-i4Y" id="4Hj-jt-rcx"/>
                     </connections>
                 </viewController>

@@ -26,6 +26,8 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var keyboardDismissView: UIView!
     
+    @IBOutlet weak var stepperView: GMStepper!
+    
     @IBOutlet weak var searchBar: UISearchBar!
     var resultSearchController = UISearchController()
     
@@ -47,6 +49,15 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // formats jam duration stepper
+        stepperView.value = 17
+        stepperView.minimumValue = 6
+        stepperView.maximumValue = 36
+        
+        stepperView.buttonsBackgroundColor = selectedColor
+        stepperView.labelBackgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0) 
+
         
         // format create button
         createButton.layer.cornerRadius = 7
