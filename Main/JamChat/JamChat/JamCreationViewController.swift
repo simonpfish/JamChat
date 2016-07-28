@@ -69,8 +69,11 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         plusButton.addTarget(self, action: #selector(onPlus), forControlEvents: .TouchUpInside)
         
         stepperLabel = stepperView.subviews[2] as! UILabel
+        
+        // adds a listener for when the stepperView uses the panHandle gesture
         stepperView.subviews[2].gestureRecognizers![0].addTarget(self, action: #selector(onJamLengthChanged))
         
+        // jam length defaults to 'MEDIUM'
         jamLengthLabel.text = "MEDIUM"
         
         // format create button
@@ -244,9 +247,15 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
         
-        updateStepperValues(24, min: 12, max: 36, stepper: 12)
-        updateStepperValues(24, min: 12, max: 36, stepper: 12)
-        jamLengthLabel.text = "MEDIUM"
+        var defaultValue = 24.0
+        if jamLengthLabel.text == "SHORT" {
+            defaultValue -= 12
+        } else if jamLengthLabel.text == "LONG" {
+            defaultValue += 12
+        }
+        // updates the stepper values and sets the jamLengthLabel (defaults to 'MEDIUM')
+        updateStepperValues(defaultValue, min: 12, max: 36, stepper: 12)
+        updateStepperValues(defaultValue, min: 12, max: 36, stepper: 12)
         
     }
     
@@ -269,9 +278,16 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         mediumLabel.font = UIFont.boldSystemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
         
-        updateStepperValues(17, min: 8, max: 26, stepper: 9)
-        updateStepperValues(17, min: 8, max: 26, stepper: 9)
-        jamLengthLabel.text = "MEDIUM"
+        var defaultValue = 17.0
+        if jamLengthLabel.text == "SHORT" {
+            defaultValue -= 9
+        } else if jamLengthLabel.text == "LONG" {
+            defaultValue += 9
+        }
+        
+        // updates the stepper values and sets the jamLengthLabel (defaults to 'MEDIUM')
+        updateStepperValues(defaultValue, min: 8, max: 26, stepper: 9)
+        updateStepperValues(defaultValue, min: 8, max: 26, stepper: 9)
         
     }
     
@@ -294,9 +310,16 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.boldSystemFontOfSize(13.0)
         
-        updateStepperValues(13, min: 6, max: 20, stepper: 7)
-        updateStepperValues(13, min: 6, max: 20, stepper: 7)
-        jamLengthLabel.text = "MEDIUM"
+        var defaultValue = 13.0
+        if jamLengthLabel.text == "SHORT" {
+            defaultValue -= 7
+        } else if jamLengthLabel.text == "LONG" {
+            defaultValue += 7
+        }
+        
+        // updates the stepper values and sets the jamLengthLabel (defaults to 'MEDIUM')
+        updateStepperValues(defaultValue, min: 6, max: 20, stepper: 7)
+        updateStepperValues(defaultValue, min: 6, max: 20, stepper: 7)
         
     }
     
@@ -420,13 +443,13 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
                 
-        // unselects previously selected friends from the table view
-        
+        // unselects previously selected friends from the table view, and prepares the cell for reuse
         for indexPath in collectionView.indexPathsForSelectedItems() ?? [] {
             collectionView.cellForItemAtIndexPath(indexPath)?.prepareForReuse()
             collectionView.cellForItemAtIndexPath(indexPath)?.backgroundColor = UIColor.whiteColor()
         }
         
+        // resets the selected tempo to "Moderate"
         onMedium(nil)
     }
 

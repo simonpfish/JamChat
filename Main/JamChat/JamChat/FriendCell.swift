@@ -32,10 +32,6 @@ class FriendCell: UICollectionViewCell {
         // Make image circular:
         profilePictureView.layer.cornerRadius = profilePictureView.frame.size.width / 2;
         profilePictureView.clipsToBounds = true;
-        
-        //self.layer.borderColor = selectedColor.CGColor
-        //self.layer.borderWidth = 2.0
-        self.layer.cornerRadius = 4.0
     }
 
 }
