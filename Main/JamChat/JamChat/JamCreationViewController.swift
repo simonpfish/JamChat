@@ -55,7 +55,12 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // stepper
+        // sets up the stepper
+        stepperView.buttonsBackgroundColor = selectedColor
+        stepperView.labelBackgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        stepperView.limitHitAnimationColor = UIColor.redColor()
+        
+        // retrieves references to UI elements from the stepperView
         minusButton = stepperView.subviews[0] as! UIButton
         minusButton.addTarget(self, action: #selector(onMinus), forControlEvents: .TouchUpInside)
         
@@ -64,10 +69,6 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         stepperLabel = stepperView.subviews[2] as! UILabel
         jamLengthLabel.text = "MEDIUM"
-        
-        stepperView.buttonsBackgroundColor = selectedColor
-        stepperView.labelBackgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
-        stepperView.limitHitAnimationColor = UIColor.redColor()
         
         // format create button
         createButton.layer.cornerRadius = 7
@@ -131,6 +132,18 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         onMedium(nil)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let randomNumber = arc4random_uniform(UInt32(titleGenerator.count))
+        self.titleLabel.placeholder = titleGenerator[Int(randomNumber)]
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     // updates stepper values
     func updateStepperValues(defaultValue: Double, min: Double, max: Double, stepper: Double) {
@@ -142,7 +155,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         stepperLabel.text = stepperLabel.text! + " seconds"
     }
     
-    
+    // updates stepperView UI elements when the minus button is pressed
     func onMinus(sender: AnyObject) {
         
         if jamLengthLabel.text == "SHORT" {
@@ -155,9 +168,9 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         if (stepperLabel.text)?.rangeOfString("seconds") == nil {
             stepperLabel.text = stepperLabel.text! + " seconds"
         }
-
     }
     
+    // updates stepperView UI elements when the plus button is pressed
     func onPlus(sender: AnyObject) {
         
         if jamLengthLabel.text == "SHORT" {
@@ -313,6 +326,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         let currentCell = collectionView.cellForItemAtIndexPath(indexPath) as! FriendCell
         currentCell.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        currentCell.layer.cornerRadius = 4
         
         let selectedFriend = currentCell.nameLabel.text
         
@@ -372,31 +386,23 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         fastLabel.font = UIFont.systemFontOfSize(13.0)
                 
         // unselects previously selected friends from the table view
-        let paths = self.collectionView.indexPathsForSelectedItems() ?? []
-        for path in paths {
-            collectionView.deselectItemAtIndexPath(path, animated: false)
+        
+//        let paths = self.collectionView.indexPathsForSelectedItems() ?? []
+//        for path in paths {
+//            collectionView.deselectItemAtIndexPath(path, animated: false)
+//        }
+        
+        for indexPath in collectionView.indexPathsForSelectedItems() ?? [] {
+            collectionView.deselectItemAtIndexPath(indexPath, animated: false)
         }
         
         onMedium(nil)
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let randomNumber = arc4random_uniform(UInt32(titleGenerator.count))
-        self.titleLabel.placeholder = titleGenerator[Int(randomNumber)]
-        
-    }
+
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "New")
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     //dismisses keyboard on "Done"
     func textFieldShouldReturn(textField: UITextField) -> Bool {
