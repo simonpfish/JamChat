@@ -13,11 +13,13 @@ class FriendCell: UICollectionViewCell {
     @IBOutlet weak var profilePictureView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBInspectable var selectedColor: UIColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
     
     var user: User! {
         didSet {
             if let nameLabel = nameLabel {
                 nameLabel.text = user.name
+                nameLabel.textColor = UIColor.darkGrayColor()
             }
             profilePictureView.setImageWithURL(user.profileImageURL)
         }
