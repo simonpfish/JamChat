@@ -17,13 +17,20 @@ class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var jamNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    var users: [User] = []
     var jam: Jam? {
         didSet {
             userCollection.reloadData()
             jamNameLabel.text = jam!.title
-        
-            let dateString = TFGRelativeDateFormatter.sharedFormatter().stringForDate(jam!.updatedAt)
             
+            users = []
+            for user in jam!.users {
+                if user.facebookID != User.currentUser!.facebookID {
+                    users.append(user)
+                }
+            }
+            
+            let dateString = TFGRelativeDateFormatter.sharedFormatter().stringForDate(jam!.updatedAt)
             dateLabel.text = dateString
 
             self.setColor()
@@ -60,12 +67,12 @@ class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return jam?.users.count ?? 0
+        return users.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = userCollection.dequeueReusableCellWithReuseIdentifier("UserCell", forIndexPath: indexPath) as! UserCell
-        cell.user = jam!.users[indexPath.row]
+        cell.user = users[indexPath.row]
         return cell
     }
 
