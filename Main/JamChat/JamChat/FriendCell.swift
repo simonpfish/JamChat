@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendCell: UITableViewCell {
+class FriendCell: UICollectionViewCell {
 
     @IBOutlet weak var profilePictureView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -30,11 +30,6 @@ class FriendCell: UITableViewCell {
         // Make image circular:
         profilePictureView.layer.cornerRadius = profilePictureView.frame.size.width / 2;
         profilePictureView.clipsToBounds = true;
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
 
 }

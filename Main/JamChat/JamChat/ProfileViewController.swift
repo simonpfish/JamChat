@@ -73,6 +73,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         // Goes through the user's tracks, and updates the instrumentCount array
         // The instrumentCount array is used to determine a user's "Favorite Instruments"
         
+        // download the tracks the user has created, if they haven't already been downloaded
         if user!.tracks.count == 0 {
             user!.getUserTracks(){
                 print("Loading user tracks")
@@ -90,19 +91,69 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             }
         }
         
-//        if user!.friends.count == 0 {
-//            user!.loadFriends({
-//                var loadedCount = 0
-//                for friend in self.user!.friends {
-//                    friend.loadData() {
-//                        loadedCount += 1
-//                        print("Loading friend number \(loadedCount) of \(self.user!.friends.count)")
-//                        if loadedCount == self.user!.friends.count {
-//                        }
-//                    }
-//                }
-//            })
-//        }
+        // if the user's friends have not been counted, count them
+        if user!.friends.count == 0 {
+            user!.loadFriends({
+                var loadedCount = 0
+                for friend in self.user!.friends {
+                    friend.loadData() {
+                        loadedCount += 1
+                        print("Loading friend number \(loadedCount) of \(self.user!.friends.count)")
+                        if loadedCount == self.user!.friends.count {
+                            
+                            
+                            for friend in self.user!.friends {
+                                self.user!.friendCount[friend] = 0
+                            }
+                            
+                            self.user?.getTopFriends({ (users: [User]) in
+                                self.topFriends = users
+                                
+                                // retrieves the user's top three friends
+                                if self.topFriends.count > 3 {
+                                    while(self.topFriends.count > 3) {
+                                        self.topFriends.removeAtIndex(self.topFriends.count-1)
+                                    }
+                                }
+                                
+                                // Set up friends collection view:
+                                self.userDelegate = UserCollectionDelegate(users: self.topFriends, curUser: self.user!)
+                                self.friendsCollection.dataSource = self.userDelegate
+                                self.friendsCollection.delegate = self.userDelegate
+                                self.friendsCollection.reloadData()
+                            })
+
+                        }
+                    }
+                }
+            })
+        }
+        
+        // if the user's friends have already been counted
+        if user!.friends.count != 0 {
+            for friend in self.user!.friends {
+                self.user!.friendCount[friend] = 0
+            }
+            
+            self.user?.getTopFriends({ (users: [User]) in
+                self.topFriends = users
+                
+                // retrieves the user's top three friends
+                if self.topFriends.count > 3 {
+                    while(self.topFriends.count > 3) {
+                        self.topFriends.removeAtIndex(self.topFriends.count-1)
+                    }
+                }
+                
+                // Set up friends collection view:
+                self.userDelegate = UserCollectionDelegate(users: self.topFriends, curUser: self.user!)
+                self.friendsCollection.dataSource = self.userDelegate
+                self.friendsCollection.delegate = self.userDelegate
+                self.friendsCollection.reloadData()
+            })
+
+        }
+        
         
         // Makes the profile picture views circular
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2;
@@ -142,14 +193,6 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
     
     func setUpLabels() {
         
-        topFriends = (user?.getTopFriends())!
-        
-        // retrieves the user's top three friends
-        if topFriends.count > 3 {
-            while(topFriends.count > 3) {
-                topFriends.removeAtIndex(topFriends.count-1)
-            }
-        }
         
         // retrieves the user's current instrument count
         instrumentDic = (user?.instrumentCount)!
@@ -163,12 +206,6 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         instrumentCollection.dataSource = instrumentDelegate
         instrumentCollection.delegate = instrumentDelegate
         instrumentCollection.reloadData()
-
-        // Set up friends collection view:
-        userDelegate = UserCollectionDelegate(users: topFriends)
-        friendsCollection.dataSource = userDelegate
-        friendsCollection.delegate = userDelegate
-        friendsCollection.reloadData()
 
     }
     

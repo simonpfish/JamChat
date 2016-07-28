@@ -107,4 +107,6 @@ class Instrument: NSObject {
     static let acousticBass = Instrument(name: "Acoustic Bass", color: UIColor(red: 0.5294, green: 0.1294, blue: 0, alpha: 1.0), image: UIImage(named: "acoustic_bass"), fileName: "AcousticBassC")
     static let electricBass = Instrument(name: "Electric Bass", color: UIColor(red: 0.4118, green: 0.6863, blue: 0, alpha: 1.0), image: UIImage(named: "electric_bass"), fileName: "ElectricBassC")
     
+    static let instruments: [Instrument] = [electricGuitar, saxophone, choir, piano, acousticBass, electricBass]
+    
 }

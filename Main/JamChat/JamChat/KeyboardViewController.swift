@@ -22,9 +22,11 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
     let totalKeys = 12
     let lowestKey = 60
     
-    var sharpKeyColor = Instrument.choir.color
+    static var selectedInstrument = Instrument.instruments[randomInt(0..<Instrument.instruments.count)]
     
-    var instrument: Instrument! {
+    var sharpKeyColor = selectedInstrument.color
+    
+    var instrument: Instrument! = selectedInstrument {
         didSet {
             instrument.reload()
             sharpKeyColor = instrument.color
@@ -39,6 +41,8 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
                     key.backgroundColor = UIColor.whiteColor()
                 }
             }
+            
+            KeyboardViewController.selectedInstrument = instrument
         }
     }
     
@@ -46,7 +50,6 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
         
         super.viewDidLoad()
         
-        instrument = Instrument.choir
         renderKeyboard()
         // Do any additional setup after loading the view.
     }
