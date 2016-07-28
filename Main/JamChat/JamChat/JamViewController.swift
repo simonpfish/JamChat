@@ -117,15 +117,35 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     //Plays chat when wave is tapped
     func onPlay(sender: UITapGestureRecognizer? = nil) {
         let lastMessage = jam.messages.last
-        lastMessage?.loadTracks({
-            lastMessage?.play({ 
-                UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
-                    self.progressIndicator.frame.origin.x = self.view.frame.width
-                }) { (success: Bool) in
-                    self.progressIndicator.frame.origin.x = -2
-                }
+        
+        if lastMessage!.isPlaying {
+            stopAnitatingCursor()
+            lastMessage?.stop()
+        } else {
+            lastMessage?.loadTracks({
+                lastMessage?.play({
+                    self.startAnimatingCursor()
+                })
             })
-        })
+        }
+        
+    }
+    
+    var progressTimer: NSTimer!
+    func startAnimatingCursor() {
+        progressTimer =  NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+    }
+    
+    func updateProgressView() {
+        let progress = CGFloat(Double(self.view.frame.width) * jam.playthroughProgress)
+        UIView.animateWithDuration(0.05, delay: 0.0, options: [.CurveLinear], animations: {
+            self.progressIndicator.frame.origin.x = progress
+        }, completion: nil)
+    }
+    
+    func stopAnitatingCursor() {
+        progressIndicator.frame.origin.x = -2
+        progressTimer.invalidate()
     }
     
     override func didReceiveMemoryWarning() {

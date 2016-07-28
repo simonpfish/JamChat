@@ -27,10 +27,16 @@ class Jam: NSObject {
         }
     }
     
+    var playthroughProgress: Double
+        {
+        get {
+            return (messages.last?.currentTime)! / messageDuration
+        }
+    }
+    
     private var messageIDs: [String] = []
     private var userIDs: [String] = []
     private var object: PFObject!
-    
     
     /**
      Loads jam from an exisiting PFObject.
