@@ -60,7 +60,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         stepperView.buttonsBackgroundColor = selectedColor
         stepperView.labelBackgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
         stepperView.limitHitAnimationColor = UIColor.redColor()
-        
+    
         // retrieves references to UI elements from the stepperView
         minusButton = stepperView.subviews[0] as! UIButton
         minusButton.addTarget(self, action: #selector(onMinus), forControlEvents: .TouchUpInside)
@@ -69,6 +69,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         plusButton.addTarget(self, action: #selector(onPlus), forControlEvents: .TouchUpInside)
         
         stepperLabel = stepperView.subviews[2] as! UILabel
+        stepperView.subviews[2].gestureRecognizers![0].addTarget(self, action: #selector(onJamLengthChanged))
         
         jamLengthLabel.text = "MEDIUM"
         
@@ -135,6 +136,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         onMedium(nil)
     }
     
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -155,6 +157,22 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         stepperView.stepValue = stepper
         
         stepperLabel.text = stepperLabel.text! + " seconds"
+    }
+    
+    func onJamLengthChanged() {
+        
+        if (stepperLabel.text)?.rangeOfString("seconds") == nil {
+            stepperLabel.text = stepperLabel.text! + " seconds"
+        }
+        
+        if stepperLabel.text!.containsString("36") || stepperLabel.text!.containsString("26") || stepperLabel.text!.containsString("20") {
+            jamLengthLabel.text = "LONG"
+        } else if stepperLabel.text!.containsString("24") || stepperLabel.text!.containsString("17") || stepperLabel.text!.containsString("13") {
+            jamLengthLabel.text = "MEDIUM"
+        } else if stepperLabel.text!.containsString("6") || stepperLabel.text!.containsString("8") || stepperLabel.text!.containsString("12") {
+            jamLengthLabel.text = "SHORT"
+        }
+        
     }
     
     // updates stepperView UI elements when the minus button is pressed

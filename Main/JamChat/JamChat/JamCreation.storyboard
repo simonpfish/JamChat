@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="302" width="375" height="365"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kDa-Kr-m9u" userLabel="Tempo View">
-                                        <rect key="frame" x="0.0" y="53" width="375" height="120"/>
+                                        <rect key="frame" x="0.0" y="62" width="375" height="120"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wbA-Je-byF" customClass="BAPulseView">
                                                 <rect key="frame" x="269" y="40" width="65" height="65"/>
@@ -68,7 +68,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8w-1D-pLU">
-                                        <rect key="frame" x="0.0" y="215" width="375" height="83"/>
+                                        <rect key="frame" x="0.0" y="215" width="375" height="85"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <state key="normal" title="Start Jammin'!">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -126,7 +126,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLf-0o-AjW" userLabel="Jam Length View">
-                                <rect key="frame" x="0.0" y="193" width="375" height="124"/>
+                                <rect key="frame" x="0.0" y="202" width="375" height="124"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jam Length" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNd-DE-H8h">
                                         <rect key="frame" x="0.0" y="7" width="375" height="21"/>

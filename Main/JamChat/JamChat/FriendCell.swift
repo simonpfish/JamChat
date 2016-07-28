@@ -13,11 +13,13 @@ class FriendCell: UICollectionViewCell {
     @IBOutlet weak var profilePictureView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBInspectable var selectedColor: UIColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
     
     var user: User! {
         didSet {
             if let nameLabel = nameLabel {
                 nameLabel.text = user.name
+                nameLabel.textColor = UIColor.darkGrayColor()
             }
             profilePictureView.setImageWithURL(user.profileImageURL)
         }
@@ -30,6 +32,10 @@ class FriendCell: UICollectionViewCell {
         // Make image circular:
         profilePictureView.layer.cornerRadius = profilePictureView.frame.size.width / 2;
         profilePictureView.clipsToBounds = true;
+        
+        //self.layer.borderColor = selectedColor.CGColor
+        //self.layer.borderWidth = 2.0
+        self.layer.cornerRadius = 4.0
     }
 
 }
