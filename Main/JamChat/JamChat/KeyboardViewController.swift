@@ -43,6 +43,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         instrument = Instrument.choir
