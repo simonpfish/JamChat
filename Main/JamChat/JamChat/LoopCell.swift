@@ -7,27 +7,33 @@
 //
 
 import UIKit
+import BAPulseView
 
-class LoopCell: UICollectionViewCell {
+class LoopCell: UICollectionViewCell, UIGestureRecognizerDelegate {
 
-    @IBOutlet weak var selectLoop: UIButton!
+    @IBOutlet weak var loopView: BAPulseView!
+    @IBOutlet weak var loopLabel: UILabel!
     
     var loop: Loop!{
         didSet{
-            selectLoop.setTitle(loop.name, forState: .Normal)
-            selectLoop.backgroundColor = loop.color
+            loopLabel.text = loop.name
+            loopView.backgroundColor = loop.color
         }
     }
     
     override func awakeFromNib() {
-        selectLoop.layer.cornerRadius = 0.5*selectLoop.bounds.size.width
+        loopView.layer.cornerRadius = 0.5*loopView.bounds.size.width
         
-        super.awakeFromNib()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(LoopCell.tapLoop(_:)))
+            tap.delegate = self
+            loopView.addGestureRecognizer(tap)
+            
+            super.awakeFromNib()
     }
     
-    @IBAction func onLoop(sender: AnyObject) {
+    func tapLoop(sender: UITapGestureRecognizer){
+
         loop.play()
-        
     }
     
 
