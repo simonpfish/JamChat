@@ -29,6 +29,9 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var stepperView: GMStepper!
     @IBOutlet weak var jamLengthLabel: UILabel!
     
+    var minusButton: UIButton!
+    var plusButton: UIButton!
+    var stepperLabel: UILabel!
     
     @IBOutlet weak var searchBar: UISearchBar!
     var resultSearchController = UISearchController()
@@ -52,8 +55,15 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // formats jam duration stepper
-        //updateStepperValues(17, min: 8, max: 26, stepper: 9)
+        // stepper
+        minusButton = stepperView.subviews[0] as! UIButton
+        minusButton.addTarget(self, action: #selector(onMinus), forControlEvents: .TouchUpInside)
+        
+        plusButton = stepperView.subviews[1] as! UIButton
+        plusButton.addTarget(self, action: #selector(onPlus), forControlEvents: .TouchUpInside)
+        
+        stepperLabel = stepperView.subviews[2] as! UILabel
+        jamLengthLabel.text = "MEDIUM"
         
         stepperView.buttonsBackgroundColor = selectedColor
         stepperView.labelBackgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
@@ -128,12 +138,38 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         stepperView.minimumValue = min
         stepperView.maximumValue = max
         stepperView.stepValue = stepper
+        
+        stepperLabel.text = stepperLabel.text! + " seconds"
     }
     
-    //updates jam time label
-    func updateJamTime(){
-        //let duration = Int(60.0/Double(tempo)*4.0*Double(messageDurationSlider.getValue()))
-        let duration = Int(60.0/Double(tempo)*4.0*Double(0))
+    
+    func onMinus(sender: AnyObject) {
+        
+        if jamLengthLabel.text == "SHORT" {
+        } else if jamLengthLabel.text == "MEDIUM" {
+            jamLengthLabel.text = "SHORT"
+        } else if jamLengthLabel.text == "LONG" {
+            jamLengthLabel.text = "MEDIUM"
+        }
+        
+        if (stepperLabel.text)?.rangeOfString("seconds") == nil {
+            stepperLabel.text = stepperLabel.text! + " seconds"
+        }
+
+    }
+    
+    func onPlus(sender: AnyObject) {
+        
+        if jamLengthLabel.text == "SHORT" {
+            jamLengthLabel.text = "MEDIUM"
+        } else if jamLengthLabel.text == "MEDIUM" {
+            jamLengthLabel.text = "LONG"
+        } else if jamLengthLabel.text == "LONG" {
+        }
+        
+        if (stepperLabel.text)?.rangeOfString("seconds") == nil {
+            stepperLabel.text = stepperLabel.text! + " seconds"
+        }
     }
     
     func setTempoButtons(){
@@ -172,8 +208,8 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         updateStepperValues(24, min: 12, max: 36, stepper: 12)
         updateStepperValues(24, min: 12, max: 36, stepper: 12)
+        jamLengthLabel.text = "MEDIUM"
         
-        updateJamTime()
     }
     
     func onMedium (sender: UITapGestureRecognizer?){
@@ -192,8 +228,8 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         updateStepperValues(17, min: 8, max: 26, stepper: 9)
         updateStepperValues(17, min: 8, max: 26, stepper: 9)
+        jamLengthLabel.text = "MEDIUM"
         
-        updateJamTime()
     }
     
     func onFast (sender: UITapGestureRecognizer?){
@@ -212,8 +248,8 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         updateStepperValues(13, min: 6, max: 20, stepper: 7)
         updateStepperValues(13, min: 6, max: 20, stepper: 7)
+        jamLengthLabel.text = "MEDIUM"
         
-        updateJamTime()
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -276,7 +312,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         let currentCell = collectionView.cellForItemAtIndexPath(indexPath) as! FriendCell
-        currentCell.backgroundColor = UIColor.lightGrayColor()
+        currentCell.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
         
         let selectedFriend = currentCell.nameLabel.text
         
@@ -322,8 +358,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
         let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
         let home = homeNavigation.viewControllers[0] as! HomeViewController
-//        home.addNewJam(Double(totaltime.text!)!, userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
-        home.addNewJam(Double(0), userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
+        home.addNewJam(stepperView.value, userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
 
         self.selectedFriendIDs = []
         self.titleLabel.text = ""
@@ -340,7 +375,6 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         let paths = self.collectionView.indexPathsForSelectedItems() ?? []
         for path in paths {
             collectionView.deselectItemAtIndexPath(path, animated: false)
-            //collectionView.cellForItemAtIndexPath(path)?.accessoryType = UITableViewCellAccessoryType.None
         }
         
         onMedium(nil)
