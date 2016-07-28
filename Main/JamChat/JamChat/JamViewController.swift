@@ -18,6 +18,7 @@ import AVFoundation
 class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, CircleMenuDelegate {
 
     var jam: Jam!
+    var users: [User] = []
     var tempoTimer = NSTimer()
     var countdownTimer = NSTimer()
     var countdown: Int = 4
@@ -69,7 +70,13 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let tap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onRecord(_:)))
         tap.delegate = self
         recordView.addGestureRecognizer(tap)
-    
+        
+        for user in jam!.users {
+            if user.facebookID != User.currentUser!.facebookID {
+                users.append(user)
+            }
+        }
+        
         drawWaveforms()
     }
 
@@ -110,15 +117,35 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     //Plays chat when wave is tapped
     func onPlay(sender: UITapGestureRecognizer? = nil) {
         let lastMessage = jam.messages.last
-        lastMessage?.loadTracks({
-            lastMessage?.play({ 
-                UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
-                    self.progressIndicator.frame.origin.x = self.view.frame.width
-                }) { (success: Bool) in
-                    self.progressIndicator.frame.origin.x = -2
-                }
+        
+        if lastMessage!.isPlaying {
+            stopAnitatingCursor()
+            lastMessage?.stop()
+        } else {
+            lastMessage?.loadTracks({
+                lastMessage?.play({
+                    self.startAnimatingCursor()
+                })
             })
-        })
+        }
+        
+    }
+    
+    var progressTimer: NSTimer!
+    func startAnimatingCursor() {
+        progressTimer =  NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+    }
+    
+    func updateProgressView() {
+        let progress = CGFloat(Double(self.view.frame.width) * jam.playthroughProgress)
+        UIView.animateWithDuration(0.05, delay: 0.0, options: [.CurveLinear], animations: {
+            self.progressIndicator.frame.origin.x = progress
+        }, completion: nil)
+    }
+    
+    func stopAnitatingCursor() {
+        progressIndicator.frame.origin.x = -2
+        progressTimer.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -127,12 +154,12 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return jam.users.count
+        return users.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = userCollection.dequeueReusableCellWithReuseIdentifier("UserCell", forIndexPath: indexPath) as! UserCell
-        cell.user = jam.users[indexPath.row]
+        cell.user = users[indexPath.row]
         return cell
     }
     
