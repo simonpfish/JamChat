@@ -88,6 +88,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         // set up the search bar
         searchBar.delegate = self
+        searchBar.barTintColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
         
         // set up the table view
         collectionView.delegate = self
@@ -146,8 +147,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         super.viewWillAppear(animated)
         
         let randomNumber = arc4random_uniform(UInt32(titleGenerator.count))
-        self.titleLabel.placeholder = titleGenerator[Int(randomNumber)]
-        
+        self.titleLabel.placeholder = titleGenerator[Int(randomNumber)]        
     }
     
     override func didReceiveMemoryWarning() {
