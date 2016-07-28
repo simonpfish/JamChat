@@ -210,6 +210,11 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         timer = NSTimer.scheduledTimerWithTimeInterval(60/80, target: slowTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 80
         
+        //modify pulse view when selected
+        slowTempoView.backgroundColor = selectedColor
+        mediumTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        fastTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        
         // modify tempo labels when selected
         slowLabel.textColor = UIColor.whiteColor()
         mediumLabel.textColor = UIColor.whiteColor()
@@ -230,6 +235,11 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         timer = NSTimer.scheduledTimerWithTimeInterval(60/110, target: mediumTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 110
         
+        //modify pulse view when selected
+        slowTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        mediumTempoView.backgroundColor = selectedColor
+        fastTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        
         // modify tempo labels when selected
         slowLabel.textColor = UIColor.whiteColor()
         mediumLabel.textColor = UIColor.whiteColor()
@@ -249,6 +259,11 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/140, target: fastTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 140
+        
+        //modify pulse view when selected
+        slowTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        mediumTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        fastTempoView.backgroundColor = selectedColor
         
         // modify tempo labels when selected
         slowLabel.textColor = UIColor.whiteColor()
@@ -388,6 +403,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         // unselects previously selected friends from the table view
         
         for indexPath in collectionView.indexPathsForSelectedItems() ?? [] {
+            collectionView.cellForItemAtIndexPath(indexPath)?.prepareForReuse()
             collectionView.cellForItemAtIndexPath(indexPath)?.backgroundColor = UIColor.whiteColor()
         }
         
