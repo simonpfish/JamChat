@@ -11,7 +11,7 @@ import UIKit
 class LoopViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var jam: Jam!
-    var array: [Loops] = []
+    var array: [Loop] = []
 
     @IBOutlet weak var loopCollection: UICollectionView!
     
@@ -20,7 +20,7 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         loopCollection.dataSource = self
         
         if(jam.tempo == 80){
-            array = [Loops.loop1BPM80, Loops.loop2BPM80, Loops.loop3BPM80, Loops.loop4BPM80, Loops.loop5BPM80, Loops.loop6BPM80]
+            array = [Loop.loop1BPM80, Loop.loop2BPM80, Loop.loop3BPM80, Loop.loop4BPM80, Loop.loop5BPM80, Loop.loop6BPM80]
         }
 
         super.viewDidLoad()

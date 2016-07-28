@@ -12,7 +12,7 @@ class LoopCell: UICollectionViewCell {
 
     @IBOutlet weak var selectLoop: UIButton!
     
-    var loop: Loops!{
+    var loop: Loop!{
         didSet{
             selectLoop.setTitle(loop.name, forState: .Normal)
             selectLoop.backgroundColor = loop.color
