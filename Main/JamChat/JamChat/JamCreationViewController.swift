@@ -387,13 +387,8 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
                 
         // unselects previously selected friends from the table view
         
-//        let paths = self.collectionView.indexPathsForSelectedItems() ?? []
-//        for path in paths {
-//            collectionView.deselectItemAtIndexPath(path, animated: false)
-//        }
-        
         for indexPath in collectionView.indexPathsForSelectedItems() ?? [] {
-            collectionView.deselectItemAtIndexPath(indexPath, animated: false)
+            collectionView.cellForItemAtIndexPath(indexPath)?.backgroundColor = UIColor.whiteColor()
         }
         
         onMedium(nil)
