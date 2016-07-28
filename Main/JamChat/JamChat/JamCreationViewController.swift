@@ -11,79 +11,91 @@ import RAMReel
 import XLPagerTabStrip
 import IntervalSlider
 import BAPulseView
+import GMStepper
 
-class JamCreationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, IndicatorInfoProvider, UITextFieldDelegate {
+class JamCreationViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, IndicatorInfoProvider, UITextFieldDelegate {
     
     @IBInspectable var selectedColor: UIColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
     
-    var dataSource: SimplePrefixQueryDataSource!
-    var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
     var selectedFriendIDs: [String] = []
+    
     var tempo: Int = 110
     var timer = NSTimer()
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     @IBOutlet weak var keyboardDismissView: UIView!
-    @IBOutlet weak var totaltime: UILabel!
+    
+    @IBOutlet weak var stepperView: GMStepper!
+    @IBOutlet weak var jamLengthLabel: UILabel!
+    
+    var minusButton: UIButton!
+    var plusButton: UIButton!
+    var stepperLabel: UILabel!
+    
     @IBOutlet weak var searchBar: UISearchBar!
     var resultSearchController = UISearchController()
-    @IBOutlet weak var durationSliderView: UIView!
+    
     @IBOutlet weak var titleLabel: UITextField!
+    
     @IBOutlet weak var slowTempoView: BAPulseView!
     @IBOutlet weak var mediumTempoView: BAPulseView!
     @IBOutlet weak var fastTempoView: BAPulseView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var slowLabel: UILabel!
     @IBOutlet weak var mediumLabel: UILabel!
     @IBOutlet weak var fastLabel: UILabel!
+    
+    @IBOutlet weak var createButton: UIButton!
     
     var titleGenerator: [String] = []
     
     // stores the friends who match the user's search
     var filtered: [User] = []
     
-    // creates an interval slider
-    private var messageDurationSlider: IntervalSlider! {
-        didSet {
-            self.messageDurationSlider.tag = 1
-            self.durationSliderView.addSubview(self.messageDurationSlider)
-            self.messageDurationSlider.delegate = self
-        }
-    }
-    
-    // array with all the possible jam duration lengths (in seconds)
-    private var messageDurationValues: [Float] {
-        return [4, 8, 12, 16]
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // sets up the stepper
+        stepperView.labelFont = UIFont(name: "AvenirNext-Bold", size: 21.0)!
+        stepperView.buttonsBackgroundColor = selectedColor
+        stepperView.labelBackgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        stepperView.limitHitAnimationColor = UIColor.redColor()
+    
+        // retrieves references to UI elements from the stepperView
+        minusButton = stepperView.subviews[0] as! UIButton
+        minusButton.addTarget(self, action: #selector(onMinus), forControlEvents: .TouchUpInside)
         
+        plusButton = stepperView.subviews[1] as! UIButton
+        plusButton.addTarget(self, action: #selector(onPlus), forControlEvents: .TouchUpInside)
+        
+        stepperLabel = stepperView.subviews[2] as! UILabel
+        
+        // adds a listener for when the stepperView uses the panHandle gesture
+        stepperView.subviews[2].gestureRecognizers![0].addTarget(self, action: #selector(onJamLengthChanged))
+        
+        // jam length defaults to 'MEDIUM'
+        jamLengthLabel.text = "MEDIUM"
         
         // format create button
         createButton.layer.cornerRadius = 7
-        createButton.backgroundColor = UIColor.clearColor()
+        createButton.backgroundColor = selectedColor
         createButton.layer.borderWidth = 1
         createButton.layer.borderColor = selectedColor.CGColor
-        createButton.titleLabel!.textColor = selectedColor
         
         // set up the search bar
         searchBar.delegate = self
+        searchBar.barTintColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
         
         // set up the table view
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.tableView.allowsMultipleSelection = true
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        self.collectionView.allowsMultipleSelection = true
         
         // read in a text file of random jam titles and store it in an array
         let path = NSBundle.mainBundle().pathForResource("jamNames", ofType: "txt")
         let jamTitles = try! String(contentsOfFile: path!)
         titleGenerator = jamTitles.componentsSeparatedByString("\n")
         
-        // set up interval slider
-        let result = self.createSources()
-        self.messageDurationSlider = IntervalSlider(frame: self.durationSliderView.bounds, sources: result.sources, options: result.options)
         
         //sets up tempo buttons
         setTempoButtons()
@@ -103,11 +115,19 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
                             for friend in User.currentUser!.friends {
                                 self.filtered.append(friend)
                             }
-                            self.tableView.reloadData()
+                            self.collectionView.reloadData()
                         }
                     }
                 }
             })
+        } else {
+            
+            // if the friends have already been downloaded
+            
+            for friend in User.currentUser!.friends {
+                self.filtered.append(friend)
+            }
+            self.collectionView.reloadData()
         }
         
         //adds tap to dismiss keyboard
@@ -119,21 +139,73 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         onMedium(nil)
     }
     
-    //dismisses keyboard on "Done"
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        titleLabel.resignFirstResponder()
-        return true
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let randomNumber = arc4random_uniform(UInt32(titleGenerator.count))
+        self.titleLabel.placeholder = titleGenerator[Int(randomNumber)]        
     }
     
-    //dismisses keyboard on tap
-    func dismissKeyboard() {
-        view.endEditing(true)
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
-    //updates jam time label
-    func updateJamTime(){
-        let duration = Int(60.0/Double(tempo)*4.0*Double(messageDurationSlider.getValue()))
-        totaltime.text = "\(duration)"
+    // updates stepper values
+    func updateStepperValues(defaultValue: Double, min: Double, max: Double, stepper: Double) {
+        stepperView.value = defaultValue
+        stepperView.minimumValue = min
+        stepperView.maximumValue = max
+        stepperView.stepValue = stepper
+        
+        stepperLabel.text = stepperLabel.text! + " seconds"
+    }
+    
+    func onJamLengthChanged() {
+        
+        if (stepperLabel.text)?.rangeOfString("seconds") == nil {
+            stepperLabel.text = stepperLabel.text! + " seconds"
+        }
+        
+        if stepperLabel.text!.containsString("36") || stepperLabel.text!.containsString("26") || stepperLabel.text!.containsString("20") {
+            jamLengthLabel.text = "LONG"
+        } else if stepperLabel.text!.containsString("24") || stepperLabel.text!.containsString("17") || stepperLabel.text!.containsString("13") {
+            jamLengthLabel.text = "MEDIUM"
+        } else if stepperLabel.text!.containsString("6") || stepperLabel.text!.containsString("8") || stepperLabel.text!.containsString("12") {
+            jamLengthLabel.text = "SHORT"
+        }
+        
+    }
+    
+    // updates stepperView UI elements when the minus button is pressed
+    func onMinus(sender: AnyObject) {
+        
+        if jamLengthLabel.text == "LONG" {
+            jamLengthLabel.text = "MEDIUM"
+        } else if jamLengthLabel.text == "MEDIUM" {
+            jamLengthLabel.text = "SHORT"
+        } else if jamLengthLabel.text == "SHORT" {
+        }
+        
+        if (stepperLabel.text)?.rangeOfString("seconds") == nil {
+            stepperLabel.text = stepperLabel.text! + " seconds"
+        }
+    }
+    
+    // updates stepperView UI elements when the plus button is pressed
+    func onPlus(sender: AnyObject) {
+        
+        if jamLengthLabel.text == "SHORT" {
+            jamLengthLabel.text = "MEDIUM"
+        } else if jamLengthLabel.text == "MEDIUM" {
+            jamLengthLabel.text = "LONG"
+        } else if jamLengthLabel.text == "LONG" {
+        }
+        
+        if (stepperLabel.text)?.rangeOfString("seconds") == nil {
+            stepperLabel.text = stepperLabel.text! + " seconds"
+        }
     }
     
     func setTempoButtons(){
@@ -161,16 +233,30 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         timer = NSTimer.scheduledTimerWithTimeInterval(60/80, target: slowTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 80
         
+        //modify pulse view background color when selected
+        slowTempoView.backgroundColor = selectedColor
+        mediumTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        fastTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        
         // modify tempo labels when selected
-        slowLabel.textColor = selectedColor
-        mediumLabel.textColor = UIColor.darkGrayColor()
-        fastLabel.textColor = UIColor.darkGrayColor()
+        slowLabel.textColor = UIColor.whiteColor()
+        mediumLabel.textColor = UIColor.whiteColor()
+        fastLabel.textColor = UIColor.whiteColor()
         
         slowLabel.font = UIFont.boldSystemFontOfSize(13.0)
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
         
-        updateJamTime()
+        var defaultValue = 24.0
+        if jamLengthLabel.text == "SHORT" {
+            defaultValue -= 12
+        } else if jamLengthLabel.text == "LONG" {
+            defaultValue += 12
+        }
+        // updates the stepper values and sets the jamLengthLabel (defaults to 'MEDIUM')
+        updateStepperValues(defaultValue, min: 12, max: 36, stepper: 12)
+        updateStepperValues(defaultValue, min: 12, max: 36, stepper: 12)
+        
     }
     
     func onMedium (sender: UITapGestureRecognizer?){
@@ -178,16 +264,31 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         timer = NSTimer.scheduledTimerWithTimeInterval(60/110, target: mediumTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 110
         
+        //modify pulse view background color when selected
+        slowTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        mediumTempoView.backgroundColor = selectedColor
+        fastTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        
         // modify tempo labels when selected
-        slowLabel.textColor = UIColor.darkGrayColor()
-        mediumLabel.textColor = selectedColor
-        fastLabel.textColor = UIColor.darkGrayColor()
+        slowLabel.textColor = UIColor.whiteColor()
+        mediumLabel.textColor = UIColor.whiteColor()
+        fastLabel.textColor = UIColor.whiteColor()
         
         slowLabel.font = UIFont.systemFontOfSize(13.0)
         mediumLabel.font = UIFont.boldSystemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
         
-        updateJamTime()
+        var defaultValue = 17.0
+        if jamLengthLabel.text == "SHORT" {
+            defaultValue -= 9
+        } else if jamLengthLabel.text == "LONG" {
+            defaultValue += 9
+        }
+        
+        // updates the stepper values and sets the jamLengthLabel (defaults to 'MEDIUM')
+        updateStepperValues(defaultValue, min: 8, max: 26, stepper: 9)
+        updateStepperValues(defaultValue, min: 8, max: 26, stepper: 9)
+        
     }
     
     func onFast (sender: UITapGestureRecognizer?){
@@ -195,16 +296,31 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         timer = NSTimer.scheduledTimerWithTimeInterval(60/140, target: fastTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 140
         
+        //modify pulse view background color when selected
+        slowTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        mediumTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        fastTempoView.backgroundColor = selectedColor
+        
         // modify tempo labels when selected
-        slowLabel.textColor = UIColor.darkGrayColor()
-        mediumLabel.textColor = UIColor.darkGrayColor()
-        fastLabel.textColor = selectedColor
+        slowLabel.textColor = UIColor.whiteColor()
+        mediumLabel.textColor = UIColor.whiteColor()
+        fastLabel.textColor = UIColor.whiteColor()
         
         slowLabel.font = UIFont.systemFontOfSize(13.0)
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.boldSystemFontOfSize(13.0)
         
-        updateJamTime()
+        var defaultValue = 13.0
+        if jamLengthLabel.text == "SHORT" {
+            defaultValue -= 7
+        } else if jamLengthLabel.text == "LONG" {
+            defaultValue += 7
+        }
+        
+        // updates the stepper values and sets the jamLengthLabel (defaults to 'MEDIUM')
+        updateStepperValues(defaultValue, min: 6, max: 20, stepper: 7)
+        updateStepperValues(defaultValue, min: 6, max: 20, stepper: 7)
+        
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -212,7 +328,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
         let array = ((User.currentUser?.friends)! as NSArray).filteredArrayUsingPredicate(searchPredicate)
         self.filtered = array as! [User]
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
         
     }
     
@@ -232,7 +348,7 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
             
         }
 
-        tableView.reloadData()
+        collectionView.reloadData()
     }
     
     // Show cancel button on search bar when being used
@@ -246,28 +362,30 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         searchBar.resignFirstResponder()
         searchBar.text = ""
         filtered = (User.currentUser?.friends)!
-        tableView.reloadData()
+        collectionView.reloadData()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return User.currentUser?.friends.count ?? 0
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filtered.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell
-        //cell.user = User.currentUser?.friends[indexPath.row]
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
         cell.user = filtered[indexPath.row]
         return cell
     }
+
     
     /**
-     Highlights and added a check mark to a selected cell
+     Highlights a selected cell
      */
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! FriendCell
+        let currentCell = collectionView.cellForItemAtIndexPath(indexPath) as! FriendCell
+        currentCell.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        currentCell.layer.cornerRadius = 4
+        
         let selectedFriend = currentCell.nameLabel.text
         
         // Loops through all of the user's friends
@@ -286,94 +404,20 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
         }
-        
     }
+    
     
     /**
      Unhighlights and removes a check mark from an unselected cell
      */
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! FriendCell
+        let currentCell = collectionView.cellForItemAtIndexPath(indexPath) as! FriendCell
+        currentCell.backgroundColor = UIColor.whiteColor()
         
         self.selectedFriendIDs.removeAtIndex(selectedFriendIDs.indexOf(currentCell.user.facebookID)!)
-
+        
         print("Removed friend from chat in creation: \(currentCell.nameLabel.text!)")
-    }
-    
-    // formats the slider and the jam duration text
-    private func createSources() -> (sources: [IntervalSliderSource], options: [IntervalSliderOption]) {
-        
-        // Sample of equally spaced intervals
-        var sources = [IntervalSliderSource]()
-        var appearanceValue: Float = 0.5
-        
-        for data in self.messageDurationValues {
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 20))
-            label.text = "\(Int(data))"
-            label.font = UIFont.systemFontOfSize(CGFloat(12))
-            label.textColor = selectedColor
-            label.textAlignment = .Center
-            let source = IntervalSliderSource(validValue: data, appearanceValue: appearanceValue, label: label)
-            sources.append(source)
-            
-            // sets the spacing between the duration text
-            appearanceValue += 33
-        }
-        
-        // image used for the thumb image on the interval slider
-        let thumbView = UIView(frame: CGRectMake(0, 0 , 20, 20))
-        thumbView.backgroundColor = UIColor.lightGrayColor()
-        thumbView.layer.cornerRadius = thumbView.bounds.width * 0.5
-        thumbView.clipsToBounds = true
-        let image = imageFromViewWithCornerRadius(thumbView)
-        
-        // sets the track tint color and the thumb image
-        let options: [IntervalSliderOption] = [
-            .MinimumTrackTintColor(selectedColor),
-            .ThumbImage(image)
-        ]
-        
-        return (sources, options)
-    }
-    
-    func imageFromViewWithCornerRadius(view: UIView) -> UIImage {
-        // maskImage
-        let imageBounds = CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height)
-        let path = UIBezierPath(roundedRect: imageBounds, cornerRadius: view.bounds.size.width * 0.5)
-        UIGraphicsBeginImageContextWithOptions(path.bounds.size, false, 0)
-        view.backgroundColor?.setFill()
-        path.fill()
-        let maskImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        // drawImage
-        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
-        let context = UIGraphicsGetCurrentContext()
-        CGContextClipToMask(context, imageBounds, maskImage.CGImage)
-        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image;
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-        let randomNumber = arc4random_uniform(UInt32(titleGenerator.count))
-        self.titleLabel.placeholder = titleGenerator[Int(randomNumber)]
-        
-    }
-    
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "New")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func onCreate(sender: AnyObject) {
@@ -386,11 +430,10 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
         let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
         let home = homeNavigation.viewControllers[0] as! HomeViewController
-        home.addNewJam(Double(totaltime.text!)!, userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
+        home.addNewJam(stepperView.value, userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
+
         self.selectedFriendIDs = []
         self.titleLabel.text = ""
-        
-        self.totaltime.text = ""
         
         slowLabel.textColor = selectedColor
         mediumLabel.textColor = UIColor.darkGrayColor()
@@ -400,14 +443,30 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
                 
-        // unselects previously selected friends from the table view
-        let paths = self.tableView.indexPathsForSelectedRows ?? []
-        for path in paths {
-            tableView.deselectRowAtIndexPath(path, animated: false)
-            tableView.cellForRowAtIndexPath(path)?.accessoryType = UITableViewCellAccessoryType.None
+        // unselects previously selected friends from the table view, and prepares the cell for reuse
+        for indexPath in collectionView.indexPathsForSelectedItems() ?? [] {
+            collectionView.cellForItemAtIndexPath(indexPath)?.prepareForReuse()
+            collectionView.cellForItemAtIndexPath(indexPath)?.backgroundColor = UIColor.whiteColor()
         }
         
+        // resets the selected tempo to "Moderate"
         onMedium(nil)
+    }
+
+    
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "New")
+    }
+    
+    //dismisses keyboard on "Done"
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        titleLabel.resignFirstResponder()
+        return true
+    }
+    
+    //dismisses keyboard on tap
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 
     /*
@@ -420,22 +479,4 @@ class JamCreationViewController: UIViewController, UITableViewDelegate, UITableV
     }
     */
 
-}
-
-extension JamCreationViewController: IntervalSliderDelegate {
-    func confirmValue(slider: IntervalSlider, validValue: Float) {
-        updateJamTime()
-        switch slider.tag {
-        //case 1:
-            //self.valueLabel1.text = "\(Int(validValue))"
-        default:
-            break
-        }
-    }
-}
-
-struct FriendSearchTheme: Theme {
-    let font: UIFont = UIFont(name: "Roboto", size: 30)!
-    let listBackgroundColor: UIColor = UIColor.clearColor()
-    let textColor: UIColor = UIColor.blackColor()
 }

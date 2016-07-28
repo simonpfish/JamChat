@@ -271,4 +271,34 @@ class Jam: NSObject {
             }
         }
     }
+    
+    /**
+     Downloads the specific user's jams, and stores them in an array
+     */
+    class func downloadSpecificUserJams(specificUser: User, success: ([Jam]) -> ()) {
+        print("Downloading jams for user: \(specificUser.name!)")
+        
+        let query = PFQuery(className: "Jam")
+        
+        query.whereKey("users", containsString: specificUser.facebookID)
+        query.orderByDescending("updatedAt")
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+            if error != nil {
+            } else {
+                var jams: [Jam] = []
+                var loadedCount = 0
+                for object in objects ?? [] {
+                    jams.append(Jam(object: object))
+                    jams.last?.loadData({
+                        loadedCount += 1
+                        if loadedCount == objects!.count {
+                            print("Succesfully downloaded jams for user: \(specificUser.name!)")
+                            specificUser.jams = jams
+                            success(jams)
+                        }
+                    })
+                }
+            }
+        }
+    }
 }

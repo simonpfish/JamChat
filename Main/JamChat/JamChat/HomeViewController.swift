@@ -87,13 +87,6 @@ import PubNub
     
     func loadFeed() {
         
-        // download the tracks the user has created, if they haven't already been downloaded
-        if User.currentUser?.tracks.count == 0 {
-            User.currentUser?.getUserTracks(){
-                print("Loading user tracks")
-            }
-        }
-        
         Jam.downloadCurrentUserJams({ (jams: [Jam]) in
             self.jams = jams
             print("Reloading table view")

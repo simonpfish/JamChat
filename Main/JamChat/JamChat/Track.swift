@@ -65,10 +65,13 @@ class Track: NSObject {
         let file = object["media"] as! PFFile
         
         if fileManager.fileExistsAtPath(filepath) {
+            print("Audio file found in storage")
             self.player = try? AKAudioPlayer(file: AKAudioFile(forReading: NSURL(string: self.filepath)!))
             Track.mixer.connect(self.player!)
             success()
         } else {
+            print("Downloading audio file")
+
             file.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) in
                 if let error = error {
                     failure(error)
