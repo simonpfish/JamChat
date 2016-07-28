@@ -156,7 +156,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8w-1D-pLU">
-                                <rect key="frame" x="0.0" y="588" width="375" height="85"/>
+                                <rect key="frame" x="0.0" y="590" width="375" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="08k-iY-BQg"/>
                                 </constraints>
@@ -195,7 +195,7 @@
                             <constraint firstItem="dm4-bL-YwA" firstAttribute="leading" secondItem="vNd-DE-H8h" secondAttribute="leading" id="ivz-zk-Qjy"/>
                             <constraint firstItem="g8w-1D-pLU" firstAttribute="leading" secondItem="1jL-TM-TyA" secondAttribute="leading" id="pqp-7z-JQE"/>
                             <constraint firstItem="dm4-bL-YwA" firstAttribute="leading" secondItem="V9c-Nr-m5X" secondAttribute="leading" id="s1q-IG-qjq"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="g8w-1D-pLU" secondAttribute="bottom" constant="-6" id="tKA-8X-041"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="g8w-1D-pLU" secondAttribute="bottom" constant="-8" id="tKA-8X-041"/>
                             <constraint firstItem="dm4-bL-YwA" firstAttribute="leading" secondItem="Dla-u1-i4Y" secondAttribute="leading" id="zIu-sQ-P8e"/>
                         </constraints>
                     </view>
