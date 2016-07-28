@@ -56,6 +56,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         super.viewDidLoad()
         
         // sets up the stepper
+        stepperView.labelFont = UIFont(name: "AvenirNext-Bold", size: 21.0)!
         stepperView.buttonsBackgroundColor = selectedColor
         stepperView.labelBackgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
         stepperView.limitHitAnimationColor = UIColor.redColor()
@@ -68,6 +69,15 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         plusButton.addTarget(self, action: #selector(onPlus), forControlEvents: .TouchUpInside)
         
         stepperLabel = stepperView.subviews[2] as! UILabel
+        
+        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .ValueChanged)
+        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .AllEvents)
+        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .AllTouchEvents)
+        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .AllEditingEvents)
+        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .TouchDragInside)
+        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .PrimaryActionTriggered)
+        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .TouchDragEnter)
+        
         jamLengthLabel.text = "MEDIUM"
         
         // format create button
@@ -155,14 +165,22 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         stepperLabel.text = stepperLabel.text! + " seconds"
     }
     
+    func onJamTimeChanged(sender: AnyObject) {
+        
+        if (stepperLabel.text)?.rangeOfString("seconds") == nil {
+            stepperLabel.text = stepperLabel.text! + " seconds"
+        }
+
+    }
+    
     // updates stepperView UI elements when the minus button is pressed
     func onMinus(sender: AnyObject) {
         
-        if jamLengthLabel.text == "SHORT" {
+        if jamLengthLabel.text == "LONG" {
+            jamLengthLabel.text = "MEDIUM"
         } else if jamLengthLabel.text == "MEDIUM" {
             jamLengthLabel.text = "SHORT"
-        } else if jamLengthLabel.text == "LONG" {
-            jamLengthLabel.text = "MEDIUM"
+        } else if jamLengthLabel.text == "SHORT" {
         }
         
         if (stepperLabel.text)?.rangeOfString("seconds") == nil {
@@ -210,7 +228,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         timer = NSTimer.scheduledTimerWithTimeInterval(60/80, target: slowTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 80
         
-        //modify pulse view when selected
+        //modify pulse view background color when selected
         slowTempoView.backgroundColor = selectedColor
         mediumTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
         fastTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
@@ -235,7 +253,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         timer = NSTimer.scheduledTimerWithTimeInterval(60/110, target: mediumTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 110
         
-        //modify pulse view when selected
+        //modify pulse view background color when selected
         slowTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
         mediumTempoView.backgroundColor = selectedColor
         fastTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
@@ -260,7 +278,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         timer = NSTimer.scheduledTimerWithTimeInterval(60/140, target: fastTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 140
         
-        //modify pulse view when selected
+        //modify pulse view background color when selected
         slowTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
         mediumTempoView.backgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
         fastTempoView.backgroundColor = selectedColor
