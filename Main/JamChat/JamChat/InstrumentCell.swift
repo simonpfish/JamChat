@@ -61,17 +61,35 @@ class InstrumentCell: UICollectionViewCell {
         
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             
-            if self.numberIsDisplayed {
-                self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(0.0)
-                self.countLabel.hidden = true
-                self.numberIsDisplayed = false
-            } else {
-                self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(1)
-                self.countLabel.hidden = false
-                self.numberIsDisplayed = true
-            }
+            // displays the countLabel when the instrument's image is tapped
+            self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(1)
+            self.countLabel.hidden = false
+            self.numberIsDisplayed = true
+            
+            UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                
+                // reverts back to the instrument's image after 3 seconds
+                self.delay(3.0, closure: {
+                    self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(0.0)
+                    self.countLabel.hidden = true
+                    self.numberIsDisplayed = false
+                    
+                })
+                
+                }, completion: nil)
             
             }, completion: nil)
+    }
+    
+    func delay(delay: Double, closure: ()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(),
+            closure
+        )
     }
     
 }

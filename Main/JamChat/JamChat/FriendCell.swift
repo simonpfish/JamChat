@@ -15,6 +15,10 @@ class FriendCell: UICollectionViewCell {
     
     @IBInspectable var selectedColor: UIColor = UIColor(red: 247/255, green: 148/255, blue: 0/255, alpha: 1.0)
     
+    
+    var presence: Bool = false
+    var recording: Bool = true
+    
     var user: User! {
         didSet {
             if let nameLabel = nameLabel {
@@ -22,6 +26,18 @@ class FriendCell: UICollectionViewCell {
                 nameLabel.textColor = UIColor.darkGrayColor()
             }
             profilePictureView.setImageWithURL(user.profileImageURL)
+            
+            
+            if recording {
+                profilePictureView.layer.borderColor = UIColor.redColor().CGColor
+                profilePictureView.layer.borderWidth = 2.0
+            } else if presence {
+                profilePictureView.layer.borderColor = UIColor.greenColor().CGColor
+                profilePictureView.layer.borderWidth = 2.0
+            } else {
+                profilePictureView.layer.borderColor = UIColor.clearColor().CGColor
+                profilePictureView.layer.borderWidth = 2.0
+            }
         }
     }
     
