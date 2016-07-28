@@ -70,14 +70,6 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         stepperLabel = stepperView.subviews[2] as! UILabel
         
-        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .ValueChanged)
-        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .AllEvents)
-        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .AllTouchEvents)
-        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .AllEditingEvents)
-        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .TouchDragInside)
-        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .PrimaryActionTriggered)
-        stepperView.addTarget(self, action: #selector(onJamTimeChanged), forControlEvents: .TouchDragEnter)
-        
         jamLengthLabel.text = "MEDIUM"
         
         // format create button
@@ -163,14 +155,6 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         stepperView.stepValue = stepper
         
         stepperLabel.text = stepperLabel.text! + " seconds"
-    }
-    
-    func onJamTimeChanged(sender: AnyObject) {
-        
-        if (stepperLabel.text)?.rangeOfString("seconds") == nil {
-            stepperLabel.text = stepperLabel.text! + " seconds"
-        }
-
     }
     
     // updates stepperView UI elements when the minus button is pressed
