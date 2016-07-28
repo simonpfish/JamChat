@@ -107,10 +107,6 @@ import PubNub
                 }
                 
                 self.appDelegate.client.subscribeToChannels(self.jamIDs, withPresence: true)
-                let userToken = NSUserDefaults.standardUserDefaults().objectForKey("DeviceToken") as! NSData
-                self.appDelegate.client.addPushNotificationsOnChannels(self.jamIDs, withDevicePushToken: userToken) { (status: PNAcknowledgmentStatus) in
-                    print(status.debugDescription)
-                }
             }
             
         }) { (error: NSError) in

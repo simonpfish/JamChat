@@ -122,6 +122,7 @@ class User: NSObject {
         PFUser.logOut()
         currentUser = nil
         FBSDKLoginManager().logOut()
+        PubNubHandler.removePushNotifications()
     }
     
     /**
@@ -370,6 +371,7 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
                 User.currentUser?.updateDataFromProfile(profile)
                 self.controller!.dismissViewControllerAnimated(true, completion: nil)
                 self.loginSuccess?()
+                PubNubHandler.subscribeToUserNotifications(User.currentUser!)
                 print("Logged in \(User.currentUser!.name)")
             }
             

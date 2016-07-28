@@ -35,7 +35,7 @@ class Jam: NSObject {
     }
     
     private var messageIDs: [String] = []
-    private var userIDs: [String] = []
+    private(set) var userIDs: [String] = []
     private var object: PFObject!
     
     /**
