@@ -250,11 +250,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             }
             
             delay(self.jam.messageDuration) {
+                self.tempoTimer.invalidate()
                 self.sendingMessageView.startAnimation()
                 self.keyboardButton.hidden = true
             }
             
-            jam.tempoTimer = self.tempoTimer
             jam.recordSend(keyboardController.instrument, success: {
                 
                 for subview in self.waveformContainer.subviews {
