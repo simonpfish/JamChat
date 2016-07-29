@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import AudioKit
 import PubNub
+import NVActivityIndicatorView
 
 class Jam: NSObject {
     
@@ -37,6 +38,13 @@ class Jam: NSObject {
     private var messageIDs: [String] = []
     private(set) var userIDs: [String] = []
     private var object: PFObject!
+    
+    var tempoTimer: NSTimer! {
+        didSet {
+            print("WOOHOO")
+        }
+    }
+
     
     /**
      Loads jam from an exisiting PFObject.
@@ -144,6 +152,7 @@ class Jam: NSObject {
      Records a track from a certain audio node for the set track duration, adds it to a message and sends it immediately.
      */
     func recordSend(instrument: Instrument, success: () -> (), failure: (NSError) -> ()) {
+        
         let message: Message
         if messages.count > 0 {
             message = Message(previousMessage: messages[messages.count-1])
@@ -153,6 +162,7 @@ class Jam: NSObject {
         
         let track = Track()
         track.recordInstrument(instrument, duration: messageDuration) {
+            self.tempoTimer.invalidate()
             message.add(track)
             message.send({ (_: Bool, error: NSError?) in
                 if let error = error {

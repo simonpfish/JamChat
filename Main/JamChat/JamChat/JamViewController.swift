@@ -34,8 +34,10 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var waveformContainer: UIView!
     @IBOutlet weak var keyboardButton: CircleMenu!
     @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
+    @IBOutlet weak var sendingMessageView: NVActivityIndicatorView!
     @IBOutlet weak var recordView: BAPulseView!
     @IBOutlet weak var countdownLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +50,12 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.type = .LineScaleParty
         loadingIndicatorView.color = loadingColor
+        
+        sendingMessageView.hidesWhenStopped = true
+        sendingMessageView.type = .LineScale
+        sendingMessageView.color = loadingColor
+        
+        self.sendingMessageView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
         
         progressIndicator.layer.cornerRadius = progressIndicator.frame.width/2
 
@@ -101,6 +109,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                         self.waveformContainer.addSubview(waveformView)
                     }
                 }
+                
                 self.loadingIndicatorView.stopAnimation()
                 let keyboardController = self.childViewControllers[0] as! KeyboardViewController
                 keyboardController.instrument.reload()
@@ -234,16 +243,27 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 self.progressIndicator.frame.origin.x = -2
             }
             
+            delay(self.jam.messageDuration) {
+                self.sendingMessageView.startAnimation()
+                self.keyboardButton.hidden = true
+            }
+            
+            jam.tempoTimer = self.tempoTimer
             jam.recordSend(keyboardController.instrument, success: {
-                self.tempoTimer.invalidate()
+                
                 for subview in self.waveformContainer.subviews {
                     if let waveform = subview as? FDWaveformView {
                         waveform.removeFromSuperview()
                     }
                 }
+                
+                self.sendingMessageView.stopAnimation()
+                self.keyboardButton.hidden = false
                 self.drawWaveforms()
                 keyboardController.instrument.reload()
                 print("Message sent!")
+                
+                
             }) { (error: NSError) in
                 print(error.localizedDescription)
             }
@@ -258,6 +278,17 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             }
             countdown = countdown - 1
         }
+    }
+    
+    func delay(delay: Double, closure: ()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(),
+            closure
+        )
     }
     
 
