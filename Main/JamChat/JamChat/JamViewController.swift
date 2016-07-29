@@ -77,6 +77,12 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         //customizes loop button to be a circle
         loopButton.layer.cornerRadius = 0.5 * loopButton.bounds.size.width
 
+        for user in jam!.users {
+            if user.facebookID != User.currentUser!.facebookID {
+                users.append(user)
+            }
+        }
+        
         drawWaveforms()
     }
 
