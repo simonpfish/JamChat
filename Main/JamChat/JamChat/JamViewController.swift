@@ -260,7 +260,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         loopButton.hidden = true
         countdownLabel.text = "\(countdown)"
         tempoTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(onBeat), userInfo: nil, repeats: true)
-        metronomeCount()
+        metronome.play()
     }
     
     func cancelCountdown() {
@@ -268,16 +268,22 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         countdownLabel.text = "REC"
         tempoTimer.invalidate()
         isCounting = false
+        metronome.stop()
         countdown = 4
     }
     
-    //Plays metronome count-in
-    func metronomeCount(){
-        // Fix for different tempos
-        let metronome = Metronome.metronomeBPM80
-        metronome.play()
+    var metronome: Metronome {
+        switch jam.tempo! {
+        case 110:
+            return Metronome.metronomeBPM110
+        case 140:
+            return Metronome.metronomeBPM140
+        default:
+            return Metronome.metronomeBPM80
+            
+        }
     }
-    
+
     func startRecording(){
         isRecording = true
         isCounting = false
