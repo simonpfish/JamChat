@@ -205,6 +205,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func onRecord(sender: UITapGestureRecognizer) {
+        self.keyboardButton.hidden = true
+        loopButton.hidden = true
         countdownLabel.text = "\(countdown)"
         countdownTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
         metronomeCount()
@@ -213,25 +215,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     //Plays metronome count-in
     func metronomeCount(){
-        if (jam.tempo! == 80){
-            stringBPM = "80BPM"
-        }
-        else if (jam.tempo! == 110){
-            stringBPM = "110BPM"
-        }
-        else if (jam.tempo! == 140){
-            stringBPM = "140BPM"
-        }
-        
-        let path = NSBundle.mainBundle().pathForResource(stringBPM, ofType: "wav")!
-        let url = NSURL(fileURLWithPath: path)
-        do {
-            let sound = try AVAudioPlayer(contentsOfURL: url)
-            metronome = sound
-            sound.play()
-        } catch {
-            print("Couldn't load metronome sound file")
-        }
+        let metronome = Metronome.metronomeBPM80
+        metronome.play()
     }
     
     func startRecord(){
@@ -252,7 +237,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             delay(self.jam.messageDuration) {
                 self.tempoTimer.invalidate()
                 self.sendingMessageView.startAnimation()
-                self.keyboardButton.hidden = true
             }
             
             jam.recordSend(keyboardController.instrument, success: {
@@ -265,6 +249,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 
                 self.sendingMessageView.stopAnimation()
                 self.keyboardButton.hidden = false
+                self.loopButton.hidden = false
                 self.drawWaveforms()
                 keyboardController.instrument.reload()
                 print("Message sent!")

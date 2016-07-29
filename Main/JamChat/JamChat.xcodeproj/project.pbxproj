@@ -36,6 +36,7 @@
 		8C3552D41D4AAEE000795591 /* #4BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552CE1D4AAEE000795591 /* #4BPM140.wav */; };
 		8C3552D51D4AAEE000795591 /* #5BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552CF1D4AAEE000795591 /* #5BPM140.wav */; };
 		8C3552D61D4AAEE000795591 /* #6BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552D01D4AAEE000795591 /* #6BPM140.wav */; };
+		8C3552DA1D4BCB1B00795591 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3552D91D4BCB1B00795591 /* Metronome.swift */; };
 		8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D0FEB1D3D602C00380680 /* Instrument.swift */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
 		E70DC3BE1D46E28900B76CE7 /* PubNubHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */; };
@@ -124,6 +125,7 @@
 		8C3552CE1D4AAEE000795591 /* #4BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#4BPM140.wav"; sourceTree = "<group>"; };
 		8C3552CF1D4AAEE000795591 /* #5BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#5BPM140.wav"; sourceTree = "<group>"; };
 		8C3552D01D4AAEE000795591 /* #6BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#6BPM140.wav"; sourceTree = "<group>"; };
+		8C3552D91D4BCB1B00795591 /* Metronome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
 		8C9D0FEB1D3D602C00380680 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PubNubHandler.swift; sourceTree = "<group>"; };
 		E70DC3BF1D46EA0C00B76CE7 /* AKAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAudioPlayer.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 		E717EC141D2ED32F00AC812B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8C3552D91D4BCB1B00795591 /* Metronome.swift */,
 				8C3552BA1D4A0D8A00795591 /* Loop.swift */,
 				8C9D0FEB1D3D602C00380680 /* Instrument.swift */,
 				E717EC151D2ED34500AC812B /* User.swift */,
@@ -565,6 +568,7 @@
 				E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */,
 				8C01C09D1D4930BF007FB836 /* LoopViewController.swift in Sources */,
 				E7AB05571D429ED800A92C9E /* AKAudioFile+Exporting.swift in Sources */,
+				8C3552DA1D4BCB1B00795591 /* Metronome.swift in Sources */,
 				E70DC3C01D46EA0C00B76CE7 /* AKAudioPlayer.swift in Sources */,
 				E7E0D6981D3C0DCB005A840A /* UserCell.swift in Sources */,
 			);
