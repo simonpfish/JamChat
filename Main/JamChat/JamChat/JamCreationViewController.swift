@@ -460,6 +460,14 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         self.selectedFriendIDs = []
         self.titleLabel.text = ""
         
+        if(jamLengthLabel.text == "SHORT") {
+            onPlus(self)
+            numMeasures = 8
+        } else if (jamLengthLabel.text == "LONG") {
+            onMinus(self)
+            numMeasures = 8
+        }
+        
         slowLabel.textColor = selectedColor
         mediumLabel.textColor = UIColor.darkGrayColor()
         fastLabel.textColor = UIColor.darkGrayColor()
