@@ -205,6 +205,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func onRecord(sender: UITapGestureRecognizer) {
+        self.keyboardButton.hidden = true
+        loopButton.hidden = true
         countdownLabel.text = "\(countdown)"
         countdownTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
         metronomeCount()
@@ -252,7 +254,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             delay(self.jam.messageDuration) {
                 self.tempoTimer.invalidate()
                 self.sendingMessageView.startAnimation()
-                self.keyboardButton.hidden = true
             }
             
             jam.recordSend(keyboardController.instrument, success: {
@@ -265,6 +266,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 
                 self.sendingMessageView.stopAnimation()
                 self.keyboardButton.hidden = false
+                self.loopButton.hidden = false
                 self.drawWaveforms()
                 keyboardController.instrument.reload()
                 print("Message sent!")
