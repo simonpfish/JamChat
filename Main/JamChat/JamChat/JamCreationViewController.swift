@@ -21,6 +21,8 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     
     var tempo: Int = 110
     var timer = NSTimer()
+    var metronome: Metronome?
+    var firstLoad: Bool = true
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -248,6 +250,14 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func onSlow (sender: UITapGestureRecognizer?){
+        if (firstLoad == false){
+            metronome!.stop()
+        }
+        firstLoad = false
+        metronome = Metronome.metronomeBPM80
+        delay(60.0/80.0){
+        self.metronome!.play()
+        }
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/80, target: slowTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 80
@@ -282,6 +292,13 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func onMedium (sender: UITapGestureRecognizer?){
+        if (firstLoad == false){
+            metronome!.stop()
+            metronome = Metronome.metronomeBPM110
+            delay(60.0/110.0){
+            self.metronome!.play()
+        }
+        }
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/110, target: mediumTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 110
@@ -317,6 +334,14 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func onFast (sender: UITapGestureRecognizer?){
+        if (firstLoad == false){
+            metronome!.stop()
+        }
+        firstLoad = false
+        metronome = Metronome.metronomeBPM140
+        delay(60.0/140.0){
+        self.metronome!.play()
+        }
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/140, target: fastTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 140
@@ -515,5 +540,16 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func delay(delay: Double, closure: ()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(),
+            closure
+        )
+    }
 
 }
