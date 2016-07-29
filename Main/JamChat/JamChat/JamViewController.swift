@@ -24,10 +24,12 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var countdown: Int = 4
     var metronome: AVAudioPlayer!
     var stringBPM: String = ""
+    var inKeyboard: Bool = true
     
     @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
     
     @IBOutlet weak var progressIndicator: UIView!
+    @IBOutlet weak var loopContainer: UIView!
     @IBOutlet weak var keyboardContainer: UIView!
     @IBOutlet weak var jamNameLabel: UILabel!
     @IBOutlet weak var userCollection: UICollectionView!
@@ -36,6 +38,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var recordView: BAPulseView!
     @IBOutlet weak var countdownLabel: UILabel!
+    @IBOutlet weak var loopButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +74,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         tap.delegate = self
         recordView.addGestureRecognizer(tap)
         
+        //customizes loop button to be a circle
+        loopButton.layer.cornerRadius = 0.5 * loopButton.bounds.size.width
+
         for user in jam!.users {
             if user.facebookID != User.currentUser!.facebookID {
                 users.append(user)
@@ -260,15 +266,31 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == "loopSegue") {
+            let childViewController = segue.destinationViewController as! LoopViewController
+            childViewController.jam = self.jam
+            // Now you have a pointer to the child view controller.
+            // You can save the reference to it, or pass data to it.
+        }
     }
-    */
+    
+    @IBAction func onLoop(sender: AnyObject) {
+        if (inKeyboard){
+        loopContainer.alpha = 1
+        keyboardContainer.alpha = 0
+    loopButton.setImage(UIImage(named:"back_arrow.png"), forState: .Normal)
+            inKeyboard = false
+            keyboardButton.hidden = true
+        }
+            
+        else{
+            loopContainer.alpha = 0
+            keyboardContainer.alpha = 1
+            loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
+            inKeyboard = true
+            keyboardButton.hidden = false
+        }
+    }
 
 }
