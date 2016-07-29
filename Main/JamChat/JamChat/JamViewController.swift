@@ -150,7 +150,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let lastMessage = jam.messages.last
         
         if lastMessage!.isPlaying {
-            stopAnitatingCursor()
+            stopAnimatingCursor()
             lastMessage?.stop()
         } else {
             lastMessage?.loadTracks({
@@ -163,18 +163,27 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     var progressTimer: NSTimer!
+    var refreshTime = 0.055
     func startAnimatingCursor() {
-        progressTimer =  NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+        progressTimer =  NSTimer.scheduledTimerWithTimeInterval(refreshTime, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
     }
     
+    private var previousProgress: CGFloat = 0
     func updateProgressView() {
         let progress = CGFloat(Double(self.view.frame.width) * jam.playthroughProgress)
-        UIView.animateWithDuration(0.05, delay: 0.0, options: [.CurveLinear], animations: {
+        
+        if progress < previousProgress {
             self.progressIndicator.frame.origin.x = progress
-        }, completion: nil)
+        } else {
+            UIView.animateWithDuration(refreshTime, delay: 0.0, options: [.CurveLinear], animations: {
+                self.progressIndicator.frame.origin.x = progress
+                }, completion: nil)
+        }
+        
+        previousProgress = progress
     }
     
-    func stopAnitatingCursor() {
+    func stopAnimatingCursor() {
         progressIndicator.frame.origin.x = -2
         progressTimer.invalidate()
     }
@@ -274,10 +283,13 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         isCounting = false
         countdownLabel.text = ""
         countdown = 4
-            
+        
+        onPlay()
+        
         delay(self.jam.messageDuration) {
             self.tempoTimer.invalidate()
             self.sendingMessageView.startAnimation()
+            self.onPlay()
         }
         
         let keyboardController = self.childViewControllers[0] as! KeyboardViewController
