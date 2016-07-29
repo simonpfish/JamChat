@@ -14,7 +14,6 @@ class Loop: NSObject {
     private(set) var color: UIColor!
     private(set) var tempo: Int!
     
-    private var urls: [NSURL] = []
     private var fileName: String!
     private var loopSound: AVAudioPlayer!
     

@@ -215,25 +215,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     //Plays metronome count-in
     func metronomeCount(){
-        if (jam.tempo! == 80){
-            stringBPM = "80BPM"
-        }
-        else if (jam.tempo! == 110){
-            stringBPM = "110BPM"
-        }
-        else if (jam.tempo! == 140){
-            stringBPM = "140BPM"
-        }
-        
-        let path = NSBundle.mainBundle().pathForResource(stringBPM, ofType: "wav")!
-        let url = NSURL(fileURLWithPath: path)
-        do {
-            let sound = try AVAudioPlayer(contentsOfURL: url)
-            metronome = sound
-            sound.play()
-        } catch {
-            print("Couldn't load metronome sound file")
-        }
+        let metronome = Metronome.metronomeBPM80
+        metronome.play()
     }
     
     func startRecord(){
