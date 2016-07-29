@@ -266,6 +266,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func startRecord(){
+        isRecording = true
         recordView.popAndPulse()
         if (countdown == 1){
             isRecording = true
