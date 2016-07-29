@@ -13,7 +13,7 @@ import PubNub
 
 class Jam: NSObject {
     
-    var messages: [Message] = []
+    var tracks: [Track] = []
     var users: [User] = []
     private(set) var updatedAt: NSDate!
     let messageDuration: Double!
@@ -27,14 +27,14 @@ class Jam: NSObject {
         }
     }
     
-    var playthroughProgress: Double
-        {
+    var playthroughProgress: Double {
         get {
-            return (messages.last?.currentTime)! / messageDuration
+            return (tracks.last?.playbackTime)! / messageDuration
         }
     }
     
-    private var messageIDs: [String] = []
+    private var trackObjects: [PFObject] = []
+    private var trackIDs: [String] = []
     private(set) var userIDs: [String] = []
     private var object: PFObject!
     
@@ -46,7 +46,12 @@ class Jam: NSObject {
         self.object = object
         
         messageDuration = object["messageDuration"] as! Double
-        messageIDs = object["messages"] as! [String]
+        
+        let trackObjects = object["messages"] as! [PFObject]
+        for object in trackObjects {
+            tracks.append(Track(object: object))
+        }
+        
         userIDs = object["users"] as! [String]
         title = object["title"] as? String ?? ""
         tempo = object["tempo"] as? Int
@@ -57,7 +62,7 @@ class Jam: NSObject {
     
     func loadData(completion: () -> ()) {
         loadUsers {
-            self.loadMessages({
+            self.loadTracks({
                 completion()
             })
         }
@@ -107,27 +112,20 @@ class Jam: NSObject {
         })
     }
     
-    private func loadMessages(completion: () -> ()) {
+    private func loadTracks(completion: () -> ()) {
         print("Loading jam \(self.object.objectId!) messages")
-        let query = PFQuery(className: "Message")
-        query.orderByAscending("createdAt")
-        query.whereKey("objectId", containedIn: messageIDs)
-        query.includeKey("author")
         
-        query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                if objects?.count == 0 {
-                    completion()
-                } else {
-                    for object in objects! {
-                        self.messages.append(Message(object: object))
-                    }
-                    print("Successfully loaded jam \(self.object.objectId ?? "NEW") messages")
+        var loadedCount = 0
+        for track in tracks {
+            track.loadMedia({ 
+                loadedCount += 1
+                if loadedCount == self.users.count {
+                    print("Successfully loaded jam \(self.object.objectId ?? "NEW") tracks")
                     completion()
                 }
-            }
+            }, failure: { (error: NSError) in
+                print(error.localizedDescription)
+            })
         }
     }
     
@@ -144,21 +142,14 @@ class Jam: NSObject {
      Records a track from a certain audio node for the set track duration, adds it to a message and sends it immediately.
      */
     func recordSend(instrument: Instrument, success: () -> (), failure: (NSError) -> ()) {
-        let message: Message
-        if messages.count > 0 {
-            message = Message(previousMessage: messages[messages.count-1])
-        } else {
-            message = Message(previousMessage: nil)
-        }
         
         let track = Track()
+        tracks.append(track)
         track.recordInstrument(instrument, duration: messageDuration) {
-            message.add(track)
-            message.send({ (_: Bool, error: NSError?) in
+            track.upload({ (_: Bool, error: NSError?) in
                 if let error = error {
                     failure(error)
                 } else {
-                    self.add(message)
                     self.push({ (_: Bool, error: NSError?) in
                         if let error = error {
                             failure(error)
@@ -174,13 +165,6 @@ class Jam: NSObject {
     
     // Utilities to make sure arrays are updated accordingly:
     
-    private func add(message: Message) {
-        if let id = message.id {
-            messages.append(message)
-            messageIDs.append(id)
-        }
-    }
-    
     private func add(user: User) {
         if let id = user.parseUser.objectId {
             users.append(user)
@@ -191,34 +175,11 @@ class Jam: NSObject {
     /**
      Updates the jam from the server if it is necessary
      */
-    func fetch(success: () -> (), failure: (NSError) -> ()) {
-        print("Fetching jam \(self.object.objectId ?? "NEW") users")
-        
-        object.fetchIfNeededInBackgroundWithBlock() { (object: PFObject?, error: NSError?) in
-            if let object = object {
-                
-                let serverMessageIDs = Set(object["messages"] as! [String])
-                
-                let newMessageIDs = serverMessageIDs.subtract(self.messageIDs)
-                
-                let query = PFQuery(className: "Message")
-                query.whereKey("objectId", containedIn: Array(newMessageIDs))
-                
-                query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
-                    if let error = error {
-                        failure(error)
-                    } else {
-                        for object in objects! {
-                            self.messages.append(Message(object: object))
-                        }
-                        success()
-                    }
-                }
-                
-                
-            } else {
-                failure(error!)
-            }
+    func fetchTrack(id: String) {
+        let query = PFQuery(className: "Track")
+        query.whereKey("id", equalTo: id)
+        query.findObjectsInBackgroundWithBlock { (object: [PFObject]?, error: NSError?) in
+            <#code#>
         }
     }
     
@@ -230,13 +191,13 @@ class Jam: NSObject {
         
         object["messageDuration"] = messageDuration
         object["users"] = userIDs
-        object["messages"] = messageIDs
+        object["tracks"] = trackObjects
         object["title"] = title
         object["tempo"] = tempo
         
         object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
             print("Finished pushing jam \(self.object.objectId ?? "NEW")")
-            if self.messages.count == 0 {
+            if self.tracks.count == 0 {
                 PubNubHandler.notifyNewJam(self)
             }
             completion?(success, error)

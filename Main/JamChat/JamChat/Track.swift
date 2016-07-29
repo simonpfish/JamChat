@@ -29,7 +29,7 @@ class Track: NSObject {
     
     var instrumentName: String?
     
-    private var object: PFObject!
+    private(set) var object: PFObject!
     
     private var recorder: AKNodeRecorder?
     private var exportSession: AKAudioFile.ExportSessionFixed?

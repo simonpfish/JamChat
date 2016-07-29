@@ -11,26 +11,18 @@ import Parse
 
 class Message: NSObject {
     
-    var tracks: [Track] = []
+    var track: Track!
     private var newTracks: [Track] = []
     private(set) var id: String?
     private var object: PFObject!
     private var tracksAreLoaded = false
     
     var isPlaying: Bool {
-        get {
-            return tracks.last!.isPlaying
-        }
+            return track.isPlaying
     }
     
     var currentTime: Double {
-        get {
-//            var counter = 0.0
-//            for track in tracks {
-//                counter += track.playbackTime
-//            }
-            return (tracks.last?.playbackTime)!
-        }
+            return track.playbackTime
     }
     
     /**
@@ -43,40 +35,23 @@ class Message: NSObject {
         id = object.objectId
     }
     
-    func loadTracks(completion: () -> ()) {
+    func loadTrack(completion: () -> ()) {
         print("Loading tracks for message \(self.id ?? "NEW")")
         if tracksAreLoaded {
             print("Tracks are already loaded for message \(self.id ?? "NEW")")
             completion()
         } else {
-            tracks = []
             object.fetchIfNeededInBackgroundWithBlock { (_: PFObject?, error: NSError?) in
-                let trackIDs = self.object["tracks"] as! [String]
+                let trackObject = self.object["track"] as! PFObject
+                self.track = Track(object: trackObject)
                 
-                let query = PFQuery(className: "Track")
-                query.orderByAscending("createdAt")
-                query.whereKey("identifier", containedIn: trackIDs)
-                
-                query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
-                    for object in objects! {
-                        let track = Track(object: object)
-                        self.tracks.append(track)
-                    }
-                    
-                    var loadedCount = 0
-                    for track in self.tracks {
-                        track.loadMedia({
-                            loadedCount += 1
-                            if loadedCount == self.tracks.count {
-                                print("Succesfully loaded tracks for message \(self.id ?? "NEW")")
-                                self.tracksAreLoaded = true
-                                completion()
-                            }
-                            }, failure: { (error: NSError) in
-                                print(error.localizedDescription)
-                        })
-                    }
-                }
+                self.track.loadMedia({
+                    print("Succesfully loaded track for message \(self.id ?? "NEW")")
+                    self.tracksAreLoaded = true
+                    completion()
+                }, failure: { (error: NSError) in
+                    print(error.localizedDescription)
+                })
             }
         }
     }
@@ -84,10 +59,10 @@ class Message: NSObject {
     /**
      Initializes a new message that builds on top of an older one
      */
-    init(previousMessage: Message?) {
+    init(track: Track) {
         super.init()
         
-        tracks = previousMessage?.tracks ?? []
+        track = track
     }
     
     /**
@@ -95,27 +70,13 @@ class Message: NSObject {
      */
     func play(startedPlaying: (() -> ())?) {
         print("Playing message \(self.id ?? "NEW")")
-        for track in tracks {
-            track.playLooping()
-        }
+        track.playLooping()
         startedPlaying?()
     }
     
     func stop() {
         print("Playing message \(self.id ?? "NEW")")
-        for track in tracks {
-            track.stopLooping()
-        }
-    }
-    
-    /**
-     Adds a new track to the message
-     */
-    func add(track: Track) {
-        print("Added track \(track.identifier) to message")
-
-        tracks.append(track)
-        newTracks.append(track)
+        track.stopLooping()
     }
     
     /**
@@ -123,33 +84,20 @@ class Message: NSObject {
      */
     func send(completion: PFBooleanResultBlock?) {
         object = PFObject(className: "Message")
-        
-        var trackIDs: [String] = []
-        
-        for track in tracks {
-            trackIDs.append(track.identifier)
-        }
-        
-        object["tracks"] = trackIDs
+    
+        object["track"] = track.object
 
-        var uploadedCount = 0
-        for track in newTracks {
-            track.upload({ (success: Bool, error: NSError?) in
-                if let error = error {
-                    completion?(false, error)
-                } else {
-                    uploadedCount += 1
-                    if uploadedCount == self.newTracks.count {
-                        self.object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
-                            self.id = self.object.objectId
-                            print("Sent message \(self.id!)")
-                            completion!(success, error)
-                        })
-                    }
-                }
-            })
-        }
-        
+        track.upload({ (success: Bool, error: NSError?) in
+            if let error = error {
+                completion?(false, error)
+            } else {
+                self.object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                    self.id = self.object.objectId
+                    print("Sent message \(self.id!)")
+                    completion!(success, error)
+                })
+            }
+        })
     }
     
 }
