@@ -352,6 +352,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     loopButton.setImage(UIImage(named:"back_arrow.png"), forState: .Normal)
             inKeyboard = false
             keyboardButton.hidden = true
+            recordView.hidden = true
         }
             
         else{
@@ -360,6 +361,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
             inKeyboard = true
             keyboardButton.hidden = false
+            recordView.hidden = false
         }
     }
 
