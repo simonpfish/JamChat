@@ -20,10 +20,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var jam: Jam!
     var users: [User] = []
     var tempoTimer = NSTimer()
-    var countdownTimer = NSTimer()
-    var countdown: Int = 4
-    var metronome: AVAudioPlayer!
-    var stringBPM: String = ""
+    var countdown = 4
     var inKeyboard: Bool = true
     
     @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
@@ -225,91 +222,92 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     var isCounting = false
     var isRecording = false
+    
     func onRecord(sender: UITapGestureRecognizer) {
         if isRecording {return}
         if isCounting {
-            countdownTimer.invalidate()
-            countdownLabel.text = ""
-            tempoTimer.invalidate()
-            isCounting = false
-            countdown = 4
+            cancelCountdown()
         } else {
-            isCounting = true
-            countdownLabel.text = "\(countdown)"
-            countdownTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
-            metronomeCount()
-            recordView.popAndPulse()
+            startCountdown()
         }
+    }
+    
+    func onBeat() {
+        recordView.popAndPulse()
+        
+        if isCounting {
+            countdown -= 1
+            countdownLabel.text = String(countdown)
+            
+            if countdown == 0 {
+                startRecording()
+            }
+        }
+    }
+    
+    func startCountdown() {
+        isCounting = true
         self.keyboardButton.hidden = true
         loopButton.hidden = true
         countdownLabel.text = "\(countdown)"
-        countdownTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
+        tempoTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(onBeat), userInfo: nil, repeats: true)
         metronomeCount()
-        recordView.popAndPulse()
+    }
+    
+    func cancelCountdown() {
+        isCounting = false
+        countdownLabel.text = "REC"
+        tempoTimer.invalidate()
+        isCounting = false
+        countdown = 4
     }
     
     //Plays metronome count-in
     func metronomeCount(){
+        // Fix for different tempos
         let metronome = Metronome.metronomeBPM80
         metronome.play()
     }
     
-    func startRecord(){
+    func startRecording(){
         isRecording = true
-        recordView.popAndPulse()
-        if (countdown == 1){
-            isRecording = true
-            isCounting = false
-            countdownLabel.text = ""
-            countdownTimer.invalidate()
-            countdown = 4
+        isCounting = false
+        countdownLabel.text = ""
+        countdown = 4
             
-            let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+        delay(self.jam.messageDuration) {
+            self.tempoTimer.invalidate()
+            self.sendingMessageView.startAnimation()
+        }
+        
+        let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+        jam.recordSend(keyboardController.instrument, success: {
             
-            UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
-                self.progressIndicator.frame.origin.x = self.view.frame.width
-            }) { (success: Bool) in
-                self.progressIndicator.frame.origin.x = -2
-            }
-            
-            delay(self.jam.messageDuration) {
-                self.tempoTimer.invalidate()
-                self.sendingMessageView.startAnimation()
-            }
-            
-            jam.recordSend(keyboardController.instrument, success: {
-                
-                for subview in self.waveformContainer.subviews {
-                    if let waveform = subview as? FDWaveformView {
-                        waveform.removeFromSuperview()
-                    }
+            for subview in self.waveformContainer.subviews {
+                if let waveform = subview as? FDWaveformView {
+                    waveform.removeFromSuperview()
                 }
-                
-                self.sendingMessageView.stopAnimation()
-                self.keyboardButton.hidden = false
-                self.loopButton.hidden = false
-                self.drawWaveforms()
-                keyboardController.instrument.reload()
-                print("Message sent!")
-                
-                self.isRecording = false
-            }) { (error: NSError) in
-                self.isRecording = false
-                print(error.localizedDescription)
             }
+                
+            self.sendingMessageView.stopAnimation()
+            self.keyboardButton.hidden = false
+            self.loopButton.hidden = false
+            self.drawWaveforms()
+            keyboardController.instrument.reload()
+            print("Message sent!")
             
-            User.currentUser?.incrementInstrument(keyboardController.instrument)
+            self.isRecording = false
+            self.countdownLabel.text = "REC"
+        }) { (error: NSError) in
+            self.isRecording = false
+            self.countdownLabel.text = "REC"
+            print(error.localizedDescription)
         }
             
-        else{
-            countdownLabel.text = "\(countdown-1)"
-            if (countdown == 2){
-                tempoTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: recordView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
-            }
-            countdown = countdown - 1
-        }
+        User.currentUser?.incrementInstrument(keyboardController.instrument)
     }
-    
+
+
     func delay(delay: Double, closure: ()->()) {
         dispatch_after(
             dispatch_time(
