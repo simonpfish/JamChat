@@ -26,6 +26,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEt-Ra-c4T">
                                 <rect key="frame" x="0.0" y="240" width="375" height="120"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tqa-Hu-nBx">
+                                        <rect key="frame" x="0.0" y="-8" width="375" height="136"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYJ-TE-25B" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
                                         <rect key="frame" x="137" y="35" width="100" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -216,6 +220,7 @@
                         <outlet property="loadingIndicatorView" destination="DYJ-TE-25B" id="bED-UA-u4e"/>
                         <outlet property="loopButton" destination="Z8V-Et-BMo" id="x9G-6A-WH0"/>
                         <outlet property="loopContainer" destination="Sig-Vm-owL" id="8Fq-Pe-Od0"/>
+                        <outlet property="measuresView" destination="tqa-Hu-nBx" id="thk-I2-79v"/>
                         <outlet property="progressIndicator" destination="mCu-xY-0ex" id="VHv-Ip-wPN"/>
                         <outlet property="recordView" destination="kdg-MZ-tsA" id="h79-ro-L8h"/>
                         <outlet property="sendingMessageView" destination="kH3-z4-z2W" id="Yc3-YG-ugh"/>

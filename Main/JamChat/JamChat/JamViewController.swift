@@ -28,6 +28,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
     
+    @IBOutlet weak var measuresView: UIView!
     @IBOutlet weak var progressIndicator: UIView!
     @IBOutlet weak var loopContainer: UIView!
     @IBOutlet weak var keyboardContainer: UIView!
@@ -61,7 +62,36 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         self.sendingMessageView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
         
         progressIndicator.layer.cornerRadius = progressIndicator.frame.width/2
+                
+        var measureImage: UIImageView
+        
+        if jam.numMeasures == 4 {
+            
+            for i in 1...3 {
+                measureImage = UIImageView(frame:CGRectMake((measuresView.frame.width/4)*CGFloat(i), ((measuresView.frame.height)/2)-15, 10, 30));
+                measureImage.image = UIImage(named:"measureBar")
+                measuresView.addSubview(measureImage)
+            }
+        
+        } else if jam.numMeasures == 8 {
+            
+            for i in 1...7 {
+                measureImage = UIImageView(frame:CGRectMake((measuresView.frame.width/8)*CGFloat(i), ((measuresView.frame.height)/2)-15, 10, 30));
+                measureImage.image = UIImage(named:"measureBar")
+                measuresView.addSubview(measureImage)
+            }
 
+            
+        } else if jam.numMeasures == 12 {
+            
+            for i in 1...11 {
+                measureImage = UIImageView(frame:CGRectMake((measuresView.frame.width/12)*CGFloat(i), ((measuresView.frame.height)/2)-15, 10, 30));
+                measureImage.image = UIImage(named:"measureBar")
+                measuresView.addSubview(measureImage)
+            }
+            
+        }
+        
         // Set up user collection view:
         userCollection.dataSource = self
         userCollection.delegate = self
@@ -96,6 +126,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
 
     func drawWaveforms() {
         if let lastMessage = jam.messages.last {
+            self.measuresView.hidden = true
             loadingIndicatorView.startAnimation()
             lastMessage.loadTracks({
                 for track in (lastMessage.tracks) {
@@ -115,7 +146,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                         self.waveformContainer.addSubview(waveformView)
                     }
                 }
-                
+                self.measuresView.hidden = false
                 self.loadingIndicatorView.stopAnimation()
                 let keyboardController = self.childViewControllers[0] as! KeyboardViewController
                 keyboardController.instrument.reload()
