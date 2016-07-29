@@ -298,19 +298,13 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "loopSegue") {
             let childViewController = segue.destinationViewController as! LoopViewController
             childViewController.jam = self.jam
-            // Now you have a pointer to the child view controller.
-            // You can save the reference to it, or pass data to it.
         }
     }
-    */
+    
     @IBAction func onLoop(sender: AnyObject) {
         if (inKeyboard){
         loopContainer.alpha = 1
