@@ -240,6 +240,12 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             metronomeCount()
             recordView.popAndPulse()
         }
+        self.keyboardButton.hidden = true
+        loopButton.hidden = true
+        countdownLabel.text = "\(countdown)"
+        countdownTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
+        metronomeCount()
+        recordView.popAndPulse()
     }
     
     //Plays metronome count-in
