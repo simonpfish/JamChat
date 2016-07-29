@@ -310,7 +310,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             // You can save the reference to it, or pass data to it.
         }
     }
-    
+    */
     @IBAction func onLoop(sender: AnyObject) {
         if (inKeyboard){
         loopContainer.alpha = 1
