@@ -223,11 +223,23 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         keyboardButton.selected = false
     }
     
+    var isCounting = false
+    var isRecording = false
     func onRecord(sender: UITapGestureRecognizer) {
-        countdownLabel.text = "\(countdown)"
-        countdownTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
-        metronomeCount()
-        recordView.popAndPulse()
+        if isRecording {return}
+        if isCounting {
+            countdownTimer.invalidate()
+            countdownLabel.text = ""
+            tempoTimer.invalidate()
+            isCounting = false
+            countdown = 4
+        } else {
+            isCounting = true
+            countdownLabel.text = "\(countdown)"
+            countdownTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
+            metronomeCount()
+            recordView.popAndPulse()
+        }
     }
     
     //Plays metronome count-in
@@ -256,6 +268,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func startRecord(){
         recordView.popAndPulse()
         if (countdown == 1){
+            isRecording = true
+            isCounting = false
             countdownLabel.text = ""
             countdownTimer.invalidate()
             countdown = 4
@@ -288,8 +302,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 keyboardController.instrument.reload()
                 print("Message sent!")
                 
-                
+                self.isRecording = false
             }) { (error: NSError) in
+                self.isRecording = false
                 print(error.localizedDescription)
             }
             
