@@ -56,7 +56,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         super.viewDidLoad()
         
         // sets up the stepper
-        stepperView.labelFont = UIFont(name: "AvenirNext-Bold", size: 21.0)!
+        stepperView.labelFont = UIFont.systemFontOfSize(21.0, weight: UIFontWeightSemibold)
         stepperView.buttonsBackgroundColor = selectedColor
         stepperView.labelBackgroundColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
         stepperView.limitHitAnimationColor = UIColor.redColor()
@@ -85,6 +85,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         // set up the search bar
         searchBar.delegate = self
         searchBar.barTintColor = UIColor(red: 249/255, green: 194/255, blue: 97/255, alpha: 1.0)
+        //searchBar.placeholder.
         
         // set up the table view
         collectionView.delegate = self
@@ -144,7 +145,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         super.viewWillAppear(animated)
         
         let randomNumber = arc4random_uniform(UInt32(titleGenerator.count))
-        self.titleLabel.placeholder = titleGenerator[Int(randomNumber)]        
+        self.titleLabel.placeholder = "Set a Jam Title: " + titleGenerator[Int(randomNumber)]
     }
     
     override func didReceiveMemoryWarning() {
@@ -247,13 +248,14 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
         
+        // updates the defaultValue based on user's current jam length selection
         var defaultValue = 24.0
         if jamLengthLabel.text == "SHORT" {
             defaultValue -= 12
         } else if jamLengthLabel.text == "LONG" {
             defaultValue += 12
         }
-        // updates the stepper values and sets the jamLengthLabel (defaults to 'MEDIUM')
+        // updates the stepper values
         updateStepperValues(defaultValue, min: 12, max: 36, stepper: 12)
         updateStepperValues(defaultValue, min: 12, max: 36, stepper: 12)
         
@@ -278,6 +280,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         mediumLabel.font = UIFont.boldSystemFontOfSize(13.0)
         fastLabel.font = UIFont.systemFontOfSize(13.0)
         
+        // updates the defaultValue based on user's current jam length selection
         var defaultValue = 17.0
         if jamLengthLabel.text == "SHORT" {
             defaultValue -= 9
@@ -285,7 +288,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
             defaultValue += 9
         }
         
-        // updates the stepper values and sets the jamLengthLabel (defaults to 'MEDIUM')
+        // updates the stepper values
         updateStepperValues(defaultValue, min: 8, max: 26, stepper: 9)
         updateStepperValues(defaultValue, min: 8, max: 26, stepper: 9)
         
@@ -310,6 +313,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         mediumLabel.font = UIFont.systemFontOfSize(13.0)
         fastLabel.font = UIFont.boldSystemFontOfSize(13.0)
         
+        // updates the defaultValue based on user's current jam length selection
         var defaultValue = 13.0
         if jamLengthLabel.text == "SHORT" {
             defaultValue -= 7
@@ -317,7 +321,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
             defaultValue += 7
         }
         
-        // updates the stepper values and sets the jamLengthLabel (defaults to 'MEDIUM')
+        // updates the stepper values
         updateStepperValues(defaultValue, min: 6, max: 20, stepper: 7)
         updateStepperValues(defaultValue, min: 6, max: 20, stepper: 7)
         

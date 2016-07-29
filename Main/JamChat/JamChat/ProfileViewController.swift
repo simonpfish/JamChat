@@ -160,8 +160,8 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         profilePicture.clipsToBounds = true;
         
         // format the text
-        numJamsLabel.textColor = selectedColor
-        numTracksLabel.textColor = selectedColor
+//        numJamsLabel.textColor = selectedColor
+//        numTracksLabel.textColor = selectedColor
         
         // format logout button
         logoutButton.layer.cornerRadius = 7
