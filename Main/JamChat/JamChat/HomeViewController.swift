@@ -20,6 +20,7 @@ import PubNub
     
     let appDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
 
+    @IBOutlet weak var noJamsLabel: UILabel!
     @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     @IBInspectable var refreshTint: UIColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
@@ -93,6 +94,12 @@ import PubNub
             self.tableView.reloadData()
             self.tableView.dg_stopLoading()
             self.loadingIndicatorView.stopAnimation()
+            
+            if jams.count == 0 {
+                self.noJamsLabel.hidden = false
+            } else {
+                self.noJamsLabel.hidden = true
+            }
             
             if self.jamIDs.count == 0 {
                 for jam in jams {

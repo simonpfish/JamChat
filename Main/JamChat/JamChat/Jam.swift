@@ -274,6 +274,9 @@ class Jam: NSObject {
                         }
                     })
                 }
+                if objects?.count == 0 {
+                    success([])
+                }
             }
         }
     }

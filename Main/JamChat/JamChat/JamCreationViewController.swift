@@ -482,7 +482,7 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
                 
         // unselects previously selected friends from the table view, and prepares the cell for reuse
         for indexPath in collectionView.indexPathsForSelectedItems() ?? [] {
-            collectionView.cellForItemAtIndexPath(indexPath)?.prepareForReuse()
+            collectionView.deselectItemAtIndexPath(indexPath, animated: false)
             collectionView.cellForItemAtIndexPath(indexPath)?.backgroundColor = UIColor.whiteColor()
         }
         
