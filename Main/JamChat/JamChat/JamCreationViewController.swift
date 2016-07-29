@@ -47,6 +47,8 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var createButton: UIButton!
     
+    var numMeasures: Int!
+    
     var titleGenerator: [String] = []
     
     // stores the friends who match the user's search
@@ -138,6 +140,9 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         titleLabel.returnKeyType = .Done
         
         onMedium(nil)
+        
+        numMeasures = 8
+        
     }
     
     
@@ -171,10 +176,13 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         if stepperLabel.text!.containsString("36") || stepperLabel.text!.containsString("26") || stepperLabel.text!.containsString("20") {
             jamLengthLabel.text = "LONG"
+            numMeasures = 12
         } else if stepperLabel.text!.containsString("24") || stepperLabel.text!.containsString("17") || stepperLabel.text!.containsString("13") {
             jamLengthLabel.text = "MEDIUM"
+            numMeasures = 8
         } else if stepperLabel.text!.containsString("6") || stepperLabel.text!.containsString("8") || stepperLabel.text!.containsString("12") {
             jamLengthLabel.text = "SHORT"
+            numMeasures = 4
         }
         
     }
@@ -184,9 +192,12 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         if jamLengthLabel.text == "LONG" {
             jamLengthLabel.text = "MEDIUM"
+            numMeasures = 8
         } else if jamLengthLabel.text == "MEDIUM" {
             jamLengthLabel.text = "SHORT"
+            numMeasures = 4
         } else if jamLengthLabel.text == "SHORT" {
+            numMeasures = 4
         }
         
         if (stepperLabel.text)?.rangeOfString("seconds") == nil {
@@ -199,9 +210,12 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         if jamLengthLabel.text == "SHORT" {
             jamLengthLabel.text = "MEDIUM"
+            numMeasures = 8
         } else if jamLengthLabel.text == "MEDIUM" {
             jamLengthLabel.text = "LONG"
+            numMeasures = 12
         } else if jamLengthLabel.text == "LONG" {
+            numMeasures = 12
         }
         
         if (stepperLabel.text)?.rangeOfString("seconds") == nil {
@@ -252,8 +266,10 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         var defaultValue = 24.0
         if jamLengthLabel.text == "SHORT" {
             defaultValue -= 12
+            numMeasures = 4
         } else if jamLengthLabel.text == "LONG" {
             defaultValue += 12
+            numMeasures = 12
         }
         // updates the stepper values
         updateStepperValues(defaultValue, min: 12, max: 36, stepper: 12)
@@ -284,8 +300,10 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         var defaultValue = 17.0
         if jamLengthLabel.text == "SHORT" {
             defaultValue -= 9
+            numMeasures = 4
         } else if jamLengthLabel.text == "LONG" {
             defaultValue += 9
+            numMeasures = 12
         }
         
         // updates the stepper values
@@ -317,8 +335,10 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         var defaultValue = 13.0
         if jamLengthLabel.text == "SHORT" {
             defaultValue -= 7
+            numMeasures = 4
         } else if jamLengthLabel.text == "LONG" {
             defaultValue += 7
+            numMeasures = 12
         }
         
         // updates the stepper values
@@ -428,13 +448,14 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         
         // if the user does not enter a Jam Title, use the randomly generated one
         if(titleLabel.text == "") {
-            self.titleLabel.text = self.titleLabel.placeholder
+            let newTitle = self.titleLabel.placeholder?.stringByReplacingOccurrencesOfString("Set a Jam Title:", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            self.titleLabel.text = newTitle
         }
         
         PagerViewController.sharedInstance?.moveToViewControllerAtIndex(1, animated: true)
         let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
         let home = homeNavigation.viewControllers[0] as! HomeViewController
-        home.addNewJam(stepperView.value, userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo)
+        home.addNewJam(stepperView.value, userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo, numMeasures: numMeasures)
 
         self.selectedFriendIDs = []
         self.titleLabel.text = ""

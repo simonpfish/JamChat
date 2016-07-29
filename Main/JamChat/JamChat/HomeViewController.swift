@@ -119,16 +119,17 @@ import PubNub
         return cell
     }
         
-    func addNewJam(duration: Double, userIDs: [String], name: String, tempo: Int) {
+    func addNewJam(duration: Double, userIDs: [String], name: String, tempo: Int, numMeasures: Int) {
         var jam: Jam!
         let jamLength = duration
         let jamName = name
         let jamTempo = tempo
+        let jamNumMeasures = numMeasures
         
         if userIDs.count == 0 {
             print("Can't create jam without users")
         } else {
-            jam = Jam(messageDuration: Double(jamLength), userIDs: userIDs, title: jamName, tempo: jamTempo)
+            jam = Jam(messageDuration: Double(jamLength), userIDs: userIDs, title: jamName, tempo: jamTempo, numMeasures: jamNumMeasures)
             jam.push { (success: Bool, error: NSError?) in
                 if let error = error {
                     print(error.localizedDescription)
