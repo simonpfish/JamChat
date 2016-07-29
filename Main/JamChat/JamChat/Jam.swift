@@ -39,13 +39,6 @@ class Jam: NSObject {
     private(set) var userIDs: [String] = []
     private var object: PFObject!
     
-    var tempoTimer: NSTimer! {
-        didSet {
-            print("WOOHOO")
-        }
-    }
-
-    
     /**
      Loads jam from an exisiting PFObject.
      */
@@ -162,7 +155,6 @@ class Jam: NSObject {
         
         let track = Track()
         track.recordInstrument(instrument, duration: messageDuration) {
-            self.tempoTimer.invalidate()
             message.add(track)
             message.send({ (_: Bool, error: NSError?) in
                 if let error = error {
