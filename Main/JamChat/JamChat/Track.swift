@@ -21,12 +21,24 @@ class Track: NSObject {
     var filepath: String!
     var color: UIColor = UIColor.grayColor()
     
+    var playbackTime: Double{
+        get {
+            return player!.playhead
+        }
+    }
+    
     var instrumentName: String?
     
     private var object: PFObject!
     
     private var recorder: AKNodeRecorder?
     private var exportSession: AKAudioFile.ExportSessionFixed?
+    
+    var isPlaying: Bool {
+        get {
+            return player!.isPlaying
+        }
+    }
     
     /**
      Initializes a track based on a PFObject, useful for downloading them from Parse.
@@ -87,11 +99,12 @@ class Track: NSObject {
     
     func playLooping() {
         player?.looping = true
+        player?.endTime = floor((self.player?.audioFile.duration)!)
         player?.play()
     }
     
     func play() {
-        self.player?.playFrom(0, to: (self.player?.audioFile.duration)!)
+        self.player?.playFrom(0, to: floor((self.player?.audioFile.duration)!))
     }
     
     func stopLooping() {
@@ -111,11 +124,7 @@ class Track: NSObject {
     private func recordNode(node: AKNode, duration: Double, completion: ()->()) {
         recorder = try? AKNodeRecorder(node: node)
         
-        try! recorder!.record()
-        
-        delay(duration) { 
-            self.recorder!.stop()
-            
+        try! recorder!.recordFor(duration, completion: { 
             self.exportSession =  try! self.recorder?.audioFile!.exportFixed(self.identifier, ext: .m4a, baseDir: .Documents, callBack: { () in
                 
                 if self.exportSession!.succeeded {
@@ -132,7 +141,8 @@ class Track: NSObject {
                 }
                 
             })
-        }
+        })
+
     }
     
     // utility function

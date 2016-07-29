@@ -17,6 +17,22 @@ class Message: NSObject {
     private var object: PFObject!
     private var tracksAreLoaded = false
     
+    var isPlaying: Bool {
+        get {
+            return tracks.last!.isPlaying
+        }
+    }
+    
+    var currentTime: Double {
+        get {
+//            var counter = 0.0
+//            for track in tracks {
+//                counter += track.playbackTime
+//            }
+            return (tracks.last?.playbackTime)!
+        }
+    }
+    
     /**
      Initializes a new message based on a parse object
      */
@@ -80,7 +96,7 @@ class Message: NSObject {
     func play(startedPlaying: (() -> ())?) {
         print("Playing message \(self.id ?? "NEW")")
         for track in tracks {
-            track.play()
+            track.playLooping()
         }
         startedPlaying?()
     }

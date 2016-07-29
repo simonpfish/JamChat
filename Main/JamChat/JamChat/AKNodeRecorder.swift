@@ -160,6 +160,53 @@ public class AKNodeRecorder {
             print ("AKNodeRecorder Error: input node is not available")
         }
     }
+    
+    func recordFor(duration: Double, completion: () -> ()) throws {
+        if recording {
+            print ("AKNodeRecorder Warning: already recording !")
+            return
+        }
+        
+        if (AKSettings.session != AKSettings.SessionCategory.PlayAndRecord.rawValue)
+        {
+            do {
+                try AKSettings.setSessionCategory(AKSettings.SessionCategory.PlayAndRecord)
+            } catch let error as NSError {
+                print("AKNodeRecorder Error: Cannot set AVAudioSession Category to be .PlaybackAndRecord")
+                throw error
+            }
+        }
+        
+        
+        if  node != nil {
+            
+            let recordingBufferLength:AVAudioFrameCount = AKSettings.recordingBufferLength.samplesCount
+            
+            print ("recording")
+            node!.avAudioNode.installTapOnBus(0, bufferSize: recordingBufferLength, format: internalAudioFile.processingFormat, block: { (buffer: AVAudioPCMBuffer!, time: AVAudioTime!) -> Void in
+                do {
+                    buffer.frameLength = recordingBufferLength
+                    try self.internalAudioFile.writeFromBuffer(buffer)
+                    self.recording = true
+                    print("writing ( file duration:  \(self.internalAudioFile.duration) seconds)")
+                    
+                    if self.internalAudioFile.duration >= duration {
+                        self.stop()
+//                        self.internalAudioFile = try! self.internalAudioFile.extract(fromSample: 0, toSample: Int64(duration * self.internalAudioFile.sampleRate), baseDir: .Temp , name: self.internalAudioFile.fileName + "Cropped")
+                        print("Recorded file of duration: \(self.internalAudioFile.duration)")
+                        completion()
+                    }
+                    
+                } catch let error as NSError {
+                    self.recording = false
+                    print("Write failed: error -> \(error.localizedDescription)")
+                }
+            })
+        } else {
+            print ("AKNodeRecorder Error: input node is not available")
+        }
+
+    }
 
     /// Stop recording
     public func stop() {
