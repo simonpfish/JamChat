@@ -91,6 +91,10 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             }
         }
         
+        //Delegate method for loop drags
+        let loopController = self.childViewControllers[1] as! LoopViewController
+        loopController.dragLoopHandler = self.dragLoop
+        
         drawWaveforms()
     }
     
@@ -107,6 +111,23 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         measureImage = UIView(frame:CGRectMake(0, ((measuresView.frame.height)/2), measuresView.frame.width, 1));
         measureImage.backgroundColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
         measuresView.addSubview(measureImage)
+    }
+    
+    var selectedLoopView: UIView?
+    func dragLoop(view: UIView, sender: UIPanGestureRecognizer) {
+
+        switch sender.state{
+        case .Began:
+            selectedLoopView = view
+            selectedLoopView?.backgroundColor = UIColor.clearColor()
+            self.view.addSubview(selectedLoopView!)
+        case .Changed:
+            UIView.animateWithDuration(2, animations: {() -> Void in
+                self.selectedLoopView?.transform = CGAffineTransformTranslate(self.selectedLoopView!.transform, 20, 100)
+            })
+        default:
+            selectedLoopView?.removeFromSuperview()
+        }
     }
 
     func drawWaveforms() {
@@ -336,7 +357,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             closure
         )
     }
-    
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "loopSegue") {
