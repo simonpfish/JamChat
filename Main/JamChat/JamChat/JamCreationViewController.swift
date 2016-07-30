@@ -485,6 +485,10 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         let homeNavigation = PagerViewController.sharedInstance?.viewControllers[1] as! HomeNavigationController
         let home = homeNavigation.viewControllers[0] as! HomeViewController
         home.addNewJam(stepperView.value, userIDs: self.selectedFriendIDs, name: titleLabel.text!, tempo: tempo, numMeasures: numMeasures)
+        
+        if home.noJamsLabel.hidden == false {
+            home.noJamsLabel.hidden = true
+        }
 
         self.selectedFriendIDs = []
         self.titleLabel.text = ""
