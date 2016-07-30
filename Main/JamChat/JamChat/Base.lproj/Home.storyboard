@@ -122,10 +122,10 @@
                                     <constraint firstAttribute="height" constant="50" id="m2l-uG-M3t"/>
                                 </constraints>
                             </view>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new jam to start!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRf-iU-EWM">
-                                <rect key="frame" x="89.5" y="324" width="197" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new jam to get started!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRf-iU-EWM">
+                                <rect key="frame" x="41" y="318" width="293" height="31.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -134,14 +134,15 @@
                             <constraint firstItem="oRf-iU-EWM" firstAttribute="centerY" secondItem="ide-jJ-Qoh" secondAttribute="centerY" id="5iE-rX-BPT"/>
                             <constraint firstAttribute="trailing" secondItem="ide-jJ-Qoh" secondAttribute="trailing" id="6QA-Bk-U5l"/>
                             <constraint firstItem="ide-jJ-Qoh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="9gA-q1-BVh"/>
-                            <constraint firstItem="oRf-iU-EWM" firstAttribute="centerX" secondItem="ide-jJ-Qoh" secondAttribute="centerX" id="Bb6-Ab-R4L"/>
                             <constraint firstItem="ide-jJ-Qoh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="EaK-aB-Ga7"/>
                             <constraint firstAttribute="trailing" secondItem="wfu-Sa-7fw" secondAttribute="trailing" id="NJM-UO-lnm"/>
                             <constraint firstItem="wfu-Sa-7fw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="O6M-dp-OsB"/>
                             <constraint firstItem="2Yj-zQ-NrI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VIc-KX-vfy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oRf-iU-EWM" secondAttribute="trailing" constant="25" id="caR-RX-Q95"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ide-jJ-Qoh" secondAttribute="bottom" id="hwZ-ge-2nX"/>
                             <constraint firstItem="wfu-Sa-7fw" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ptb-14-3Ai"/>
                             <constraint firstItem="2Yj-zQ-NrI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="r6i-WL-Zrf"/>
+                            <constraint firstItem="oRf-iU-EWM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="25" id="riC-lw-ypD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OGw-g0-NdJ">
