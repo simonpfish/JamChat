@@ -98,9 +98,23 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         drawWaveforms()
     }
     
+    func layoutMeasureBars() {
+        var measureImage: UIView
+        
+        for i in 1...jam.numMeasures!-1 {
+            measureImage = UIView(frame:CGRectMake((measuresView.frame.width/CGFloat(jam.numMeasures!))*CGFloat(i), ((measuresView.frame.height)/2)-12, 1, 24));
+            measureImage.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
+            measureImage.layer.cornerRadius = 0.5
+            measuresView.addSubview(measureImage)
+        }
+        
+        measureImage = UIView(frame:CGRectMake(0, ((measuresView.frame.height)/2), measuresView.frame.width, 1));
+        measureImage.backgroundColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
+        measuresView.addSubview(measureImage)
+    }
+    
     var selectedLoopView: UIView?
     func dragLoop(view: UIView, sender: UIPanGestureRecognizer) {
-        let translation = sender.translationInView(self.view)
 
         switch sender.state{
         case .Began:
