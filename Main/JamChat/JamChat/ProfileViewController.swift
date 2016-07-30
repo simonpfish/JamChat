@@ -169,7 +169,12 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
         logoutButton.layer.borderWidth = 1
         logoutButton.layer.borderColor = selectedColor.CGColor
         logoutButton.titleLabel!.textColor = selectedColor
-
+        
+        dismissProfileButton.layer.cornerRadius = 7
+        dismissProfileButton.backgroundColor = UIColor.clearColor()
+        dismissProfileButton.layer.borderWidth = 1
+        dismissProfileButton.layer.borderColor = selectedColor.CGColor
+        dismissProfileButton.titleLabel!.textColor = selectedColor
         
         let friendsLayout = KTCenterFlowLayout()
         friendsLayout.minimumInteritemSpacing = 20.0
@@ -180,8 +185,8 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
 
         let instrumentLayout = KTCenterFlowLayout()
         instrumentLayout.minimumInteritemSpacing = 20.0
-        instrumentLayout.itemSize = CGSizeMake(60, 70)
-        instrumentLayout.minimumLineSpacing = 0.0
+        instrumentLayout.itemSize = CGSizeMake(63, 80)
+        instrumentLayout.minimumLineSpacing = 10.0
         instrumentCollection.collectionViewLayout = instrumentLayout
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
