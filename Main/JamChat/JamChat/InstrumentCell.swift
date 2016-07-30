@@ -59,26 +59,32 @@ class InstrumentCell: UICollectionViewCell {
         self.countLabel.hidden = false
         self.countLabel.text = String(num)
         
-        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        
+        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             
-            // displays the countLabel when the instrument's image is tapped
-            self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(1)
-            self.countLabel.hidden = false
-            self.numberIsDisplayed = true
+            if self.numberIsDisplayed {
+                self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(0.0)
+                self.countLabel.hidden = true
+                self.numberIsDisplayed = false
+            } else {
+                self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(1)
+                self.countLabel.hidden = false
+                self.numberIsDisplayed = true
+            }
             
-            UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+            // reverts back to the instrument's image after 5 seconds, if the count label is still showing
+            self.delay(5.0, closure: {
                 
-                // reverts back to the instrument's image after 3 seconds
-                self.delay(3.0, closure: {
+                if self.numberIsDisplayed {
                     self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(0.0)
                     self.countLabel.hidden = true
                     self.numberIsDisplayed = false
-                    
-                })
+                }
                 
-                }, completion: nil)
+            })
             
             }, completion: nil)
+        
     }
     
     func delay(delay: Double, closure: ()->()) {
