@@ -250,11 +250,12 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func onSlow (sender: UITapGestureRecognizer?){
+        metronome = Metronome.metronomeBPM80
+        metronome!.play()
         if (firstLoad == false){
             metronome!.stop()
         }
         firstLoad = false
-        metronome = Metronome.metronomeBPM80
         delay(60.0/80.0){
         self.metronome!.play()
         }
@@ -293,12 +294,14 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func onMedium (sender: UITapGestureRecognizer?){
         if (firstLoad == false){
-            metronome!.stop()
             metronome = Metronome.metronomeBPM110
+            metronome!.play()
+            metronome!.stop()
             delay(60.0/110.0){
             self.metronome!.play()
         }
         }
+        
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/110, target: mediumTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
         tempo = 110
@@ -334,11 +337,12 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func onFast (sender: UITapGestureRecognizer?){
+         metronome = Metronome.metronomeBPM140
+         metronome!.play()
         if (firstLoad == false){
             metronome!.stop()
         }
         firstLoad = false
-        metronome = Metronome.metronomeBPM140
         delay(60.0/140.0){
         self.metronome!.play()
         }
