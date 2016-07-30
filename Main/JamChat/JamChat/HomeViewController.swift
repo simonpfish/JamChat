@@ -95,7 +95,7 @@ import PubNub
             self.tableView.dg_stopLoading()
             self.loadingIndicatorView.stopAnimation()
             
-            if jams.count == 0 {
+            if self.jams.count == 0 {
                 self.noJamsLabel.hidden = false
             } else {
                 self.noJamsLabel.hidden = true

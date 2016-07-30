@@ -72,8 +72,8 @@ class InstrumentCell: UICollectionViewCell {
                 self.numberIsDisplayed = true
             }
             
-            // reverts back to the instrument's image after 3 seconds, if the count label is still showing
-            self.delay(3.0, closure: {
+            // reverts back to the instrument's image after 5 seconds, if the count label is still showing
+            self.delay(5.0, closure: {
                 
                 if self.numberIsDisplayed {
                     self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(0.0)
