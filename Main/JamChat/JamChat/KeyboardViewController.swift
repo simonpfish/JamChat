@@ -83,8 +83,14 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
                 newButton.layer.cornerRadius = 10
                 newButton.layer.borderWidth = 2
                 
-                newButton.setNeedsDisplay()
+                //labels notes
+                let noteLabel = UILabel(frame: CGRectMake(0, newButton.frame.height-newButton.frame.width, newButton.frame.width, newButton.frame.width))
+                noteLabel.font = noteLabel.font.fontWithSize(12)
+                noteLabel.textAlignment = NSTextAlignment.Center
+                noteLabel.text = notesWithSharps[(lowestKey + increment) % 12]
+                newButton.addSubview(noteLabel)
                 
+                newButton.setNeedsDisplay()
                 newButton.frame.origin.y = CGFloat(1)
                 newButton.tag = lowestKey + increment
                 keys.append(newButton)
