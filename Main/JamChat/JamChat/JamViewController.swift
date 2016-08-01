@@ -157,7 +157,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                         waveformView.wavesColor = track.color.colorWithAlphaComponent(0.6)
                         
                         self.waveformContainer.addSubview(waveformView)
-                        self.waveformContainer.bringSubviewToFront(self.loadingIndicatorView)
                     }
                 }
                 self.measuresView.hidden = false
@@ -168,7 +167,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
                 self.waveformContainer.subviews.last!.addGestureRecognizer(waveTap)
                 
-                self.waveformContainer.bringSubviewToFront(self.progressIndicator)
             })
         } else {
             self.loadingIndicatorView.stopAnimation()
@@ -178,21 +176,26 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     //Plays chat when wave is tapped
     func onPlay(sender: UITapGestureRecognizer? = nil) {
         if jam.isPlaying {
-            stopAnitatingCursor()
+            stopAnimatingCursor()
             jam.stop()
         } else {
-            jam.loadTracks({
-                self.jam.play({
-                    self.startAnimatingCursor()
-                })
+            self.jam.play({
+                self.startAnimatingCursor()
             })
         }
     }
     
-    var progressTimer: NSTimer!
-    var refreshTime = 0.055
+    var progressTimer: NSTimer?
+    var refreshTime = 0.052
     func startAnimatingCursor() {
-        progressTimer =  NSTimer.scheduledTimerWithTimeInterval(refreshTime, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+        
+        if jam.tracks.count > 0 {
+            progressTimer =  NSTimer.scheduledTimerWithTimeInterval(refreshTime, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+        } else {
+            UIView.animateWithDuration(jam.duration, delay: 0.0, options: [.CurveLinear], animations: {
+                self.progressIndicator.frame.origin.x = self.view.frame.width
+                }, completion: nil)
+        }
     }
     
     private var previousProgress: CGFloat = 0
@@ -211,8 +214,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func stopAnimatingCursor() {
+        progressTimer?.invalidate()
+        progressIndicator.layer.removeAllAnimations()
         progressIndicator.frame.origin.x = -2
-        progressTimer.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -319,7 +323,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         onPlay()
         
-        delay(self.jam.messageDuration) {
+        delay(self.jam.duration) {
             self.tempoTimer.invalidate()
             self.sendingMessageView.startAnimation()
             self.onPlay()
@@ -334,10 +338,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 }
                 self.drawWaveforms()
                 keyboardController.instrument.reload()
-            }) { (error: NSError) in
-                print(error.localizedDescription)
             }
-                
+            
             self.sendingMessageView.stopAnimation()
             self.keyboardButton.hidden = false
             self.loopButton.hidden = false
@@ -377,9 +379,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     @IBAction func onLoop(sender: AnyObject) {
         if (inKeyboard){
-        loopContainer.alpha = 1
-        keyboardContainer.alpha = 0
-    loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+            loopContainer.alpha = 1
+            keyboardContainer.alpha = 0
+            loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
             inKeyboard = false
             keyboardButton.hidden = true
             recordView.hidden = true
@@ -389,8 +391,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         else if (inMicrophone){
             loopContainer.alpha = 1
             microphoneContainer.alpha = 0
-    loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
-microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
+            loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+            microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
             inMicrophone = false
             inLoop = true
         }
@@ -398,7 +400,7 @@ microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
         else{
             loopContainer.alpha = 0
             keyboardContainer.alpha = 1
-    loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
+            loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
             inKeyboard = true
             inLoop = false
             keyboardButton.hidden = false
@@ -420,8 +422,8 @@ microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
         else if (inLoop){
             microphoneContainer.alpha = 1
             loopContainer.alpha = 0
-    loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
-microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+            loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
+            microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
             inMicrophone = true
             inLoop = false
         }
@@ -429,7 +431,7 @@ microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
         else{
             microphoneContainer.alpha = 0
             keyboardContainer.alpha = 1
-microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
+            microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
             inKeyboard = true
             inMicrophone = false
             keyboardButton.hidden = false
@@ -437,5 +439,5 @@ microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
         }
     }
     
-
+    
 }

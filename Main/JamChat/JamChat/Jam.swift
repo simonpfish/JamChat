@@ -18,7 +18,7 @@ class Jam: NSObject {
     var tracks: [Track] = []
     var users: [User] = []
     private(set) var updatedAt: NSDate!
-    let messageDuration: Double!
+    let duration: Double!
     var title: String = ""
     static var currentUserJams: [Jam] = []
     static var usersInCurreentUserJams: [User] = []
@@ -32,7 +32,7 @@ class Jam: NSObject {
     
     var playthroughProgress: Double {
         get {
-            return (tracks.last?.playbackTime)! / messageDuration
+            return (tracks.last?.playbackTime)! / duration
         }
     }
     
@@ -48,7 +48,7 @@ class Jam: NSObject {
         
         self.object = object
         
-        messageDuration = object["messageDuration"] as! Double
+        duration = object["messageDuration"] as! Double
         
         trackObjects = object["tracks"] as! [PFObject]
         for object in trackObjects {
@@ -69,7 +69,7 @@ class Jam: NSObject {
      */
     init(messageDuration: Double, users: [User], title: String) {
         object = PFObject(className: "Jam")
-        self.messageDuration = messageDuration
+        self.duration = messageDuration
         self.title = title
         self.updatedAt = NSDate()
         
@@ -133,7 +133,7 @@ class Jam: NSObject {
     
     init(messageDuration: Double, userIDs: [String], title: String, tempo: Int, numMeasures: Int) {
         object = PFObject(className: "Jam")
-        self.messageDuration = messageDuration
+        self.duration = messageDuration
         self.userIDs = userIDs
         self.userIDs.append(User.currentUser!.facebookID)
         self.title = title
@@ -145,10 +145,9 @@ class Jam: NSObject {
      Records a track from a certain audio node for the set track duration, adds it to a message and sends it immediately.
      */
     func recordSend(instrument: Instrument, success: () -> (), failure: (NSError) -> ()) {
-        
         let track = Track()
         tracks.append(track)
-        track.recordInstrument(instrument, duration: messageDuration) {
+        track.recordInstrument(instrument, duration: duration) {
             track.upload({ (_: Bool, error: NSError?) in
                 if let error = error {
                     failure(error)
@@ -199,7 +198,7 @@ class Jam: NSObject {
     func push(completion: PFBooleanResultBlock?) {
         print("Pushing jam \(title)")
         
-        object["messageDuration"] = messageDuration
+        object["messageDuration"] = duration
         object["users"] = userIDs
         object["tracks"] = trackObjects
         object["title"] = title
@@ -226,6 +225,10 @@ class Jam: NSObject {
     }
     
     func stop() {
-        
+        print("Stopping jam \(title)")
+        for track in tracks {
+            track.stopLooping()
+        }
+        isPlaying = false
     }
 }

@@ -248,8 +248,13 @@ class User: NSObject {
         query.orderByDescending("updatedAt")
         query.includeKey("tracks")
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
-            if error != nil {
-            } else {
+            if error == nil {
+                
+                if objects?.count == 0 {
+                    success([])
+                    return
+                }
+                
                 var jams: [Jam] = []
                 var loadedCount = 0
                 for object in objects ?? [] {

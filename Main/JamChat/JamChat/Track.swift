@@ -23,7 +23,7 @@ class Track: NSObject {
     
     var playbackTime: Double{
         get {
-            return player!.playhead
+            return player?.playhead ?? 0
         }
     }
     

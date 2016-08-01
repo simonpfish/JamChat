@@ -333,6 +333,8 @@
 		E7F0BB501D3D7D0B0059160B /* Jam */ = {
 			isa = PBXGroup;
 			children = (
+				E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */,
+				21F29BCE1D4FDE1400CED9D8 /* MicrophoneViewController.swift */,
 				E74F1DF41D3869DB00A34409 /* JamViewController.swift */,
 				E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */,
 				21F29BCB1D4FCD2300CED9D8 /* Loops */,
@@ -566,7 +568,8 @@
 				E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */,
 				21F29BCF1D4FDE1400CED9D8 /* MicrophoneViewController.swift in Sources */,
 				213089B11D41594A0030D099 /* UserCollectionDelegate.swift in Sources */,
-				8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */,
+				210AEB011D4FC7D1006EDF89 /* LoopsPagerViewController.swift in Sources */,
+				8C3552BB1D4A0D8A00795591 /* Loop.swift in Sources */,
 				E7F0BB3E1D3D61550059160B /* PagerViewController.swift in Sources */,
 				E7FBA05D1D469F020011B689 /* AKNodeRecorder.swift in Sources */,
 				213089B31D415AB00030D099 /* InstrumentCollectionDelegate.swift in Sources */,
