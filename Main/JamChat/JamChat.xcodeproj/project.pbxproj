@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210AEB011D4FC7D1006EDF89 /* LoopsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210AEB001D4FC7D1006EDF89 /* LoopsPagerViewController.swift */; };
 		213089AD1D4154CF0030D099 /* InstrumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089AC1D4154CF0030D099 /* InstrumentCell.swift */; };
 		213089B11D41594A0030D099 /* UserCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089B01D41594A0030D099 /* UserCollectionDelegate.swift */; };
 		213089B31D415AB00030D099 /* InstrumentCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */; };
 		219AEAA41D403E39008DC61B /* jamNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 219AEAA31D403E39008DC61B /* jamNames.txt */; };
 		21ECC9ED1D41D47800E4E695 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ECC9EC1D41D47800E4E695 /* FriendCell.swift */; };
+		21F29BCA1D4FCD1100CED9D8 /* ChordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F29BC91D4FCD1100CED9D8 /* ChordsViewController.swift */; };
+		21F29BCF1D4FDE1400CED9D8 /* MicrophoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F29BCE1D4FDE1400CED9D8 /* MicrophoneViewController.swift */; };
 		8C01C09D1D4930BF007FB836 /* LoopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C01C09C1D4930BF007FB836 /* LoopViewController.swift */; };
 		8C01C09F1D4957CE007FB836 /* LoopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C01C09E1D4957CE007FB836 /* LoopCell.swift */; };
 		8C0EC4C81D46D9C200092B88 /* 80BPM.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C0EC4C71D46D9C200092B88 /* 80BPM.wav */; };
@@ -37,7 +40,6 @@
 		8C3552D51D4AAEE000795591 /* #5BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552CF1D4AAEE000795591 /* #5BPM140.wav */; };
 		8C3552D61D4AAEE000795591 /* #6BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552D01D4AAEE000795591 /* #6BPM140.wav */; };
 		8C3552DA1D4BCB1B00795591 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3552D91D4BCB1B00795591 /* Metronome.swift */; };
-		8C3552E01D4FCBB500795591 /* MicrophoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3552DF1D4FCBB500795591 /* MicrophoneViewController.swift */; };
 		8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D0FEB1D3D602C00380680 /* Instrument.swift */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
 		E70DC3BE1D46E28900B76CE7 /* PubNubHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */; };
@@ -96,11 +98,14 @@
 
 /* Begin PBXFileReference section */
 		06DC7EFB1EBB19B0747B99B1 /* Pods-JamChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.release.xcconfig"; sourceTree = "<group>"; };
+		210AEB001D4FC7D1006EDF89 /* LoopsPagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopsPagerViewController.swift; sourceTree = "<group>"; };
 		213089AC1D4154CF0030D099 /* InstrumentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstrumentCell.swift; sourceTree = "<group>"; };
 		213089B01D41594A0030D099 /* UserCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionDelegate.swift; sourceTree = "<group>"; };
 		213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstrumentCollectionDelegate.swift; sourceTree = "<group>"; };
 		219AEAA31D403E39008DC61B /* jamNames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jamNames.txt; sourceTree = "<group>"; };
 		21ECC9EC1D41D47800E4E695 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
+		21F29BC91D4FCD1100CED9D8 /* ChordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordsViewController.swift; sourceTree = "<group>"; };
+		21F29BCE1D4FDE1400CED9D8 /* MicrophoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrophoneViewController.swift; sourceTree = "<group>"; };
 		7F275E1B8FE709C2BCDCFD4D /* Pods-JamChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.debug.xcconfig"; sourceTree = "<group>"; };
 		8C01C09C1D4930BF007FB836 /* LoopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopViewController.swift; sourceTree = "<group>"; };
 		8C01C09E1D4957CE007FB836 /* LoopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopCell.swift; sourceTree = "<group>"; };
@@ -127,7 +132,6 @@
 		8C3552CF1D4AAEE000795591 /* #5BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#5BPM140.wav"; sourceTree = "<group>"; };
 		8C3552D01D4AAEE000795591 /* #6BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#6BPM140.wav"; sourceTree = "<group>"; };
 		8C3552D91D4BCB1B00795591 /* Metronome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
-		8C3552DF1D4FCBB500795591 /* MicrophoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrophoneViewController.swift; sourceTree = "<group>"; };
 		8C9D0FEB1D3D602C00380680 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PubNubHandler.swift; sourceTree = "<group>"; };
 		E70DC3BF1D46EA0C00B76CE7 /* AKAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAudioPlayer.swift; sourceTree = "<group>"; };
@@ -185,6 +189,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21F29BCB1D4FCD2300CED9D8 /* Loops */ = {
+			isa = PBXGroup;
+			children = (
+				8C01C09C1D4930BF007FB836 /* LoopViewController.swift */,
+				210AEB001D4FC7D1006EDF89 /* LoopsPagerViewController.swift */,
+				21F29BC91D4FCD1100CED9D8 /* ChordsViewController.swift */,
+			);
+			name = Loops;
+			sourceTree = "<group>";
+		};
 		49EEAABBFF989D0DC4BBBFC4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,11 +341,11 @@
 		E7F0BB501D3D7D0B0059160B /* Jam */ = {
 			isa = PBXGroup;
 			children = (
-				8C3552DF1D4FCBB500795591 /* MicrophoneViewController.swift */,
-				8C01C09C1D4930BF007FB836 /* LoopViewController.swift */,
 				E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */,
+				21F29BCE1D4FDE1400CED9D8 /* MicrophoneViewController.swift */,
 				E74F1DF41D3869DB00A34409 /* JamViewController.swift */,
 				E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */,
+				21F29BCB1D4FCD2300CED9D8 /* Loops */,
 			);
 			name = Jam;
 			sourceTree = "<group>";
@@ -555,15 +569,16 @@
 				21ECC9ED1D41D47800E4E695 /* FriendCell.swift in Sources */,
 				E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */,
 				8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */,
-				8C3552E01D4FCBB500795591 /* MicrophoneViewController.swift in Sources */,
 				E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */,
 				E717EC161D2ED34500AC812B /* User.swift in Sources */,
 				E7F0BB591D3ECA470059160B /* KeyboardViewController.swift in Sources */,
 				E7FE0FE81D35706A00452361 /* HomeViewController.swift in Sources */,
 				E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */,
 				E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */,
+				21F29BCF1D4FDE1400CED9D8 /* MicrophoneViewController.swift in Sources */,
 				213089B11D41594A0030D099 /* UserCollectionDelegate.swift in Sources */,
 				E74F1DFA1D386A2E00A34409 /* JamHistoryViewController.swift in Sources */,
+				210AEB011D4FC7D1006EDF89 /* LoopsPagerViewController.swift in Sources */,
 				E7FE0FFD1D359F4100452361 /* MessageCell.swift in Sources */,
 				8C3552BB1D4A0D8A00795591 /* Loop.swift in Sources */,
 				E7F0BB3E1D3D61550059160B /* PagerViewController.swift in Sources */,
@@ -571,6 +586,7 @@
 				213089B31D415AB00030D099 /* InstrumentCollectionDelegate.swift in Sources */,
 				E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */,
 				8C01C09D1D4930BF007FB836 /* LoopViewController.swift in Sources */,
+				21F29BCA1D4FCD1100CED9D8 /* ChordsViewController.swift in Sources */,
 				E7AB05571D429ED800A92C9E /* AKAudioFile+Exporting.swift in Sources */,
 				8C3552DA1D4BCB1B00795591 /* Metronome.swift in Sources */,
 				E70DC3C01D46EA0C00B76CE7 /* AKAudioPlayer.swift in Sources */,
