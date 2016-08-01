@@ -297,6 +297,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         isCounting = true
         self.keyboardButton.hidden = true
         loopButton.hidden = true
+        microphoneButton.hidden = true
         countdownLabel.text = "\(countdown)"
         tempoTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(onBeat), userInfo: nil, repeats: true)
         metronome.play()
