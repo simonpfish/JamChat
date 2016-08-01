@@ -20,6 +20,7 @@ import PubNub
     
     let appDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
 
+    @IBOutlet weak var noJamsLabel: UILabel!
     @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     @IBInspectable var refreshTint: UIColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
@@ -94,6 +95,12 @@ import PubNub
             self.tableView.dg_stopLoading()
             self.loadingIndicatorView.stopAnimation()
             
+            if self.jams.count == 0 {
+                self.noJamsLabel.hidden = false
+            } else {
+                self.noJamsLabel.hidden = true
+            }
+            
             if self.jamIDs.count == 0 {
                 for jam in jams {
                     self.jamIDs.append(jam.id)
@@ -115,16 +122,17 @@ import PubNub
         return cell
     }
         
-    func addNewJam(duration: Double, userIDs: [String], name: String, tempo: Int) {
+    func addNewJam(duration: Double, userIDs: [String], name: String, tempo: Int, numMeasures: Int) {
         var jam: Jam!
         let jamLength = duration
         let jamName = name
         let jamTempo = tempo
+        let jamNumMeasures = numMeasures
         
         if userIDs.count == 0 {
             print("Can't create jam without users")
         } else {
-            jam = Jam(messageDuration: Double(jamLength), userIDs: userIDs, title: jamName, tempo: jamTempo)
+            jam = Jam(messageDuration: Double(jamLength), userIDs: userIDs, title: jamName, tempo: jamTempo, numMeasures: jamNumMeasures)
             jam.push { (success: Bool, error: NSError?) in
                 if let error = error {
                     print(error.localizedDescription)

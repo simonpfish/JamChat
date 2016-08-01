@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import AudioKit
 import PubNub
+import NVActivityIndicatorView
 
 class Jam: NSObject {
     
@@ -22,6 +23,7 @@ class Jam: NSObject {
     static var currentUserJams: [Jam] = []
     static var usersInCurreentUserJams: [User] = []
     var tempo: Int?
+    var numMeasures: Int?
     var id: String {
         get {
             return object.objectId!
@@ -56,6 +58,7 @@ class Jam: NSObject {
         userIDs = object["users"] as! [String]
         title = object["title"] as? String ?? ""
         tempo = object["tempo"] as? Int
+        numMeasures = object["numMeasures"] as? Int
         updatedAt = object.updatedAt
         
         super.init()
@@ -128,13 +131,14 @@ class Jam: NSObject {
         }
     }
     
-    init(messageDuration: Double, userIDs: [String], title: String, tempo: Int) {
+    init(messageDuration: Double, userIDs: [String], title: String, tempo: Int, numMeasures: Int) {
         object = PFObject(className: "Jam")
         self.messageDuration = messageDuration
         self.userIDs = userIDs
         self.userIDs.append(User.currentUser!.facebookID)
         self.title = title
         self.tempo = tempo
+        self.numMeasures = numMeasures
     }
     
     /**
@@ -200,6 +204,7 @@ class Jam: NSObject {
         object["tracks"] = trackObjects
         object["title"] = title
         object["tempo"] = tempo
+        object["numMeasures"] = numMeasures
         
         object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
             print("Finished pushing jam \(self.title)")

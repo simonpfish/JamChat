@@ -20,22 +20,29 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var jam: Jam!
     var users: [User] = []
     var tempoTimer = NSTimer()
-    var countdownTimer = NSTimer()
-    var countdown: Int = 4
-    var metronome: AVAudioPlayer!
-    var stringBPM: String = ""
+    var countdown = 4
+    var inKeyboard: Bool = true
+    var inMicrophone: Bool = false
+    var inLoop: Bool = false
     
     @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
     
+    @IBOutlet weak var measuresView: UIView!
     @IBOutlet weak var progressIndicator: UIView!
+    @IBOutlet weak var loopContainer: UIView!
     @IBOutlet weak var keyboardContainer: UIView!
     @IBOutlet weak var jamNameLabel: UILabel!
     @IBOutlet weak var userCollection: UICollectionView!
+    @IBOutlet weak var microphoneContainer: UIView!
     @IBOutlet weak var waveformContainer: UIView!
     @IBOutlet weak var keyboardButton: CircleMenu!
     @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
+    @IBOutlet weak var sendingMessageView: NVActivityIndicatorView!
     @IBOutlet weak var recordView: BAPulseView!
     @IBOutlet weak var countdownLabel: UILabel!
+    @IBOutlet weak var loopButton: UIButton!
+    @IBOutlet weak var microphoneButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +56,16 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         loadingIndicatorView.type = .LineScaleParty
         loadingIndicatorView.color = loadingColor
         
+        sendingMessageView.hidesWhenStopped = true
+        sendingMessageView.type = .LineScale
+        sendingMessageView.color = loadingColor
+        
+        self.sendingMessageView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
+        
         progressIndicator.layer.cornerRadius = progressIndicator.frame.width/2
-
+                
+        layoutMeasureBars()
+        
         // Set up user collection view:
         userCollection.dataSource = self
         userCollection.delegate = self
@@ -71,6 +86,13 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         tap.delegate = self
         recordView.addGestureRecognizer(tap)
         
+        //customizes loop button to be a circle
+        loopButton.layer.cornerRadius = 0.5 * loopButton.bounds.size.width
+        
+        //customizes microphone button to be a circle
+        microphoneButton.layer.cornerRadius = 0.5 * microphoneButton.bounds.size.width
+        microphoneContainer.alpha = 0
+
         for user in jam!.users {
             if user.facebookID != User.currentUser!.facebookID {
                 users.append(user)
@@ -83,6 +105,38 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     override func viewDidAppear(animated: Bool) {
         drawWaveforms()
+    }
+    
+    func layoutMeasureBars() {
+        var measureImage: UIView
+        
+        for i in 1...jam.numMeasures!-1 {
+            measureImage = UIView(frame:CGRectMake((measuresView.frame.width/CGFloat(jam.numMeasures!))*CGFloat(i), ((measuresView.frame.height)/2)-12, 1, 24));
+            measureImage.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
+            measureImage.layer.cornerRadius = 0.5
+            measuresView.addSubview(measureImage)
+        }
+        
+        measureImage = UIView(frame:CGRectMake(0, ((measuresView.frame.height)/2), measuresView.frame.width, 1));
+        measureImage.backgroundColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
+        measuresView.addSubview(measureImage)
+    }
+    
+    var selectedLoopView: UIView?
+    func dragLoop(view: UIView, sender: UIPanGestureRecognizer) {
+
+        switch sender.state{
+        case .Began:
+            selectedLoopView = view
+            selectedLoopView?.backgroundColor = UIColor.clearColor()
+            self.view.addSubview(selectedLoopView!)
+        case .Changed:
+            UIView.animateWithDuration(2, animations: {() -> Void in
+                self.selectedLoopView?.transform = CGAffineTransformTranslate(self.selectedLoopView!.transform, 20, 100)
+            })
+        default:
+            selectedLoopView?.removeFromSuperview()
+        }
     }
 
     func drawWaveforms() {
@@ -106,6 +160,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                         self.waveformContainer.bringSubviewToFront(self.loadingIndicatorView)
                     }
                 }
+                self.measuresView.hidden = false
                 self.loadingIndicatorView.stopAnimation()
                 let keyboardController = self.childViewControllers[0] as! KeyboardViewController
                 keyboardController.instrument.reload()
@@ -135,18 +190,27 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     var progressTimer: NSTimer!
+    var refreshTime = 0.055
     func startAnimatingCursor() {
-        progressTimer =  NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+        progressTimer =  NSTimer.scheduledTimerWithTimeInterval(refreshTime, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
     }
     
+    private var previousProgress: CGFloat = 0
     func updateProgressView() {
         let progress = CGFloat(Double(self.view.frame.width) * jam.playthroughProgress)
-        UIView.animateWithDuration(0.05, delay: 0.0, options: [.CurveLinear], animations: {
+        
+        if progress < previousProgress {
             self.progressIndicator.frame.origin.x = progress
-        }, completion: nil)
+        } else {
+            UIView.animateWithDuration(refreshTime, delay: 0.0, options: [.CurveLinear], animations: {
+                self.progressIndicator.frame.origin.x = progress
+                }, completion: nil)
+        }
+        
+        previousProgress = progress
     }
     
-    func stopAnitatingCursor() {
+    func stopAnimatingCursor() {
         progressIndicator.frame.origin.x = -2
         progressTimer.invalidate()
     }
@@ -192,85 +256,186 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         keyboardButton.selected = false
     }
     
+    var isCounting = false
+    var isRecording = false
+    
     func onRecord(sender: UITapGestureRecognizer) {
-        countdownLabel.text = "\(countdown)"
-        countdownTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(JamViewController.startRecord), userInfo: nil, repeats: true)
-        metronomeCount()
-        recordView.popAndPulse()
+        if isRecording {return}
+        if isCounting {
+            cancelCountdown()
+        } else {
+            startCountdown()
+        }
     }
     
-    //Plays metronome count-in
-    func metronomeCount(){
-        if (jam.tempo! == 80){
-            stringBPM = "80BPM"
+    func onBeat() {
+        recordView.popAndPulse()
+        
+        if isCounting {
+            countdown -= 1
+            countdownLabel.text = String(countdown)
+            
+            if countdown == 0 {
+                startRecording()
+            }
         }
-        else if (jam.tempo! == 110){
-            stringBPM = "110BPM"
+    }
+    
+    func startCountdown() {
+        isCounting = true
+        self.keyboardButton.hidden = true
+        loopButton.hidden = true
+        countdownLabel.text = "\(countdown)"
+        tempoTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(onBeat), userInfo: nil, repeats: true)
+        metronome.play()
+    }
+    
+    func cancelCountdown() {
+        isCounting = false
+        countdownLabel.text = "REC"
+        tempoTimer.invalidate()
+        isCounting = false
+        metronome.stop()
+        countdown = 4
+    }
+    
+    var metronome: Metronome {
+        switch jam.tempo! {
+        case 110:
+            return Metronome.metronomeBPM110
+        case 140:
+            return Metronome.metronomeBPM140
+        default:
+            return Metronome.metronomeBPM80
+            
         }
-        else if (jam.tempo! == 140){
-            stringBPM = "140BPM"
+    }
+
+    func startRecording(){
+        isRecording = true
+        isCounting = false
+        countdownLabel.text = ""
+        countdown = 4
+        
+        onPlay()
+        
+        delay(self.jam.messageDuration) {
+            self.tempoTimer.invalidate()
+            self.sendingMessageView.startAnimation()
+            self.onPlay()
         }
         
-        let path = NSBundle.mainBundle().pathForResource(stringBPM, ofType: "wav")!
-        let url = NSURL(fileURLWithPath: path)
-        do {
-            let sound = try AVAudioPlayer(contentsOfURL: url)
-            metronome = sound
-            sound.play()
-        } catch {
-            print("Couldn't load metronome sound file")
-        }
-    }
-    
-    func startRecord(){
-        recordView.popAndPulse()
-        if (countdown == 1){
-            countdownLabel.text = ""
-            countdownTimer.invalidate()
-            countdown = 4
+        let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+        jam.recordSend(keyboardController.instrument, success: {
             
-            let keyboardController = self.childViewControllers[0] as! KeyboardViewController
-            
-            UIView.animateWithDuration(self.jam.messageDuration, delay: 0.0, options: [.CurveLinear], animations: {
-                self.progressIndicator.frame.origin.x = self.view.frame.width
-            }) { (success: Bool) in
-                self.progressIndicator.frame.origin.x = -2
-            }
-            
-            jam.recordSend(keyboardController.instrument, success: {
-                self.tempoTimer.invalidate()
-                for subview in self.waveformContainer.subviews {
-                    if let waveform = subview as? FDWaveformView {
-                        waveform.removeFromSuperview()
-                    }
+            for subview in self.waveformContainer.subviews {
+                if let waveform = subview as? FDWaveformView {
+                    waveform.removeFromSuperview()
                 }
                 self.drawWaveforms()
                 keyboardController.instrument.reload()
             }) { (error: NSError) in
                 print(error.localizedDescription)
             }
+                
+            self.sendingMessageView.stopAnimation()
+            self.keyboardButton.hidden = false
+            self.loopButton.hidden = false
+            self.drawWaveforms()
+            keyboardController.instrument.reload()
+            print("Message sent!")
             
-            User.currentUser?.incrementInstrument(keyboardController.instrument)
+            self.isRecording = false
+            self.countdownLabel.text = "REC"
+        }) { (error: NSError) in
+            self.isRecording = false
+            self.countdownLabel.text = "REC"
+            print(error.localizedDescription)
         }
             
-        else{
-            countdownLabel.text = "\(countdown-1)"
-            if (countdown == 2){
-                tempoTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: recordView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
-            }
-            countdown = countdown - 1
+        User.currentUser?.incrementInstrument(keyboardController.instrument)
+    }
+
+
+    func delay(delay: Double, closure: ()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(),
+            closure
+        )
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "loopSegue") {
+            let childViewController = segue.destinationViewController as! LoopsPagerViewController
+            childViewController.jam = self.jam
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func onLoop(sender: AnyObject) {
+        if (inKeyboard){
+        loopContainer.alpha = 1
+        keyboardContainer.alpha = 0
+    loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+            inKeyboard = false
+            keyboardButton.hidden = true
+            recordView.hidden = true
+            inLoop = true
+        }
+            
+        else if (inMicrophone){
+            loopContainer.alpha = 1
+            microphoneContainer.alpha = 0
+    loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
+            inMicrophone = false
+            inLoop = true
+        }
+            
+        else{
+            loopContainer.alpha = 0
+            keyboardContainer.alpha = 1
+    loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
+            inKeyboard = true
+            inLoop = false
+            keyboardButton.hidden = false
+            recordView.hidden = false
+        }
     }
-    */
+    
+    @IBAction func onMicrophone(sender: AnyObject) {
+        if (inKeyboard){
+            microphoneContainer.alpha = 1
+            keyboardContainer.alpha = 0
+            microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+            inKeyboard = false
+            keyboardButton.hidden = true
+            recordView.hidden = true
+            inMicrophone = true
+        }
+            
+        else if (inLoop){
+            microphoneContainer.alpha = 1
+            loopContainer.alpha = 0
+    loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
+microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+            inMicrophone = true
+            inLoop = false
+        }
+            
+        else{
+            microphoneContainer.alpha = 0
+            keyboardContainer.alpha = 1
+microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
+            inKeyboard = true
+            inMicrophone = false
+            keyboardButton.hidden = false
+            recordView.hidden = false
+        }
+    }
+    
 
 }

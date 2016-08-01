@@ -59,7 +59,8 @@ class InstrumentCell: UICollectionViewCell {
         self.countLabel.hidden = false
         self.countLabel.text = String(num)
         
-        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        
+        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             
             if self.numberIsDisplayed {
                 self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(0.0)
@@ -71,7 +72,30 @@ class InstrumentCell: UICollectionViewCell {
                 self.numberIsDisplayed = true
             }
             
+            // reverts back to the instrument's image after 5 seconds, if the count label is still showing
+            self.delay(5.0, closure: {
+                
+                if self.numberIsDisplayed {
+                    self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(0.0)
+                    self.countLabel.hidden = true
+                    self.numberIsDisplayed = false
+                }
+                
+            })
+            
             }, completion: nil)
+        
+    }
+    
+    func delay(delay: Double, closure: ()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(),
+            closure
+        )
     }
     
 }

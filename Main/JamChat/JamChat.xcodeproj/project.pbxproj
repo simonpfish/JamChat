@@ -7,15 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210AEB011D4FC7D1006EDF89 /* LoopsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210AEB001D4FC7D1006EDF89 /* LoopsPagerViewController.swift */; };
 		213089AD1D4154CF0030D099 /* InstrumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089AC1D4154CF0030D099 /* InstrumentCell.swift */; };
 		213089B11D41594A0030D099 /* UserCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089B01D41594A0030D099 /* UserCollectionDelegate.swift */; };
 		213089B31D415AB00030D099 /* InstrumentCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */; };
 		219AEAA41D403E39008DC61B /* jamNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 219AEAA31D403E39008DC61B /* jamNames.txt */; };
 		21ECC9ED1D41D47800E4E695 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ECC9EC1D41D47800E4E695 /* FriendCell.swift */; };
+		21F29BCA1D4FCD1100CED9D8 /* ChordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F29BC91D4FCD1100CED9D8 /* ChordsViewController.swift */; };
+		21F29BCF1D4FDE1400CED9D8 /* MicrophoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F29BCE1D4FDE1400CED9D8 /* MicrophoneViewController.swift */; };
+		8C01C09D1D4930BF007FB836 /* LoopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C01C09C1D4930BF007FB836 /* LoopViewController.swift */; };
+		8C01C09F1D4957CE007FB836 /* LoopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C01C09E1D4957CE007FB836 /* LoopCell.swift */; };
 		8C0EC4C81D46D9C200092B88 /* 80BPM.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C0EC4C71D46D9C200092B88 /* 80BPM.wav */; };
-		8C0EC4CA1D46E16D00092B88 /* 110BPM.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C0EC4C91D46E16D00092B88 /* 110BPM.wav */; };
 		8C0EC4CC1D46E33000092B88 /* 140BPM.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C0EC4CB1D46E33000092B88 /* 140BPM.wav */; };
-		8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20F5F11D38F37800622892 /* SelectionView.swift */; };
+		8C3552B21D4A057700795591 /* #1BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552AC1D4A057700795591 /* #1BPM80.wav */; };
+		8C3552B31D4A057700795591 /* #2BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552AD1D4A057700795591 /* #2BPM80.wav */; };
+		8C3552B41D4A057700795591 /* #3BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552AE1D4A057700795591 /* #3BPM80.wav */; };
+		8C3552B51D4A057700795591 /* #4BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552AF1D4A057700795591 /* #4BPM80.wav */; };
+		8C3552B61D4A057700795591 /* #5BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552B01D4A057700795591 /* #5BPM80.wav */; };
+		8C3552B71D4A057700795591 /* #6BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552B11D4A057700795591 /* #6BPM80.wav */; };
+		8C3552B91D4A0CCA00795591 /* 110BPM.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552B81D4A0CCA00795591 /* 110BPM.wav */; };
+		8C3552BB1D4A0D8A00795591 /* Loop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3552BA1D4A0D8A00795591 /* Loop.swift */; };
+		8C3552C51D4AA4DE00795591 /* #1BPM110.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552BF1D4AA4DE00795591 /* #1BPM110.wav */; };
+		8C3552C61D4AA4DE00795591 /* #2BPM110.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552C01D4AA4DE00795591 /* #2BPM110.wav */; };
+		8C3552C71D4AA4DE00795591 /* #3BPM110.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552C11D4AA4DE00795591 /* #3BPM110.wav */; };
+		8C3552C81D4AA4DE00795591 /* #4BPM110.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552C21D4AA4DE00795591 /* #4BPM110.wav */; };
+		8C3552C91D4AA4DE00795591 /* #5BPM110.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552C31D4AA4DE00795591 /* #5BPM110.wav */; };
+		8C3552CA1D4AA4DE00795591 /* #6BPM110.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552C41D4AA4DE00795591 /* #6BPM110.wav */; };
+		8C3552D11D4AAEE000795591 /* #1BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552CB1D4AAEE000795591 /* #1BPM140.wav */; };
+		8C3552D21D4AAEE000795591 /* #2BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552CC1D4AAEE000795591 /* #2BPM140.wav */; };
+		8C3552D31D4AAEE000795591 /* #3BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552CD1D4AAEE000795591 /* #3BPM140.wav */; };
+		8C3552D41D4AAEE000795591 /* #4BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552CE1D4AAEE000795591 /* #4BPM140.wav */; };
+		8C3552D51D4AAEE000795591 /* #5BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552CF1D4AAEE000795591 /* #5BPM140.wav */; };
+		8C3552D61D4AAEE000795591 /* #6BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552D01D4AAEE000795591 /* #6BPM140.wav */; };
+		8C3552DA1D4BCB1B00795591 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3552D91D4BCB1B00795591 /* Metronome.swift */; };
 		8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D0FEB1D3D602C00380680 /* Instrument.swift */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
 		E70DC3BE1D46E28900B76CE7 /* PubNubHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */; };
@@ -47,7 +71,6 @@
 		E7F0BB491D3D67B80059160B /* JamCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F0BB481D3D67B80059160B /* JamCreation.storyboard */; };
 		E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */; };
 		E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */; };
-		E7F0BB561D3EA5070059160B /* PolyphonicKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB541D3EA5070059160B /* PolyphonicKeyboardView.swift */; };
 		E7F0BB591D3ECA470059160B /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */; };
 		E7FBA05D1D469F020011B689 /* AKNodeRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FBA05C1D469F020011B689 /* AKNodeRecorder.swift */; };
 		E7FBA05F1D469F3D0011B689 /* AKSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FBA05E1D469F3D0011B689 /* AKSettings.swift */; };
@@ -72,16 +95,40 @@
 
 /* Begin PBXFileReference section */
 		06DC7EFB1EBB19B0747B99B1 /* Pods-JamChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.release.xcconfig"; sourceTree = "<group>"; };
+		210AEB001D4FC7D1006EDF89 /* LoopsPagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopsPagerViewController.swift; sourceTree = "<group>"; };
 		213089AC1D4154CF0030D099 /* InstrumentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstrumentCell.swift; sourceTree = "<group>"; };
 		213089B01D41594A0030D099 /* UserCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionDelegate.swift; sourceTree = "<group>"; };
 		213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstrumentCollectionDelegate.swift; sourceTree = "<group>"; };
 		219AEAA31D403E39008DC61B /* jamNames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jamNames.txt; sourceTree = "<group>"; };
 		21ECC9EC1D41D47800E4E695 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
+		21F29BC91D4FCD1100CED9D8 /* ChordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordsViewController.swift; sourceTree = "<group>"; };
+		21F29BCE1D4FDE1400CED9D8 /* MicrophoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrophoneViewController.swift; sourceTree = "<group>"; };
 		7F275E1B8FE709C2BCDCFD4D /* Pods-JamChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JamChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JamChat/Pods-JamChat.debug.xcconfig"; sourceTree = "<group>"; };
+		8C01C09C1D4930BF007FB836 /* LoopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopViewController.swift; sourceTree = "<group>"; };
+		8C01C09E1D4957CE007FB836 /* LoopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopCell.swift; sourceTree = "<group>"; };
 		8C0EC4C71D46D9C200092B88 /* 80BPM.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 80BPM.wav; sourceTree = "<group>"; };
-		8C0EC4C91D46E16D00092B88 /* 110BPM.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 110BPM.wav; sourceTree = "<group>"; };
 		8C0EC4CB1D46E33000092B88 /* 140BPM.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 140BPM.wav; sourceTree = "<group>"; };
-		8C20F5F11D38F37800622892 /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		8C3552AC1D4A057700795591 /* #1BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#1BPM80.wav"; sourceTree = "<group>"; };
+		8C3552AD1D4A057700795591 /* #2BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#2BPM80.wav"; sourceTree = "<group>"; };
+		8C3552AE1D4A057700795591 /* #3BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#3BPM80.wav"; sourceTree = "<group>"; };
+		8C3552AF1D4A057700795591 /* #4BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#4BPM80.wav"; sourceTree = "<group>"; };
+		8C3552B01D4A057700795591 /* #5BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#5BPM80.wav"; sourceTree = "<group>"; };
+		8C3552B11D4A057700795591 /* #6BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#6BPM80.wav"; sourceTree = "<group>"; };
+		8C3552B81D4A0CCA00795591 /* 110BPM.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 110BPM.wav; sourceTree = "<group>"; };
+		8C3552BA1D4A0D8A00795591 /* Loop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loop.swift; sourceTree = "<group>"; };
+		8C3552BF1D4AA4DE00795591 /* #1BPM110.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#1BPM110.wav"; sourceTree = "<group>"; };
+		8C3552C01D4AA4DE00795591 /* #2BPM110.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#2BPM110.wav"; sourceTree = "<group>"; };
+		8C3552C11D4AA4DE00795591 /* #3BPM110.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#3BPM110.wav"; sourceTree = "<group>"; };
+		8C3552C21D4AA4DE00795591 /* #4BPM110.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#4BPM110.wav"; sourceTree = "<group>"; };
+		8C3552C31D4AA4DE00795591 /* #5BPM110.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#5BPM110.wav"; sourceTree = "<group>"; };
+		8C3552C41D4AA4DE00795591 /* #6BPM110.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#6BPM110.wav"; sourceTree = "<group>"; };
+		8C3552CB1D4AAEE000795591 /* #1BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#1BPM140.wav"; sourceTree = "<group>"; };
+		8C3552CC1D4AAEE000795591 /* #2BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#2BPM140.wav"; sourceTree = "<group>"; };
+		8C3552CD1D4AAEE000795591 /* #3BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#3BPM140.wav"; sourceTree = "<group>"; };
+		8C3552CE1D4AAEE000795591 /* #4BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#4BPM140.wav"; sourceTree = "<group>"; };
+		8C3552CF1D4AAEE000795591 /* #5BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#5BPM140.wav"; sourceTree = "<group>"; };
+		8C3552D01D4AAEE000795591 /* #6BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#6BPM140.wav"; sourceTree = "<group>"; };
+		8C3552D91D4BCB1B00795591 /* Metronome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
 		8C9D0FEB1D3D602C00380680 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PubNubHandler.swift; sourceTree = "<group>"; };
 		E70DC3BF1D46EA0C00B76CE7 /* AKAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAudioPlayer.swift; sourceTree = "<group>"; };
@@ -114,7 +161,6 @@
 		E7F0BB481D3D67B80059160B /* JamCreation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JamCreation.storyboard; sourceTree = "<group>"; };
 		E7F0BB4A1D3D6C300059160B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E7F0BB4C1D3D6CE90059160B /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
-		E7F0BB541D3EA5070059160B /* PolyphonicKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolyphonicKeyboardView.swift; sourceTree = "<group>"; };
 		E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		E7FBA05C1D469F020011B689 /* AKNodeRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKNodeRecorder.swift; sourceTree = "<group>"; };
 		E7FBA05E1D469F3D0011B689 /* AKSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKSettings.swift; sourceTree = "<group>"; };
@@ -137,6 +183,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21F29BCB1D4FCD2300CED9D8 /* Loops */ = {
+			isa = PBXGroup;
+			children = (
+				8C01C09C1D4930BF007FB836 /* LoopViewController.swift */,
+				210AEB001D4FC7D1006EDF89 /* LoopsPagerViewController.swift */,
+				21F29BC91D4FCD1100CED9D8 /* ChordsViewController.swift */,
+			);
+			name = Loops;
+			sourceTree = "<group>";
+		};
 		49EEAABBFF989D0DC4BBBFC4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +201,54 @@
 				EB46293530A6261983676B0D /* Pods_JamChat.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8C3552BC1D4AA41D00795591 /* Loops */ = {
+			isa = PBXGroup;
+			children = (
+				8C3552CB1D4AAEE000795591 /* #1BPM140.wav */,
+				8C3552CC1D4AAEE000795591 /* #2BPM140.wav */,
+				8C3552CD1D4AAEE000795591 /* #3BPM140.wav */,
+				8C3552CE1D4AAEE000795591 /* #4BPM140.wav */,
+				8C3552CF1D4AAEE000795591 /* #5BPM140.wav */,
+				8C3552D01D4AAEE000795591 /* #6BPM140.wav */,
+				8C3552BF1D4AA4DE00795591 /* #1BPM110.wav */,
+				8C3552C01D4AA4DE00795591 /* #2BPM110.wav */,
+				8C3552C11D4AA4DE00795591 /* #3BPM110.wav */,
+				8C3552C21D4AA4DE00795591 /* #4BPM110.wav */,
+				8C3552C31D4AA4DE00795591 /* #5BPM110.wav */,
+				8C3552C41D4AA4DE00795591 /* #6BPM110.wav */,
+				8C3552AC1D4A057700795591 /* #1BPM80.wav */,
+				8C3552AD1D4A057700795591 /* #2BPM80.wav */,
+				8C3552AE1D4A057700795591 /* #3BPM80.wav */,
+				8C3552AF1D4A057700795591 /* #4BPM80.wav */,
+				8C3552B01D4A057700795591 /* #5BPM80.wav */,
+				8C3552B11D4A057700795591 /* #6BPM80.wav */,
+			);
+			name = Loops;
+			sourceTree = "<group>";
+		};
+		8C3552BD1D4AA43600795591 /* Instruments */ = {
+			isa = PBXGroup;
+			children = (
+				E723F2C91D40116100CF1C29 /* AcousticBassC.wav */,
+				E723F2BF1D40115700CF1C29 /* ChoirC.wav */,
+				E723F2C01D40115700CF1C29 /* ElectricBassC.wav */,
+				E723F2C11D40115700CF1C29 /* PianoC.wav */,
+				E723F2C21D40115700CF1C29 /* RockGuitarC.wav */,
+				E723F2C31D40115700CF1C29 /* SaxC.wav */,
+			);
+			name = Instruments;
+			sourceTree = "<group>";
+		};
+		8C3552BE1D4AA44C00795591 /* Count-Ins */ = {
+			isa = PBXGroup;
+			children = (
+				8C0EC4C71D46D9C200092B88 /* 80BPM.wav */,
+				8C3552B81D4A0CCA00795591 /* 110BPM.wav */,
+				8C0EC4CB1D46E33000092B88 /* 140BPM.wav */,
+			);
+			name = "Count-Ins";
 			sourceTree = "<group>";
 		};
 		ADB320D560FF361DF46D00EF /* Pods */ = {
@@ -159,6 +263,8 @@
 		E717EC141D2ED32F00AC812B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8C3552D91D4BCB1B00795591 /* Metronome.swift */,
+				8C3552BA1D4A0D8A00795591 /* Loop.swift */,
 				8C9D0FEB1D3D602C00380680 /* Instrument.swift */,
 				E717EC151D2ED34500AC812B /* User.swift */,
 				E799567C1D31746300EE445B /* Jam.swift */,
@@ -168,18 +274,10 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		E74F1DF01D38162500A34409 /* Instruments */ = {
-			isa = PBXGroup;
-			children = (
-				E7F0BB541D3EA5070059160B /* PolyphonicKeyboardView.swift */,
-				8C20F5F11D38F37800622892 /* SelectionView.swift */,
-			);
-			name = Instruments;
-			sourceTree = "<group>";
-		};
 		E74F1DF11D38163900A34409 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				8C01C09E1D4957CE007FB836 /* LoopCell.swift */,
 				E7FE0FE51D356E2100452361 /* JamCell.swift */,
 				E7E0D6971D3C0DCB005A840A /* UserCell.swift */,
 				213089AC1D4154CF0030D099 /* InstrumentCell.swift */,
@@ -237,6 +335,7 @@
 			children = (
 				E74F1DF41D3869DB00A34409 /* JamViewController.swift */,
 				E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */,
+				21F29BCB1D4FCD2300CED9D8 /* Loops */,
 			);
 			name = Jam;
 			sourceTree = "<group>";
@@ -251,7 +350,6 @@
 				E79AE2031D3D50F400899823 /* Profile.storyboard */,
 				E74F1E011D3C06B800A34409 /* Jam.storyboard */,
 				E74F1DF11D38163900A34409 /* Cells */,
-				E74F1DF01D38162500A34409 /* Instruments */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -276,15 +374,9 @@
 		E7FE0FF51D359CB000452361 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8C0EC4C71D46D9C200092B88 /* 80BPM.wav */,
-				8C0EC4C91D46E16D00092B88 /* 110BPM.wav */,
-				8C0EC4CB1D46E33000092B88 /* 140BPM.wav */,
-				E723F2C91D40116100CF1C29 /* AcousticBassC.wav */,
-				E723F2BF1D40115700CF1C29 /* ChoirC.wav */,
-				E723F2C01D40115700CF1C29 /* ElectricBassC.wav */,
-				E723F2C11D40115700CF1C29 /* PianoC.wav */,
-				E723F2C21D40115700CF1C29 /* RockGuitarC.wav */,
-				E723F2C31D40115700CF1C29 /* SaxC.wav */,
+				8C3552BE1D4AA44C00795591 /* Count-Ins */,
+				8C3552BD1D4AA43600795591 /* Instruments */,
+				8C3552BC1D4AA41D00795591 /* Loops */,
 				E723F2BC1D400B6B00CF1C29 /* Vintage Strat.exs */,
 			);
 			name = Resources;
@@ -361,24 +453,42 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C3552C81D4AA4DE00795591 /* #4BPM110.wav in Resources */,
+				8C3552D61D4AAEE000795591 /* #6BPM140.wav in Resources */,
+				8C3552B41D4A057700795591 /* #3BPM80.wav in Resources */,
+				8C3552B61D4A057700795591 /* #5BPM80.wav in Resources */,
+				8C3552B51D4A057700795591 /* #4BPM80.wav in Resources */,
+				8C3552CA1D4AA4DE00795591 /* #6BPM110.wav in Resources */,
 				E723F2BD1D400B8300CF1C29 /* Vintage Strat.exs in Resources */,
+				8C3552D11D4AAEE000795591 /* #1BPM140.wav in Resources */,
 				E723F2C71D40115700CF1C29 /* RockGuitarC.wav in Resources */,
 				8C0EC4CC1D46E33000092B88 /* 140BPM.wav in Resources */,
 				E756A87E1D2D7E74007C0590 /* LaunchScreen.storyboard in Resources */,
+				8C3552C51D4AA4DE00795591 /* #1BPM110.wav in Resources */,
+				8C3552C61D4AA4DE00795591 /* #2BPM110.wav in Resources */,
+				8C3552D31D4AAEE000795591 /* #3BPM140.wav in Resources */,
+				8C3552C91D4AA4DE00795591 /* #5BPM110.wav in Resources */,
+				8C3552B71D4A057700795591 /* #6BPM80.wav in Resources */,
 				E723F2C51D40115700CF1C29 /* ElectricBassC.wav in Resources */,
 				E7F0BB491D3D67B80059160B /* JamCreation.storyboard in Resources */,
 				E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */,
+				8C3552D21D4AAEE000795591 /* #2BPM140.wav in Resources */,
 				E723F2CA1D40116100CF1C29 /* AcousticBassC.wav in Resources */,
+				8C3552B21D4A057700795591 /* #1BPM80.wav in Resources */,
 				E723F2C41D40115700CF1C29 /* ChoirC.wav in Resources */,
 				E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */,
+				8C3552B31D4A057700795591 /* #2BPM80.wav in Resources */,
 				E79AE2051D3D50F400899823 /* Profile.storyboard in Resources */,
 				8C0EC4C81D46D9C200092B88 /* 80BPM.wav in Resources */,
 				E7F0BB471D3D67110059160B /* Home.storyboard in Resources */,
-				8C0EC4CA1D46E16D00092B88 /* 110BPM.wav in Resources */,
 				E74F1E031D3C06B800A34409 /* Jam.storyboard in Resources */,
+				8C3552D51D4AAEE000795591 /* #5BPM140.wav in Resources */,
 				219AEAA41D403E39008DC61B /* jamNames.txt in Resources */,
 				E723F2C81D40115700CF1C29 /* SaxC.wav in Resources */,
+				8C3552C71D4AA4DE00795591 /* #3BPM110.wav in Resources */,
 				E723F2C61D40115700CF1C29 /* PianoC.wav in Resources */,
+				8C3552B91D4A0CCA00795591 /* 110BPM.wav in Resources */,
+				8C3552D41D4AAEE000795591 /* #4BPM140.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +553,7 @@
 				E799567D1D31746300EE445B /* Jam.swift in Sources */,
 				E7FE0FE61D356E2100452361 /* JamCell.swift in Sources */,
 				E795FCE21D480AD5002937E1 /* LoginViewController.swift in Sources */,
+				8C01C09F1D4957CE007FB836 /* LoopCell.swift in Sources */,
 				E70DC3BE1D46E28900B76CE7 /* PubNubHandler.swift in Sources */,
 				21ECC9ED1D41D47800E4E695 /* FriendCell.swift in Sources */,
 				E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */,
@@ -453,15 +564,18 @@
 				E7FE0FE81D35706A00452361 /* HomeViewController.swift in Sources */,
 				E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */,
 				E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */,
+				21F29BCF1D4FDE1400CED9D8 /* MicrophoneViewController.swift in Sources */,
 				213089B11D41594A0030D099 /* UserCollectionDelegate.swift in Sources */,
 				8C20F5F21D38F37800622892 /* SelectionView.swift in Sources */,
 				E7F0BB3E1D3D61550059160B /* PagerViewController.swift in Sources */,
 				E7FBA05D1D469F020011B689 /* AKNodeRecorder.swift in Sources */,
 				213089B31D415AB00030D099 /* InstrumentCollectionDelegate.swift in Sources */,
 				E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */,
+				8C01C09D1D4930BF007FB836 /* LoopViewController.swift in Sources */,
+				21F29BCA1D4FCD1100CED9D8 /* ChordsViewController.swift in Sources */,
 				E7AB05571D429ED800A92C9E /* AKAudioFile+Exporting.swift in Sources */,
+				8C3552DA1D4BCB1B00795591 /* Metronome.swift in Sources */,
 				E70DC3C01D46EA0C00B76CE7 /* AKAudioPlayer.swift in Sources */,
-				E7F0BB561D3EA5070059160B /* PolyphonicKeyboardView.swift in Sources */,
 				E7E0D6981D3C0DCB005A840A /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
