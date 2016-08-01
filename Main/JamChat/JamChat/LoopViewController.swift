@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import XLPagerTabStrip
 
-class LoopViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class LoopViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, IndicatorInfoProvider {
     
     var jam: Jam!
     var array: [Loop] = []
@@ -51,7 +52,7 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 print("NAME", indexPathForLocation)
                 selectedLoopView = selectedCell!.snapshot
                 selectedLoopView?.center = selectedCell!.center
-                self.view.addSubview(selectedLoopView!)
+                self.view.superview!.superview!.addSubview(selectedLoopView!)
             }
         case .Changed:
             UIView.animateWithDuration(0.25, animations: {() -> Void in
@@ -83,6 +84,10 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell.loop = array[indexPath.row]
 
         return cell
+    }
+    
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Loops")
     }
     
  }

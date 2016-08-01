@@ -91,10 +91,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             }
         }
         
-        //Delegate method for loop drags
-        let loopController = self.childViewControllers[1] as! LoopViewController
-        loopController.dragLoopHandler = self.dragLoop
-        
         drawWaveforms()
     }
     
@@ -360,7 +356,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "loopSegue") {
-            let childViewController = segue.destinationViewController as! LoopViewController
+            let childViewController = segue.destinationViewController as! LoopsPagerViewController
             childViewController.jam = self.jam
         }
     }
