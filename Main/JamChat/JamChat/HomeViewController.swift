@@ -87,7 +87,7 @@ import PubNub
     
     func loadFeed() {
         
-        Jam.downloadCurrentUserJams({ (jams: [Jam]) in
+        User.currentUser!.downloadJams() {(jams: [Jam]) in
             self.jams = jams
             print("Reloading table view")
             self.tableView.reloadData()
@@ -102,10 +102,6 @@ import PubNub
                 self.appDelegate.client.subscribeToChannels(self.jamIDs, withPresence: true)
             }
             
-        }) { (error: NSError) in
-            print(error.localizedDescription)
-            self.tableView.dg_stopLoading()
-            self.loadingIndicatorView.stopAnimation()
         }
     }
     
@@ -135,9 +131,7 @@ import PubNub
                 } else {
                     self.jams.insert(jam, atIndex: 0)
                     print("Succesfully created jam, reloading data")
-                    jam.loadData({
-                        self.tableView.reloadData()
-                    })
+                    self.tableView.reloadData()
                 }
             }
         }

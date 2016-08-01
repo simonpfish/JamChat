@@ -13,6 +13,7 @@ import PubNub
 
 class Jam: NSObject {
     
+    private(set) var isPlaying = false
     var tracks: [Track] = []
     var users: [User] = []
     private(set) var updatedAt: NSDate!
@@ -47,7 +48,7 @@ class Jam: NSObject {
         
         messageDuration = object["messageDuration"] as! Double
         
-        let trackObjects = object["messages"] as! [PFObject]
+        trackObjects = object["tracks"] as! [PFObject]
         for object in trackObjects {
             tracks.append(Track(object: object))
         }
@@ -58,14 +59,6 @@ class Jam: NSObject {
         updatedAt = object.updatedAt
         
         super.init()
-    }
-    
-    func loadData(completion: () -> ()) {
-        loadUsers {
-            self.loadTracks({
-                completion()
-            })
-        }
     }
     
     /**
@@ -85,8 +78,8 @@ class Jam: NSObject {
         add(User.currentUser!)
     }
     
-    private func loadUsers(completion: () -> ()) {
-        print("Loading jam \(self.object.objectId ?? "NEW") users")
+    func loadUsers(completion: () -> ()) {
+        print("Loading jam \(title) users")
         let query = PFQuery(className: "_User")
         query.whereKey("facebookID", containedIn: userIDs)
         query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
@@ -112,15 +105,21 @@ class Jam: NSObject {
         })
     }
     
-    private func loadTracks(completion: () -> ()) {
-        print("Loading jam \(self.object.objectId!) messages")
+    func loadTracks(completion: () -> ()) {
+        print("Loading jam \(title) tracks")
         
         var loadedCount = 0
+        
+        if tracks.count == 0 {
+            completion()
+            return
+        }
+        
         for track in tracks {
             track.loadMedia({ 
                 loadedCount += 1
-                if loadedCount == self.users.count {
-                    print("Successfully loaded jam \(self.object.objectId ?? "NEW") tracks")
+                if loadedCount == self.tracks.count {
+                    print("Successfully loaded jam \(self.title) tracks")
                     completion()
                 }
             }, failure: { (error: NSError) in
@@ -150,6 +149,7 @@ class Jam: NSObject {
                 if let error = error {
                     failure(error)
                 } else {
+                    self.trackObjects.append(track.object)
                     self.push({ (_: Bool, error: NSError?) in
                         if let error = error {
                             failure(error)
@@ -173,13 +173,19 @@ class Jam: NSObject {
     }
     
     /**
-     Updates the jam from the server if it is necessary
+     Fetches a particular track from the server and adds it to the jam
      */
-    func fetchTrack(id: String) {
+    func fetchTrack(id: String, completion: () -> ()) {
         let query = PFQuery(className: "Track")
         query.whereKey("id", equalTo: id)
-        query.findObjectsInBackgroundWithBlock { (object: [PFObject]?, error: NSError?) in
-            <#code#>
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+            if let object = objects?.first {
+                self.trackObjects.append(object)
+                self.tracks.append(Track(object: object))
+                completion()
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
         }
     }
     
@@ -187,7 +193,7 @@ class Jam: NSObject {
      Push the updates to the jam back to the server
      */
     func push(completion: PFBooleanResultBlock?) {
-        print("Pushing jam \(self.object.objectId ?? "NEW")")
+        print("Pushing jam \(title)")
         
         object["messageDuration"] = messageDuration
         object["users"] = userIDs
@@ -196,7 +202,7 @@ class Jam: NSObject {
         object["tempo"] = tempo
         
         object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
-            print("Finished pushing jam \(self.object.objectId ?? "NEW")")
+            print("Finished pushing jam \(self.title)")
             if self.tracks.count == 0 {
                 PubNubHandler.notifyNewJam(self)
             }
@@ -204,62 +210,17 @@ class Jam: NSObject {
         })
     }
     
-    class func downloadCurrentUserJams(success: ([Jam]) -> (), failure: (NSError) -> ()) {
-        print("Downloading jams for active user")
-        
-        let query = PFQuery(className: "Jam")
-        
-        query.whereKey("users", containsString: User.currentUser!.facebookID)
-        query.orderByDescending("updatedAt")
-        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
-            if let error = error {
-                failure(error)
-            } else {
-                var jams: [Jam] = []
-                var loadedCount = 0
-                for object in objects ?? [] {
-                    jams.append(Jam(object: object))
-                    //currentUserJams = jams
-                    jams.last?.loadData({
-                        loadedCount += 1
-                        if loadedCount == objects!.count {
-                            print("Succesfully downloaded jams for active user")
-                            currentUserJams = jams
-                            success(jams)
-                        }
-                    })
-                }
-            }
+    
+    func play(startedPlaying: (() -> ())?) {
+        print("Playing jam \(title)")
+        for track in tracks {
+            track.playLooping()
         }
+        isPlaying = true
+        startedPlaying?()
     }
     
-    /**
-     Downloads the specific user's jams, and stores them in an array
-     */
-    class func downloadSpecificUserJams(specificUser: User, success: ([Jam]) -> ()) {
-        print("Downloading jams for user: \(specificUser.name!)")
+    func stop() {
         
-        let query = PFQuery(className: "Jam")
-        
-        query.whereKey("users", containsString: specificUser.facebookID)
-        query.orderByDescending("updatedAt")
-        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
-            if error != nil {
-            } else {
-                var jams: [Jam] = []
-                var loadedCount = 0
-                for object in objects ?? [] {
-                    jams.append(Jam(object: object))
-                    jams.last?.loadData({
-                        loadedCount += 1
-                        if loadedCount == objects!.count {
-                            print("Succesfully downloaded jams for user: \(specificUser.name!)")
-                            specificUser.jams = jams
-                            success(jams)
-                        }
-                    })
-                }
-            }
-        }
     }
 }

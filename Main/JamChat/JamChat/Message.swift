@@ -62,7 +62,7 @@ class Message: NSObject {
     init(track: Track) {
         super.init()
         
-        track = track
+        self.track = track
     }
     
     /**

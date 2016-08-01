@@ -237,6 +237,37 @@ class User: NSObject {
     }
     
     /**
+     Downloads user's jams, and stores them in an array
+     */
+    func downloadJams(success: ([Jam]) -> ()) {
+        print("Downloading jams for user: \(self.name!)")
+        
+        let query = PFQuery(className: "Jam")
+        
+        query.whereKey("users", containsString: self.facebookID)
+        query.orderByDescending("updatedAt")
+        query.includeKey("tracks")
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+            if error != nil {
+            } else {
+                var jams: [Jam] = []
+                var loadedCount = 0
+                for object in objects ?? [] {
+                    jams.append(Jam(object: object))
+                    jams.last?.loadUsers({
+                        loadedCount += 1
+                        if loadedCount == objects!.count {
+                            print("Succesfully downloaded jams for user: \(self.name!)")
+                            self.jams = jams
+                            success(jams)
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    /**
      Returns an array of Users, that represents the current user's top three friends.
      */
     func getTopFriends(completion: (users: [User]) -> ()) {
@@ -293,7 +324,7 @@ class User: NSObject {
             
             // if the user has not already loaded their jams, load them
             if self.jams.count == 0 {
-                Jam.downloadSpecificUserJams(self, success: {(jams: [Jam]) in
+                downloadJams({(jams: [Jam]) in
                     self.jams = jams
                     
                     for jam in self.jams {

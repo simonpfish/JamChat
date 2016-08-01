@@ -53,7 +53,7 @@ class JamCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func setColor() {
-        let number = 100 - Double(jam!.messages.count) * 10
+        let number = 100 - Double(jam!.tracks.count) * 10
         let r = number<50 ? 255 : floor(255-(number*2-100)*255/100);
         let g = number>50 ? 255 : floor((number*2)*255/100);
         

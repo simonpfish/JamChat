@@ -77,14 +77,18 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             }
         }
         
+        loadingIndicatorView.startAnimation()
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         drawWaveforms()
     }
 
     func drawWaveforms() {
-        if let lastMessage = jam.messages.last {
-            loadingIndicatorView.startAnimation()
-            lastMessage.loadTracks({
-                for track in (lastMessage.tracks) {
+        if jam.tracks.count > 0 {
+            jam.loadTracks({
+                for track in (self.jam.tracks) {
                     if let filepath = track.filepath {
                         
                         let fileURL = NSURL(fileURLWithPath: filepath)
@@ -99,6 +103,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                         waveformView.wavesColor = track.color.colorWithAlphaComponent(0.6)
                         
                         self.waveformContainer.addSubview(waveformView)
+                        self.waveformContainer.bringSubviewToFront(self.loadingIndicatorView)
                     }
                 }
                 self.loadingIndicatorView.stopAnimation()
@@ -110,25 +115,23 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 
                 self.waveformContainer.bringSubviewToFront(self.progressIndicator)
             })
-
+        } else {
+            self.loadingIndicatorView.stopAnimation()
         }
     }
     
     //Plays chat when wave is tapped
     func onPlay(sender: UITapGestureRecognizer? = nil) {
-        let lastMessage = jam.messages.last
-        
-        if lastMessage!.isPlaying {
+        if jam.isPlaying {
             stopAnitatingCursor()
-            lastMessage?.stop()
+            jam.stop()
         } else {
-            lastMessage?.loadTracks({
-                lastMessage?.play({
+            jam.loadTracks({
+                self.jam.play({
                     self.startAnimatingCursor()
                 })
             })
         }
-        
     }
     
     var progressTimer: NSTimer!
@@ -243,7 +246,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 }
                 self.drawWaveforms()
                 keyboardController.instrument.reload()
-                print("Message sent!")
             }) { (error: NSError) in
                 print(error.localizedDescription)
             }
