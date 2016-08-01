@@ -18,7 +18,9 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
     var jam: Jam?
     
     override func viewDidLoad() {
+        
         LoopsPagerViewController.sharedInstance = self
+        
         // change selected bar color
         settings.style.buttonBarBackgroundColor = UIColor.clearColor()
         settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
@@ -36,6 +38,18 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = UIColor(red: 138/255.0, green: 138/255.0, blue: 144/255.0, alpha: 1.0)
             newCell?.label.textColor = .blackColor()
+            
+            // enlarges the size of the selected cell
+            if animated {
+                UIView.animateWithDuration(0.1, animations: { () -> Void in
+                    newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                    oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
+                })
+            }
+            else {
+                newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
+            }
         }
         
         moveToViewControllerAtIndex(1, animated: false)
@@ -60,6 +74,11 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
         drumLoopsController.jam = jam
         
         return [drumLoopsController, chordsController]
+    }
+    
+    override func configureCell(cell: ButtonBarViewCell, indicatorInfo: IndicatorInfo) {
+        super.configureCell(cell, indicatorInfo: indicatorInfo)
+        cell.backgroundColor = .clearColor()
     }
 
     /*
