@@ -344,6 +344,10 @@
         <scene sceneID="tNv-3p-OCO">
             <objects>
                 <viewController id="2es-DV-dxk" customClass="MicrophoneViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="q6J-vq-EkJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="bV1-2j-vjF"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qxH-0D-tlz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

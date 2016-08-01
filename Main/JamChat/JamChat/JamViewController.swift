@@ -22,6 +22,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var tempoTimer = NSTimer()
     var countdown = 4
     var inKeyboard: Bool = true
+    var inMicrophone: Bool = false
+    var inLoop: Bool = false
     
     @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
     
@@ -374,19 +376,28 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         if (inKeyboard){
         loopContainer.alpha = 1
         keyboardContainer.alpha = 0
-        microphoneContainer.alpha = 0
     loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
             inKeyboard = false
             keyboardButton.hidden = true
             recordView.hidden = true
+            inLoop = true
+        }
+            
+        else if (inMicrophone){
+            loopContainer.alpha = 1
+            microphoneContainer.alpha = 0
+    loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
+            inMicrophone = false
+            inLoop = true
         }
             
         else{
             loopContainer.alpha = 0
             keyboardContainer.alpha = 1
-            microphoneContainer.alpha = 0
-            loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
+    loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
             inKeyboard = true
+            inLoop = false
             keyboardButton.hidden = false
             recordView.hidden = false
         }
@@ -394,21 +405,30 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     @IBAction func onMicrophone(sender: AnyObject) {
         if (inKeyboard){
-            loopContainer.alpha = 0
-            keyboardContainer.alpha = 0
             microphoneContainer.alpha = 1
+            keyboardContainer.alpha = 0
             microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
             inKeyboard = false
             keyboardButton.hidden = true
             recordView.hidden = true
+            inMicrophone = true
+        }
+            
+        else if (inLoop){
+            microphoneContainer.alpha = 1
+            loopContainer.alpha = 0
+    loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
+microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+            inMicrophone = true
+            inLoop = false
         }
             
         else{
-            loopContainer.alpha = 0
-            keyboardContainer.alpha = 1
             microphoneContainer.alpha = 0
+            keyboardContainer.alpha = 1
 microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
             inKeyboard = true
+            inMicrophone = false
             keyboardButton.hidden = false
             recordView.hidden = false
         }
