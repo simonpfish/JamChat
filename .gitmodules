@@ -1,3 +1,6 @@
 [submodule "Servers/jamchat-dashboard"]
 	path = Servers/jamchat-dashboard
 	url = https://git.heroku.com/jamchat-dashboard.git
+[submodule "Main/JamChat/AudioKit"]
+	path = Main/JamChat/AudioKit
+	url = https://github.com/audiokit/AudioKit.git
