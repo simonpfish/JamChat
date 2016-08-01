@@ -8,6 +8,7 @@
 
 import UIKit
 import BAPulseView
+import RandomColorSwift
 
 class LoopCell: UICollectionViewCell, UIGestureRecognizerDelegate {
 
@@ -47,8 +48,19 @@ class LoopCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             super.awakeFromNib()
     }
     
+    var timer: NSTimer!
+    
     func tapLoop(sender: UITapGestureRecognizer){
         loop.play()
+//        
+//        timer = NSTimer.scheduledTimerWithTimeInterval(60.0/Double(loop.tempo), target: loopView, selector: #selector(changeColor(_:)), userInfo: nil, repeats: true)
+        
     }
+    
+//    func changeColor(sender: NSTimer) {
+//        
+//        loopView.backgroundColor = randomColor(hue: .Random, luminosity: .Light)
+//
+//    }
 
 }

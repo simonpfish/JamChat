@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import RandomColorSwift
 
 class Loop: NSObject {
     private(set) var name: String!
