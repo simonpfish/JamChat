@@ -287,7 +287,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2093.5" y="60"/>
+            <point key="canvasLocation" x="2089.5" y="674"/>
         </scene>
         <!--Loop View Controller-->
         <scene sceneID="0Tc-Lo-Aoz">
@@ -389,7 +389,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXW-m1-Ivs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1672.5" y="675"/>
+            <point key="canvasLocation" x="1614.5" y="674"/>
         </scene>
         <!--Chords View Controller-->
         <scene sceneID="vZX-85-PwP">
