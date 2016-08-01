@@ -53,14 +53,12 @@
 		E723F2C81D40115700CF1C29 /* SaxC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E723F2C31D40115700CF1C29 /* SaxC.wav */; };
 		E723F2CA1D40116100CF1C29 /* AcousticBassC.wav in Resources */ = {isa = PBXBuildFile; fileRef = E723F2C91D40116100CF1C29 /* AcousticBassC.wav */; };
 		E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F1DF41D3869DB00A34409 /* JamViewController.swift */; };
-		E74F1DFA1D386A2E00A34409 /* JamHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */; };
 		E74F1E031D3C06B800A34409 /* Jam.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74F1E011D3C06B800A34409 /* Jam.storyboard */; };
 		E756A8741D2D7E74007C0590 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756A8731D2D7E74007C0590 /* AppDelegate.swift */; };
 		E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E756A8771D2D7E74007C0590 /* Main.storyboard */; };
 		E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E756A87A1D2D7E74007C0590 /* Assets.xcassets */; };
 		E756A87E1D2D7E74007C0590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E756A87C1D2D7E74007C0590 /* LaunchScreen.storyboard */; };
 		E795FCE21D480AD5002937E1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E795FCE11D480AD5002937E1 /* LoginViewController.swift */; };
-		E799567B1D31744500EE445B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799567A1D31744500EE445B /* Message.swift */; };
 		E799567D1D31746300EE445B /* Jam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799567C1D31746300EE445B /* Jam.swift */; };
 		E799567F1D31749F00EE445B /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799567E1D31749F00EE445B /* Track.swift */; };
 		E79AE2051D3D50F400899823 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E79AE2031D3D50F400899823 /* Profile.storyboard */; };
@@ -79,7 +77,6 @@
 		E7FE0FE61D356E2100452361 /* JamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE51D356E2100452361 /* JamCell.swift */; };
 		E7FE0FE81D35706A00452361 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FE71D35706A00452361 /* HomeViewController.swift */; };
 		E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */; };
-		E7FE0FFD1D359F4100452361 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FFC1D359F4100452361 /* MessageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -146,7 +143,6 @@
 		E723F3051D4292AB00CF1C29 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 		E723F3091D4292B300CF1C29 /* AudioKit.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AudioKit.docset; sourceTree = "<group>"; };
 		E74F1DF41D3869DB00A34409 /* JamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamViewController.swift; sourceTree = "<group>"; };
-		E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamHistoryViewController.swift; sourceTree = "<group>"; };
 		E74F1E021D3C06B800A34409 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Jam.storyboard; sourceTree = "<group>"; };
 		E756A8701D2D7E74007C0590 /* JamChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JamChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E756A8731D2D7E74007C0590 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,7 +151,6 @@
 		E756A87D1D2D7E74007C0590 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E756A87F1D2D7E74007C0590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E795FCE11D480AD5002937E1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		E799567A1D31744500EE445B /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		E799567C1D31746300EE445B /* Jam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jam.swift; sourceTree = "<group>"; };
 		E799567E1D31749F00EE445B /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		E79AE2041D3D50F400899823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
@@ -172,7 +167,6 @@
 		E7FE0FE51D356E2100452361 /* JamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamCell.swift; sourceTree = "<group>"; };
 		E7FE0FE71D35706A00452361 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamCreationViewController.swift; sourceTree = "<group>"; };
-		E7FE0FFC1D359F4100452361 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		EB46293530A6261983676B0D /* Pods_JamChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JamChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -274,7 +268,6 @@
 				8C9D0FEB1D3D602C00380680 /* Instrument.swift */,
 				E717EC151D2ED34500AC812B /* User.swift */,
 				E799567C1D31746300EE445B /* Jam.swift */,
-				E799567A1D31744500EE445B /* Message.swift */,
 				E799567E1D31749F00EE445B /* Track.swift */,
 				E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */,
 			);
@@ -286,7 +279,6 @@
 			children = (
 				8C01C09E1D4957CE007FB836 /* LoopCell.swift */,
 				E7FE0FE51D356E2100452361 /* JamCell.swift */,
-				E7FE0FFC1D359F4100452361 /* MessageCell.swift */,
 				E7E0D6971D3C0DCB005A840A /* UserCell.swift */,
 				213089AC1D4154CF0030D099 /* InstrumentCell.swift */,
 				21ECC9EC1D41D47800E4E695 /* FriendCell.swift */,
@@ -565,7 +557,6 @@
 				E795FCE21D480AD5002937E1 /* LoginViewController.swift in Sources */,
 				8C01C09F1D4957CE007FB836 /* LoopCell.swift in Sources */,
 				E70DC3BE1D46E28900B76CE7 /* PubNubHandler.swift in Sources */,
-				E799567B1D31744500EE445B /* Message.swift in Sources */,
 				21ECC9ED1D41D47800E4E695 /* FriendCell.swift in Sources */,
 				E74F1DF61D3869DB00A34409 /* JamViewController.swift in Sources */,
 				8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */,
@@ -577,9 +568,7 @@
 				E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */,
 				21F29BCF1D4FDE1400CED9D8 /* MicrophoneViewController.swift in Sources */,
 				213089B11D41594A0030D099 /* UserCollectionDelegate.swift in Sources */,
-				E74F1DFA1D386A2E00A34409 /* JamHistoryViewController.swift in Sources */,
 				210AEB011D4FC7D1006EDF89 /* LoopsPagerViewController.swift in Sources */,
-				E7FE0FFD1D359F4100452361 /* MessageCell.swift in Sources */,
 				8C3552BB1D4A0D8A00795591 /* Loop.swift in Sources */,
 				E7F0BB3E1D3D61550059160B /* PagerViewController.swift in Sources */,
 				E7FBA05D1D469F020011B689 /* AKNodeRecorder.swift in Sources */,

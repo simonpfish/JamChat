@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
         config = PNConfiguration(publishKey: "pub-c-9d14846c-d67e-4d85-b279-b189919c1ed6", subscribeKey: "sub-c-df45123e-52aa-11e6-ba28-02ee2ddab7fe")
         client = PubNub.clientWithConfiguration(config)
         client.subscribeToChannels(["global"], withPresence: false)
-        client.publish("Swift+PubNub!", toChannel: "global", compressed: false, withCompletion: nil)
         
         super.init()
         client.addListener(self)
