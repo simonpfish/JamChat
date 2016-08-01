@@ -99,6 +99,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             }
         }
         
+        loadingIndicatorView.startAnimation()
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         drawWaveforms()
     }
     
@@ -135,11 +140,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
 
     func drawWaveforms() {
-        if let lastMessage = jam.messages.last {
-            self.measuresView.hidden = true
-            loadingIndicatorView.startAnimation()
-            lastMessage.loadTracks({
-                for track in (lastMessage.tracks) {
+        if jam.tracks.count > 0 {
+            jam.loadTracks({
+                for track in (self.jam.tracks) {
                     if let filepath = track.filepath {
                         
                         let fileURL = NSURL(fileURLWithPath: filepath)
@@ -164,33 +167,35 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
                 self.waveformContainer.subviews.last!.addGestureRecognizer(waveTap)
                 
-                self.waveformContainer.bringSubviewToFront(self.progressIndicator)
             })
-
+        } else {
+            self.loadingIndicatorView.stopAnimation()
         }
     }
     
     //Plays chat when wave is tapped
     func onPlay(sender: UITapGestureRecognizer? = nil) {
-        let lastMessage = jam.messages.last
-        
-        if lastMessage!.isPlaying {
+        if jam.isPlaying {
             stopAnimatingCursor()
-            lastMessage?.stop()
+            jam.stop()
         } else {
-            lastMessage?.loadTracks({
-                lastMessage?.play({
-                    self.startAnimatingCursor()
-                })
+            self.jam.play({
+                self.startAnimatingCursor()
             })
         }
-        
     }
     
-    var progressTimer: NSTimer!
-    var refreshTime = 0.055
+    var progressTimer: NSTimer?
+    var refreshTime = 0.052
     func startAnimatingCursor() {
-        progressTimer =  NSTimer.scheduledTimerWithTimeInterval(refreshTime, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+        
+        if jam.tracks.count > 0 {
+            progressTimer =  NSTimer.scheduledTimerWithTimeInterval(refreshTime, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+        } else {
+            UIView.animateWithDuration(jam.duration, delay: 0.0, options: [.CurveLinear], animations: {
+                self.progressIndicator.frame.origin.x = self.view.frame.width
+                }, completion: nil)
+        }
     }
     
     private var previousProgress: CGFloat = 0
@@ -209,8 +214,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func stopAnimatingCursor() {
+        progressTimer?.invalidate()
+        progressIndicator.layer.removeAllAnimations()
         progressIndicator.frame.origin.x = -2
-        progressTimer.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -317,7 +323,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         onPlay()
         
-        delay(self.jam.messageDuration) {
+        delay(self.jam.duration) {
             self.tempoTimer.invalidate()
             self.sendingMessageView.startAnimation()
             self.onPlay()
@@ -330,8 +336,10 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 if let waveform = subview as? FDWaveformView {
                     waveform.removeFromSuperview()
                 }
+                self.drawWaveforms()
+                keyboardController.instrument.reload()
             }
-                
+            
             self.sendingMessageView.stopAnimation()
             self.keyboardButton.hidden = false
             self.loopButton.hidden = false
@@ -371,9 +379,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     @IBAction func onLoop(sender: AnyObject) {
         if (inKeyboard){
-        loopContainer.alpha = 1
-        keyboardContainer.alpha = 0
-    loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+            loopContainer.alpha = 1
+            keyboardContainer.alpha = 0
+            loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
             inKeyboard = false
             keyboardButton.hidden = true
             recordView.hidden = true
@@ -383,8 +391,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         else if (inMicrophone){
             loopContainer.alpha = 1
             microphoneContainer.alpha = 0
-    loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
-microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
+            loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+            microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
             inMicrophone = false
             inLoop = true
         }
@@ -392,7 +400,7 @@ microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
         else{
             loopContainer.alpha = 0
             keyboardContainer.alpha = 1
-    loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
+            loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
             inKeyboard = true
             inLoop = false
             keyboardButton.hidden = false
@@ -414,8 +422,8 @@ microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
         else if (inLoop){
             microphoneContainer.alpha = 1
             loopContainer.alpha = 0
-    loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
-microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+            loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
+            microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
             inMicrophone = true
             inLoop = false
         }
@@ -423,7 +431,7 @@ microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
         else{
             microphoneContainer.alpha = 0
             keyboardContainer.alpha = 1
-microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
+            microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
             inKeyboard = true
             inMicrophone = false
             keyboardButton.hidden = false
@@ -431,5 +439,5 @@ microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
         }
     }
     
-
+    
 }
