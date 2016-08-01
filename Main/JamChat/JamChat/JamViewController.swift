@@ -31,6 +31,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var keyboardContainer: UIView!
     @IBOutlet weak var jamNameLabel: UILabel!
     @IBOutlet weak var userCollection: UICollectionView!
+    @IBOutlet weak var microphoneContainer: UIView!
     @IBOutlet weak var waveformContainer: UIView!
     @IBOutlet weak var keyboardButton: CircleMenu!
     @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
@@ -38,6 +39,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var recordView: BAPulseView!
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var loopButton: UIButton!
+    @IBOutlet weak var microphoneButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -84,6 +86,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         //customizes loop button to be a circle
         loopButton.layer.cornerRadius = 0.5 * loopButton.bounds.size.width
+        
+        //customizes microphone button to be a circle
+        microphoneButton.layer.cornerRadius = 0.5 * microphoneButton.bounds.size.width
 
         for user in jam!.users {
             if user.facebookID != User.currentUser!.facebookID {
@@ -369,7 +374,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         if (inKeyboard){
         loopContainer.alpha = 1
         keyboardContainer.alpha = 0
-    loopButton.setImage(UIImage(named:"back_arrow.png"), forState: .Normal)
+        microphoneContainer.alpha = 0
+    loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
             inKeyboard = false
             keyboardButton.hidden = true
             recordView.hidden = true
@@ -378,11 +384,35 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         else{
             loopContainer.alpha = 0
             keyboardContainer.alpha = 1
+            microphoneContainer.alpha = 0
             loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
             inKeyboard = true
             keyboardButton.hidden = false
             recordView.hidden = false
         }
     }
+    
+    @IBAction func onMicrophone(sender: AnyObject) {
+        if (inKeyboard){
+            loopContainer.alpha = 0
+            keyboardContainer.alpha = 0
+            microphoneContainer.alpha = 1
+            microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
+            inKeyboard = false
+            keyboardButton.hidden = true
+            recordView.hidden = true
+        }
+            
+        else{
+            loopContainer.alpha = 0
+            keyboardContainer.alpha = 1
+            microphoneContainer.alpha = 0
+microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
+            inKeyboard = true
+            keyboardButton.hidden = false
+            recordView.hidden = false
+        }
+    }
+    
 
 }

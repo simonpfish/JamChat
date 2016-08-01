@@ -177,6 +177,20 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G0X-Xh-Bf2">
+                                <rect key="frame" x="0.0" y="467" width="375" height="200"/>
+                                <connections>
+                                    <segue destination="2es-DV-dxk" kind="embed" id="dFl-C0-5yy"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ef4-8G-AgU">
+                                <rect key="frame" x="46" y="429" width="33" height="33"/>
+                                <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="microphone"/>
+                                <connections>
+                                    <action selector="onMicrophone:" destination="MkN-39-iBX" eventType="touchUpInside" id="yuH-K4-KN7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -221,6 +235,8 @@
                         <outlet property="loopButton" destination="Z8V-Et-BMo" id="x9G-6A-WH0"/>
                         <outlet property="loopContainer" destination="Sig-Vm-owL" id="8Fq-Pe-Od0"/>
                         <outlet property="measuresView" destination="tqa-Hu-nBx" id="thk-I2-79v"/>
+                        <outlet property="microphoneButton" destination="Ef4-8G-AgU" id="xrm-V4-wBZ"/>
+                        <outlet property="microphoneContainer" destination="G0X-Xh-Bf2" id="zJK-ys-G1i"/>
                         <outlet property="progressIndicator" destination="mCu-xY-0ex" id="VHv-Ip-wPN"/>
                         <outlet property="recordView" destination="kdg-MZ-tsA" id="h79-ro-L8h"/>
                         <outlet property="sendingMessageView" destination="kH3-z4-z2W" id="Yc3-YG-ugh"/>
@@ -324,8 +340,23 @@
             </objects>
             <point key="canvasLocation" x="1571.5" y="669"/>
         </scene>
+        <!--Microphone View Controller-->
+        <scene sceneID="tNv-3p-OCO">
+            <objects>
+                <viewController id="2es-DV-dxk" customClass="MicrophoneViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qxH-0D-tlz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TvU-er-Tgy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1153.5" y="669"/>
+        </scene>
     </scenes>
     <resources>
         <image name="loop" width="240" height="240"/>
+        <image name="microphone" width="240" height="240"/>
     </resources>
 </document>
