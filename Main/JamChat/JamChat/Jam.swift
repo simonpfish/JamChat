@@ -146,12 +146,12 @@ class Jam: NSObject {
      */
     func recordSend(instrument: Instrument, success: () -> (), failure: (NSError) -> ()) {
         let track = Track()
-        tracks.append(track)
         track.recordInstrument(instrument, duration: duration) {
             track.upload({ (_: Bool, error: NSError?) in
                 if let error = error {
                     failure(error)
                 } else {
+                    self.tracks.append(track)
                     self.trackObjects.append(track.object)
                     self.push({ (_: Bool, error: NSError?) in
                         if let error = error {

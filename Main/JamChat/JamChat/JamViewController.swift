@@ -140,6 +140,12 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
 
     func drawWaveforms() {
+        for subview in self.waveformContainer.subviews {
+            if let waveform = subview as? FDWaveformView {
+                waveform.removeFromSuperview()
+            }
+        }
+        
         if jam.tracks.count > 0 {
             jam.loadTracks({
                 for track in (self.jam.tracks) {
@@ -167,6 +173,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
                 self.waveformContainer.subviews.last!.addGestureRecognizer(waveTap)
                 
+                self.waveformContainer.bringSubviewToFront(self.progressIndicator)
+                self.view.bringSubviewToFront(self.measuresView)
             })
         } else {
             self.loadingIndicatorView.stopAnimation()
@@ -331,15 +339,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         let keyboardController = self.childViewControllers[0] as! KeyboardViewController
         jam.recordSend(keyboardController.instrument, success: {
-            
-            for subview in self.waveformContainer.subviews {
-                if let waveform = subview as? FDWaveformView {
-                    waveform.removeFromSuperview()
-                }
-                self.drawWaveforms()
-                keyboardController.instrument.reload()
-            }
-            
+           
             self.sendingMessageView.stopAnimation()
             self.keyboardButton.hidden = false
             self.loopButton.hidden = false
