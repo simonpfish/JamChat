@@ -62,7 +62,7 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
             selectedLoopView?.removeFromSuperview()
         }
 
-     print("DRAG")
+     //print("DRAG")
     }
     
     func updateDragAndDropSnapshotView(alpha: CGFloat, center: CGPoint, transform: CGAffineTransform){
