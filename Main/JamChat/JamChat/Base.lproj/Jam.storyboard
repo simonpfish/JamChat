@@ -177,15 +177,22 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G0X-Xh-Bf2">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0X-Xh-Bf2">
                                 <rect key="frame" x="0.0" y="467" width="375" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="QcY-FE-QET"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="2es-DV-dxk" kind="embed" id="dFl-C0-5yy"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ef4-8G-AgU">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ef4-8G-AgU">
                                 <rect key="frame" x="46" y="429" width="33" height="33"/>
                                 <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="D3t-UW-K53"/>
+                                    <constraint firstAttribute="width" constant="33" id="Tr3-53-2yu"/>
+                                </constraints>
                                 <state key="normal" image="microphone"/>
                                 <connections>
                                     <action selector="onMicrophone:" destination="MkN-39-iBX" eventType="touchUpInside" id="yuH-K4-KN7"/>
@@ -195,18 +202,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="kdg-MZ-tsA" secondAttribute="trailing" constant="-10" id="35L-z9-xSY"/>
+                            <constraint firstItem="G0X-Xh-Bf2" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" id="3sY-5b-7an"/>
                             <constraint firstItem="gHF-9c-CYD" firstAttribute="centerX" secondItem="Wss-dE-9Xg" secondAttribute="centerX" id="73r-RP-IBr"/>
                             <constraint firstAttribute="trailing" secondItem="VLa-Qf-sge" secondAttribute="trailing" id="7tZ-lK-pW4"/>
                             <constraint firstItem="Sig-Vm-owL" firstAttribute="trailing" secondItem="eBW-N3-riu" secondAttribute="trailing" id="AOU-Y5-hjb"/>
                             <constraint firstItem="kdg-MZ-tsA" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" constant="336" id="AeF-eN-ivD"/>
                             <constraint firstItem="Sig-Vm-owL" firstAttribute="top" secondItem="kdg-MZ-tsA" secondAttribute="bottom" constant="8" id="CLu-OH-gIw"/>
+                            <constraint firstItem="G0X-Xh-Bf2" firstAttribute="top" secondItem="Ef4-8G-AgU" secondAttribute="bottom" constant="5" id="FBU-6y-cgi"/>
                             <constraint firstItem="eBW-N3-riu" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" id="Fp2-0Z-rO1"/>
                             <constraint firstItem="giU-0X-45U" firstAttribute="top" secondItem="eBW-N3-riu" secondAttribute="bottom" id="HcD-IL-9V9"/>
                             <constraint firstItem="Btw-D1-CzS" firstAttribute="top" secondItem="UEt-Ra-c4T" secondAttribute="bottom" constant="46" id="JAk-L6-t8a"/>
+                            <constraint firstItem="giU-0X-45U" firstAttribute="top" secondItem="G0X-Xh-Bf2" secondAttribute="bottom" id="Kkh-Ib-3Ep"/>
                             <constraint firstItem="Sig-Vm-owL" firstAttribute="top" secondItem="eBW-N3-riu" secondAttribute="top" id="Lvp-Sl-88L"/>
                             <constraint firstItem="Sig-Vm-owL" firstAttribute="top" secondItem="Z8V-Et-BMo" secondAttribute="bottom" constant="5" id="XXz-4E-2fh"/>
                             <constraint firstItem="Z8V-Et-BMo" firstAttribute="top" secondItem="UEt-Ra-c4T" secondAttribute="bottom" constant="69" id="Y12-7w-JaB"/>
+                            <constraint firstAttribute="trailing" secondItem="G0X-Xh-Bf2" secondAttribute="trailing" id="YWR-5y-LqG"/>
                             <constraint firstItem="UEt-Ra-c4T" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" id="avB-wc-Sya"/>
+                            <constraint firstItem="Ef4-8G-AgU" firstAttribute="leading" secondItem="Z8V-Et-BMo" secondAttribute="trailing" constant="8" id="cTK-Ct-Rre"/>
                             <constraint firstItem="Z8V-Et-BMo" firstAttribute="leading" secondItem="UEt-Ra-c4T" secondAttribute="leading" constant="5" id="jqt-hb-wsy"/>
                             <constraint firstItem="VLa-Qf-sge" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" id="k64-hq-lvH"/>
                             <constraint firstAttribute="trailing" secondItem="eBW-N3-riu" secondAttribute="trailing" id="oDc-dz-C5Z"/>

@@ -91,6 +91,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         //customizes microphone button to be a circle
         microphoneButton.layer.cornerRadius = 0.5 * microphoneButton.bounds.size.width
+        microphoneContainer.alpha = 0
 
         for user in jam!.users {
             if user.facebookID != User.currentUser!.facebookID {
