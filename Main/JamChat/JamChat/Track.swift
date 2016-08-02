@@ -99,7 +99,7 @@ class Track: NSObject {
     
     func playLooping() {
         player?.looping = true
-        player?.endTime = floor((self.player?.audioFile.duration)!)
+        player?.endTime = (self.player?.audioFile.duration)!
         player?.play()
     }
     
@@ -143,6 +143,40 @@ class Track: NSObject {
             })
         })
 
+    }
+    
+    func recordLoop(duration: Double, loop: Loop, measure: Double, completion: ()->()) {
+        color = loop.color
+        instrumentName = "Loop"
+        
+        let asset = AVAsset(URL: loop.url)
+        let composition = AVMutableComposition()
+        let offset = CMTime(seconds: measure*(60.0 / Double(loop.tempo) * 4), preferredTimescale: 1000)
+        let range = CMTimeRange(start: kCMTimeZero, duration: offset)
+        composition.insertEmptyTimeRange(range)
+        try! composition.insertTimeRange(CMTimeRange(start: kCMTimeZero, duration: asset.duration), ofAsset: asset, atTime: offset)
+        
+        let endTime = CMTime(seconds: duration, preferredTimescale: 1000)
+        composition.insertEmptyTimeRange(CMTimeRange(start: asset.duration + offset, duration: endTime - (asset.duration + offset)))
+        try! composition.insertTimeRange(CMTimeRange(start: kCMTimeZero, duration: CMTime(seconds: 0.001, preferredTimescale: 1000)), ofAsset: asset, atTime: endTime)
+        
+        self.filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + self.identifier + ".m4a"
+        
+        guard let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else { return }
+        exporter.outputURL = NSURL(fileURLWithPath: filepath)
+        exporter.outputFileType = AVFileTypeAppleM4A
+        exporter.shouldOptimizeForNetworkUse = true
+        
+        // 6 - Perform the Export
+        exporter.exportAsynchronouslyWithCompletionHandler() {
+            dispatch_async(dispatch_get_main_queue()) { _ in
+                self.player = try? AKAudioPlayer(file: AKAudioFile(forReading: NSURL(string: self.filepath)!))
+                Track.mixer.connect(self.player!)
+                
+                completion()
+            }
+        }
+        
     }
     
     // utility function

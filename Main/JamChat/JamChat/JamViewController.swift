@@ -419,8 +419,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         if (segue.identifier == "loopSegue") {
             let childViewController = segue.destinationViewController as! LoopsPagerViewController
             childViewController.jam = self.jam
-            childViewController.waveformY = waveformContainer.frame.origin.y
-            childViewController.waveformHeight = waveformContainer.frame.height
+            childViewController.waveformView = waveformContainer
+            childViewController.loadingView = sendingMessageView
         }
     }
     
