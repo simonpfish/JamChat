@@ -123,7 +123,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
             for key in keys where !onKeys.contains(key) {
                 if CGRectContainsPoint(key.frame, touch.locationInView(self.view)) {
                     instrument.play(key.tag)
-                    unhighlightKeys()
+//                    unhighlightKeys()
                     key.backgroundColor = UIColor.redColor()
                     onKeys.insert(key)
                 }
