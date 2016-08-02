@@ -16,6 +16,8 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
     @IBInspectable var selectedColor: UIColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
     
     var jam: Jam?
+    var waveformY: CGFloat?
+    var waveformHeight: CGFloat?
     
     override func viewDidLoad() {
         
@@ -52,7 +54,7 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
             }
         }
         
-        moveToViewControllerAtIndex(1, animated: false)
+        moveToViewControllerAtIndex(0, animated: false)
         
         super.viewDidLoad()
         
@@ -72,7 +74,9 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
         let chordsController = jamStoryboard.instantiateViewControllerWithIdentifier("Chords")
 
         drumLoopsController.jam = jam
-        
+        drumLoopsController.waveformY = waveformY
+        drumLoopsController.waveformHeight = waveformHeight
+
         return [drumLoopsController, chordsController]
     }
     

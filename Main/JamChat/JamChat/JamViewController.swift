@@ -43,7 +43,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var loopButton: UIButton!
     @IBOutlet weak var microphoneButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -344,6 +343,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         isCounting = true
         self.keyboardButton.hidden = true
         loopButton.hidden = true
+        microphoneButton.hidden = true
         countdownLabel.text = "\(countdown)"
         tempoTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(onBeat), userInfo: nil, repeats: true)
         metronome.play()
@@ -419,6 +419,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         if (segue.identifier == "loopSegue") {
             let childViewController = segue.destinationViewController as! LoopsPagerViewController
             childViewController.jam = self.jam
+            childViewController.waveformY = waveformContainer.frame.origin.y
+            childViewController.waveformHeight = waveformContainer.frame.height
         }
     }
     

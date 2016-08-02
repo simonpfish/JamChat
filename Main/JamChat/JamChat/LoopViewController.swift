@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import RandomColorSwift
 
 class LoopViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, IndicatorInfoProvider {
     
@@ -16,8 +17,10 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var panGesture: UIPanGestureRecognizer?
     var currentDragAndDropIndexPath: NSIndexPath?
     var currentDragAndDropSnapshot: UIView?
-
     var dragLoopHandler: ((UIView, UIPanGestureRecognizer) -> ())?
+    var highlightView: UIView?
+    var waveformY: CGFloat!
+    var waveformHeight: CGFloat!
     
     @IBOutlet weak var loopCollection: UICollectionView!
     
@@ -25,7 +28,7 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         loopCollection.delegate = self
         loopCollection.dataSource = self
-        
+                
         if(jam.tempo == 80){
             array = [Loop.loop1BPM80, Loop.loop2BPM80, Loop.loop3BPM80, Loop.loop4BPM80, Loop.loop5BPM80, Loop.loop6BPM80]
         }
@@ -53,25 +56,26 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 selectedLoopView = selectedCell!.snapshot
                 selectedLoopView?.center = selectedCell!.center
                 self.view.superview!.superview!.addSubview(selectedLoopView!)
+                highlightView = UIView(frame: CGRectMake(0, 13-waveformY, self.view.frame.width/CGFloat(self.jam.numMeasures!), waveformHeight))
+                highlightView!.layer.cornerRadius = 25
+                highlightView!.alpha = 0.3
+                self.view.superview!.superview!.addSubview(highlightView!)
             }
         case .Changed:
             UIView.animateWithDuration(0.25, animations: {() -> Void in
-                self.selectedLoopView?.frame.origin = sender.locationInView(self.view)
+                let point = sender.locationInView(self.view)
+                    self.selectedLoopView!.center.x = point.x
+                    self.selectedLoopView!.center.y = point.y
+                if (self.selectedLoopView!.frame.origin.y > (13-self.waveformY) && self.selectedLoopView!.frame.origin.y < ((13-self.waveformY)+self.selectedLoopView!.frame.height)){
+                    let highlightedX = floor(self.selectedLoopView!.frame.origin.x/(self.highlightView!.frame.width))
+                    self.highlightView!.frame = CGRect(x: highlightedX*self.highlightView!.frame.width, y: self.highlightView!.frame.origin.y, width: self.highlightView!.frame.width, height: self.highlightView!.frame.height)
+                    self.highlightView?.backgroundColor = UIColor.orangeColor()
+                }
             })
         default:
             selectedLoopView?.removeFromSuperview()
+            highlightView?.backgroundColor = UIColor.clearColor()
         }
-
-     print("DRAG")
-    }
-    
-    func updateDragAndDropSnapshotView(alpha: CGFloat, center: CGPoint, transform: CGAffineTransform){
-        if self.currentDragAndDropSnapshot != nil{
-            self.currentDragAndDropSnapshot!.alpha = alpha
-            self.currentDragAndDropSnapshot!.center = center
-            self.currentDragAndDropSnapshot!.transform = transform
-        }
-        
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
