@@ -16,8 +16,10 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var panGesture: UIPanGestureRecognizer?
     var currentDragAndDropIndexPath: NSIndexPath?
     var currentDragAndDropSnapshot: UIView?
-
     var dragLoopHandler: ((UIView, UIPanGestureRecognizer) -> ())?
+    var highlightView: UIView?
+    var waveformY: CGFloat!
+    var waveformHeight: CGFloat!
     
     @IBOutlet weak var loopCollection: UICollectionView!
     
@@ -53,6 +55,11 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 selectedLoopView = selectedCell!.snapshot
                 selectedLoopView?.center = selectedCell!.center
                 self.view.superview!.superview!.addSubview(selectedLoopView!)
+                highlightView = UIView(frame: CGRectMake(0, 10-waveformY, self.view.frame.width/CGFloat(self.jam.numMeasures!), waveformHeight))
+                highlightView!.backgroundColor = UIColor.clearColor()
+                highlightView!.layer.cornerRadius = 25
+                highlightView!.alpha = 0.3
+                self.view.superview!.superview!.addSubview(highlightView!)
             }
         case .Changed:
             UIView.animateWithDuration(0.25, animations: {() -> Void in
@@ -61,17 +68,6 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         default:
             selectedLoopView?.removeFromSuperview()
         }
-
-     print("DRAG")
-    }
-    
-    func updateDragAndDropSnapshotView(alpha: CGFloat, center: CGPoint, transform: CGAffineTransform){
-        if self.currentDragAndDropSnapshot != nil{
-            self.currentDragAndDropSnapshot!.alpha = alpha
-            self.currentDragAndDropSnapshot!.center = center
-            self.currentDragAndDropSnapshot!.transform = transform
-        }
-        
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

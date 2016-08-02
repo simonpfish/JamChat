@@ -43,7 +43,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var loopButton: UIButton!
     @IBOutlet weak var microphoneButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -120,23 +119,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         measureImage = UIView(frame:CGRectMake(0, ((measuresView.frame.height)/2), measuresView.frame.width, 1));
         measureImage.backgroundColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
         measuresView.addSubview(measureImage)
-    }
-    
-    var selectedLoopView: UIView?
-    func dragLoop(view: UIView, sender: UIPanGestureRecognizer) {
-
-        switch sender.state{
-        case .Began:
-            selectedLoopView = view
-            selectedLoopView?.backgroundColor = UIColor.clearColor()
-            self.view.addSubview(selectedLoopView!)
-        case .Changed:
-            UIView.animateWithDuration(2, animations: {() -> Void in
-                self.selectedLoopView?.transform = CGAffineTransformTranslate(self.selectedLoopView!.transform, 20, 100)
-            })
-        default:
-            selectedLoopView?.removeFromSuperview()
-        }
     }
 
     func drawWaveforms() {
@@ -375,6 +357,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         if (segue.identifier == "loopSegue") {
             let childViewController = segue.destinationViewController as! LoopsPagerViewController
             childViewController.jam = self.jam
+            childViewController.waveformY = waveformContainer.frame.origin.y
+            childViewController.waveformHeight = waveformContainer.frame.height
         }
     }
     
