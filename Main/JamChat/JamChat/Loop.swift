@@ -19,6 +19,11 @@ class Loop: NSObject {
     private var fileName: String!
     private var loopSound: AVAudioPlayer!
     
+    var url: NSURL {
+        let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "wav")!
+        return NSURL(fileURLWithPath: path)
+    }
+    
     private init(name: String, color: UIColor, fileName: String, tempo: Int, image: UIImage?) {
         self.name = name
         self.color = color
@@ -28,8 +33,6 @@ class Loop: NSObject {
     }
     
     func play() {
-        let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "wav")!
-        let url = NSURL(fileURLWithPath: path)
         do {
             let sound = try AVAudioPlayer(contentsOfURL: url)
             loopSound = sound
