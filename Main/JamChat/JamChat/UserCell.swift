@@ -110,13 +110,14 @@ class UserCell: UICollectionViewCell {
             }
             
             // reverts back to the friend's image after 5 seconds, if the count label is still showing
-            self.delay(5.0, closure: {
+            self.delay(4.0, closure: {
                 
                 if self.numberIsDisplayed {
-                    self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(0.0)
-                    self.countLabel.hidden = true
-                    self.numberIsDisplayed = false
-                    
+                    UIView.animateWithDuration(1, animations: {
+                        self.countButton.backgroundColor = self.countButton.backgroundColor?.colorWithAlphaComponent(0.0)
+                        self.countLabel.hidden = true
+                        self.numberIsDisplayed = false
+                    })
                 }
                 
             })

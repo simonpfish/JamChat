@@ -14,12 +14,16 @@ class InstrumentCollectionDelegate: NSObject, UICollectionViewDelegate, UICollec
     var user: User
     
     init (instruments: [Instrument], user: User) {
-        self.instruments = instruments
         self.user = user
+        
+        let unsortedCounts = user.instrumentCount
+        self.instruments = unsortedCounts.keysSortedByValue { (a: Int, b: Int) -> Bool in
+            return a>b
+        }
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return instruments.count
+        return 3
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
