@@ -59,11 +59,12 @@
 		E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E756A87A1D2D7E74007C0590 /* Assets.xcassets */; };
 		E756A87E1D2D7E74007C0590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E756A87C1D2D7E74007C0590 /* LaunchScreen.storyboard */; };
 		E795FCE21D480AD5002937E1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E795FCE11D480AD5002937E1 /* LoginViewController.swift */; };
+		E796B9D21D50118D004FAE19 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E796B9CD1D501140004FAE19 /* AudioKit.framework */; };
+		E796B9D31D5011B0004FAE19 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E796B9CD1D501140004FAE19 /* AudioKit.framework */; };
+		E796B9D41D5011B0004FAE19 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E796B9CD1D501140004FAE19 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E799567D1D31746300EE445B /* Jam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799567C1D31746300EE445B /* Jam.swift */; };
 		E799567F1D31749F00EE445B /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = E799567E1D31749F00EE445B /* Track.swift */; };
 		E79AE2051D3D50F400899823 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E79AE2031D3D50F400899823 /* Profile.storyboard */; };
-		E7AB05471D4296C400A92C9E /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E723F3051D4292AB00CF1C29 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E7AB05491D4296DE00A92C9E /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E723F3051D4292AB00CF1C29 /* AudioKit.framework */; };
 		E7AB05571D429ED800A92C9E /* AKAudioFile+Exporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB05511D429ED800A92C9E /* AKAudioFile+Exporting.swift */; };
 		E7E0D6981D3C0DCB005A840A /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E0D6971D3C0DCB005A840A /* UserCell.swift */; };
 		E7F0BB3E1D3D61550059160B /* PagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0BB3D1D3D61550059160B /* PagerViewController.swift */; };
@@ -79,6 +80,37 @@
 		E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E796B9CC1D501140004FAE19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E796B9C71D501140004FAE19 /* AudioKit For iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C42F35001C057E03000E937C;
+			remoteInfo = AudioKit;
+		};
+		E796B9CE1D501140004FAE19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E796B9C71D501140004FAE19 /* AudioKit For iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C43792781C0CE2E0001E9160;
+			remoteInfo = AudioKitTests;
+		};
+		E796B9D01D50117F004FAE19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E796B9C71D501140004FAE19 /* AudioKit For iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C42F34FF1C057E03000E937C;
+			remoteInfo = AudioKit;
+		};
+		E796B9D51D5011B0004FAE19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E796B9C71D501140004FAE19 /* AudioKit For iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C42F34FF1C057E03000E937C;
+			remoteInfo = AudioKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		E7AB05481D4296C400A92C9E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -86,7 +118,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E7AB05471D4296C400A92C9E /* AudioKit.framework in Embed Frameworks */,
+				E796B9D41D5011B0004FAE19 /* AudioKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,8 +172,6 @@
 		E723F2C21D40115700CF1C29 /* RockGuitarC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = RockGuitarC.wav; sourceTree = "<group>"; };
 		E723F2C31D40115700CF1C29 /* SaxC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SaxC.wav; sourceTree = "<group>"; };
 		E723F2C91D40116100CF1C29 /* AcousticBassC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AcousticBassC.wav; sourceTree = "<group>"; };
-		E723F3051D4292AB00CF1C29 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
-		E723F3091D4292B300CF1C29 /* AudioKit.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AudioKit.docset; sourceTree = "<group>"; };
 		E74F1DF41D3869DB00A34409 /* JamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamViewController.swift; sourceTree = "<group>"; };
 		E74F1E021D3C06B800A34409 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Jam.storyboard; sourceTree = "<group>"; };
 		E756A8701D2D7E74007C0590 /* JamChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JamChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +181,7 @@
 		E756A87D1D2D7E74007C0590 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E756A87F1D2D7E74007C0590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E795FCE11D480AD5002937E1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E796B9C71D501140004FAE19 /* AudioKit For iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "AudioKit For iOS.xcodeproj"; path = "AudioKit/AudioKit/iOS/AudioKit For iOS.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		E799567C1D31746300EE445B /* Jam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jam.swift; sourceTree = "<group>"; };
 		E799567E1D31749F00EE445B /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		E79AE2041D3D50F400899823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
@@ -175,8 +206,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E796B9D31D5011B0004FAE19 /* AudioKit.framework in Frameworks */,
+				E796B9D21D50118D004FAE19 /* AudioKit.framework in Frameworks */,
 				B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */,
-				E7AB05491D4296DE00A92C9E /* AudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,8 +228,6 @@
 		49EEAABBFF989D0DC4BBBFC4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E723F3091D4292B300CF1C29 /* AudioKit.docset */,
-				E723F3051D4292AB00CF1C29 /* AudioKit.framework */,
 				EB46293530A6261983676B0D /* Pods_JamChat.framework */,
 			);
 			name = Frameworks;
@@ -289,6 +319,7 @@
 		E756A8671D2D7E74007C0590 = {
 			isa = PBXGroup;
 			children = (
+				E796B9C71D501140004FAE19 /* AudioKit For iOS.xcodeproj */,
 				E756A8721D2D7E74007C0590 /* JamChat */,
 				E756A8711D2D7E74007C0590 /* Products */,
 				ADB320D560FF361DF46D00EF /* Pods */,
@@ -317,6 +348,15 @@
 				E7FE0FF51D359CB000452361 /* Resources */,
 			);
 			path = JamChat;
+			sourceTree = "<group>";
+		};
+		E796B9C81D501140004FAE19 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E796B9CD1D501140004FAE19 /* AudioKit.framework */,
+				E796B9CF1D501140004FAE19 /* AudioKitTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E7AB055B1D429EDD00A92C9E /* AudioKit-fixed */ = {
@@ -401,6 +441,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				E796B9D11D50117F004FAE19 /* PBXTargetDependency */,
+				E796B9D61D5011B0004FAE19 /* PBXTargetDependency */,
 			);
 			name = JamChat;
 			productName = JamChat;
@@ -442,12 +484,35 @@
 			mainGroup = E756A8671D2D7E74007C0590;
 			productRefGroup = E756A8711D2D7E74007C0590 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E796B9C81D501140004FAE19 /* Products */;
+					ProjectRef = E796B9C71D501140004FAE19 /* AudioKit For iOS.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E756A86F1D2D7E74007C0590 /* JamChat */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E796B9CD1D501140004FAE19 /* AudioKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AudioKit.framework;
+			remoteRef = E796B9CC1D501140004FAE19 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E796B9CF1D501140004FAE19 /* AudioKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AudioKitTests.xctest;
+			remoteRef = E796B9CE1D501140004FAE19 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E756A86E1D2D7E74007C0590 /* Resources */ = {
@@ -584,6 +649,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E796B9D11D50117F004FAE19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AudioKit;
+			targetProxy = E796B9D01D50117F004FAE19 /* PBXContainerItemProxy */;
+		};
+		E796B9D61D5011B0004FAE19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AudioKit;
+			targetProxy = E796B9D51D5011B0004FAE19 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		E74F1E011D3C06B800A34409 /* Jam.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -718,6 +796,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -739,6 +818,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
