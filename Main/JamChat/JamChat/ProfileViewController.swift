@@ -88,7 +88,21 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
                         }
                     }
                 }
+                
+                // Set up instrument collection view:
+                self.instrumentDelegate = InstrumentCollectionDelegate(instruments: self.instrumentNames, user: self.user!)
+                self.instrumentCollection.dataSource = self.instrumentDelegate
+                self.instrumentCollection.delegate = self.instrumentDelegate
+                self.instrumentCollection.reloadData()
+                
             }
+        } else {
+            // Set up instrument collection view:
+            self.instrumentDelegate = InstrumentCollectionDelegate(instruments: self.instrumentNames, user: self.user!)
+            self.instrumentCollection.dataSource = self.instrumentDelegate
+            self.instrumentCollection.delegate = self.instrumentDelegate
+            self.instrumentCollection.reloadData()
+            
         }
         
         // if the user's friends have not been counted, count them
@@ -206,11 +220,7 @@ class ProfileViewController: UIViewController, IndicatorInfoProvider {
             instrumentNames.append(instrument)
         }
         
-        // Set up instrument collection view:
-        instrumentDelegate = InstrumentCollectionDelegate(instruments: instrumentNames, user: user!)
-        instrumentCollection.dataSource = instrumentDelegate
-        instrumentCollection.delegate = instrumentDelegate
-        instrumentCollection.reloadData()
+
 
     }
     

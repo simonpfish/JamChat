@@ -484,6 +484,10 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBAction func onCreate(sender: AnyObject) {
         
+        if selectedFriendIDs.count == 0 {
+            return
+        }
+        
         // if the user does not enter a Jam Title, use the randomly generated one
         if(titleLabel.text == "") {
             let newTitle = self.titleLabel.placeholder?.stringByReplacingOccurrencesOfString("Set a Jam Title:", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)

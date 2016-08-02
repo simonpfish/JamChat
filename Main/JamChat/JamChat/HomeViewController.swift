@@ -36,6 +36,10 @@ import PubNub
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserverForName("new_jam", object: nil, queue: nil) { (notification: NSNotification) in
+            self.loadFeed()
+        }
+        
         // Customize navigation bar
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -139,7 +143,10 @@ import PubNub
                 } else {
                     self.jams.insert(jam, atIndex: 0)
                     print("Succesfully created jam, reloading data")
-                    self.tableView.reloadData()
+                    jam.loadUsers({ 
+                        self.tableView.reloadData()
+                        self.performSegueWithIdentifier("JamSegue", sender: jam)
+                    })
                 }
             }
         }
@@ -159,8 +166,14 @@ import PubNub
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if let jamView = segue.destinationViewController as? JamViewController {
-            let cell = sender as! JamCell
-            jamView.jam = cell.jam
+            
+            if let jam = sender as? Jam {
+                jamView.jam = jam
+            } else {
+                let cell = sender as! JamCell
+                jamView.jam = cell.jam
+            }
+        
         }
         
     }
