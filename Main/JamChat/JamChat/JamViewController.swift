@@ -315,6 +315,10 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var isRecording = false
     
     func onRecord(sender: UITapGestureRecognizer) {
+        
+        jam.stop()
+        stopAnimatingCursor()
+        
         if isRecording {return}
         if isCounting {
             cancelCountdown()
