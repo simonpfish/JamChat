@@ -47,6 +47,17 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserverForName("new_message", object: nil, queue: nil) { (notification: NSNotification) in
+            let trackID = notification.object as! String
+            self.jam.fetchTrack(trackID, completion: { (track: Track) in
+                track.loadMedia({ 
+                    self.addWaveform(track)
+                    }, failure: { (error: NSError) in
+                    print(error.localizedDescription)
+                })
+            })
+        }
+        
         keyboardButton.delegate = self
         keyboardButton.layer.cornerRadius = keyboardButton.frame.size.width / 2.0
         keyboardButton.setImage(UIImage(named: "icon_menu"), forState: .Normal)
@@ -136,6 +147,27 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             selectedLoopView?.removeFromSuperview()
         }
     }
+    
+    func addWaveform(track: Track) {
+        let waveformView = FDWaveformView(frame: self.waveformContainer.frame)
+        
+        waveformView.frame.origin.y = 0
+        let fileURL = NSURL(fileURLWithPath: track.filepath)
+        waveformView.audioURL = fileURL
+        waveformView.doesAllowScrubbing = false
+        waveformView.doesAllowScroll = false
+        waveformView.doesAllowStretch = false
+        waveformView.wavesColor = track.color.colorWithAlphaComponent(0.6)
+        
+        self.waveformContainer.addSubview(waveformView)
+
+        let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
+        self.waveformContainer.subviews.last!.addGestureRecognizer(waveTap)
+        
+        self.waveformContainer.bringSubviewToFront(self.progressIndicator)
+        self.view.bringSubviewToFront(self.measuresView)
+        
+    }
 
     func drawWaveforms() {
         
@@ -186,6 +218,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 
             }
         } else {
+            let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+            keyboardController.instrument.reload()
             self.loadingIndicatorView.stopAnimation()
         }
     }
@@ -352,8 +386,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             self.sendingMessageView.stopAnimation()
             self.keyboardButton.hidden = false
             self.loopButton.hidden = false
-            self.drawWaveforms()
-            keyboardController.instrument.reload()
             print("Message sent!")
             
             self.isRecording = false

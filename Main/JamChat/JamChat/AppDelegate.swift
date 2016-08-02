@@ -115,6 +115,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print(userInfo)
+        
+        if let aps = userInfo["aps"] as? NSDictionary {
+            if let userID = aps["userID"] as? String {
+                if userID != User.currentUser!.facebookID {
+                    if let trackID = aps["trackID"] as? String {
+                        NSNotificationCenter.defaultCenter().postNotificationName("new_message", object: trackID)
+                    } else {
+                        NSNotificationCenter.defaultCenter().postNotificationName("new_jam", object: nil)
+                    }
+                }
+            }
+        }
     }
     
 }

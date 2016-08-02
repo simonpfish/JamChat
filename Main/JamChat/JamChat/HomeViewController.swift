@@ -36,6 +36,10 @@ import PubNub
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserverForName("new_jam", object: nil, queue: nil) { (notification: NSNotification) in
+            self.loadFeed()
+        }
+        
         // Customize navigation bar
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
