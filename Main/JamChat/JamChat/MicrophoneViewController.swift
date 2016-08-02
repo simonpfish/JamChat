@@ -12,22 +12,17 @@ import AVFoundation
 class MicrophoneViewController: UIViewController, AVAudioRecorderDelegate
 {
     var audioRecorder: AVAudioRecorder!
-    var isRecording: Bool = false
     
     @IBOutlet weak var waveformView: SiriWaveformView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if isRecording {
-            waveformView.waveColor = UIColor(red:0.928, green:0.103, blue:0.176, alpha:1)
-        } else {
-            waveformView.waveColor = UIColor.blackColor()
-        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        waveformView.waveColor = UIColor.blackColor()
         
         audioRecorder = audioRecorder(NSURL(fileURLWithPath:"/dev/null"))
         audioRecorder.prepareToRecord()
@@ -35,6 +30,14 @@ class MicrophoneViewController: UIViewController, AVAudioRecorderDelegate
         
         let displayLink = CADisplayLink(target: self, selector: #selector(MicrophoneViewController.updateMeters))
         displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
+    }
+    
+    func redWaveform() {
+        waveformView.waveColor = UIColor(red:0.928, green:0.103, blue:0.176, alpha:1)
+    }
+    
+    func blackWaveform() {
+        waveformView.waveColor = UIColor.blackColor()
     }
     
     func updateMeters() {

@@ -305,7 +305,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         button.backgroundColor = instruments[atIndex].color
         button.setImage(instruments[atIndex].image, forState: .Normal)
         
-        // set highlited image
+        // set highlighted image
         let highlightedImage  = instruments[atIndex].image!.imageWithRenderingMode(.AlwaysTemplate)
         button.setImage(highlightedImage, forState: .Highlighted)
         button.tintColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
@@ -385,10 +385,16 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         onPlay()
         
+        let microphoneController = self.childViewControllers[2] as! MicrophoneViewController
+        microphoneController.redWaveform()
+        
+        
         delay(self.jam.duration) {
             self.tempoTimer.invalidate()
             self.sendingMessageView.startAnimation()
             self.onPlay()
+            
+            microphoneController.blackWaveform()
         }
         
         let keyboardController = self.childViewControllers[0] as! KeyboardViewController
