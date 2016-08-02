@@ -46,6 +46,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AppDelegate.restartAudiokit()
+        
         NSNotificationCenter.defaultCenter().addObserverForName("new_message", object: nil, queue: nil) { (notification: NSNotification) in
             let trackID = notification.object as! String
             self.jam.fetchTrack(trackID, completion: { (track: Track) in
@@ -111,8 +113,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         loadingIndicatorView.startAnimation()
         
-        
         drawWaveforms()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        jam.stop()
     }
     
     func layoutMeasureBars() {
@@ -169,6 +174,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
 
     func drawWaveforms() {
+        AudioKit.stop()
         
         for subview in self.waveformContainer.subviews {
             if let waveform = subview as? FDWaveformView {
@@ -212,6 +218,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                         
                         self.waveformContainer.bringSubviewToFront(self.progressIndicator)
                         self.view.bringSubviewToFront(self.measuresView)
+                        AudioKit.start()
                     }
                 })
                 
@@ -385,22 +392,41 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
         
         let keyboardController = self.childViewControllers[0] as! KeyboardViewController
-        jam.recordSend(keyboardController.instrument, success: {
-           
-            self.sendingMessageView.stopAnimation()
-            self.keyboardButton.hidden = false
-            self.loopButton.hidden = false
-            print("Message sent!")
+        
+        if inMicrophone {
+            jam.recordSendVoice({
+                
+                self.sendingMessageView.stopAnimation()
+                self.loopButton.hidden = false
+                print("Message sent!")
+                
+                self.isRecording = false
+                self.countdownLabel.text = "REC"
+
+                }, failure: { (error: NSError) in
+                
+                    self.isRecording = false
+                    self.countdownLabel.text = "REC"
+                    print(error.localizedDescription)
+            })
+        } else {
+            jam.recordSend(keyboardController.instrument, success: {
+                
+                self.sendingMessageView.stopAnimation()
+                self.keyboardButton.hidden = false
+                self.loopButton.hidden = false
+                print("Message sent!")
+                
+                self.isRecording = false
+                self.countdownLabel.text = "REC"
+            }) { (error: NSError) in
+                self.isRecording = false
+                self.countdownLabel.text = "REC"
+                print(error.localizedDescription)
+            }
             
-            self.isRecording = false
-            self.countdownLabel.text = "REC"
-        }) { (error: NSError) in
-            self.isRecording = false
-            self.countdownLabel.text = "REC"
-            print(error.localizedDescription)
+            User.currentUser?.incrementInstrument(keyboardController.instrument)
         }
-            
-        User.currentUser?.incrementInstrument(keyboardController.instrument)
     }
 
 
@@ -462,7 +488,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
             inKeyboard = false
             keyboardButton.hidden = true
-            recordView.hidden = true
             inMicrophone = true
         }
             
@@ -482,7 +507,6 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             inKeyboard = true
             inMicrophone = false
             keyboardButton.hidden = false
-            recordView.hidden = false
         }
     }
     

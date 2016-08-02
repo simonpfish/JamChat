@@ -151,6 +151,29 @@ class Jam: NSObject {
         }
     }
     
+    func recordSendVoice(success: () -> (), failure: (NSError) -> ()) {
+        let track = Track()
+        track.recordMicrophone(duration) {
+            track.upload({ (_: Bool, error: NSError?) in
+                if let error = error {
+                    failure(error)
+                } else {
+                    self.tracks.append(track)
+                    self.trackObjects.append(track.object)
+                    self.push({ (_: Bool, error: NSError?) in
+                        if let error = error {
+                            failure(error)
+                        } else {
+                            NSNotificationCenter.defaultCenter().postNotificationName("new_message", object: track.identifier)
+                            PubNubHandler.notifyNewMessage(self, trackID: track.identifier)
+                            success()
+                        }
+                    })
+                }
+            })
+        }
+    }
+    
     // Utilities to make sure arrays are updated accordingly:
     
     private func add(user: User) {
