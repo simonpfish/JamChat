@@ -52,7 +52,6 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         case .Began:
             if let indexPathForLocation = self.loopCollection.indexPathForItemAtPoint(sender.locationInView(loopCollection)) {
                 let selectedCell: LoopCell? = self.loopCollection.cellForItemAtIndexPath(indexPathForLocation) as? LoopCell
-                print("NAME", indexPathForLocation)
                 selectedLoopView = selectedCell!.snapshot
                 selectedLoopView?.center = selectedCell!.center
                 self.view.superview!.superview!.addSubview(selectedLoopView!)
@@ -67,7 +66,7 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     self.selectedLoopView!.center.x = point.x
                     self.selectedLoopView!.center.y = point.y
                 if (self.selectedLoopView!.frame.origin.y > (13-self.waveformY) && self.selectedLoopView!.frame.origin.y < ((13-self.waveformY)+self.selectedLoopView!.frame.height)){
-                    let highlightedX = floor(self.selectedLoopView!.frame.origin.x/(self.highlightView!.frame.width))
+                    let highlightedX = floor(self.selectedLoopView!.center.x/(self.highlightView!.frame.width))
                     self.highlightView!.frame = CGRect(x: highlightedX*self.highlightView!.frame.width, y: self.highlightView!.frame.origin.y, width: self.highlightView!.frame.width, height: self.highlightView!.frame.height)
                     self.highlightView?.backgroundColor = UIColor.orangeColor()
                 }
