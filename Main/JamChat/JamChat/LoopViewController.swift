@@ -63,9 +63,11 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         case .Changed:
             UIView.animateWithDuration(0.25, animations: {() -> Void in
                 self.selectedLoopView?.frame.origin = sender.locationInView(self.view)
-                let highlightedX = floor(self.selectedLoopView!.frame.origin.x/(self.highlightView!.frame.width))
-                self.highlightView!.frame = CGRect(x: highlightedX*self.highlightView!.frame.width, y: self.highlightView!.frame.origin.y, width: self.highlightView!.frame.width, height: self.highlightView!.frame.height)
-                self.highlightView?.backgroundColor = UIColor.orangeColor()
+                if (self.selectedLoopView!.frame.origin.y > (13-self.waveformY) && self.selectedLoopView!.frame.origin.y < ((13-self.waveformY)+self.selectedLoopView!.frame.height)){
+                    let highlightedX = floor(self.selectedLoopView!.frame.origin.x/(self.highlightView!.frame.width))
+                    self.highlightView!.frame = CGRect(x: highlightedX*self.highlightView!.frame.width, y: self.highlightView!.frame.origin.y, width: self.highlightView!.frame.width, height: self.highlightView!.frame.height)
+                    self.highlightView?.backgroundColor = UIColor.orangeColor()
+                }
             })
         default:
             selectedLoopView?.removeFromSuperview()
