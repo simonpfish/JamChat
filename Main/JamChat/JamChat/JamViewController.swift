@@ -99,10 +99,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
         
         loadingIndicatorView.startAnimation()
-
-    }
-    
-    override func viewDidAppear(animated: Bool) {
+        
+        
         drawWaveforms()
     }
     
@@ -122,6 +120,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
 
     func drawWaveforms() {
+        
         for subview in self.waveformContainer.subviews {
             if let waveform = subview as? FDWaveformView {
                 waveform.removeFromSuperview()
@@ -129,35 +128,45 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
         
         if jam.tracks.count > 0 {
-            jam.loadTracks({
-                for track in (self.jam.tracks) {
-                    if let filepath = track.filepath {
-                        
-                        let fileURL = NSURL(fileURLWithPath: filepath)
-                        
-                        let waveformView = FDWaveformView(frame: self.waveformContainer.frame)
-                        
-                        waveformView.frame.origin.y = 0
-                        waveformView.audioURL = fileURL
-                        waveformView.doesAllowScrubbing = false
-                        waveformView.doesAllowScroll = false
-                        waveformView.doesAllowStretch = false
-                        waveformView.wavesColor = track.color.colorWithAlphaComponent(0.6)
-                        
-                        self.waveformContainer.addSubview(waveformView)
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                
+                self.jam.loadTracks({
+                    for track in (self.jam.tracks) {
+                        if let filepath = track.filepath {
+                            
+                            let fileURL = NSURL(fileURLWithPath: filepath)
+                            
+                            let waveformView = FDWaveformView(frame: self.waveformContainer.frame)
+                            
+                            waveformView.frame.origin.y = 0
+                            waveformView.audioURL = fileURL
+                            waveformView.doesAllowScrubbing = false
+                            waveformView.doesAllowScroll = false
+                            waveformView.doesAllowStretch = false
+                            waveformView.wavesColor = track.color.colorWithAlphaComponent(0.6)
+                            
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self.waveformContainer.addSubview(waveformView)
+                            }
+                        }
                     }
-                }
-                self.measuresView.hidden = false
-                self.loadingIndicatorView.stopAnimation()
-                let keyboardController = self.childViewControllers[0] as! KeyboardViewController
-                keyboardController.instrument.reload()
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.measuresView.hidden = false
+                        self.loadingIndicatorView.stopAnimation()
+                        let keyboardController = self.childViewControllers[0] as! KeyboardViewController
+                        keyboardController.instrument.reload()
+                        
+                        let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
+                        self.waveformContainer.subviews.last!.addGestureRecognizer(waveTap)
+                        
+                        self.waveformContainer.bringSubviewToFront(self.progressIndicator)
+                        self.view.bringSubviewToFront(self.measuresView)
+                    }
+                })
                 
-                let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
-                self.waveformContainer.subviews.last!.addGestureRecognizer(waveTap)
-                
-                self.waveformContainer.bringSubviewToFront(self.progressIndicator)
-                self.view.bringSubviewToFront(self.measuresView)
-            })
+            }
         } else {
             self.loadingIndicatorView.stopAnimation()
         }
