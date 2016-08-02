@@ -389,6 +389,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
            
             self.sendingMessageView.stopAnimation()
             self.keyboardButton.hidden = false
+            self.microphoneButton.hidden = false
             self.loopButton.hidden = false
             print("Message sent!")
             
