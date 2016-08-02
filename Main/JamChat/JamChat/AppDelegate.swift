@@ -165,7 +165,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
             if let userID = aps["userID"] as? String {
                 if userID != User.currentUser!.facebookID {
                     if let trackID = aps["trackID"] as? String {
-                        NSNotificationCenter.defaultCenter().postNotificationName("new_message", object: trackID)
+                        let jamID = aps["jamID"] as! String
+                        NSNotificationCenter.defaultCenter().postNotificationName("new_message", object: [trackID, jamID])
                     } else {
                         NSNotificationCenter.defaultCenter().postNotificationName("new_jam", object: nil)
                     }

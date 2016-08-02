@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import NVActivityIndicatorView
 
 class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
     
@@ -16,8 +17,8 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
     @IBInspectable var selectedColor: UIColor = UIColor(red: 33/255.0, green: 174/255.0, blue: 67/255.0, alpha: 1.0)
     
     var jam: Jam?
-    var waveformY: CGFloat?
-    var waveformHeight: CGFloat?
+    var waveformView: UIView?
+    var loadingView: NVActivityIndicatorView?
     
     override func viewDidLoad() {
         
@@ -74,9 +75,9 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
         let chordsController = jamStoryboard.instantiateViewControllerWithIdentifier("Chords")
 
         drumLoopsController.jam = jam
-        drumLoopsController.waveformY = waveformY
-        drumLoopsController.waveformHeight = waveformHeight
-
+        drumLoopsController.waveformView = waveformView
+        drumLoopsController.loadingView = loadingView
+        
         return [drumLoopsController, chordsController]
     }
     

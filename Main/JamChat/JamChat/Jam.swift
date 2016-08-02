@@ -114,9 +114,9 @@ class Jam: NSObject {
         }
     }
     
-    init(messageDuration: Double, userIDs: [String], title: String, tempo: Int, numMeasures: Int) {
+    init(userIDs: [String], title: String, tempo: Int, numMeasures: Int) {
         object = PFObject(className: "Jam")
-        self.duration = messageDuration
+        self.duration = 60.0 / Double(tempo) * 4.0 * numMeasures
         self.userIDs = userIDs
         self.userIDs.append(User.currentUser!.facebookID)
         self.title = title
@@ -141,7 +141,28 @@ class Jam: NSObject {
                         if let error = error {
                             failure(error)
                         } else {
-                            NSNotificationCenter.defaultCenter().postNotificationName("new_message", object: track.identifier)
+                            PubNubHandler.notifyNewMessage(self, trackID: track.identifier)
+                            success()
+                        }
+                    })
+                }
+            })
+        }
+    }
+    
+    func recordSendLoop(loop: Loop, measure: Double, success: () -> (), failure: (NSError) -> ()){
+        let track = Track()
+        track.recordLoop(duration, loop: loop, measure: measure) {
+            track.upload({ (_: Bool, error: NSError?) in
+                if let error = error {
+                    failure(error)
+                } else {
+                    self.tracks.append(track)
+                    self.trackObjects.append(track.object)
+                    self.push({ (_: Bool, error: NSError?) in
+                        if let error = error {
+                            failure(error)
+                        } else {
                             PubNubHandler.notifyNewMessage(self, trackID: track.identifier)
                             success()
                         }
@@ -187,6 +208,14 @@ class Jam: NSObject {
      Fetches a particular track from the server and adds it to the jam
      */
     func fetchTrack(id: String, completion: (Track) -> ()) {
+        
+        for track in tracks {
+            if track.identifier == id {
+                completion(track)
+                return
+            }
+        }
+        
         let query = PFQuery(className: "Track")
         query.whereKey("identifier", equalTo: id)
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
