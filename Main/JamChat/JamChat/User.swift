@@ -86,7 +86,7 @@ class User: NSObject {
                 
                 let query = PFQuery(className: "_User")
                 query.whereKey("facebookID", containedIn: friendIDs)
-    
+                
                 query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
                     
                     if let users = objects as? [PFUser] {
@@ -96,7 +96,7 @@ class User: NSObject {
                         print("Succesfully loaded \(self.name)'s friends: \(self.friends)")
                         completion?()
                     }
-
+                    
                 })
             }
         }
@@ -129,10 +129,10 @@ class User: NSObject {
      Attempts to log in an user, presenting a login subview in the given view.
      
      - parameters:
-        - controller: view controller on which to present the login subview
-        - success: block that will be called when the user is logged in succesfully
-        - failure: block that will be called when there's an error
-    */
+     - controller: view controller on which to present the login subview
+     - success: block that will be called when the user is logged in succesfully
+     - failure: block that will be called when there's an error
+     */
     class func login(controller: UIViewController, success: (() -> ())?, failure: ((NSError?) -> ())?) {
         loginDelegate.loginSuccess = success
         loginDelegate.loginFailure = failure
@@ -206,33 +206,17 @@ class User: NSObject {
      Updates an array with the tracks the current user has created.
      */
     func getUserTracks(completion: () -> ()) {
-            
+        
         // if the user has not created any tracks, do not create a query
         let query = PFQuery(className: "Track")
         query.whereKey("author", containsString: self.parseUser.objectId)
         query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) in
-            var loadedCount = 0;
             for object in objects ?? [] {
                 let track = Track(object: object)
                 self.tracks.append(track)
                 print("Loading track \(track)")
-                loadedCount += 1
-                if loadedCount == objects!.count {
-                    
-                    // update the user's instrumentCount
-                    for track in self.tracks {
-                        for instrument in self.instrumentCount.keys {
-                            if let instrumentname = track.instrumentName {
-                                if(instrument.name == instrumentname) {
-                                    var curNum = self.instrumentCount[instrument]
-                                    curNum = curNum! + 1
-                                    self.instrumentCount[instrument] = curNum
-                                }
-                            }
-                        }
-                    }
-                }
             }
+            completion()
         }
     }
     
@@ -276,7 +260,7 @@ class User: NSObject {
      Returns an array of Users, that represents the current user's top three friends.
      */
     func getTopFriends(completion: (users: [User]) -> ()) {
-
+        
         var numUserOccurrences: [String: Int] = [:] // maps each facebookID to a number of occurrences
         var numUserObjOccurrences: [User: Int] = [:] // maps each user Object to a number of occurrences
         var topIDs: [String] = [] // an array of the facebookIDs of the user's top friends
@@ -287,93 +271,14 @@ class User: NSObject {
             friendIDs.append(friend.facebookID)
         }
         
-        // if the user is the current user, no need to load the jams
-        if self == User.currentUser! {
-            for jam in Jam.currentUserJams {
-                for user in jam.users {
-                    
-                    if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
-                        if(user.facebookID != self.facebookID) {
-                            if (!numUserOccurrences.keys.contains(user.facebookID)) {
-                                numUserOccurrences[user.facebookID] = 1
-                                numUserObjOccurrences[user] = 1
-                            } else {
-                                var curNum = numUserOccurrences[user.facebookID]
-                                curNum = curNum! + 1 // update the number of occurrences
-                                numUserOccurrences[user.facebookID] = curNum
-                                numUserObjOccurrences[user] = curNum
-                            }
-                        }
-                    }
-                    
-                    for friend in friendCount.keys {
-                        if(friend.facebookID == user.facebookID) {
-                            var curNum = friendCount[friend]
-                            curNum = curNum! + 1
-                            friendCount[friend] = curNum
-                        }
-                    }
-                    
-                }
-            }
-            
-            // sort the dictionaries by number of occurrences, from highest to lowest
-            topIDs = numUserOccurrences.keysSortedByValue(>)
-            topFriends = numUserObjOccurrences.keysSortedByValue(>)
-            
-            let arrayUsers = getUserFromID(topFriends, arrayOfIDs: topIDs)
-            
-            completion(users: arrayUsers)
-            
-        } else {
-            
-            // if the user has not already loaded their jams, load them
-            if self.jams.count == 0 {
-                downloadJams({(jams: [Jam]) in
-                    self.jams = jams
-                    
-                    for jam in self.jams {
-                        for user in jam.users {
-                            if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
-                                if(user.facebookID != self.facebookID) {
-                                    if (!numUserOccurrences.keys.contains(user.facebookID)) {
-                                        numUserOccurrences[user.facebookID] = 1
-                                        numUserObjOccurrences[user] = 1
-                                    } else {
-                                        var curNum = numUserOccurrences[user.facebookID]
-                                        curNum = curNum! + 1 // update the number of occurrences
-                                        numUserOccurrences[user.facebookID] = curNum
-                                        numUserObjOccurrences[user] = curNum
-                                    }
-                                }
-                            }
-                            
-                            for friend in self.friendCount.keys {
-                                if(friend.facebookID == user.facebookID) {
-                                    var curNum = self.friendCount[friend]
-                                    curNum = curNum! + 1
-                                    self.friendCount[friend] = curNum
-                                }
-                            }
-                            
-                        }
-                    }
-                    
-                    // sort the dictionaries by number of occurrences, from highest to lowest
-                    topIDs = numUserOccurrences.keysSortedByValue(>)
-                    topFriends = numUserObjOccurrences.keysSortedByValue(>)
-                    
-                    let arrayUsers = self.getUserFromID(topFriends, arrayOfIDs: topIDs)
-                    
-                    completion(users: arrayUsers)
-                    
-                })
-            } else {
+        
+        // if the user has not already loaded their jams, load them
+        if self.jams.count == 0 {
+            downloadJams({(jams: [Jam]) in
+                self.jams = jams
                 
-                // if the user's jams are already loaded
                 for jam in self.jams {
                     for user in jam.users {
-                        
                         if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
                             if(user.facebookID != self.facebookID) {
                                 if (!numUserOccurrences.keys.contains(user.facebookID)) {
@@ -406,10 +311,50 @@ class User: NSObject {
                 let arrayUsers = self.getUserFromID(topFriends, arrayOfIDs: topIDs)
                 
                 completion(users: arrayUsers)
-
+                
+            })
+        } else {
+            
+            // if the user's jams are already loaded
+            for jam in self.jams {
+                for user in jam.users {
+                    
+                    if(friendIDs.contains(user.facebookID)) { // ensures that a 'top friend' is a friend of the current user
+                        if(user.facebookID != self.facebookID) {
+                            if (!numUserOccurrences.keys.contains(user.facebookID)) {
+                                numUserOccurrences[user.facebookID] = 1
+                                numUserObjOccurrences[user] = 1
+                            } else {
+                                var curNum = numUserOccurrences[user.facebookID]
+                                curNum = curNum! + 1 // update the number of occurrences
+                                numUserOccurrences[user.facebookID] = curNum
+                                numUserObjOccurrences[user] = curNum
+                            }
+                        }
+                    }
+                    
+                    for friend in self.friendCount.keys {
+                        if(friend.facebookID == user.facebookID) {
+                            var curNum = self.friendCount[friend]
+                            curNum = curNum! + 1
+                            self.friendCount[friend] = curNum
+                        }
+                    }
+                    
+                }
             }
             
+            // sort the dictionaries by number of occurrences, from highest to lowest
+            topIDs = numUserOccurrences.keysSortedByValue(>)
+            topFriends = numUserObjOccurrences.keysSortedByValue(>)
+            
+            let arrayUsers = self.getUserFromID(topFriends, arrayOfIDs: topIDs)
+            
+            completion(users: arrayUsers)
+            
         }
+        
+        
         
     }
     
@@ -474,7 +419,7 @@ class User: NSObject {
             }
         }
     }
-
+    
 }
 
 // Delegate used for the login view success and failure cases
@@ -486,7 +431,7 @@ class LoginDelegate: NSObject, PFLogInViewControllerDelegate {
     
     // Called when user is logged in succesfully, dismissing the login view
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
-       
+        
         FBSDKProfile.loadCurrentProfileWithCompletion({ (profile: FBSDKProfile!, error: NSError!) in
             
             if let error = error {

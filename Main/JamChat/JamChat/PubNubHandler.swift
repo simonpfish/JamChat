@@ -16,20 +16,20 @@ class PubNubHandler: NSObject {
         return appDelegate.client
     }
     
-    static func notifyNewMessage(jam: Jam) {
-        for user in jam.users {
-            let payload = ["aps" : ["alert" : "\(User.currentUser!.name!) -> \(jam.title)"]]
-            client.publish("new_message", toChannel: user.facebookID, mobilePushPayload: payload) { (status: PNPublishStatus) in
-                print(status.debugDescription)
+    static func notifyNewMessage(jam: Jam, trackID: String) {
+        for userID in jam.userIDs {
+            let payload = ["aps" : ["alert" : "\(User.currentUser!.name!) -> \(jam.title)", "trackID": trackID, "userID": User.currentUser!.facebookID, "jamID": jam.id]]
+            client.publish("new_message", toChannel: userID, mobilePushPayload: payload) { (status: PNPublishStatus) in
+//                print(status.debugDescription)
             }
         }
     }
     
     static func notifyNewJam(jam: Jam) {
         for userID in jam.userIDs {
-            let payload = ["aps" : ["alert" : "\(User.currentUser!.name!) created jam \(jam.title)!"]]
+            let payload = ["aps" : ["alert" : "\(User.currentUser!.name!) created jam \(jam.title)!", "userID": User.currentUser!.facebookID]]
             client.publish("new_message", toChannel: userID, mobilePushPayload: payload) { (status: PNPublishStatus) in
-                print(status.debugDescription)
+//                print(status.debugDescription)
             }
         }
     }

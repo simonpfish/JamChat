@@ -90,7 +90,7 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Loops")
+        return IndicatorInfo(title: "Drum Loops")
     }
     
  }

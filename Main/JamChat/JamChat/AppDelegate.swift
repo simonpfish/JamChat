@@ -63,6 +63,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
         AppDelegate.mainMixer!.start()
         AudioKit.start()
         
+        if let notification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? [NSObject : AnyObject] {
+            if let aps = notification["aps"] as? NSDictionary {
+                if let userID = aps["userID"] as? String {
+                    if userID != User.currentUser!.facebookID {
+                        if let jamID = aps["jamID"] as? String {
+                            let root = self.window?.rootViewController as! PagerViewController
+                            root.moveToViewControllerAtIndex(1, animated: false)
+                            
+                            let query = PFQuery(className: "Jam")
+                            var jam: Jam?
+                            
+                            query.whereKey("objectId", equalTo: jamID)
+                            query.includeKey("tracks")
+                            query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) in
+                                if error == nil {
+                                    jam = Jam(object: objects!.last!)
+                                    
+                                    jam?.loadUsers({ 
+                                        let jamView = JamViewController()
+                                        jamView.jam = jam
+                                        
+                                        let home = root.viewControllers[1] as! HomeViewController
+                                        home.presentViewController(jamView, animated: true, completion: nil)
+                                    })
+                                }
+                            }
+                        } else {
+                            NSNotificationCenter.defaultCenter().postNotificationName("new_jam", object: nil)
+                        }
+                    }
+                }
+            }
+        }
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -115,6 +149,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print(userInfo)
+        
+        if let aps = userInfo["aps"] as? NSDictionary {
+            if let userID = aps["userID"] as? String {
+                if userID != User.currentUser!.facebookID {
+                    if let trackID = aps["trackID"] as? String {
+                        NSNotificationCenter.defaultCenter().postNotificationName("new_message", object: trackID)
+                    } else {
+                        NSNotificationCenter.defaultCenter().postNotificationName("new_jam", object: nil)
+                    }
+                }
+            }
+        }
     }
     
 }

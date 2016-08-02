@@ -52,7 +52,7 @@ class Loop: NSObject {
     static let loop3BPM110 = Loop(name: "3", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#3BPM110", tempo: 110, image: UIImage(named: "square"))
     static let loop4BPM110 = Loop(name: "4", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#4BPM110", tempo: 110, image: UIImage(named: "headphones"))
     static let loop5BPM110 = Loop(name: "5", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#5BPM110", tempo: 110, image: UIImage(named: "cd"))
-    static let loop6BPM110 = Loop(name: "6", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#6BPM110", tempo: 110, image: UIImage(named: "wave1"))
+    static let loop6BPM110 = Loop(name: "6", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#6BPM110", tempo: 110, image: UIImage(named: "wave"))
     static let loop1BPM140 = Loop(name: "1", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#1BPM140", tempo: 140, image: UIImage(named: "robot"))
     static let loop2BPM140 = Loop(name: "2", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#2BPM140", tempo: 140, image: UIImage(named: "musicnotes"))
     static let loop3BPM140 = Loop(name: "3", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#3BPM140", tempo: 140, image: UIImage(named: "wires"))

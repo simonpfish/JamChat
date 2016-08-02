@@ -64,23 +64,6 @@ class Jam: NSObject {
         super.init()
     }
     
-    /**
-     Creates a new jam with a given message duration and name
-     */
-    init(messageDuration: Double, users: [User], title: String) {
-        object = PFObject(className: "Jam")
-        self.duration = messageDuration
-        self.title = title
-        self.updatedAt = NSDate()
-        
-        super.init()
-        
-        for user in users {
-            add(user)
-        }
-        add(User.currentUser!)
-    }
-    
     func loadUsers(completion: () -> ()) {
         print("Loading jam \(title) users")
         let query = PFQuery(className: "_User")
@@ -138,6 +121,7 @@ class Jam: NSObject {
         self.userIDs.append(User.currentUser!.facebookID)
         self.title = title
         self.tempo = tempo
+        self.updatedAt = NSDate()
         self.numMeasures = numMeasures
     }
     
@@ -157,7 +141,8 @@ class Jam: NSObject {
                         if let error = error {
                             failure(error)
                         } else {
-                            PubNubHandler.notifyNewMessage(self)
+                            NSNotificationCenter.defaultCenter().postNotificationName("new_message", object: track.identifier)
+                            PubNubHandler.notifyNewMessage(self, trackID: track.identifier)
                             success()
                         }
                     })
@@ -178,14 +163,15 @@ class Jam: NSObject {
     /**
      Fetches a particular track from the server and adds it to the jam
      */
-    func fetchTrack(id: String, completion: () -> ()) {
+    func fetchTrack(id: String, completion: (Track) -> ()) {
         let query = PFQuery(className: "Track")
-        query.whereKey("id", equalTo: id)
+        query.whereKey("identifier", equalTo: id)
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
             if let object = objects?.first {
                 self.trackObjects.append(object)
-                self.tracks.append(Track(object: object))
-                completion()
+                let track = Track(object: object)
+                self.tracks.append(track)
+                completion(track)
             } else if let error = error {
                 print(error.localizedDescription)
             }
