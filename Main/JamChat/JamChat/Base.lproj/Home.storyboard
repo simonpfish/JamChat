@@ -109,7 +109,7 @@
                                             <outlet property="dateLabel" destination="GvX-YU-g1W" id="29c-Ae-Tdq"/>
                                             <outlet property="jamNameLabel" destination="Ljl-KK-ak9" id="PmL-L3-SV1"/>
                                             <outlet property="userCollection" destination="YEx-qK-Ety" id="vqg-pd-Eii"/>
-                                            <segue destination="x4v-zO-RyJ" kind="show" id="ZOx-pJ-uvm"/>
+                                            <segue destination="x4v-zO-RyJ" kind="show" identifier="JamSegue" id="ZOx-pJ-uvm"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

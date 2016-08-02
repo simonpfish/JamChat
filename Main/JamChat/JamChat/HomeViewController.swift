@@ -143,7 +143,10 @@ import PubNub
                 } else {
                     self.jams.insert(jam, atIndex: 0)
                     print("Succesfully created jam, reloading data")
-                    self.tableView.reloadData()
+                    jam.loadUsers({ 
+                        self.tableView.reloadData()
+                        self.performSegueWithIdentifier("JamSegue", sender: jam)
+                    })
                 }
             }
         }
@@ -163,8 +166,14 @@ import PubNub
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if let jamView = segue.destinationViewController as? JamViewController {
-            let cell = sender as! JamCell
-            jamView.jam = cell.jam
+            
+            if let jam = sender as? Jam {
+                jamView.jam = jam
+            } else {
+                let cell = sender as! JamCell
+                jamView.jam = cell.jam
+            }
+        
         }
         
     }

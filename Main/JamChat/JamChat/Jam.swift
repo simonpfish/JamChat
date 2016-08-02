@@ -64,23 +64,6 @@ class Jam: NSObject {
         super.init()
     }
     
-    /**
-     Creates a new jam with a given message duration and name
-     */
-    init(messageDuration: Double, users: [User], title: String) {
-        object = PFObject(className: "Jam")
-        self.duration = messageDuration
-        self.title = title
-        self.updatedAt = NSDate()
-        
-        super.init()
-        
-        for user in users {
-            add(user)
-        }
-        add(User.currentUser!)
-    }
-    
     func loadUsers(completion: () -> ()) {
         print("Loading jam \(title) users")
         let query = PFQuery(className: "_User")
@@ -138,6 +121,7 @@ class Jam: NSObject {
         self.userIDs.append(User.currentUser!.facebookID)
         self.title = title
         self.tempo = tempo
+        self.updatedAt = NSDate()
         self.numMeasures = numMeasures
     }
     
