@@ -92,7 +92,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
                 noteLabel.font = noteLabel.font.fontWithSize(12)
                 noteLabel.textColor = labelColor
                 noteLabel.textAlignment = NSTextAlignment.Center
-                noteLabel.text = notesWithSharps[(lowestKey + increment) % 12]
+                noteLabel.text = notesWithFlats[(lowestKey + increment) % 12]
                 newButton.addSubview(noteLabel)
                 
                 newButton.setNeedsDisplay()

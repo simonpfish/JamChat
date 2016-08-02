@@ -43,23 +43,31 @@ class Loop: NSObject {
         }
     }
     
-    // Loops:
+    // 80 BPM loops
     static let loop1BPM80 = Loop(name: "1", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#1BPM80", tempo: 80, image: UIImage(named: "afro"))
     static let loop2BPM80 = Loop(name: "2", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#2BPM80", tempo: 80, image: UIImage(named: "circleTech"))
     static let loop3BPM80 = Loop(name: "3", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#3BPM80", tempo: 80, image: UIImage(named: "peace"))
     static let loop4BPM80 = Loop(name: "4", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#4BPM80", tempo: 80, image: UIImage(named: "computer"))
     static let loop5BPM80 = Loop(name: "5", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#5BPM80", tempo: 80, image: UIImage(named: "wires"))
     static let loop6BPM80 = Loop(name: "6", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#6BPM80", tempo: 80, image: UIImage(named: "rockon"))
+    
+    // 110 BPM loops
     static let loop1BPM110 = Loop(name: "1", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#1BPM110", tempo: 110, image: UIImage(named: "leaf"))
     static let loop2BPM110 = Loop(name: "2", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#2BPM110", tempo: 110, image: UIImage(named: "ipodWires"))
     static let loop3BPM110 = Loop(name: "3", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#3BPM110", tempo: 110, image: UIImage(named: "square"))
     static let loop4BPM110 = Loop(name: "4", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#4BPM110", tempo: 110, image: UIImage(named: "headphones"))
     static let loop5BPM110 = Loop(name: "5", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#5BPM110", tempo: 110, image: UIImage(named: "cd"))
     static let loop6BPM110 = Loop(name: "6", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#6BPM110", tempo: 110, image: UIImage(named: "wave"))
+    
+    // 140 BPM loops
     static let loop1BPM140 = Loop(name: "1", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#1BPM140", tempo: 140, image: UIImage(named: "robot"))
     static let loop2BPM140 = Loop(name: "2", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#2BPM140", tempo: 140, image: UIImage(named: "musicnotes"))
     static let loop3BPM140 = Loop(name: "3", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#3BPM140", tempo: 140, image: UIImage(named: "wires"))
     static let loop4BPM140 = Loop(name: "4", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#4BPM140", tempo: 140, image: UIImage(named: "ipod"))
     static let loop5BPM140 = Loop(name: "5", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#5BPM140", tempo: 140, image: UIImage(named: "circleTech1"))
     static let loop6BPM140 = Loop(name: "6", color: UIColor(red: 0, green: 0.7882, blue: 0.7608, alpha: 1.0), fileName: "#6BPM140", tempo: 140, image: UIImage(named: "peaceon"))
+    
+    static let Loops80: [Loop] = [loop1BPM80, Loop.loop2BPM80, loop3BPM80, loop4BPM80, loop5BPM80, loop6BPM80]
+    static let Loops110: [Loop] = [loop1BPM110, Loop.loop2BPM110, loop3BPM110, loop4BPM110, loop5BPM110, loop6BPM110]
+    static let Loops140: [Loop] = [loop1BPM140, loop2BPM140, loop3BPM140, loop4BPM140, loop5BPM140, loop6BPM140]
 }
