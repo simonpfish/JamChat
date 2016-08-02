@@ -55,8 +55,7 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 selectedLoopView = selectedCell!.snapshot
                 selectedLoopView?.center = selectedCell!.center
                 self.view.superview!.superview!.addSubview(selectedLoopView!)
-                highlightView = UIView(frame: CGRectMake(0, 10-waveformY, self.view.frame.width/CGFloat(self.jam.numMeasures!), waveformHeight))
-                highlightView!.backgroundColor = UIColor.clearColor()
+                highlightView = UIView(frame: CGRectMake(0, 13-waveformY, self.view.frame.width/CGFloat(self.jam.numMeasures!), waveformHeight))
                 highlightView!.layer.cornerRadius = 25
                 highlightView!.alpha = 0.3
                 self.view.superview!.superview!.addSubview(highlightView!)
@@ -64,9 +63,13 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         case .Changed:
             UIView.animateWithDuration(0.25, animations: {() -> Void in
                 self.selectedLoopView?.frame.origin = sender.locationInView(self.view)
+                let highlightedX = floor(self.selectedLoopView!.frame.origin.x/(self.highlightView!.frame.width))
+                self.highlightView!.frame = CGRect(x: highlightedX*self.highlightView!.frame.width, y: self.highlightView!.frame.origin.y, width: self.highlightView!.frame.width, height: self.highlightView!.frame.height)
+                self.highlightView?.backgroundColor = UIColor.orangeColor()
             })
         default:
             selectedLoopView?.removeFromSuperview()
+            highlightView?.backgroundColor = UIColor.clearColor()
         }
     }
 
