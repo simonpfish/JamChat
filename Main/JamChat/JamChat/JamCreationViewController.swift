@@ -294,8 +294,8 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
             metronome!.play()
             metronome!.stop()
             delay(60.0/110.0){
-            self.metronome!.play()
-        }
+                self.metronome!.play()
+            }
         }
         
         timer.invalidate()
@@ -516,7 +516,9 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         }
         
         // resets the selected tempo to "Moderate"
+        firstLoad = true
         onMedium(nil)
+        firstLoad = falsellkkcrnnvluuedejcljibvfuvggjkflu
     }
 
     
