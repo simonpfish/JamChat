@@ -246,6 +246,9 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func onSlow (sender: UITapGestureRecognizer?){
+        
+        metronome?.stop()
+        
         metronome = Metronome.metronomeBPM80
         metronome!.play()
         if (firstLoad == false){
@@ -289,13 +292,16 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func onMedium (sender: UITapGestureRecognizer?){
+        
+        metronome?.stop()
+        
         if (firstLoad == false){
             metronome = Metronome.metronomeBPM110
             metronome!.play()
             metronome!.stop()
             delay(60.0/110.0){
-            self.metronome!.play()
-        }
+                self.metronome!.play()
+            }
         }
         
         timer.invalidate()
@@ -333,14 +339,17 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func onFast (sender: UITapGestureRecognizer?){
-         metronome = Metronome.metronomeBPM140
-         metronome!.play()
+        
+        metronome?.stop()
+        
+        metronome = Metronome.metronomeBPM140
+        metronome!.play()
         if (firstLoad == false){
             metronome!.stop()
         }
         firstLoad = false
         delay(60.0/140.0){
-        self.metronome!.play()
+            self.metronome!.play()
         }
         timer.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(60/140, target: fastTempoView, selector: #selector(BAPulseView.popAndPulse), userInfo: nil, repeats: true)
@@ -516,7 +525,9 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
         }
         
         // resets the selected tempo to "Moderate"
+        firstLoad = true
         onMedium(nil)
+        firstLoad = false
     }
 
     
