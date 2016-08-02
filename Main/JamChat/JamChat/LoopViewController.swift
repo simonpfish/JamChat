@@ -30,13 +30,13 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         loopCollection.dataSource = self
                 
         if(jam.tempo == 80){
-            array = [Loop.loop1BPM80, Loop.loop2BPM80, Loop.loop3BPM80, Loop.loop4BPM80, Loop.loop5BPM80, Loop.loop6BPM80]
+            array = Loop.Loops80
         }
         else if(jam.tempo == 110){
-            array = [Loop.loop1BPM110, Loop.loop2BPM110, Loop.loop3BPM110, Loop.loop4BPM110, Loop.loop5BPM110, Loop.loop6BPM110]
+            array = Loop.Loops110
         }
         else{
-            array = [Loop.loop1BPM140, Loop.loop2BPM140, Loop.loop3BPM140, Loop.loop4BPM140, Loop.loop5BPM140, Loop.loop6BPM140]
+            array = Loop.Loops140
         }
         
         self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(LoopViewController.dragLoop(_:)))
