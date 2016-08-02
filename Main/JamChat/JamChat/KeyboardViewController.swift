@@ -64,6 +64,8 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
         blackFrame.backgroundColor = UIColor.clearColor()
         view.addSubview(blackFrame)
         
+        var labelColor: UIColor!
+        
         var keyCount = 0
         var increment = 0
         while keyCount < totalKeys {
@@ -73,10 +75,12 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
                     newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: 200))
                     newButton.frame.origin.x = CGFloat(keyCount * (keyWidth + 1)) + 1
                     newButton.backgroundColor = sharpKeyColor
+                    labelColor = UIColor.whiteColor()
                 } else {
                     newButton = UIView(frame:CGRect(x: 0, y: 0, width: keyWidth, height: 200))
                     newButton.frame.origin.x = CGFloat(keyCount * (keyWidth + 1)) + 1
                     newButton.backgroundColor = UIColor.whiteColor()
+                    labelColor = UIColor.blackColor()
                 }
                 
                 newButton.layer.borderColor = UIColor.blackColor().CGColor
@@ -86,6 +90,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
                 //labels notes
                 let noteLabel = UILabel(frame: CGRectMake(0, newButton.frame.height-newButton.frame.width, newButton.frame.width, newButton.frame.width))
                 noteLabel.font = noteLabel.font.fontWithSize(12)
+                noteLabel.textColor = labelColor
                 noteLabel.textAlignment = NSTextAlignment.Center
                 noteLabel.text = notesWithSharps[(lowestKey + increment) % 12]
                 newButton.addSubview(noteLabel)
