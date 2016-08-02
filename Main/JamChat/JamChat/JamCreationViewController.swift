@@ -59,10 +59,6 @@ class JamCreationViewController: UIViewController, UICollectionViewDelegate, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // sets up title label
-//        titleLabel.layer.borderColor = selectedColor.CGColor
-//        titleLabel.layer.borderWidth = 3.0
-        
         // sets up the stepper
         stepperView.labelFont = UIFont.systemFontOfSize(21.0, weight: UIFontWeightSemibold)
         stepperView.buttonsBackgroundColor = selectedColor

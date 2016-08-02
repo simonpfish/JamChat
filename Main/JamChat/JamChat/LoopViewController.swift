@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import RandomColorSwift
 
 class LoopViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, IndicatorInfoProvider {
     
@@ -27,7 +28,7 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         loopCollection.delegate = self
         loopCollection.dataSource = self
-        
+                
         if(jam.tempo == 80){
             array = [Loop.loop1BPM80, Loop.loop2BPM80, Loop.loop3BPM80, Loop.loop4BPM80, Loop.loop5BPM80, Loop.loop6BPM80]
         }

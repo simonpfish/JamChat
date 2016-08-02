@@ -54,7 +54,7 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
             }
         }
         
-        moveToViewControllerAtIndex(1, animated: false)
+        moveToViewControllerAtIndex(0, animated: false)
         
         super.viewDidLoad()
         
