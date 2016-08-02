@@ -321,12 +321,9 @@
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PHh-f1-Rhw" customClass="BAPulseView">
                                                     <rect key="frame" x="2" y="2" width="75" height="75"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xU-df-JUm">
-                                                            <rect key="frame" x="17" y="28" width="42" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nOD-b5-vPK">
+                                                            <rect key="frame" x="20" y="20" width="35" height="35"/>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -335,7 +332,7 @@
                                         </view>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <connections>
-                                            <outlet property="loopLabel" destination="4xU-df-JUm" id="vNZ-X9-cd4"/>
+                                            <outlet property="loopImage" destination="nOD-b5-vPK" id="f8Q-N3-cwR"/>
                                             <outlet property="loopView" destination="PHh-f1-Rhw" id="wgF-rI-xGc"/>
                                         </connections>
                                     </collectionViewCell>

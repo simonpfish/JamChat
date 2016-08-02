@@ -333,7 +333,6 @@
 		E7F0BB501D3D7D0B0059160B /* Jam */ = {
 			isa = PBXGroup;
 			children = (
-				E74F1DF81D386A2E00A34409 /* JamHistoryViewController.swift */,
 				21F29BCE1D4FDE1400CED9D8 /* MicrophoneViewController.swift */,
 				E74F1DF41D3869DB00A34409 /* JamViewController.swift */,
 				E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */,

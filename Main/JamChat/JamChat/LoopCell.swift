@@ -13,11 +13,11 @@ import RandomColorSwift
 class LoopCell: UICollectionViewCell, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var loopView: BAPulseView!
-    @IBOutlet weak var loopLabel: UILabel!
+    @IBOutlet weak var loopImage: UIImageView!
     
     var loop: Loop!{
         didSet{
-            loopLabel.text = loop.name
+            loopImage.image = loop.image
             loopView.backgroundColor = loop.color
         }
     }
