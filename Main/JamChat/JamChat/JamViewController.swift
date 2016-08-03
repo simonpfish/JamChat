@@ -16,7 +16,7 @@ import BAPulseView
 import AVFoundation
 
 class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, CircleMenuDelegate {
-
+    
     var jam: Jam!
     var users: [User] = []
     var tempoTimer = NSTimer()
@@ -44,10 +44,12 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var loopButton: UIButton!
     @IBOutlet weak var microphoneButton: UIButton!
     @IBOutlet weak var dragAndDropLabel: UILabel!
+    @IBOutlet weak var selectedView: UIView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         NSNotificationCenter.defaultCenter().addObserverForName("new_message", object: nil, queue: nil) { (notification: NSNotification) in
             let data = notification.object as! [String]
             if data[1] == self.jam.id {
@@ -74,12 +76,18 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         sendingMessageView.type = .LineScale
         sendingMessageView.color = loadingColor
         
+        selectedView.layer.cornerRadius = selectedView.frame.size.width / 2.0
+        
+        loopButton.backgroundColor = loopButton.backgroundColor?.colorWithAlphaComponent(0.0)
+        microphoneButton.backgroundColor = microphoneButton.backgroundColor?.colorWithAlphaComponent(0.0)
+        keyboardButton.backgroundColor = keyboardButton.backgroundColor?.colorWithAlphaComponent(0.0)
+        
         self.sendingMessageView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
         
         progressIndicator.layer.cornerRadius = progressIndicator.frame.width/2
         
         dragAndDropLabel.hidden = true
-                
+        
         layoutMeasureBars()
         
         // Set up user collection view:
@@ -105,11 +113,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         //customizes loop button to be a circle
         loopButton.layer.cornerRadius = 0.5 * loopButton.bounds.size.width
         keyboardButton.layer.cornerRadius = 0.5 * loopButton.bounds.size.width
-
+        
         //customizes microphone button to be a circle
         microphoneButton.layer.cornerRadius = 0.5 * microphoneButton.bounds.size.width
         microphoneContainer.alpha = 0
-
+        
         for user in jam!.users {
             if user.facebookID != User.currentUser!.facebookID {
                 users.append(user)
@@ -144,7 +152,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     var selectedLoopView: UIView?
     func dragLoop(view: UIView, sender: UIPanGestureRecognizer) {
-
+        
         switch sender.state{
         case .Began:
             selectedLoopView = view
@@ -171,7 +179,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         waveformView.wavesColor = track.color.colorWithAlphaComponent(0.6)
         
         self.waveformContainer.addSubview(waveformView)
-
+        
         let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
         self.waveformContainer.subviews.last!.addGestureRecognizer(waveTap)
         
@@ -179,7 +187,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         self.view.bringSubviewToFront(self.measuresView)
         
     }
-
+    
     func drawWaveforms() {
         AudioKit.stop()
         
@@ -389,7 +397,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             
         }
     }
-
+    
     func startRecording(){
         isRecording = true
         isCounting = false
@@ -426,9 +434,9 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 
                 self.isRecording = false
                 self.countdownLabel.text = "REC"
-
-                }, failure: { (error: NSError) in
                 
+                }, failure: { (error: NSError) in
+                    
                     self.isRecording = false
                     self.countdownLabel.text = "REC"
                     
@@ -466,8 +474,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             User.currentUser?.incrementInstrument(keyboardController.instrument)
         }
     }
-
-
+    
+    
     func delay(delay: Double, closure: ()->()) {
         dispatch_after(
             dispatch_time(
@@ -478,7 +486,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             closure
         )
     }
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "loopSegue") {
             let childViewController = segue.destinationViewController as! LoopsPagerViewController
@@ -507,10 +515,18 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         menuButton.hidden = true
         recordView.hidden = true
         
-        loopButton.backgroundColor = loopButton.backgroundColor?.colorWithAlphaComponent(1.0)
-        microphoneButton.backgroundColor = microphoneButton.backgroundColor?.colorWithAlphaComponent(0.0)
-        keyboardButton.backgroundColor = keyboardButton.backgroundColor?.colorWithAlphaComponent(0.0)
-
+        
+        let overshootAmount : CGFloat = 2.0
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: [], animations: {
+            self.selectedView.center.x = self.loopButton.center.x
+            self.selectedView.backgroundColor = self.loopButton.backgroundColor?.colorWithAlphaComponent(1.0)
+            
+            self.selectedView.center.x -= overshootAmount
+            self.selectedView.center.x += overshootAmount
+            
+            }, completion: nil)
+        
     }
     
     @IBAction func onMicrophone(sender: AnyObject) {
@@ -526,10 +542,18 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         inMicrophone = true
         dragAndDropLabel.hidden = true
         recordView.hidden = false
-
-        loopButton.backgroundColor = loopButton.backgroundColor?.colorWithAlphaComponent(0.0)
-        microphoneButton.backgroundColor = microphoneButton.backgroundColor?.colorWithAlphaComponent(1.0)
-        keyboardButton.backgroundColor = keyboardButton.backgroundColor?.colorWithAlphaComponent(0.0)
+        
+        let overshootAmount : CGFloat = 2.0
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: [], animations: {
+            self.selectedView.center.x = self.microphoneButton.center.x
+            self.selectedView.backgroundColor = self.microphoneButton.backgroundColor?.colorWithAlphaComponent(1.0)
+            
+            self.selectedView.center.x -= overshootAmount
+            self.selectedView.center.x += overshootAmount
+            
+            }, completion: nil)
+        
     }
     
     @IBAction func onKeyboard(sender: AnyObject) {
@@ -552,9 +576,17 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         dragAndDropLabel.hidden = true
         recordView.hidden = false
         
-        loopButton.backgroundColor = loopButton.backgroundColor?.colorWithAlphaComponent(0.0)
-        microphoneButton.backgroundColor = microphoneButton.backgroundColor?.colorWithAlphaComponent(0.0)
-        keyboardButton.backgroundColor = keyboardButton.backgroundColor?.colorWithAlphaComponent(1.0)
+        let overshootAmount : CGFloat = 2.0
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: [], animations: {
+            self.selectedView.center.x = self.keyboardButton.center.x
+            self.selectedView.backgroundColor = self.keyboardButton.backgroundColor?.colorWithAlphaComponent(1.0)
+            
+            self.selectedView.center.x -= overshootAmount
+            self.selectedView.center.x += overshootAmount
+            
+            }, completion: nil)
+        
     }
     
 }
