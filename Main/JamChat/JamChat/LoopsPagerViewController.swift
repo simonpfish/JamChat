@@ -43,16 +43,16 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = .blackColor()
             
             // enlarges the size of the selected cell
-            if animated {
-                UIView.animateWithDuration(0.1, animations: { () -> Void in
-                    newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
-                    oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
-                })
-            }
-            else {
-                newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
-                oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
-            }
+//            if animated {
+//                UIView.animateWithDuration(0.1, animations: { () -> Void in
+//                    newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
+//                    oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
+//                })
+//            }
+//            else {
+//                newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
+//                oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
+//            }
         }
         
         moveToViewControllerAtIndex(0, animated: false)

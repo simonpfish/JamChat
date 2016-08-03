@@ -150,9 +150,9 @@ class Jam: NSObject {
         }
     }
     
-    func recordSendLoop(loop: Loop, measure: Double, success: () -> (), failure: (NSError) -> ()){
+    func recordSendVoice(success: () -> (), failure: (NSError) -> ()) {
         let track = Track()
-        track.recordLoop(duration, loop: loop, measure: measure) {
+        track.recordMicrophone(duration) {
             track.upload({ (_: Bool, error: NSError?) in
                 if let error = error {
                     failure(error)
@@ -172,9 +172,9 @@ class Jam: NSObject {
         }
     }
     
-    func recordSendVoice(success: () -> (), failure: (NSError) -> ()) {
+    func recordSendLoop(loop: Loop, measure: Double, success: () -> (), failure: (NSError) -> ()){
         let track = Track()
-        track.recordMicrophone(duration) {
+        track.recordLoop(duration, loop: loop, measure: measure) {
             track.upload({ (_: Bool, error: NSError?) in
                 if let error = error {
                     failure(error)
@@ -185,7 +185,6 @@ class Jam: NSObject {
                         if let error = error {
                             failure(error)
                         } else {
-                            NSNotificationCenter.defaultCenter().postNotificationName("new_message", object: track.identifier)
                             PubNubHandler.notifyNewMessage(self, trackID: track.identifier)
                             success()
                         }

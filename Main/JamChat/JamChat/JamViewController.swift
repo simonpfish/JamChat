@@ -42,6 +42,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var loopButton: UIButton!
     @IBOutlet weak var microphoneButton: UIButton!
+    @IBOutlet weak var dragAndDropLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +78,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         self.sendingMessageView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
         
         progressIndicator.layer.cornerRadius = progressIndicator.frame.width/2
+        
+        dragAndDropLabel.hidden = true
                 
         layoutMeasureBars()
         
@@ -467,6 +470,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             keyboardButton.hidden = true
             recordView.hidden = true
             inLoop = true
+            dragAndDropLabel.hidden = false
         }
             
         else if (inMicrophone){
@@ -476,6 +480,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
             inMicrophone = false
             inLoop = true
+            dragAndDropLabel.hidden = false
         }
             
         else{
@@ -486,6 +491,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             inLoop = false
             keyboardButton.hidden = false
             recordView.hidden = false
+            dragAndDropLabel.hidden = false
         }
     }
     
@@ -497,6 +503,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             inKeyboard = false
             keyboardButton.hidden = true
             inMicrophone = true
+            dragAndDropLabel.hidden = true
         }
             
         else if (inLoop){
@@ -506,6 +513,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
             inMicrophone = true
             inLoop = false
+            dragAndDropLabel.hidden = true
         }
             
         else{
@@ -515,6 +523,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             inKeyboard = true
             inMicrophone = false
             keyboardButton.hidden = false
+            dragAndDropLabel.hidden = true
         }
     }
     
