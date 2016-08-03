@@ -24,9 +24,15 @@ class MicrophoneViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        super.viewWillAppear(animated)
+        if self.view.superview!.alpha == 1 {
+            loadRecorder()
+        }
         
+    }
+    
+    func loadRecorder() {
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             
@@ -41,10 +47,16 @@ class MicrophoneViewController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        audioRecorder.stop()
-        displayLink.invalidate()
+    func unloadRecorder() {
+        audioRecorder?.stop()
+        displayLink?.invalidate()
         audioRecorder = nil
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        if self.view.superview!.alpha == 1 {
+            unloadRecorder()
+        }
     }
     
     func reloadRecorderWaveform() {

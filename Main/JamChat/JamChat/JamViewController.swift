@@ -16,7 +16,7 @@ import BAPulseView
 import AVFoundation
 
 class JamViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, CircleMenuDelegate {
-
+    
     var jam: Jam!
     var users: [User] = []
     var tempoTimer = NSTimer()
@@ -27,6 +27,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     @IBInspectable var loadingColor: UIColor = UIColor.grayColor()
     
+    @IBOutlet weak var keyboardButton: UIButton!
     @IBOutlet weak var measuresView: UIView!
     @IBOutlet weak var progressIndicator: UIView!
     @IBOutlet weak var loopContainer: UIView!
@@ -35,7 +36,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var userCollection: UICollectionView!
     @IBOutlet weak var microphoneContainer: UIView!
     @IBOutlet weak var waveformContainer: UIView!
-    @IBOutlet weak var keyboardButton: CircleMenu!
+    @IBOutlet weak var menuButton: CircleMenu!
     @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var sendingMessageView: NVActivityIndicatorView!
     @IBOutlet weak var recordView: BAPulseView!
@@ -43,10 +44,12 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var loopButton: UIButton!
     @IBOutlet weak var microphoneButton: UIButton!
     @IBOutlet weak var dragAndDropLabel: UILabel!
+    @IBOutlet weak var selectedView: UIView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         NSNotificationCenter.defaultCenter().addObserverForName("new_message", object: nil, queue: nil) { (notification: NSNotification) in
             let data = notification.object as! [String]
             if data[1] == self.jam.id {
@@ -60,10 +63,10 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             }
         }
         
-        keyboardButton.delegate = self
-        keyboardButton.layer.cornerRadius = keyboardButton.frame.size.width / 2.0
-        keyboardButton.setImage(UIImage(named: "icon_menu"), forState: .Normal)
-        keyboardButton.setImage(UIImage(named: "icon_close"), forState: .Selected)
+        menuButton.delegate = self
+        menuButton.layer.cornerRadius = menuButton.frame.size.width / 2.0
+        menuButton.setImage(UIImage(named: "icon_menu"), forState: .Normal)
+        menuButton.setImage(UIImage(named: "icon_close"), forState: .Selected)
         
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.type = .LineScaleParty
@@ -73,12 +76,18 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         sendingMessageView.type = .LineScale
         sendingMessageView.color = loadingColor
         
+        selectedView.layer.cornerRadius = selectedView.frame.size.width / 2.0
+        
+        loopButton.backgroundColor = loopButton.backgroundColor?.colorWithAlphaComponent(0.0)
+        microphoneButton.backgroundColor = microphoneButton.backgroundColor?.colorWithAlphaComponent(0.0)
+        keyboardButton.backgroundColor = keyboardButton.backgroundColor?.colorWithAlphaComponent(0.0)
+        
         self.sendingMessageView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
         
         progressIndicator.layer.cornerRadius = progressIndicator.frame.width/2
         
         dragAndDropLabel.hidden = true
-                
+        
         layoutMeasureBars()
         
         // Set up user collection view:
@@ -103,11 +112,12 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         //customizes loop button to be a circle
         loopButton.layer.cornerRadius = 0.5 * loopButton.bounds.size.width
+        keyboardButton.layer.cornerRadius = 0.5 * loopButton.bounds.size.width
         
         //customizes microphone button to be a circle
         microphoneButton.layer.cornerRadius = 0.5 * microphoneButton.bounds.size.width
         microphoneContainer.alpha = 0
-
+        
         for user in jam!.users {
             if user.facebookID != User.currentUser!.facebookID {
                 users.append(user)
@@ -115,6 +125,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
         
         loadingIndicatorView.startAnimation()
+        
+        onKeyboard(self)
         
         drawWaveforms()
     }
@@ -140,7 +152,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     var selectedLoopView: UIView?
     func dragLoop(view: UIView, sender: UIPanGestureRecognizer) {
-
+        
         switch sender.state{
         case .Began:
             selectedLoopView = view
@@ -167,7 +179,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         waveformView.wavesColor = track.color.colorWithAlphaComponent(0.6)
         
         self.waveformContainer.addSubview(waveformView)
-
+        
         let waveTap = UITapGestureRecognizer(target: self, action: #selector(JamViewController.onPlay(_:)))
         self.waveformContainer.subviews.last!.addGestureRecognizer(waveTap)
         
@@ -175,7 +187,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         self.view.bringSubviewToFront(self.measuresView)
         
     }
-
+    
     func drawWaveforms() {
         AudioKit.stop()
         
@@ -317,7 +329,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: UIButton, atIndex: Int) {
         let keyboardController = self.childViewControllers[0] as! KeyboardViewController
         keyboardController.instrument = instruments[atIndex]
-        keyboardButton.selected = false
+        menuButton.selected = false
     }
     
     var isCounting = false
@@ -351,9 +363,10 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     func startCountdown() {
         isCounting = true
-        self.keyboardButton.hidden = true
+        self.menuButton.hidden = true
         loopButton.hidden = true
         microphoneButton.hidden = true
+        keyboardButton.hidden = true
         countdownLabel.text = "\(countdown)"
         tempoTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(onBeat), userInfo: nil, repeats: true)
         metronome.play()
@@ -366,6 +379,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         isCounting = false
         metronome.stop()
         countdown = 4
+        
+        loopButton.hidden = false
+        microphoneButton.hidden = false
+        keyboardButton.hidden = false
+        menuButton.hidden = false
     }
     
     var metronome: Metronome {
@@ -379,7 +397,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             
         }
     }
-
+    
     func startRecording(){
         isRecording = true
         isCounting = false
@@ -409,23 +427,34 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 
                 self.sendingMessageView.stopAnimation()
                 self.loopButton.hidden = false
+                self.microphoneButton.hidden = false
+                self.keyboardButton.hidden = false
+                self.menuButton.hidden = false
                 print("Message sent!")
                 
                 self.isRecording = false
                 self.countdownLabel.text = "REC"
-
-                }, failure: { (error: NSError) in
                 
+                }, failure: { (error: NSError) in
+                    
                     self.isRecording = false
                     self.countdownLabel.text = "REC"
+                    
+                    self.loopButton.hidden = false
+                    self.microphoneButton.hidden = false
+                    self.keyboardButton.hidden = false
+                    self.menuButton.hidden = false
+                    
                     print(error.localizedDescription)
             })
         } else {
             jam.recordSend(keyboardController.instrument, success: {
                 
                 self.sendingMessageView.stopAnimation()
-                self.keyboardButton.hidden = false
                 self.loopButton.hidden = false
+                self.microphoneButton.hidden = false
+                self.keyboardButton.hidden = false
+                self.menuButton.hidden = false
                 print("Message sent!")
                 
                 self.isRecording = false
@@ -433,14 +462,20 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             }) { (error: NSError) in
                 self.isRecording = false
                 self.countdownLabel.text = "REC"
+                
+                self.loopButton.hidden = false
+                self.microphoneButton.hidden = false
+                self.keyboardButton.hidden = false
+                self.menuButton.hidden = false
+                
                 print(error.localizedDescription)
             }
             
             User.currentUser?.incrementInstrument(keyboardController.instrument)
         }
     }
-
-
+    
+    
     func delay(delay: Double, closure: ()->()) {
         dispatch_after(
             dispatch_time(
@@ -451,7 +486,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             closure
         )
     }
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "loopSegue") {
             let childViewController = segue.destinationViewController as! LoopsPagerViewController
@@ -462,70 +497,96 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     @IBAction func onLoop(sender: AnyObject) {
-        if (inKeyboard){
-            loopContainer.alpha = 1
-            keyboardContainer.alpha = 0
-            loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
-            inKeyboard = false
-            keyboardButton.hidden = true
-            recordView.hidden = true
-            inLoop = true
-            dragAndDropLabel.hidden = false
+        
+        if inMicrophone {
+            let microphoneController = self.childViewControllers[2] as! MicrophoneViewController
+            microphoneController.unloadRecorder()
         }
+        
+        loopContainer.alpha = 1
+        keyboardContainer.alpha = 0
+        microphoneContainer.alpha = 0
+        
+        inKeyboard = false
+        inMicrophone = false
+        inLoop = true
+        
+        dragAndDropLabel.hidden = false
+        menuButton.hidden = true
+        recordView.hidden = true
+        
+        
+        let overshootAmount : CGFloat = 2.0
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: [], animations: {
+            self.selectedView.center.x = self.loopButton.center.x
+            self.selectedView.backgroundColor = self.loopButton.backgroundColor?.colorWithAlphaComponent(1.0)
             
-        else if (inMicrophone){
-            loopContainer.alpha = 1
-            microphoneContainer.alpha = 0
-            loopButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
-            microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
-            inMicrophone = false
-            inLoop = true
-            dragAndDropLabel.hidden = false
-        }
+            self.selectedView.center.x -= overshootAmount
+            self.selectedView.center.x += overshootAmount
             
-        else{
-            loopContainer.alpha = 0
-            keyboardContainer.alpha = 1
-            loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
-            inKeyboard = true
-            inLoop = false
-            keyboardButton.hidden = false
-            recordView.hidden = false
-            dragAndDropLabel.hidden = false
-        }
+            }, completion: nil)
+        
     }
     
     @IBAction func onMicrophone(sender: AnyObject) {
-        if (inKeyboard){
-            microphoneContainer.alpha = 1
-            keyboardContainer.alpha = 0
-            microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
-            inKeyboard = false
-            keyboardButton.hidden = true
-            inMicrophone = true
-            dragAndDropLabel.hidden = true
-        }
+        let microphoneController = self.childViewControllers[2] as! MicrophoneViewController
+        microphoneController.loadRecorder()
+        
+        microphoneContainer.alpha = 1
+        keyboardContainer.alpha = 0
+        loopContainer.alpha = 0
+        inKeyboard = false
+        inLoop = false
+        menuButton.hidden = true
+        inMicrophone = true
+        dragAndDropLabel.hidden = true
+        recordView.hidden = false
+        
+        let overshootAmount : CGFloat = 2.0
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: [], animations: {
+            self.selectedView.center.x = self.microphoneButton.center.x
+            self.selectedView.backgroundColor = self.microphoneButton.backgroundColor?.colorWithAlphaComponent(1.0)
             
-        else if (inLoop){
-            microphoneContainer.alpha = 1
-            loopContainer.alpha = 0
-            loopButton.setImage(UIImage(named:"loop.png"), forState: .Normal)
-            microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
-            inMicrophone = true
-            inLoop = false
-            dragAndDropLabel.hidden = true
-        }
+            self.selectedView.center.x -= overshootAmount
+            self.selectedView.center.x += overshootAmount
             
-        else{
-            microphoneContainer.alpha = 0
-            keyboardContainer.alpha = 1
-            microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
-            inKeyboard = true
-            inMicrophone = false
-            keyboardButton.hidden = false
-            dragAndDropLabel.hidden = true
-        }
+            }, completion: nil)
+        
     }
     
+    @IBAction func onKeyboard(sender: AnyObject) {
+        
+        if inMicrophone {
+            let microphoneController = self.childViewControllers[2] as! MicrophoneViewController
+            microphoneController.unloadRecorder()
+            
+            let keyboard = self.childViewControllers[0] as! KeyboardViewController
+            keyboard.instrument.reload()
+        }
+        
+        microphoneContainer.alpha = 0
+        keyboardContainer.alpha = 1
+        loopContainer.alpha = 0
+        inKeyboard = true
+        inLoop = false
+        menuButton.hidden = false
+        inMicrophone = false
+        dragAndDropLabel.hidden = true
+        recordView.hidden = false
+        
+        let overshootAmount : CGFloat = 2.0
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: [], animations: {
+            self.selectedView.center.x = self.keyboardButton.center.x
+            self.selectedView.backgroundColor = self.keyboardButton.backgroundColor?.colorWithAlphaComponent(1.0)
+            
+            self.selectedView.center.x -= overshootAmount
+            self.selectedView.center.x += overshootAmount
+            
+            }, completion: nil)
+        
+    }
     
 }
