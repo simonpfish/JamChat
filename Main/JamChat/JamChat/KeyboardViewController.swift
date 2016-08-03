@@ -51,7 +51,6 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
         super.viewDidLoad()
         
         renderKeyboard()
-        // Do any additional setup after loading the view.
     }
     
     func renderKeyboard() {
@@ -166,7 +165,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
         if(sender.state == .Ended){
             for key in keys where onKeys.contains(key) {
                 if CGRectContainsPoint(key.frame, sender.locationInView(self.view)) {
-                    instrument.stop(key.tag)
+//                    instrument.stop(key.tag)
                     unhighlightKeys()
                 }
             }
@@ -178,7 +177,7 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
         for touch in touches {
             for key in keys where onKeys.contains(key) {
                 if CGRectContainsPoint(key.frame, touch.locationInView(self.view)) {
-                    instrument.stop(key.tag)
+//                    instrument.stop(key.tag)
                     unhighlightKeys()
                 }
             }
@@ -190,9 +189,13 @@ class KeyboardViewController: UIViewController, CircleMenuDelegate{
     func unhighlightKeys() {
         for key in onKeys {
             if notesWithSharps[key.tag % 12].rangeOfString("#") != nil {
-                key.backgroundColor = sharpKeyColor
+                UIView.animateWithDuration(0.3, animations: {
+                    key.backgroundColor = self.sharpKeyColor
+                })
             } else {
-                key.backgroundColor = UIColor.whiteColor()
+                UIView.animateWithDuration(0.3, animations: {
+                    key.backgroundColor = UIColor.whiteColor()
+                })
             }
         }
         onKeys.removeAll()
