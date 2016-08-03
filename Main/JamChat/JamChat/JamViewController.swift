@@ -42,10 +42,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var loopButton: UIButton!
     @IBOutlet weak var microphoneButton: UIButton!
+    @IBOutlet weak var dragAndDropLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         NSNotificationCenter.defaultCenter().addObserverForName("new_message", object: nil, queue: nil) { (notification: NSNotification) in
             let data = notification.object as! [String]
             if data[1] == self.jam.id {
@@ -75,6 +76,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         self.sendingMessageView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
         
         progressIndicator.layer.cornerRadius = progressIndicator.frame.width/2
+        
+        dragAndDropLabel.hidden = true
                 
         layoutMeasureBars()
         
@@ -113,8 +116,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         loadingIndicatorView.startAnimation()
         
-        
         drawWaveforms()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        jam.stop()
     }
     
     func layoutMeasureBars() {
@@ -171,6 +177,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
 
     func drawWaveforms() {
+        AudioKit.stop()
         
         for subview in self.waveformContainer.subviews {
             if let waveform = subview as? FDWaveformView {
@@ -214,6 +221,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                         
                         self.waveformContainer.bringSubviewToFront(self.progressIndicator)
                         self.view.bringSubviewToFront(self.measuresView)
+                        AudioKit.start()
                     }
                 })
                 
@@ -300,7 +308,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         button.backgroundColor = instruments[atIndex].color
         button.setImage(instruments[atIndex].image, forState: .Normal)
         
-        // set highlited image
+        // set highlighted image
         let highlightedImage  = instruments[atIndex].image!.imageWithRenderingMode(.AlwaysTemplate)
         button.setImage(highlightedImage, forState: .Highlighted)
         button.tintColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
@@ -380,29 +388,56 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         onPlay()
         
+        let microphoneController = self.childViewControllers[2] as! MicrophoneViewController
+        microphoneController.redWaveform()
+        
+        
         delay(self.jam.duration) {
             self.tempoTimer.invalidate()
             self.sendingMessageView.startAnimation()
             self.onPlay()
+            
+            microphoneController.blackWaveform()
         }
         
         let keyboardController = self.childViewControllers[0] as! KeyboardViewController
-        jam.recordSend(keyboardController.instrument, success: {
-           
-            self.sendingMessageView.stopAnimation()
-            self.keyboardButton.hidden = false
-            self.loopButton.hidden = false
-            print("Message sent!")
+        
+        if inMicrophone {
+            jam.recordSendVoice({
+                
+                microphoneController.reloadRecorderWaveform()
+                
+                self.sendingMessageView.stopAnimation()
+                self.loopButton.hidden = false
+                print("Message sent!")
+                
+                self.isRecording = false
+                self.countdownLabel.text = "REC"
+
+                }, failure: { (error: NSError) in
+                
+                    self.isRecording = false
+                    self.countdownLabel.text = "REC"
+                    print(error.localizedDescription)
+            })
+        } else {
+            jam.recordSend(keyboardController.instrument, success: {
+                
+                self.sendingMessageView.stopAnimation()
+                self.keyboardButton.hidden = false
+                self.loopButton.hidden = false
+                print("Message sent!")
+                
+                self.isRecording = false
+                self.countdownLabel.text = "REC"
+            }) { (error: NSError) in
+                self.isRecording = false
+                self.countdownLabel.text = "REC"
+                print(error.localizedDescription)
+            }
             
-            self.isRecording = false
-            self.countdownLabel.text = "REC"
-        }) { (error: NSError) in
-            self.isRecording = false
-            self.countdownLabel.text = "REC"
-            print(error.localizedDescription)
+            User.currentUser?.incrementInstrument(keyboardController.instrument)
         }
-            
-        User.currentUser?.incrementInstrument(keyboardController.instrument)
     }
 
 
@@ -435,6 +470,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             keyboardButton.hidden = true
             recordView.hidden = true
             inLoop = true
+            dragAndDropLabel.hidden = false
         }
             
         else if (inMicrophone){
@@ -444,6 +480,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             microphoneButton.setImage(UIImage(named:"microphone.png"), forState: .Normal)
             inMicrophone = false
             inLoop = true
+            dragAndDropLabel.hidden = false
         }
             
         else{
@@ -454,6 +491,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             inLoop = false
             keyboardButton.hidden = false
             recordView.hidden = false
+            dragAndDropLabel.hidden = false
         }
     }
     
@@ -464,8 +502,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
             inKeyboard = false
             keyboardButton.hidden = true
-            recordView.hidden = true
             inMicrophone = true
+            dragAndDropLabel.hidden = true
         }
             
         else if (inLoop){
@@ -475,6 +513,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             microphoneButton.setImage(UIImage(named:"piano.png"), forState: .Normal)
             inMicrophone = true
             inLoop = false
+            dragAndDropLabel.hidden = true
         }
             
         else{
@@ -484,7 +523,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
             inKeyboard = true
             inMicrophone = false
             keyboardButton.hidden = false
-            recordView.hidden = false
+            dragAndDropLabel.hidden = true
         }
     }
     

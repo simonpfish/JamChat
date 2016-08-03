@@ -32,6 +32,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
         super.init()
         client.addListener(self)
     }
+
+    static func restartAudiokit() {
+        print("Restarting audio")
+        AudioKit.stop()
+        
+        mainMixer?.volume = 1
+        Track.mixer.volume = 1
+        Instrument.mixer.volume = 1
+        
+        AudioKit.start()
+    }
     
     func client(client: PubNub, didReceiveMessage message: PNMessageResult) {
         print(message.data)
@@ -61,7 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
         Track.mixer.start()
         Instrument.mixer.start()
         AppDelegate.mainMixer!.start()
-        AudioKit.start()
         
         if let notification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? [NSObject : AnyObject] {
             if let aps = notification["aps"] as? NSDictionary {
