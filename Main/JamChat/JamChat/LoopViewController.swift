@@ -56,7 +56,6 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         case .Began:
             if let indexPathForLocation = self.loopCollection.indexPathForItemAtPoint(sender.locationInView(loopCollection)) {
                 let selectedCell: LoopCell? = self.loopCollection.cellForItemAtIndexPath(indexPathForLocation) as? LoopCell
-                print("NAME", indexPathForLocation)
                 
                 selectedLoopView = selectedCell!.snapshot
                 selectedLoop = selectedCell?.loop

@@ -10,9 +10,10 @@ import UIKit
 
 class MajorChordCell: UICollectionViewCell {
     
-    var chords: [Chord]! {
+    @IBOutlet weak var chordLabel: UILabel!
+    var chord: Chord! {
         didSet{
-            
+            chordLabel.text = chord.name
         }
     }
     override func awakeFromNib() {

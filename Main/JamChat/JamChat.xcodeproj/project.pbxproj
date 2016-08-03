@@ -244,6 +244,7 @@
 		21F29BCB1D4FCD2300CED9D8 /* Loops */ = {
 			isa = PBXGroup;
 			children = (
+				8C1FEA451D517E3700ADB8A8 /* ChordNavigationController.swift */,
 				8C1FEA4D1D51A6C800ADB8A8 /* SeventhChordViewController.swift */,
 				8C1FEA3F1D51762E00ADB8A8 /* MajorChordViewController.swift */,
 				8C1FEA411D51765E00ADB8A8 /* MinorChordViewController.swift */,
@@ -444,7 +445,6 @@
 		E7FE0FF41D359CA400452361 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8C1FEA451D517E3700ADB8A8 /* ChordNavigationController.swift */,
 				E7F0BB501D3D7D0B0059160B /* Jam */,
 				E7FE0FE71D35706A00452361 /* HomeViewController.swift */,
 				E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */,

@@ -10,15 +10,14 @@ import UIKit
 
 class ChordsViewController: UIViewController{
     
+    var jam: Jam!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
         self.navigationController?.navigationBar.tintColor = UIColor(red:1.00, green:0.56, blue:0.45, alpha:1.0)
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,6 +35,22 @@ class ChordsViewController: UIViewController{
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        if (segue.identifier == "majorSegue"){
+        let chordsController = segue.destinationViewController as! MajorChordViewController
+        chordsController.jam = jam
+        }
+        
+        if (segue.identifier == "minorSegue"){
+            let chordsController = segue.destinationViewController as! MinorChordViewController
+            chordsController.jam = jam
+        }
+        
+        if (segue.identifier == "seventhSegue"){
+            let chordsController = segue.destinationViewController as! SeventhChordViewController
+            chordsController.jam = jam
+        }
+        
     }
 
 }

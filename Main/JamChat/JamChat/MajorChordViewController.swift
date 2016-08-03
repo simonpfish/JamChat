@@ -10,11 +10,27 @@ import UIKit
 
 class MajorChordViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    var jam: Jam!
+    var chords: [Chord] = []
+    
     @IBOutlet weak var majorCollection: UICollectionView!
     
     override func viewDidLoad() {
         majorCollection.dataSource = self
         majorCollection.delegate = self
+        
+        if (jam.tempo == 80){
+            chords = Chord.MajChords80
+        }
+            
+        else if(jam.tempo == 110){
+            chords = Chord.MajChords110
+        }
+            
+        else{
+            chords = Chord.MajChords140
+        }
+        
         super.viewDidLoad()
     }
     
@@ -25,7 +41,7 @@ class MajorChordViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = majorCollection.dequeueReusableCellWithReuseIdentifier("MajorChordCell", forIndexPath: indexPath) as! MajorChordCell
         
-        //cell.chords = array[indexPath.row]
+        cell.chord = chords[indexPath.row]
         
         return cell
     }

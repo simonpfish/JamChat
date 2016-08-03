@@ -10,6 +10,13 @@ import UIKit
 
 class MinorChordCell: UICollectionViewCell {
     
+    @IBOutlet weak var chordLabel: UILabel!
+    var chord: Chord! {
+        didSet{
+            chordLabel.text = chord.name
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

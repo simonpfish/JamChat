@@ -11,10 +11,26 @@ import UIKit
 class SeventhChordViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var seventhCollection: UICollectionView!
+    
+    var jam: Jam!
+    var chords: [Chord]!
 
     override func viewDidLoad() {
         seventhCollection.delegate = self
         seventhCollection.dataSource = self
+        
+        if (jam.tempo == 80){
+            chords = Chord.SevChords80
+        }
+        
+        else if(jam.tempo == 110){
+            chords = Chord.SevChords110
+        }
+        
+        else{
+            chords = Chord.SevChords140
+        }
+        
         super.viewDidLoad()
     }
     
@@ -25,7 +41,7 @@ class SeventhChordViewController: UIViewController, UICollectionViewDelegate, UI
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = seventhCollection.dequeueReusableCellWithReuseIdentifier("SeventhChordCell", forIndexPath: indexPath) as! SeventhChordCell
         
-        //cell.chords = array[indexPath.row]
+        cell.chord = chords[indexPath.row]
         
         return cell
     }
