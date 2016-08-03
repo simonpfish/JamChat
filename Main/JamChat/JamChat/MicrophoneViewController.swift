@@ -37,20 +37,22 @@ class MicrophoneViewController: UIViewController {
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             
             self.audioRecorder = self.audioRecorder(NSURL(fileURLWithPath:"/dev/null"))
-            self.audioRecorder.prepareToRecord()
-            self.audioRecorder.record()
+            self.audioRecorder?.prepareToRecord()
+            self.audioRecorder?.record()
             
             dispatch_async(dispatch_get_main_queue()) {
                 self.displayLink = CADisplayLink(target: self, selector: #selector(MicrophoneViewController.updateMeters))
                 self.displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
+                print("loaded microphone")
             }
         }
     }
     
     func unloadRecorder() {
-        audioRecorder?.stop()
         displayLink?.invalidate()
+        audioRecorder?.stop()
         audioRecorder = nil
+        print("unloaded microphone")
     }
     
     override func viewWillDisappear(animated: Bool) {

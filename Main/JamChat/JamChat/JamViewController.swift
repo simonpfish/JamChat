@@ -126,9 +126,20 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         loadingIndicatorView.startAnimation()
         
+        inKeyboard = false
         onKeyboard(self)
-        
+                
         drawWaveforms()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if inKeyboard {
+            selectedView.frame = keyboardButton.frame
+        } else if inMicrophone {
+            selectedView.frame = microphoneButton.frame
+        } else {
+            selectedView.frame = loopButton.frame
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -367,6 +378,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         loopButton.hidden = true
         microphoneButton.hidden = true
         keyboardButton.hidden = true
+        selectedView.alpha = 0
         countdownLabel.text = "\(countdown)"
         tempoTimer = NSTimer.scheduledTimerWithTimeInterval(60/jam.tempo!, target: self, selector: #selector(onBeat), userInfo: nil, repeats: true)
         metronome.play()
@@ -383,7 +395,10 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         loopButton.hidden = false
         microphoneButton.hidden = false
         keyboardButton.hidden = false
-        menuButton.hidden = false
+        if self.inKeyboard {
+            self.menuButton.hidden = false
+        }
+        selectedView.alpha = 1
     }
     
     var metronome: Metronome {
@@ -429,7 +444,13 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 self.loopButton.hidden = false
                 self.microphoneButton.hidden = false
                 self.keyboardButton.hidden = false
-                self.menuButton.hidden = false
+                
+                if self.inKeyboard {
+                    self.menuButton.hidden = false
+                }
+                
+                self.selectedView.alpha = 1
+
                 print("Message sent!")
                 
                 self.isRecording = false
@@ -443,7 +464,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                     self.loopButton.hidden = false
                     self.microphoneButton.hidden = false
                     self.keyboardButton.hidden = false
-                    self.menuButton.hidden = false
+                    if self.inKeyboard {
+                        self.menuButton.hidden = false
+                    }
+                    self.selectedView.alpha = 1
+
                     
                     print(error.localizedDescription)
             })
@@ -454,7 +479,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 self.loopButton.hidden = false
                 self.microphoneButton.hidden = false
                 self.keyboardButton.hidden = false
-                self.menuButton.hidden = false
+                if self.inKeyboard {
+                    self.menuButton.hidden = false
+                }
+                self.selectedView.alpha = 1
+
                 print("Message sent!")
                 
                 self.isRecording = false
@@ -466,7 +495,11 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 self.loopButton.hidden = false
                 self.microphoneButton.hidden = false
                 self.keyboardButton.hidden = false
-                self.menuButton.hidden = false
+                if self.inKeyboard {
+                    self.menuButton.hidden = false
+                }
+                self.selectedView.alpha = 1
+
                 
                 print(error.localizedDescription)
             }
@@ -497,19 +530,23 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     @IBAction func onLoop(sender: AnyObject) {
+        if inLoop {
+            return
+        }
+        
+        inLoop = true
         
         if inMicrophone {
             let microphoneController = self.childViewControllers[2] as! MicrophoneViewController
             microphoneController.unloadRecorder()
         }
         
+        inMicrophone = false
+        inKeyboard = false
+
         loopContainer.alpha = 1
         keyboardContainer.alpha = 0
         microphoneContainer.alpha = 0
-        
-        inKeyboard = false
-        inMicrophone = false
-        inLoop = true
         
         dragAndDropLabel.hidden = false
         menuButton.hidden = true
@@ -530,16 +567,22 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     @IBAction func onMicrophone(sender: AnyObject) {
+        if inMicrophone {
+            return
+        }
+        
+        inKeyboard = false
+        inLoop = false
+        inMicrophone = true
+        
         let microphoneController = self.childViewControllers[2] as! MicrophoneViewController
         microphoneController.loadRecorder()
         
         microphoneContainer.alpha = 1
         keyboardContainer.alpha = 0
         loopContainer.alpha = 0
-        inKeyboard = false
-        inLoop = false
+        
         menuButton.hidden = true
-        inMicrophone = true
         dragAndDropLabel.hidden = true
         recordView.hidden = false
         
@@ -557,22 +600,28 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     @IBAction func onKeyboard(sender: AnyObject) {
+        if inKeyboard {
+            return
+        }
+
+        inKeyboard = true
         
         if inMicrophone {
             let microphoneController = self.childViewControllers[2] as! MicrophoneViewController
             microphoneController.unloadRecorder()
-            
-            let keyboard = self.childViewControllers[0] as! KeyboardViewController
-            keyboard.instrument.reload()
         }
+        
+        inLoop = false
+        inMicrophone = false
+        
+        let keyboard = self.childViewControllers[0] as! KeyboardViewController
+        keyboard.instrument.reload()
         
         microphoneContainer.alpha = 0
         keyboardContainer.alpha = 1
         loopContainer.alpha = 0
-        inKeyboard = true
-        inLoop = false
+        
         menuButton.hidden = false
-        inMicrophone = false
         dragAndDropLabel.hidden = true
         recordView.hidden = false
         

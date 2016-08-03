@@ -29,7 +29,7 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         loopCollection.delegate = self
         loopCollection.dataSource = self
-                
+        
         if(jam.tempo == 80){
             array = Loop.Loops80
         }
@@ -51,7 +51,7 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var selectedMeasure = 0.0
     var isOverWaveform = false
     func dragLoop(sender: UIPanGestureRecognizer){
-    
+        
         switch sender.state{
         case .Began:
             if let indexPathForLocation = self.loopCollection.indexPathForItemAtPoint(sender.locationInView(loopCollection)) {
@@ -91,6 +91,9 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
             highlightView?.backgroundColor = UIColor.clearColor()
             if isOverWaveform {
                 loadingView.startAnimation()
+                if jam.isPlaying {
+                    jam.stop()
+                }
                 jam.recordSendLoop(selectedLoop!, measure: selectedMeasure, success: {
                     self.loadingView.stopAnimation()
                     print("Sent loop!")
@@ -100,16 +103,16 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
     }
-
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return array.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = loopCollection.dequeueReusableCellWithReuseIdentifier("LoopCell", forIndexPath: indexPath) as! LoopCell
-
+        
         cell.loop = array[indexPath.row]
-
+        
         return cell
     }
     
@@ -117,4 +120,4 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return IndicatorInfo(title: "Drum Loops")
     }
     
- }
+}
