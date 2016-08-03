@@ -118,6 +118,30 @@ class Track: NSObject {
         recordNode(instrument.sampler, duration: duration, completion: completion)
     }
     
+    func recordMicrophone(duration: Double, completion: ()->()) {
+        color = UIColor.redColor()
+        instrumentName = "Microphone"
+//        AudioKit.stop()
+//        let microphone = AKMicrophone()
+//        AudioKit.start()
+//        recordNode(microphone, duration: duration) {
+//            completion()
+//            AppDelegate.restartAudiokit()
+//        }
+        
+        let file = try! AKAudioFile()
+        let recorder = AKMicrophoneRecorder(file)
+        recorder.record()
+        delay(duration) { 
+            recorder.stop()
+            let recorded = try! AKAudioFile(forReading: file.url)
+            self.export(recorded, completion: { 
+                completion()
+                AppDelegate.restartAudiokit()
+            })
+        }
+    }
+    
     /**
      Records the track from an AKNode, overwriting any previous content
      */
@@ -125,24 +149,28 @@ class Track: NSObject {
         recorder = try? AKNodeRecorder(node: node)
         
         try! recorder!.recordFor(duration, completion: { 
-            self.exportSession =  try! self.recorder?.audioFile!.exportFixed(self.identifier, ext: .m4a, baseDir: .Documents, callBack: { () in
-                
-                if self.exportSession!.succeeded {
-                    
-                    self.filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + self.identifier + ".m4a"
-                    
-                    self.player = try? AKAudioPlayer(file: AKAudioFile(forReading: NSURL(string: self.filepath)!))
-                    Track.mixer.connect(self.player!)
-                    
-                    completion()
-                    
-                } else {
-                    print ("Export failed")
-                }
-                
-            })
+            self.export(self.recorder!.audioFile!, completion: completion)
         })
-
+    }
+    
+    private func export(file: AKAudioFile, completion: ()->()) {
+        
+        self.exportSession =  try! file.exportFixed(self.identifier, ext: .m4a, baseDir: .Documents, callBack: { () in
+            
+            if self.exportSession!.succeeded {
+                
+                self.filepath =  (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]) +  "/" + self.identifier + ".m4a"
+                
+                self.player = try? AKAudioPlayer(file: AKAudioFile(forReading: NSURL(string: self.filepath)!))
+                Track.mixer.connect(self.player!)
+                
+                completion()
+                
+            } else {
+                print ("Export failed")
+            }
+            
+        })
     }
     
     func recordLoop(duration: Double, loop: Loop, measure: Double, completion: ()->()) {
