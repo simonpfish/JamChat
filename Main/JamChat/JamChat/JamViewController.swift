@@ -46,9 +46,7 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        AppDelegate.restartAudiokit()
-        
+                
         NSNotificationCenter.defaultCenter().addObserverForName("new_message", object: nil, queue: nil) { (notification: NSNotification) in
             let data = notification.object as! [String]
             if data[1] == self.jam.id {
@@ -406,6 +404,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         if inMicrophone {
             jam.recordSendVoice({
+                
+                microphoneController.reloadRecorderWaveform()
                 
                 self.sendingMessageView.stopAnimation()
                 self.loopButton.hidden = false
