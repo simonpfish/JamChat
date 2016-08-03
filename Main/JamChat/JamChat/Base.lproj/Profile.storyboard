@@ -171,7 +171,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" semanticContentAttribute="spatial" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tAy-xa-9ap">
-                                <rect key="frame" x="11" y="352" width="363" height="220"/>
+                                <rect key="frame" x="11" y="352" width="352" height="220"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="15" minimumInteritemSpacing="15" id="J9I-QZ-u8z">
                                     <size key="itemSize" width="65" height="81"/>
@@ -243,7 +243,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75s-fI-Opk">
-                                <rect key="frame" x="149" y="614" width="87" height="30"/>
+                                <rect key="frame" x="151" y="614" width="87" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="Jrm-QI-XwR"/>
                                 </constraints>
@@ -291,10 +291,10 @@
                             <constraint firstAttribute="trailing" secondItem="RaO-ik-8Xn" secondAttribute="trailing" id="eG0-M0-mzW"/>
                             <constraint firstItem="koz-nO-FhB" firstAttribute="centerX" secondItem="2A3-xT-b2W" secondAttribute="centerX" id="fXV-ZB-Fp6"/>
                             <constraint firstItem="Wbc-9I-DoN" firstAttribute="leading" secondItem="tAy-xa-9ap" secondAttribute="leading" id="gx8-gt-KRb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="tAy-xa-9ap" secondAttribute="trailing" constant="-15" id="h4t-L3-ZK3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tAy-xa-9ap" secondAttribute="trailing" constant="-4" id="h4t-L3-ZK3"/>
                             <constraint firstItem="RaO-ik-8Xn" firstAttribute="leading" secondItem="OdD-F3-EFk" secondAttribute="leading" id="jjZ-ut-K8R"/>
                             <constraint firstItem="OdD-F3-EFk" firstAttribute="centerX" secondItem="Lf3-ED-ZDb" secondAttribute="centerX" constant="-5" id="myc-bM-Tuk"/>
-                            <constraint firstItem="tAy-xa-9ap" firstAttribute="centerX" secondItem="75s-fI-Opk" secondAttribute="centerX" id="tlR-q6-LaQ"/>
+                            <constraint firstItem="tAy-xa-9ap" firstAttribute="centerX" secondItem="75s-fI-Opk" secondAttribute="centerX" constant="-7.5" id="tlR-q6-LaQ"/>
                             <constraint firstItem="koz-nO-FhB" firstAttribute="top" secondItem="2A3-xT-b2W" secondAttribute="bottom" constant="13" id="ttl-K9-3EV"/>
                             <constraint firstItem="6ZC-LJ-YMe" firstAttribute="top" secondItem="75s-fI-Opk" secondAttribute="bottom" constant="23" id="zeu-1S-u93"/>
                         </constraints>

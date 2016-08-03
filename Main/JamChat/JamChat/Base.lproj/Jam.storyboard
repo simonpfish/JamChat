@@ -97,7 +97,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.30055786550000002" blue="0.49397084540000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kH3-z4-z2W" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kH3-z4-z2W" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
                                 <rect key="frame" x="162" y="320" width="50" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -198,11 +198,18 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Drag and drop to add!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XU6-3k-4Ff">
+                                <rect key="frame" x="87" y="429" width="197" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="kdg-MZ-tsA" secondAttribute="trailing" constant="-10" id="35L-z9-xSY"/>
                             <constraint firstItem="G0X-Xh-Bf2" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" id="3sY-5b-7an"/>
+                            <constraint firstItem="XU6-3k-4Ff" firstAttribute="top" secondItem="kH3-z4-z2W" secondAttribute="bottom" constant="59" id="4dx-le-b2Y"/>
                             <constraint firstItem="gHF-9c-CYD" firstAttribute="centerX" secondItem="Wss-dE-9Xg" secondAttribute="centerX" id="73r-RP-IBr"/>
                             <constraint firstAttribute="trailing" secondItem="VLa-Qf-sge" secondAttribute="trailing" id="7tZ-lK-pW4"/>
                             <constraint firstItem="Sig-Vm-owL" firstAttribute="trailing" secondItem="eBW-N3-riu" secondAttribute="trailing" id="AOU-Y5-hjb"/>
@@ -211,6 +218,7 @@
                             <constraint firstItem="G0X-Xh-Bf2" firstAttribute="top" secondItem="Ef4-8G-AgU" secondAttribute="bottom" constant="5" id="FBU-6y-cgi"/>
                             <constraint firstItem="eBW-N3-riu" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" id="Fp2-0Z-rO1"/>
                             <constraint firstItem="giU-0X-45U" firstAttribute="top" secondItem="eBW-N3-riu" secondAttribute="bottom" id="HcD-IL-9V9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XU6-3k-4Ff" secondAttribute="trailing" constant="71" id="Hdu-tx-GoX"/>
                             <constraint firstItem="Btw-D1-CzS" firstAttribute="top" secondItem="UEt-Ra-c4T" secondAttribute="bottom" constant="46" id="JAk-L6-t8a"/>
                             <constraint firstItem="giU-0X-45U" firstAttribute="top" secondItem="G0X-Xh-Bf2" secondAttribute="bottom" id="Kkh-Ib-3Ep"/>
                             <constraint firstItem="Sig-Vm-owL" firstAttribute="top" secondItem="eBW-N3-riu" secondAttribute="top" id="Lvp-Sl-88L"/>
@@ -219,8 +227,11 @@
                             <constraint firstAttribute="trailing" secondItem="G0X-Xh-Bf2" secondAttribute="trailing" id="YWR-5y-LqG"/>
                             <constraint firstItem="UEt-Ra-c4T" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" id="avB-wc-Sya"/>
                             <constraint firstItem="Ef4-8G-AgU" firstAttribute="leading" secondItem="Z8V-Et-BMo" secondAttribute="trailing" constant="8" id="cTK-Ct-Rre"/>
+                            <constraint firstItem="XU6-3k-4Ff" firstAttribute="bottom" secondItem="Btw-D1-CzS" secondAttribute="bottom" id="d2E-gt-3Uw"/>
                             <constraint firstItem="Z8V-Et-BMo" firstAttribute="leading" secondItem="UEt-Ra-c4T" secondAttribute="leading" constant="5" id="jqt-hb-wsy"/>
                             <constraint firstItem="VLa-Qf-sge" firstAttribute="leading" secondItem="Wss-dE-9Xg" secondAttribute="leading" id="k64-hq-lvH"/>
+                            <constraint firstItem="XU6-3k-4Ff" firstAttribute="top" secondItem="Btw-D1-CzS" secondAttribute="bottom" constant="-27" id="kg1-gu-gOY"/>
+                            <constraint firstItem="XU6-3k-4Ff" firstAttribute="leading" secondItem="Ef4-8G-AgU" secondAttribute="trailing" constant="8" symbolic="YES" id="nVj-2B-jCV"/>
                             <constraint firstAttribute="trailing" secondItem="eBW-N3-riu" secondAttribute="trailing" id="oDc-dz-C5Z"/>
                             <constraint firstItem="Sig-Vm-owL" firstAttribute="leading" secondItem="eBW-N3-riu" secondAttribute="leading" id="oqJ-77-j8R"/>
                             <constraint firstAttribute="trailing" secondItem="UEt-Ra-c4T" secondAttribute="trailing" id="rpV-e3-msv"/>
@@ -240,6 +251,7 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="countdownLabel" destination="0Zq-6X-eaA" id="Ivp-l7-VVQ"/>
+                        <outlet property="dragAndDropLabel" destination="XU6-3k-4Ff" id="ull-jg-o5i"/>
                         <outlet property="jamNameLabel" destination="gHF-9c-CYD" id="k4F-zs-I0b"/>
                         <outlet property="keyboardButton" destination="Btw-D1-CzS" id="8UG-oZ-117"/>
                         <outlet property="keyboardContainer" destination="eBW-N3-riu" id="wmR-0R-fIi"/>
@@ -452,8 +464,18 @@
                     <view key="view" contentMode="scaleToFill" id="qxH-0D-tlz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mqk-Mg-Gj4" customClass="SiriWaveformView" customModule="JamChat" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="waveformView" destination="Mqk-Mg-Gj4" id="cVW-G4-S2k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TvU-er-Tgy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

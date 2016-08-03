@@ -12,6 +12,7 @@
 		213089B11D41594A0030D099 /* UserCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089B01D41594A0030D099 /* UserCollectionDelegate.swift */; };
 		213089B31D415AB00030D099 /* InstrumentCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */; };
 		219AEAA41D403E39008DC61B /* jamNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 219AEAA31D403E39008DC61B /* jamNames.txt */; };
+		21BF282C1D507ED8002C5321 /* SiriWaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BF282B1D507ED8002C5321 /* SiriWaveformView.swift */; };
 		21ECC9ED1D41D47800E4E695 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ECC9EC1D41D47800E4E695 /* FriendCell.swift */; };
 		21F29BCA1D4FCD1100CED9D8 /* ChordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F29BC91D4FCD1100CED9D8 /* ChordsViewController.swift */; };
 		21F29BCF1D4FDE1400CED9D8 /* MicrophoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F29BCE1D4FDE1400CED9D8 /* MicrophoneViewController.swift */; };
@@ -145,6 +146,7 @@
 		213089B01D41594A0030D099 /* UserCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionDelegate.swift; sourceTree = "<group>"; };
 		213089B21D415AB00030D099 /* InstrumentCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstrumentCollectionDelegate.swift; sourceTree = "<group>"; };
 		219AEAA31D403E39008DC61B /* jamNames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jamNames.txt; sourceTree = "<group>"; };
+		21BF282B1D507ED8002C5321 /* SiriWaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiriWaveformView.swift; sourceTree = "<group>"; };
 		21ECC9EC1D41D47800E4E695 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		21F29BC91D4FCD1100CED9D8 /* ChordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordsViewController.swift; sourceTree = "<group>"; };
 		21F29BCE1D4FDE1400CED9D8 /* MicrophoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrophoneViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +243,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21BF28271D507D1B002C5321 /* Microphone */ = {
+			isa = PBXGroup;
+			children = (
+				21F29BCE1D4FDE1400CED9D8 /* MicrophoneViewController.swift */,
+				21BF282B1D507ED8002C5321 /* SiriWaveformView.swift */,
+			);
+			name = Microphone;
+			sourceTree = "<group>";
+		};
 		21F29BCB1D4FCD2300CED9D8 /* Loops */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,7 +431,6 @@
 		E7F0BB501D3D7D0B0059160B /* Jam */ = {
 			isa = PBXGroup;
 			children = (
-				21F29BCE1D4FDE1400CED9D8 /* MicrophoneViewController.swift */,
 				E74F1DF41D3869DB00A34409 /* JamViewController.swift */,
 				E7F0BB571D3ECA470059160B /* KeyboardViewController.swift */,
 				21F29BCB1D4FCD2300CED9D8 /* Loops */,
@@ -445,6 +455,7 @@
 		E7FE0FF41D359CA400452361 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				21BF28271D507D1B002C5321 /* Microphone */,
 				E7F0BB501D3D7D0B0059160B /* Jam */,
 				E7FE0FE71D35706A00452361 /* HomeViewController.swift */,
 				E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */,
