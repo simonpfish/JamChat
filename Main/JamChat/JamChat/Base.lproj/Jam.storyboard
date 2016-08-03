@@ -403,7 +403,6 @@
         <!--Chords View Controller-->
         <scene sceneID="vZX-85-PwP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DZJ-pb-kDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="N1E-j7-Qmy" customClass="ChordsViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GNZ-qD-n2K"/>
@@ -450,6 +449,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="200"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DZJ-pb-kDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1469.5" y="1386"/>
         </scene>
@@ -485,6 +485,10 @@
         <scene sceneID="UVF-CB-fad">
             <objects>
                 <viewController id="NfI-yk-BCc" customClass="MajorChordViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mnY-fo-jLL"/>
+                        <viewControllerLayoutGuide type="bottom" id="IDx-Wf-JOC"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VsM-o5-kdp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -523,6 +527,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="chordLabel" destination="dki-9A-NWk" id="ERf-md-7sa"/>
+                                            <outlet property="chordView" destination="QWX-cp-YqU" id="JOP-wn-2YA"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -585,6 +590,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="chordLabel" destination="1ce-Eg-3VW" id="1Dm-bf-iwi"/>
+                                            <outlet property="chordView" destination="paV-PE-YD9" id="t9z-UV-wk0"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -606,6 +612,10 @@
         <scene sceneID="xzl-Sh-Amh">
             <objects>
                 <viewController id="W2A-0O-6Qf" customClass="MinorChordViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ppT-QL-O72"/>
+                        <viewControllerLayoutGuide type="bottom" id="GRe-vk-9GM"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eJA-Gk-1Va">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -645,6 +655,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="chordLabel" destination="Kxo-Mq-MfO" id="f81-KF-KaI"/>
+                                            <outlet property="chordView" destination="JCD-V7-vCL" id="tgM-OB-gDv"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

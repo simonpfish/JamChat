@@ -8,9 +8,10 @@
 
 import UIKit
 
-class SeventhChordCell: UICollectionViewCell {
+class SeventhChordCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var chordLabel: UILabel!
+    @IBOutlet weak var chordView: UIView!
     
     var chord: Chord!{
         didSet{
@@ -18,7 +19,17 @@ class SeventhChordCell: UICollectionViewCell {
         }
     }
     override func awakeFromNib() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(SeventhChordCell.tapChord(_:)))
+        tap.delegate = self
+    chordView.addGestureRecognizer(tap)
+        
         super.awakeFromNib()
     }
+    
+    func tapChord(sender: UITapGestureRecognizer){
+        chord.play()
+        
+    }
+
 
 }

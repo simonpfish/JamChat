@@ -715,6 +715,7 @@
 				E7AB05571D429ED800A92C9E /* AKAudioFile+Exporting.swift in Sources */,
 				8C3552DA1D4BCB1B00795591 /* Metronome.swift in Sources */,
 				E70DC3C01D46EA0C00B76CE7 /* AKAudioPlayer.swift in Sources */,
+				21BF282C1D507ED8002C5321 /* SiriWaveformView.swift in Sources */,
 				8C1FEA461D517E3700ADB8A8 /* ChordNavigationController.swift in Sources */,
 				E7E0D6981D3C0DCB005A840A /* UserCell.swift in Sources */,
 			);

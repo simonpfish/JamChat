@@ -401,13 +401,40 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
         
         let keyboardController = self.childViewControllers[0] as! KeyboardViewController
-        jam.recordSend(keyboardController.instrument, success: {
-           
-            self.sendingMessageView.stopAnimation()
-            self.keyboardButton.hidden = false
-            self.microphoneButton.hidden = false
-            self.loopButton.hidden = false
-            print("Message sent!")
+        
+        if inMicrophone {
+            jam.recordSendVoice({
+                
+                microphoneController.reloadRecorderWaveform()
+                
+                self.sendingMessageView.stopAnimation()
+                self.loopButton.hidden = false
+                print("Message sent!")
+                
+                self.isRecording = false
+                self.countdownLabel.text = "REC"
+
+                }, failure: { (error: NSError) in
+                
+                    self.isRecording = false
+                    self.countdownLabel.text = "REC"
+                    print(error.localizedDescription)
+            })
+        } else {
+            jam.recordSend(keyboardController.instrument, success: {
+                
+                self.sendingMessageView.stopAnimation()
+                self.keyboardButton.hidden = false
+                self.loopButton.hidden = false
+                print("Message sent!")
+                
+                self.isRecording = false
+                self.countdownLabel.text = "REC"
+            }) { (error: NSError) in
+                self.isRecording = false
+                self.countdownLabel.text = "REC"
+                print(error.localizedDescription)
+            }
             
             User.currentUser?.incrementInstrument(keyboardController.instrument)
         }
