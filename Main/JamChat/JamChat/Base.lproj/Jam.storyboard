@@ -59,6 +59,7 @@
                                     <constraint firstItem="DYJ-TE-25B" firstAttribute="centerY" secondItem="UEt-Ra-c4T" secondAttribute="centerY" id="FQ3-1S-bQb"/>
                                     <constraint firstItem="tqa-Hu-nBx" firstAttribute="centerY" secondItem="DYJ-TE-25B" secondAttribute="centerY" id="VSJ-f2-oUR"/>
                                     <constraint firstAttribute="height" constant="120" id="YMr-XN-iQm"/>
+                                    <constraint firstItem="tqa-Hu-nBx" firstAttribute="leading" secondItem="UEt-Ra-c4T" secondAttribute="leading" id="gOv-SH-b2R"/>
                                     <constraint firstItem="mCu-xY-0ex" firstAttribute="leading" secondItem="UEt-Ra-c4T" secondAttribute="leading" constant="-2" id="gTd-X0-qnx"/>
                                     <constraint firstItem="tqa-Hu-nBx" firstAttribute="leading" secondItem="UEt-Ra-c4T" secondAttribute="leading" id="hiH-uG-h3A"/>
                                     <constraint firstItem="DYJ-TE-25B" firstAttribute="centerX" secondItem="UEt-Ra-c4T" secondAttribute="centerX" id="zQL-35-Cil"/>
@@ -396,7 +397,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRa-fd-9QK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964.5" y="1014"/>
+            <point key="canvasLocation" x="2208.5" y="1026"/>
         </scene>
         <!--Loops Pager View Controller-->
         <scene sceneID="lyp-6n-JEt">
@@ -438,7 +439,7 @@
         <!--Chords View Controller-->
         <scene sceneID="vZX-85-PwP">
             <objects>
-                <viewController storyboardIdentifier="Chords" useStoryboardIdentifierAsRestorationIdentifier="YES" id="N1E-j7-Qmy" customClass="ChordsViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="N1E-j7-Qmy" customClass="ChordsViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GNZ-qD-n2K"/>
                         <viewControllerLayoutGuide type="bottom" id="AAc-08-vN2"/>
@@ -446,14 +447,47 @@
                     <view key="view" contentMode="scaleToFill" id="udc-RQ-pgc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJO-vR-GCC">
+                                <rect key="frame" x="14" y="50" width="100" height="100"/>
+                                <color key="backgroundColor" red="1" green="0.47058823529411764" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Major">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="NfI-yk-BCc" kind="show" identifier="majorSegue" id="Wjj-k1-hsa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plS-dc-fyR">
+                                <rect key="frame" x="137" y="50" width="100" height="100"/>
+                                <color key="backgroundColor" red="1" green="0.47058823529411764" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Minor">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="W2A-0O-6Qf" kind="show" identifier="minorSegue" id="iTU-ge-33l"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixr-B4-W3R">
+                                <rect key="frame" x="260" y="50" width="100" height="100"/>
+                                <color key="backgroundColor" red="1" green="0.47058823529999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Seventh">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="me9-6Y-Jro" kind="show" identifier="seventhSegue" id="EPY-5S-GMk"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="RX9-oc-Buz"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="200"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DZJ-pb-kDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1367.5" y="1014"/>
+            <point key="canvasLocation" x="1469.5" y="1386"/>
         </scene>
         <!--Microphone View Controller-->
         <scene sceneID="tNv-3p-OCO">
@@ -482,6 +516,216 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TvU-er-Tgy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1153.5" y="669"/>
+        </scene>
+        <!--Major Chord View Controller-->
+        <scene sceneID="UVF-CB-fad">
+            <objects>
+                <viewController id="NfI-yk-BCc" customClass="MajorChordViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mnY-fo-jLL"/>
+                        <viewControllerLayoutGuide type="bottom" id="IDx-Wf-JOC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VsM-o5-kdp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="82j-PK-T8g">
+                                <rect key="frame" x="0.0" y="10" width="375" height="190"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IAd-l5-CkN">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MajorChordCell" id="PMp-2M-CIx" customClass="MajorChordCell" customModule="JamChat" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="64" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QWX-cp-YqU">
+                                                    <rect key="frame" x="5" y="0.0" width="40" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dki-9A-NWk">
+                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.81176470588235294" green="0.85098039215686272" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="chordLabel" destination="dki-9A-NWk" id="ERf-md-7sa"/>
+                                            <outlet property="chordView" destination="QWX-cp-YqU" id="JOP-wn-2YA"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="majorCollection" destination="82j-PK-T8g" id="dbo-yI-kbC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hrd-8z-pWV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1089.5" y="1832"/>
+        </scene>
+        <!--Seventh Chord View Controller-->
+        <scene sceneID="bVO-pf-Csu">
+            <objects>
+                <viewController id="me9-6Y-Jro" customClass="SeventhChordViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qbz-sD-NNZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="xEW-bN-pWh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kQI-nO-bai">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ico-Nr-8s4">
+                                <rect key="frame" x="0.0" y="7" width="375" height="190"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Bj7-7E-bk0">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SeventhChordCell" id="U1h-Qj-0e6" customClass="SeventhChordCell" customModule="JamChat" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="64" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="paV-PE-YD9">
+                                                    <rect key="frame" x="5" y="0.0" width="40" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ce-Eg-3VW">
+                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.53284014940000002" green="0.75264841699999996" blue="0.9343125471" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="chordLabel" destination="1ce-Eg-3VW" id="1Dm-bf-iwi"/>
+                                            <outlet property="chordView" destination="paV-PE-YD9" id="t9z-UV-wk0"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="200"/>
+                    <connections>
+                        <outlet property="seventhCollection" destination="Ico-Nr-8s4" id="7qf-zc-yw9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ri4-r5-c4f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1863.5" y="1832"/>
+        </scene>
+        <!--Minor Chord View Controller-->
+        <scene sceneID="xzl-Sh-Amh">
+            <objects>
+                <viewController id="W2A-0O-6Qf" customClass="MinorChordViewController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ppT-QL-O72"/>
+                        <viewControllerLayoutGuide type="bottom" id="GRe-vk-9GM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eJA-Gk-1Va">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZIL-6M-vwO">
+                                <rect key="frame" x="0.0" y="9" width="375" height="190"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hrH-NU-a4J">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MinorChordCell" id="uzf-YO-2rS" customClass="MinorChordCell" customModule="JamChat" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="64" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JCD-V7-vCL">
+                                                    <rect key="frame" x="5" y="0.0" width="40" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kxo-Mq-MfO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.8176930147" green="0.42324705620000003" blue="0.67022671109999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="chordLabel" destination="Kxo-Mq-MfO" id="f81-KF-KaI"/>
+                                            <outlet property="chordView" destination="JCD-V7-vCL" id="tgM-OB-gDv"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="minorCollection" destination="ZIL-6M-vwO" id="hfG-er-i3I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fro-xJ-sdg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1476.5" y="1832"/>
+        </scene>
+        <!--Chord Navigation Controller-->
+        <scene sceneID="Keu-6n-kwX">
+            <objects>
+                <navigationController storyboardIdentifier="Chords" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7fU-N4-j24" customClass="ChordNavigationController" customModule="JamChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="200" height="200"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jIO-3M-0v9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="N1E-j7-Qmy" kind="relationship" relationship="rootViewController" id="Ofv-ty-MXP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zh2-1z-rkq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1469" y="1026"/>
         </scene>
     </scenes>
     <resources>

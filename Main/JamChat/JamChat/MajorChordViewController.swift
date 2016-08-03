@@ -1,66 +1,63 @@
 //
-//  LoopViewController.swift
+//  MajorChordViewController.swift
 //  JamChat
 //
-//  Created by Alexina Boudreaux-Allen on 7/27/16.
+//  Created by Alexina Boudreaux-Allen on 8/2/16.
 //  Copyright © 2016 Jammers. All rights reserved.
 //
 
 import UIKit
-import XLPagerTabStrip
-import RandomColorSwift
-import NVActivityIndicatorView
 
-class LoopViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, IndicatorInfoProvider {
+class MajorChordViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var jam: Jam!
-    var array: [Loop] = []
+    var chords: [Chord] = []
     var panGesture: UIPanGestureRecognizer?
     var currentDragAndDropIndexPath: NSIndexPath?
     var currentDragAndDropSnapshot: UIView?
     var dragLoopHandler: ((UIView, UIPanGestureRecognizer) -> ())?
     var highlightView: UIView?
-    var loadingView: NVActivityIndicatorView!
     var waveformView: UIView!
     
-    @IBOutlet weak var loopCollection: UICollectionView!
+    @IBOutlet weak var majorCollection: UICollectionView!
     
     override func viewDidLoad() {
+        majorCollection.dataSource = self
+        majorCollection.delegate = self
         
-        loopCollection.delegate = self
-        loopCollection.dataSource = self
-        
-        if(jam.tempo == 80){
-            array = Loop.Loops80
+        if (jam.tempo == 80){
+            chords = Chord.MajChords80
         }
+            
         else if(jam.tempo == 110){
-            array = Loop.Loops110
+            chords = Chord.MajChords110
         }
+            
         else{
-            array = Loop.Loops140
+            chords = Chord.MajChords140
         }
         
         self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(LoopViewController.dragLoop(_:)))
-        self.loopCollection.addGestureRecognizer(self.panGesture!)
+        self.majorCollection.addGestureRecognizer(self.panGesture!)
         
         super.viewDidLoad()
     }
     
-    var selectedLoopView: UIView?
-    var selectedLoop: Loop?
+    var selectedChordView: UIView?
+    var selectedChord: Chord?
     var selectedMeasure = 0.0
     var isOverWaveform = false
     func dragLoop(sender: UIPanGestureRecognizer){
         
         switch sender.state{
         case .Began:
-            if let indexPathForLocation = self.loopCollection.indexPathForItemAtPoint(sender.locationInView(loopCollection)) {
-                let selectedCell: LoopCell? = self.loopCollection.cellForItemAtIndexPath(indexPathForLocation) as? LoopCell
+            if let indexPathForLocation = self.majorCollection.indexPathForItemAtPoint(sender.locationInView(majorCollection)) {
+                let selectedCell: MajorChordCell? = self.majorCollection.cellForItemAtIndexPath(indexPathForLocation) as? MajorChordCell
                 
-                selectedLoopView = selectedCell!.snapshot
-                selectedLoop = selectedCell?.loop
-                selectedLoopView?.center = selectedCell!.center
-                self.view.superview!.superview!.addSubview(selectedLoopView!)
+                selectedChordView = selectedCell!.snapshot
+                selectedChord = selectedCell?.chord
+                selectedChordView?.center = sender.locationInView(self.view)
+                self.parentViewController!.view.superview!.superview!.addSubview(selectedChordView!)
                 
                 highlightView = UIView(frame: CGRectMake(0, 0, self.view.frame.width/CGFloat(self.jam.numMeasures!), waveformView.frame.height))
                 highlightView!.layer.cornerRadius = 25
@@ -76,8 +73,8 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
             selectedMeasure = Double(floor(point.x / self.highlightView!.frame.width))
             
             UIView.animateWithDuration(0.25, animations: {() -> Void in
-                self.selectedLoopView!.center.x = point.x
-                self.selectedLoopView!.center.y = point.y
+                self.selectedChordView!.center.x = point.x
+                self.selectedChordView!.center.y = point.y
                 self.highlightView?.frame.origin.x = CGFloat(self.selectedMeasure) * self.highlightView!.frame.width
                 
                 if self.isOverWaveform {
@@ -87,37 +84,22 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 }
             })
         default:
-            selectedLoopView?.removeFromSuperview()
+            selectedChordView?.removeFromSuperview()
             highlightView?.backgroundColor = UIColor.clearColor()
-            if isOverWaveform {
-                loadingView.startAnimation()
-                if jam.isPlaying {
-                    jam.stop()
-                }
-                jam.recordSendLoop(selectedLoop!, measure: selectedMeasure, success: {
-                    self.loadingView.stopAnimation()
-                    print("Sent loop!")
-                    }, failure: { (error: NSError) in
-                        print(error.localizedDescription)
-                })
-            }
         }
     }
+
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return array.count
+        return 12
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = loopCollection.dequeueReusableCellWithReuseIdentifier("LoopCell", forIndexPath: indexPath) as! LoopCell
+        let cell = majorCollection.dequeueReusableCellWithReuseIdentifier("MajorChordCell", forIndexPath: indexPath) as! MajorChordCell
         
-        cell.loop = array[indexPath.row]
+        cell.chord = chords[indexPath.row]
         
         return cell
     }
-    
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Drum Loops")
-    }
-    
+
 }

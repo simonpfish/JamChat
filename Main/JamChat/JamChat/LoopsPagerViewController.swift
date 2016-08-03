@@ -72,10 +72,12 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
         let jamStoryboard = UIStoryboard(name: "Jam", bundle: NSBundle.mainBundle())
         
         let drumLoopsController = jamStoryboard.instantiateViewControllerWithIdentifier("DrumLoops") as! LoopViewController
-        let chordsController = jamStoryboard.instantiateViewControllerWithIdentifier("Chords")
+        let chordsController = jamStoryboard.instantiateViewControllerWithIdentifier("Chords") as! ChordNavigationController
 
         drumLoopsController.jam = jam
+        chordsController.jam = jam
         drumLoopsController.waveformView = waveformView
+        chordsController.waveformView = waveformView
         drumLoopsController.loadingView = loadingView
         
         return [drumLoopsController, chordsController]
