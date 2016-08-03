@@ -47,14 +47,16 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserverForName("new_message", object: nil, queue: nil) { (notification: NSNotification) in
-            let trackID = notification.object as! String
-            self.jam.fetchTrack(trackID, completion: { (track: Track) in
-                track.loadMedia({ 
-                    self.addWaveform(track)
-                    }, failure: { (error: NSError) in
-                    print(error.localizedDescription)
+            let data = notification.object as! [String]
+            if data[1] == self.jam.id {
+                self.jam.fetchTrack(data[0], completion: { (track: Track) in
+                    track.loadMedia({
+                        self.addWaveform(track)
+                        }, failure: { (error: NSError) in
+                            print(error.localizedDescription)
+                    })
                 })
-            })
+            }
         }
         
         keyboardButton.delegate = self
@@ -420,8 +422,8 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         if (segue.identifier == "loopSegue") {
             let childViewController = segue.destinationViewController as! LoopsPagerViewController
             childViewController.jam = self.jam
-            childViewController.waveformY = waveformContainer.frame.origin.y
-            childViewController.waveformHeight = waveformContainer.frame.height
+            childViewController.waveformView = waveformContainer
+            childViewController.loadingView = sendingMessageView
         }
     }
     

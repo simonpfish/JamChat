@@ -9,6 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import RandomColorSwift
+import NVActivityIndicatorView
 
 class LoopViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, IndicatorInfoProvider {
     
@@ -19,8 +20,8 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var currentDragAndDropSnapshot: UIView?
     var dragLoopHandler: ((UIView, UIPanGestureRecognizer) -> ())?
     var highlightView: UIView?
-    var waveformY: CGFloat!
-    var waveformHeight: CGFloat!
+    var loadingView: NVActivityIndicatorView!
+    var waveformView: UIView!
     
     @IBOutlet weak var loopCollection: UICollectionView!
     
@@ -46,34 +47,58 @@ class LoopViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     var selectedLoopView: UIView?
+    var selectedLoop: Loop?
+    var selectedMeasure = 0.0
+    var isOverWaveform = false
     func dragLoop(sender: UIPanGestureRecognizer){
     
         switch sender.state{
         case .Began:
             if let indexPathForLocation = self.loopCollection.indexPathForItemAtPoint(sender.locationInView(loopCollection)) {
                 let selectedCell: LoopCell? = self.loopCollection.cellForItemAtIndexPath(indexPathForLocation) as? LoopCell
+                print("NAME", indexPathForLocation)
+                
                 selectedLoopView = selectedCell!.snapshot
+                selectedLoop = selectedCell?.loop
                 selectedLoopView?.center = selectedCell!.center
                 self.view.superview!.superview!.addSubview(selectedLoopView!)
-                highlightView = UIView(frame: CGRectMake(0, 13-waveformY, self.view.frame.width/CGFloat(self.jam.numMeasures!), waveformHeight))
+                
+                highlightView = UIView(frame: CGRectMake(0, 0, self.view.frame.width/CGFloat(self.jam.numMeasures!), waveformView.frame.height))
                 highlightView!.layer.cornerRadius = 25
                 highlightView!.alpha = 0.3
-                self.view.superview!.superview!.addSubview(highlightView!)
+                highlightView!.hidden = true
+                highlightView!.backgroundColor = UIColor.orangeColor()
+                waveformView.addSubview(highlightView!)
             }
         case .Changed:
+            let point = sender.locationInView(self.view)
+            let pointInSuperview = sender.locationInView(waveformView)
+            isOverWaveform = pointInSuperview.y > 0 && pointInSuperview.y < waveformView.frame.height
+            selectedMeasure = Double(floor(point.x / self.highlightView!.frame.width))
+            
             UIView.animateWithDuration(0.25, animations: {() -> Void in
-                let point = sender.locationInView(self.view)
-                    self.selectedLoopView!.center.x = point.x
-                    self.selectedLoopView!.center.y = point.y
-                if (self.selectedLoopView!.frame.origin.y > (13-self.waveformY) && self.selectedLoopView!.frame.origin.y < ((13-self.waveformY)+self.selectedLoopView!.frame.height)){
-                    let highlightedX = floor(self.selectedLoopView!.center.x/(self.highlightView!.frame.width))
-                    self.highlightView!.frame = CGRect(x: highlightedX*self.highlightView!.frame.width, y: self.highlightView!.frame.origin.y, width: self.highlightView!.frame.width, height: self.highlightView!.frame.height)
-                    self.highlightView?.backgroundColor = UIColor.orangeColor()
+                self.selectedLoopView!.center.x = point.x
+                self.selectedLoopView!.center.y = point.y
+                self.highlightView?.frame.origin.x = CGFloat(self.selectedMeasure) * self.highlightView!.frame.width
+                
+                if self.isOverWaveform {
+                    self.highlightView?.hidden = false
+                } else {
+                    self.highlightView?.hidden = true
                 }
             })
         default:
             selectedLoopView?.removeFromSuperview()
             highlightView?.backgroundColor = UIColor.clearColor()
+            if isOverWaveform {
+                loadingView.startAnimation()
+                jam.recordSendLoop(selectedLoop!, measure: selectedMeasure, success: {
+                    self.loadingView.stopAnimation()
+                    print("Sent loop!")
+                    }, failure: { (error: NSError) in
+                        print(error.localizedDescription)
+                })
+            }
         }
     }
 
