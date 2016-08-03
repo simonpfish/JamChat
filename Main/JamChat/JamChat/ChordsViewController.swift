@@ -11,6 +11,7 @@ import UIKit
 class ChordsViewController: UIViewController{
     
     var jam: Jam!
+    var waveformView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +39,19 @@ class ChordsViewController: UIViewController{
         
         if (segue.identifier == "majorSegue"){
         let chordsController = segue.destinationViewController as! MajorChordViewController
+            chordsController.waveformView = waveformView
         chordsController.jam = jam
         }
         
         if (segue.identifier == "minorSegue"){
             let chordsController = segue.destinationViewController as! MinorChordViewController
+            chordsController.waveformView = waveformView
             chordsController.jam = jam
         }
         
         if (segue.identifier == "seventhSegue"){
             let chordsController = segue.destinationViewController as! SeventhChordViewController
+            chordsController.waveformView = waveformView
             chordsController.jam = jam
         }
         

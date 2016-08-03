@@ -77,6 +77,7 @@ class LoopsPagerViewController: ButtonBarPagerTabStripViewController {
         drumLoopsController.jam = jam
         chordsController.jam = jam
         drumLoopsController.waveformView = waveformView
+        chordsController.waveformView = waveformView
         drumLoopsController.loadingView = loadingView
         
         return [drumLoopsController, chordsController]

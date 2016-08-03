@@ -12,10 +12,24 @@ class MajorChordCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var chordView: UIView!
     @IBOutlet weak var chordLabel: UILabel!
+    
     var chord: Chord! {
         didSet{
             chordLabel.text = chord.name
         }
+    }
+    
+    var isMoving: Bool = false {
+        didSet{
+            self.chordView!.alpha = isMoving ? 0.0: 1.0
+            print("ISMOVING")
+        }
+    }
+    
+    var snapshot: UIView{
+        let snapshot: UIView = self.snapshotViewAfterScreenUpdates(true)
+        
+        return snapshot
     }
     
     override func awakeFromNib() {
