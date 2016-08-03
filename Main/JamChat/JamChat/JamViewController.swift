@@ -248,8 +248,10 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
                     }
                 })
                 
+                
             }
         } else {
+            AudioKit.start()
             let keyboardController = self.childViewControllers[0] as! KeyboardViewController
             keyboardController.instrument.reload()
             self.loadingIndicatorView.stopAnimation()
