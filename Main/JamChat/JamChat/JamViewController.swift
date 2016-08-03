@@ -556,4 +556,37 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
     }
     
+    @IBAction func onKeyboard(sender: AnyObject) {
+        
+        if inMicrophone {
+            let microphoneController = self.childViewControllers[2] as! MicrophoneViewController
+            microphoneController.unloadRecorder()
+            
+            let keyboard = self.childViewControllers[0] as! KeyboardViewController
+            keyboard.instrument.reload()
+        }
+        
+        microphoneContainer.alpha = 0
+        keyboardContainer.alpha = 1
+        loopContainer.alpha = 0
+        inKeyboard = true
+        inLoop = false
+        menuButton.hidden = false
+        inMicrophone = false
+        dragAndDropLabel.hidden = true
+        recordView.hidden = false
+        
+        let overshootAmount : CGFloat = 2.0
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: [], animations: {
+            self.selectedView.center.x = self.keyboardButton.center.x
+            self.selectedView.backgroundColor = self.keyboardButton.backgroundColor?.colorWithAlphaComponent(1.0)
+            
+            self.selectedView.center.x -= overshootAmount
+            self.selectedView.center.x += overshootAmount
+            
+            }, completion: nil)
+        
+    }
+    
 }

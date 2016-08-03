@@ -34,7 +34,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEt-Ra-c4T">
                                 <rect key="frame" x="0.0" y="240" width="375" height="120"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tqa-Hu-nBx">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqa-Hu-nBx">
                                         <rect key="frame" x="0.0" y="-8" width="375" height="136"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -59,7 +59,11 @@
                                 <constraints>
                                     <constraint firstItem="mCu-xY-0ex" firstAttribute="centerY" secondItem="UEt-Ra-c4T" secondAttribute="centerY" id="58i-6z-COK"/>
                                     <constraint firstItem="DYJ-TE-25B" firstAttribute="centerY" secondItem="UEt-Ra-c4T" secondAttribute="centerY" id="FQ3-1S-bQb"/>
+                                    <constraint firstItem="tqa-Hu-nBx" firstAttribute="centerY" secondItem="DYJ-TE-25B" secondAttribute="centerY" id="JNv-lD-iCE"/>
+                                    <constraint firstItem="tqa-Hu-nBx" firstAttribute="centerX" secondItem="DYJ-TE-25B" secondAttribute="centerX" id="OG6-zT-njz"/>
+                                    <constraint firstItem="tqa-Hu-nBx" firstAttribute="top" secondItem="UEt-Ra-c4T" secondAttribute="top" constant="-8" id="Wrz-be-PuO"/>
                                     <constraint firstAttribute="height" constant="120" id="YMr-XN-iQm"/>
+                                    <constraint firstItem="tqa-Hu-nBx" firstAttribute="leading" secondItem="UEt-Ra-c4T" secondAttribute="leading" id="gOv-SH-b2R"/>
                                     <constraint firstItem="mCu-xY-0ex" firstAttribute="leading" secondItem="UEt-Ra-c4T" secondAttribute="leading" constant="-2" id="gTd-X0-qnx"/>
                                     <constraint firstItem="DYJ-TE-25B" firstAttribute="centerX" secondItem="UEt-Ra-c4T" secondAttribute="centerX" id="zQL-35-Cil"/>
                                 </constraints>
