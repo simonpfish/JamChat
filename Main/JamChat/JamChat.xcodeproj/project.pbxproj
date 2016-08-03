@@ -19,6 +19,13 @@
 		8C01C09F1D4957CE007FB836 /* LoopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C01C09E1D4957CE007FB836 /* LoopCell.swift */; };
 		8C0EC4C81D46D9C200092B88 /* 80BPM.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C0EC4C71D46D9C200092B88 /* 80BPM.wav */; };
 		8C0EC4CC1D46E33000092B88 /* 140BPM.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C0EC4CB1D46E33000092B88 /* 140BPM.wav */; };
+		8C1FEA401D51762E00ADB8A8 /* MajorChordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FEA3F1D51762E00ADB8A8 /* MajorChordViewController.swift */; };
+		8C1FEA421D51765E00ADB8A8 /* MinorChordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FEA411D51765E00ADB8A8 /* MinorChordViewController.swift */; };
+		8C1FEA461D517E3700ADB8A8 /* ChordNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FEA451D517E3700ADB8A8 /* ChordNavigationController.swift */; };
+		8C1FEA481D51A04900ADB8A8 /* MajorChordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FEA471D51A04900ADB8A8 /* MajorChordCell.swift */; };
+		8C1FEA4A1D51A05E00ADB8A8 /* MinorChordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FEA491D51A05D00ADB8A8 /* MinorChordCell.swift */; };
+		8C1FEA4C1D51A44300ADB8A8 /* SeventhChordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FEA4B1D51A44300ADB8A8 /* SeventhChordCell.swift */; };
+		8C1FEA4E1D51A6C800ADB8A8 /* SeventhChordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FEA4D1D51A6C800ADB8A8 /* SeventhChordViewController.swift */; };
 		8C3552B21D4A057700795591 /* #1BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552AC1D4A057700795591 /* #1BPM80.wav */; };
 		8C3552B31D4A057700795591 /* #2BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552AD1D4A057700795591 /* #2BPM80.wav */; };
 		8C3552B41D4A057700795591 /* #3BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552AE1D4A057700795591 /* #3BPM80.wav */; };
@@ -146,6 +153,13 @@
 		8C01C09E1D4957CE007FB836 /* LoopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopCell.swift; sourceTree = "<group>"; };
 		8C0EC4C71D46D9C200092B88 /* 80BPM.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 80BPM.wav; sourceTree = "<group>"; };
 		8C0EC4CB1D46E33000092B88 /* 140BPM.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 140BPM.wav; sourceTree = "<group>"; };
+		8C1FEA3F1D51762E00ADB8A8 /* MajorChordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MajorChordViewController.swift; sourceTree = "<group>"; };
+		8C1FEA411D51765E00ADB8A8 /* MinorChordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinorChordViewController.swift; sourceTree = "<group>"; };
+		8C1FEA451D517E3700ADB8A8 /* ChordNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordNavigationController.swift; sourceTree = "<group>"; };
+		8C1FEA471D51A04900ADB8A8 /* MajorChordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MajorChordCell.swift; sourceTree = "<group>"; };
+		8C1FEA491D51A05D00ADB8A8 /* MinorChordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinorChordCell.swift; sourceTree = "<group>"; };
+		8C1FEA4B1D51A44300ADB8A8 /* SeventhChordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeventhChordCell.swift; sourceTree = "<group>"; };
+		8C1FEA4D1D51A6C800ADB8A8 /* SeventhChordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeventhChordViewController.swift; sourceTree = "<group>"; };
 		8C3552AC1D4A057700795591 /* #1BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#1BPM80.wav"; sourceTree = "<group>"; };
 		8C3552AD1D4A057700795591 /* #2BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#2BPM80.wav"; sourceTree = "<group>"; };
 		8C3552AE1D4A057700795591 /* #3BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#3BPM80.wav"; sourceTree = "<group>"; };
@@ -230,6 +244,9 @@
 		21F29BCB1D4FCD2300CED9D8 /* Loops */ = {
 			isa = PBXGroup;
 			children = (
+				8C1FEA4D1D51A6C800ADB8A8 /* SeventhChordViewController.swift */,
+				8C1FEA3F1D51762E00ADB8A8 /* MajorChordViewController.swift */,
+				8C1FEA411D51765E00ADB8A8 /* MinorChordViewController.swift */,
 				8C01C09C1D4930BF007FB836 /* LoopViewController.swift */,
 				210AEB001D4FC7D1006EDF89 /* LoopsPagerViewController.swift */,
 				21F29BC91D4FCD1100CED9D8 /* ChordsViewController.swift */,
@@ -333,6 +350,9 @@
 		E74F1DF11D38163900A34409 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				8C1FEA471D51A04900ADB8A8 /* MajorChordCell.swift */,
+				8C1FEA491D51A05D00ADB8A8 /* MinorChordCell.swift */,
+				8C1FEA4B1D51A44300ADB8A8 /* SeventhChordCell.swift */,
 				8C01C09E1D4957CE007FB836 /* LoopCell.swift */,
 				E7FE0FE51D356E2100452361 /* JamCell.swift */,
 				E7E0D6971D3C0DCB005A840A /* UserCell.swift */,
@@ -424,6 +444,7 @@
 		E7FE0FF41D359CA400452361 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8C1FEA451D517E3700ADB8A8 /* ChordNavigationController.swift */,
 				E7F0BB501D3D7D0B0059160B /* Jam */,
 				E7FE0FE71D35706A00452361 /* HomeViewController.swift */,
 				E7FE0FED1D357C6C00452361 /* JamCreationViewController.swift */,
@@ -663,9 +684,14 @@
 				E7FE0FE81D35706A00452361 /* HomeViewController.swift in Sources */,
 				E7FE0FEF1D357C6C00452361 /* JamCreationViewController.swift in Sources */,
 				E7F0BB4B1D3D6C300059160B /* ProfileViewController.swift in Sources */,
+				8C1FEA4A1D51A05E00ADB8A8 /* MinorChordCell.swift in Sources */,
 				21F29BCF1D4FDE1400CED9D8 /* MicrophoneViewController.swift in Sources */,
+				8C1FEA421D51765E00ADB8A8 /* MinorChordViewController.swift in Sources */,
+				8C1FEA401D51762E00ADB8A8 /* MajorChordViewController.swift in Sources */,
+				8C1FEA481D51A04900ADB8A8 /* MajorChordCell.swift in Sources */,
 				213089B11D41594A0030D099 /* UserCollectionDelegate.swift in Sources */,
 				210AEB011D4FC7D1006EDF89 /* LoopsPagerViewController.swift in Sources */,
+				8C1FEA4C1D51A44300ADB8A8 /* SeventhChordCell.swift in Sources */,
 				8C3552BB1D4A0D8A00795591 /* Loop.swift in Sources */,
 				E7F0BB3E1D3D61550059160B /* PagerViewController.swift in Sources */,
 				8C3552E61D511FA700795591 /* Chord.swift in Sources */,
@@ -674,9 +700,11 @@
 				E7F0BB4D1D3D6CE90059160B /* HomeNavigationController.swift in Sources */,
 				8C01C09D1D4930BF007FB836 /* LoopViewController.swift in Sources */,
 				21F29BCA1D4FCD1100CED9D8 /* ChordsViewController.swift in Sources */,
+				8C1FEA4E1D51A6C800ADB8A8 /* SeventhChordViewController.swift in Sources */,
 				E7AB05571D429ED800A92C9E /* AKAudioFile+Exporting.swift in Sources */,
 				8C3552DA1D4BCB1B00795591 /* Metronome.swift in Sources */,
 				E70DC3C01D46EA0C00B76CE7 /* AKAudioPlayer.swift in Sources */,
+				8C1FEA461D517E3700ADB8A8 /* ChordNavigationController.swift in Sources */,
 				E7E0D6981D3C0DCB005A840A /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

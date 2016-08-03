@@ -489,5 +489,4 @@ class JamViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
-    
 }
