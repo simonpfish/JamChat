@@ -7,33 +7,54 @@
 //
 
 import UIKit
-import XLPagerTabStrip
 
-class ChordsViewController: UIViewController, IndicatorInfoProvider {
-
+class ChordsViewController: UIViewController{
+    
+    var jam: Jam!
+    var waveformView: UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.tintColor = UIColor(red:1.00, green:0.56, blue:0.45, alpha:1.0)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Chords")
-    }
 
-    /*
+
+       /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+        
+        if (segue.identifier == "majorSegue"){
+        let chordsController = segue.destinationViewController as! MajorChordViewController
+            chordsController.waveformView = waveformView
+        chordsController.jam = jam
+        }
+        
+        if (segue.identifier == "minorSegue"){
+            let chordsController = segue.destinationViewController as! MinorChordViewController
+            chordsController.waveformView = waveformView
+            chordsController.jam = jam
+        }
+        
+        if (segue.identifier == "seventhSegue"){
+            let chordsController = segue.destinationViewController as! SeventhChordViewController
+            chordsController.waveformView = waveformView
+            chordsController.jam = jam
+        }
+        
     }
-    */
 
 }
