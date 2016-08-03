@@ -27,6 +27,15 @@
 		8C1FEA4A1D51A05E00ADB8A8 /* MinorChordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FEA491D51A05D00ADB8A8 /* MinorChordCell.swift */; };
 		8C1FEA4C1D51A44300ADB8A8 /* SeventhChordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FEA4B1D51A44300ADB8A8 /* SeventhChordCell.swift */; };
 		8C1FEA4E1D51A6C800ADB8A8 /* SeventhChordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FEA4D1D51A6C800ADB8A8 /* SeventhChordViewController.swift */; };
+		8C32C4871D51EE7700B808A4 /* MajChord80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C32C47E1D51EE7700B808A4 /* MajChord80.wav */; };
+		8C32C4881D51EE7700B808A4 /* MajChord110.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C32C47F1D51EE7700B808A4 /* MajChord110.wav */; };
+		8C32C4891D51EE7700B808A4 /* MajChord140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C32C4801D51EE7700B808A4 /* MajChord140.wav */; };
+		8C32C48A1D51EE7700B808A4 /* MinChord80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C32C4811D51EE7700B808A4 /* MinChord80.wav */; };
+		8C32C48B1D51EE7700B808A4 /* MinChord110.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C32C4821D51EE7700B808A4 /* MinChord110.wav */; };
+		8C32C48C1D51EE7700B808A4 /* MinChord140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C32C4831D51EE7700B808A4 /* MinChord140.wav */; };
+		8C32C48D1D51EE7700B808A4 /* SevChord80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C32C4841D51EE7700B808A4 /* SevChord80.wav */; };
+		8C32C48E1D51EE7700B808A4 /* SevChord110.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C32C4851D51EE7700B808A4 /* SevChord110.wav */; };
+		8C32C48F1D51EE7700B808A4 /* SevChord140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C32C4861D51EE7700B808A4 /* SevChord140.wav */; };
 		8C3552B21D4A057700795591 /* #1BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552AC1D4A057700795591 /* #1BPM80.wav */; };
 		8C3552B31D4A057700795591 /* #2BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552AD1D4A057700795591 /* #2BPM80.wav */; };
 		8C3552B41D4A057700795591 /* #3BPM80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552AE1D4A057700795591 /* #3BPM80.wav */; };
@@ -49,12 +58,6 @@
 		8C3552D61D4AAEE000795591 /* #6BPM140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552D01D4AAEE000795591 /* #6BPM140.wav */; };
 		8C3552DA1D4BCB1B00795591 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3552D91D4BCB1B00795591 /* Metronome.swift */; };
 		8C3552E61D511FA700795591 /* Chord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3552E51D511FA700795591 /* Chord.swift */; };
-		8C3552EA1D5123BD00795591 /* MajChord80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552E91D5123BD00795591 /* MajChord80.wav */; };
-		8C3552EC1D5123C400795591 /* MajChord110.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552EB1D5123C400795591 /* MajChord110.wav */; };
-		8C3552EE1D5123CA00795591 /* MajChord140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552ED1D5123CA00795591 /* MajChord140.wav */; };
-		8C3552F01D5123CE00795591 /* MinChord80.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552EF1D5123CE00795591 /* MinChord80.wav */; };
-		8C3552F21D5123D100795591 /* MinChord110.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552F11D5123D100795591 /* MinChord110.wav */; };
-		8C3552F41D5123D700795591 /* MinChord140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C3552F31D5123D700795591 /* MinChord140.wav */; };
 		8C9D0FEC1D3D602C00380680 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9D0FEB1D3D602C00380680 /* Instrument.swift */; };
 		B478B30C21015976D36752E7 /* Pods_JamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46293530A6261983676B0D /* Pods_JamChat.framework */; };
 		E70DC3BE1D46E28900B76CE7 /* PubNubHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */; };
@@ -162,6 +165,15 @@
 		8C1FEA491D51A05D00ADB8A8 /* MinorChordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinorChordCell.swift; sourceTree = "<group>"; };
 		8C1FEA4B1D51A44300ADB8A8 /* SeventhChordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeventhChordCell.swift; sourceTree = "<group>"; };
 		8C1FEA4D1D51A6C800ADB8A8 /* SeventhChordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeventhChordViewController.swift; sourceTree = "<group>"; };
+		8C32C47E1D51EE7700B808A4 /* MajChord80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MajChord80.wav; sourceTree = "<group>"; };
+		8C32C47F1D51EE7700B808A4 /* MajChord110.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MajChord110.wav; sourceTree = "<group>"; };
+		8C32C4801D51EE7700B808A4 /* MajChord140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MajChord140.wav; sourceTree = "<group>"; };
+		8C32C4811D51EE7700B808A4 /* MinChord80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MinChord80.wav; sourceTree = "<group>"; };
+		8C32C4821D51EE7700B808A4 /* MinChord110.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MinChord110.wav; sourceTree = "<group>"; };
+		8C32C4831D51EE7700B808A4 /* MinChord140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MinChord140.wav; sourceTree = "<group>"; };
+		8C32C4841D51EE7700B808A4 /* SevChord80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SevChord80.wav; sourceTree = "<group>"; };
+		8C32C4851D51EE7700B808A4 /* SevChord110.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SevChord110.wav; sourceTree = "<group>"; };
+		8C32C4861D51EE7700B808A4 /* SevChord140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SevChord140.wav; sourceTree = "<group>"; };
 		8C3552AC1D4A057700795591 /* #1BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#1BPM80.wav"; sourceTree = "<group>"; };
 		8C3552AD1D4A057700795591 /* #2BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#2BPM80.wav"; sourceTree = "<group>"; };
 		8C3552AE1D4A057700795591 /* #3BPM80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#3BPM80.wav"; sourceTree = "<group>"; };
@@ -184,12 +196,6 @@
 		8C3552D01D4AAEE000795591 /* #6BPM140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "#6BPM140.wav"; sourceTree = "<group>"; };
 		8C3552D91D4BCB1B00795591 /* Metronome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
 		8C3552E51D511FA700795591 /* Chord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
-		8C3552E91D5123BD00795591 /* MajChord80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MajChord80.wav; sourceTree = "<group>"; };
-		8C3552EB1D5123C400795591 /* MajChord110.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MajChord110.wav; sourceTree = "<group>"; };
-		8C3552ED1D5123CA00795591 /* MajChord140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MajChord140.wav; sourceTree = "<group>"; };
-		8C3552EF1D5123CE00795591 /* MinChord80.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MinChord80.wav; sourceTree = "<group>"; };
-		8C3552F11D5123D100795591 /* MinChord110.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MinChord110.wav; sourceTree = "<group>"; };
-		8C3552F31D5123D700795591 /* MinChord140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MinChord140.wav; sourceTree = "<group>"; };
 		8C9D0FEB1D3D602C00380680 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		E70DC3BD1D46E28900B76CE7 /* PubNubHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PubNubHandler.swift; sourceTree = "<group>"; };
 		E70DC3BF1D46EA0C00B76CE7 /* AKAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAudioPlayer.swift; sourceTree = "<group>"; };
@@ -325,12 +331,15 @@
 		8C3552E81D5123AB00795591 /* Chords */ = {
 			isa = PBXGroup;
 			children = (
-				8C3552F31D5123D700795591 /* MinChord140.wav */,
-				8C3552F11D5123D100795591 /* MinChord110.wav */,
-				8C3552EF1D5123CE00795591 /* MinChord80.wav */,
-				8C3552EB1D5123C400795591 /* MajChord110.wav */,
-				8C3552E91D5123BD00795591 /* MajChord80.wav */,
-				8C3552ED1D5123CA00795591 /* MajChord140.wav */,
+				8C32C47E1D51EE7700B808A4 /* MajChord80.wav */,
+				8C32C47F1D51EE7700B808A4 /* MajChord110.wav */,
+				8C32C4801D51EE7700B808A4 /* MajChord140.wav */,
+				8C32C4811D51EE7700B808A4 /* MinChord80.wav */,
+				8C32C4821D51EE7700B808A4 /* MinChord110.wav */,
+				8C32C4831D51EE7700B808A4 /* MinChord140.wav */,
+				8C32C4841D51EE7700B808A4 /* SevChord80.wav */,
+				8C32C4851D51EE7700B808A4 /* SevChord110.wav */,
+				8C32C4861D51EE7700B808A4 /* SevChord140.wav */,
 			);
 			name = Chords;
 			sourceTree = "<group>";
@@ -582,7 +591,8 @@
 				8C3552D61D4AAEE000795591 /* #6BPM140.wav in Resources */,
 				8C3552B41D4A057700795591 /* #3BPM80.wav in Resources */,
 				8C3552B61D4A057700795591 /* #5BPM80.wav in Resources */,
-				8C3552F21D5123D100795591 /* MinChord110.wav in Resources */,
+				8C32C48D1D51EE7700B808A4 /* SevChord80.wav in Resources */,
+				8C32C48B1D51EE7700B808A4 /* MinChord110.wav in Resources */,
 				8C3552B51D4A057700795591 /* #4BPM80.wav in Resources */,
 				8C3552CA1D4AA4DE00795591 /* #6BPM110.wav in Resources */,
 				E723F2BD1D400B8300CF1C29 /* Vintage Strat.exs in Resources */,
@@ -596,10 +606,12 @@
 				8C3552C91D4AA4DE00795591 /* #5BPM110.wav in Resources */,
 				8C3552B71D4A057700795591 /* #6BPM80.wav in Resources */,
 				E723F2C51D40115700CF1C29 /* ElectricBassC.wav in Resources */,
+				8C32C48E1D51EE7700B808A4 /* SevChord110.wav in Resources */,
 				E7F0BB491D3D67B80059160B /* JamCreation.storyboard in Resources */,
+				8C32C48F1D51EE7700B808A4 /* SevChord140.wav in Resources */,
 				E756A87B1D2D7E74007C0590 /* Assets.xcassets in Resources */,
-				8C3552F41D5123D700795591 /* MinChord140.wav in Resources */,
-				8C3552EA1D5123BD00795591 /* MajChord80.wav in Resources */,
+				8C32C48C1D51EE7700B808A4 /* MinChord140.wav in Resources */,
+				8C32C4871D51EE7700B808A4 /* MajChord80.wav in Resources */,
 				8C3552D21D4AAEE000795591 /* #2BPM140.wav in Resources */,
 				E723F2CA1D40116100CF1C29 /* AcousticBassC.wav in Resources */,
 				8C3552B21D4A057700795591 /* #1BPM80.wav in Resources */,
@@ -607,17 +619,17 @@
 				E756A8791D2D7E74007C0590 /* Main.storyboard in Resources */,
 				8C3552B31D4A057700795591 /* #2BPM80.wav in Resources */,
 				E79AE2051D3D50F400899823 /* Profile.storyboard in Resources */,
-				8C3552EE1D5123CA00795591 /* MajChord140.wav in Resources */,
+				8C32C4891D51EE7700B808A4 /* MajChord140.wav in Resources */,
 				8C0EC4C81D46D9C200092B88 /* 80BPM.wav in Resources */,
 				E7F0BB471D3D67110059160B /* Home.storyboard in Resources */,
-				8C3552F01D5123CE00795591 /* MinChord80.wav in Resources */,
+				8C32C48A1D51EE7700B808A4 /* MinChord80.wav in Resources */,
 				E74F1E031D3C06B800A34409 /* Jam.storyboard in Resources */,
 				8C3552D51D4AAEE000795591 /* #5BPM140.wav in Resources */,
 				219AEAA41D403E39008DC61B /* jamNames.txt in Resources */,
 				E723F2C81D40115700CF1C29 /* SaxC.wav in Resources */,
 				8C3552C71D4AA4DE00795591 /* #3BPM110.wav in Resources */,
 				E723F2C61D40115700CF1C29 /* PianoC.wav in Resources */,
-				8C3552EC1D5123C400795591 /* MajChord110.wav in Resources */,
+				8C32C4881D51EE7700B808A4 /* MajChord110.wav in Resources */,
 				8C3552B91D4A0CCA00795591 /* 110BPM.wav in Resources */,
 				8C3552D41D4AAEE000795591 /* #4BPM140.wav in Resources */,
 			);
